@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Scope Creep adversary</title>
+  <desc id="desc">Original construction barrel adversary.</desc>
+  <path fill="#2b292d" d="M17 8h30l4 48H13l4-48Z"></path>
+  <path fill="#f98070" d="M20 12h24l3.25 40h-30.5L20 12Z"></path>
+  <path fill="#fcf9ee" d="M18.6 25h26.8l.65 8H17.95l.65-8ZM19.85 41h24.3l.57 7H19.28l.57-7Z"></path>
+  <path fill="#df9718" d="M21.4 14h21.2l.49 6H20.91l.49-6Z"></path>
+  <path fill="#2b292d" d="M12 52h40v6H12zM21 4h22v8H21z"></path>
+  <path fill="#fcf9ee" d="M25 6h14v4H25z"></path>
+</svg>

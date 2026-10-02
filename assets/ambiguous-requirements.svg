@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Ambiguous Requirements adversary</title>
+  <desc id="desc">Original street sign with question mark.</desc>
+  <path fill="#2b292d" d="M30 34h5v24h-5z"></path>
+  <path fill="#2b292d" d="M9 13 32 4l23 9v26l-23 9L9 39V13Z"></path>
+  <path fill="#df9718" d="m14 16 18-7 18 7v20l-18 7-18-7V16Z"></path>
+  <path fill="#fcf9ee" d="M28.83 30.66c0-5.85 7.69-6.63 7.69-10.14 0-1.82-1.37-3.06-3.71-3.06-2.21 0-4.03.91-5.72 2.73l-3.51-3.9c2.41-2.8 5.72-4.42 9.88-4.42 5.66 0 9.49 2.99 9.49 7.8 0 6.7-8.19 7.28-8.19 11.38v1.04h-5.93v-1.43Zm-.46 7.67c0-1.95 1.63-3.58 3.58-3.58s3.58 1.63 3.58 3.58-1.63 3.58-3.58 3.58-3.58-1.63-3.58-3.58Z"></path>
+  <path fill="#2b292d" d="M23 56h19v5H23z"></path>
+</svg>

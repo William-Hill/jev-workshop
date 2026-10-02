@@ -1,0 +1,14 @@
+node_modules/
+.vite/
+bundle/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/.playwright/
+
+# Secrets
+.env
+.env.*
+!.env.example

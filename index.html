@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RenderMaze — Lemon Pepper Run (Phaser)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="marquee mono">
+    <span class="s">★</span><span>RenderATL University</span><span class="s">★</span><span>Code + Culture Ship Together</span><span class="s">★</span><span>Lemon Pepper Run</span><span class="s">★</span><span>Run It</span><span class="s">★</span>
+  </div>
+
+  <div class="wrap">
+    <div class="left">
+      <div class="brandrow">
+        <div>
+          <div class="eyebrow mono">★ Phaser Build</div>
+          <h1 class="title disp">Render<br>Maze</h1>
+        </div>
+        <div id="themeTag" class="themetag mono">Atlanta Wing Run</div>
+      </div>
+
+      <div class="hud" role="status" aria-live="polite">
+        <div>
+          <div class="lab mono">Score</div>
+          <strong id="score" class="disp">0</strong>
+        </div>
+        <div>
+          <div class="lab mono"><span id="leftLabel">Wings</span> Left</div>
+          <strong id="left" class="disp">0</strong>
+        </div>
+        <div>
+          <div class="lab mono">Lives</div>
+          <div id="lives" class="lives"></div>
+        </div>
+        <div>
+          <div class="lab mono">Mode</div>
+          <strong id="mode" class="modeval head">Ready</strong>
+          <div id="powerWrap" class="powerwrap" hidden><div id="powerBar" class="powerbar"></div></div>
+        </div>
+      </div>
+
+      <div class="boardwrap">
+        <div id="game"></div>
+
+        <div id="titleScreen" class="overlay" style="background:rgba(33,28,34,.82);backdrop-filter:blur(2px)">
+          <div class="ov-kick mono">★ Press Start ★</div>
+          <h2 class="ov-h2 disp">Lemon Pepper<br>Run</h2>
+          <p id="deck" class="ov-deck">Collect every crispy wing, grab the lemon-pepper wet wing to flip the blockers, and clear the route before the spec falls apart.</p>
+          <div class="seg" role="group" aria-label="Choose theme" style="margin:20px 0 8px">
+            <button id="pickWorkshop" class="head" aria-pressed="false">Workshop Specs</button>
+            <button id="pickAtlanta" class="head" aria-pressed="true">Atlanta Wing Run</button>
+          </div>
+          <div class="seg small" role="group" aria-label="Difficulty">
+            <button data-diff="chill" class="head" aria-pressed="false">Chill</button>
+            <button data-diff="normal" class="head" aria-pressed="true">Normal</button>
+            <button data-diff="spicy" class="head" aria-pressed="false">Spicy</button>
+          </div>
+          <button id="startBtn" class="btn-primary disp" style="margin-top:18px">★&nbsp; Run It &nbsp;★</button>
+          <div class="hint mono">Hold Arrows / WASD to move · Space to pause</div>
+        </div>
+
+        <div id="pauseScreen" class="overlay" style="background:rgba(33,28,34,.8)" hidden>
+          <div class="ov-kick mono">Workshop Pause</div>
+          <h2 class="ov-h2 disp" style="margin-bottom:18px">Paused</h2>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+            <button id="resumeBtn" class="btn-sm disp">Resume</button>
+            <button id="quitBtn1" class="btn-ghost disp">Quit</button>
+          </div>
+        </div>
+
+        <div id="resultScreen" class="overlay" hidden>
+          <div id="resultKicker" class="ov-kick mono">Spec Accepted</div>
+          <h2 id="resultTitle" class="ov-h2 disp">You Shipped It</h2>
+          <div class="statbox">
+            <div><div class="lab mono">Score</div><div id="resultScore" class="val disp" style="color:#fcf9ee">0</div></div>
+            <div><div class="lab mono">Best</div><div id="bestScore" class="val disp" style="color:#df9718">0</div></div>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:18px">
+            <button id="againBtn" class="btn-sm disp">Run It Again</button>
+            <button id="quitBtn2" class="btn-ghost disp">Main Menu</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div style="display:flex;gap:8px">
+          <button id="pauseBtn" class="ctrl-btn head">Pause</button>
+          <button id="restartBtn" class="ctrl-btn head">Restart</button>
+        </div>
+        <p class="ctrl-hint mono">Hold Arrows / WASD · Space pauses</p>
+      </div>
+
+      <div class="dpad-wrap" aria-hidden="false">
+        <div class="dpad">
+          <span style="grid-column:2;grid-row:1"><button data-dir="up" aria-label="Move up" style="width:100%;height:100%">▲</button></span>
+          <span style="grid-column:1;grid-row:2"><button data-dir="left" aria-label="Move left" style="width:100%;height:100%">◀</button></span>
+          <span style="grid-column:2;grid-row:2"><button class="down" data-dir="down" aria-label="Move down" style="width:100%;height:100%">▼</button></span>
+          <span style="grid-column:3;grid-row:2"><button data-dir="right" aria-label="Move right" style="width:100%;height:100%">▶</button></span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="legend" aria-label="Game legend">
+      <div>
+        <h3 class="mono">Collectibles</h3>
+        <ul id="collectibleLegend"></ul>
+      </div>
+      <div>
+        <h3 class="mono">Blockers</h3>
+        <ul id="enemyLegend"></ul>
+      </div>
+    </aside>
+  </div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

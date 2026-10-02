@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Spec card collectible</title>
+  <desc id="desc">Cream card labeled SPEC.</desc>
+  <path fill="#2b292d" d="M12 6h34l8 8v44H12z"></path>
+  <path fill="#fcf9ee" d="M16 10h27l7 7v37H16z"></path>
+  <path fill="#df9718" d="M43 10v9h7z"></path>
+  <path fill="#ff88df" d="M20 22h24v5H20zM20 32h20v4H20zM20 41h24v4H20z"></path>
+  <path fill="#2b292d" d="M20 51h16v3H20z"></path>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Flaky Tests adversary</title>
+  <desc id="desc">Original red test terminal adversary.</desc>
+  <path fill="#2b292d" d="M7 11h50v42H7z"></path>
+  <path fill="#711b43" d="M12 17h40v31H12z"></path>
+  <path fill="#fcf9ee" d="M12 17h40v7H12z"></path>
+  <path fill="#2b292d" d="M16 20h4v2h-4zM23 20h4v2h-4zM30 20h4v2h-4z"></path>
+  <path fill="#ff88df" d="m21 32 4-4 7 7 7-7 4 4-7 7 7 7-4 4-7-7-7 7-4-4 7-7-7-7Z"></path>
+  <path fill="#df9718" d="M14 50h36v3H14z"></path>
+  <path fill="#fcf9ee" d="M44 29h5v4h-5zM44 37h5v4h-5z" opacity=".8"></path>
+</svg>

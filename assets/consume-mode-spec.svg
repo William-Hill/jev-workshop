@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Approved spec collectible</title>
+  <desc id="desc">Gold approved spec card that activates blocker-clearing mode.</desc>
+  <path fill="#2b292d" d="M10 5h36l9 9v45H10z"></path>
+  <path fill="#fff7cf" d="M15 10h28l7 7v37H15z"></path>
+  <path fill="#df9718" d="M43 10v10h8zM19 19h25v5H19zM19 45h26v5H19z"></path>
+  <path fill="#ff88df" d="M19 29h18v4H19zM19 37h23v4H19z"></path>
+  <path fill="#015a55" d="M43 28a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"></path>
+  <path fill="#fcf9ee" d="m32 25 5 3-5 3v-6Z"></path>
+  <path fill="#2b292d" d="M22 55h20v4H22z"></path>
+</svg>
