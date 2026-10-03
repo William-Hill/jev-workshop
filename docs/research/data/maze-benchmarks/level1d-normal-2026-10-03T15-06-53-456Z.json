@@ -1,0 +1,46 @@
+{
+  "summary": {
+    "variant": "level1d",
+    "difficulty": "normal",
+    "games": 1,
+    "mean_points": 86,
+    "mean_jev_share": 0.94,
+    "wins": 1,
+    "mean_lives_lost": 2,
+    "mean_collectibles_left": 0,
+    "input_tokens": 165578
+  },
+  "games": [
+    {
+      "result": "won",
+      "collectibles_left": 0,
+      "lives": 1,
+      "game_seconds": 101,
+      "latency_p50_ms": 165,
+      "input_tokens": 165578,
+      "model": "jev-1.13.0",
+      "fallback_reasons": {
+        "confidence is less than 0.2": 10
+      },
+      "score": {
+        "points": 86,
+        "jev_share": 0.94,
+        "decisions": {
+          "jev": 148,
+          "override": 0,
+          "fallback": 10,
+          "code": 516
+        },
+        "collected": {
+          "jev": 146,
+          "fallback": 13
+        },
+        "lives_lost": {
+          "jev": 1,
+          "fallback": 1
+        }
+      },
+      "wall_seconds": 80
+    }
+  ]
+}

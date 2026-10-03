@@ -94,6 +94,19 @@ Other Normal games, not in the table:
 - A later 20-game run (after the staff-level review) gave the baseline 4 of 20 and `level1` 9 of 20. All Normal runs together: baseline 6 of 29 (21%), `level1` 15 of 28 (54%). The earlier `level1` figure of 6 of 8 was a small-sample high.
 - In the 20-game `level1` run, 7 games stopped at the time limit. The runner circled a corner loop with no item and no blocker, because the rule "keep the runner alive first" made "no blocker at all" look best. The fix for one literal reading created another one.
 - A code-only baseline (`variants/code-only.js`) won 10 of 10 on Normal, with 1 life lost each time.
+- Three more versions, 20 games each on Normal (2026-10-03):
+
+  | Variant | Idea | Wins | Mean lives lost | Fallback share of Jev requests |
+  |---|---|---|---|---|
+  | `level1c` | One ranked list of rules in place of separate rules | 14 of 20 (70%) | 1.55 | 8.6% |
+  | `level2b` | `level1b` words + the fact "the blocker moves toward the runner" | 15 of 20 (75%) | 1.25 | 4.0% |
+  | `level1d` | `level1c` words; code removes directions with a blocker 3 steps or fewer away | 13 of 20 (65%) | 1.8 | 6.1% |
+
+  - None of the three reached the time limit.
+  - The three are too close to rank with 20 games each. All three are far above the first question (21%).
+  - `level2b` turned `level1b` (60%) into 75% with one added fact. This supports the idea that the pincer deaths came from a missing fact.
+  - `level1d` did not beat `level1c`. Code removed a direction in only 101 of about 13,000 decision states. Most `level1d` losses came late (3 to 9 items left), from blockers that approached from more than 3 steps away. A fixed 3-step filter does not see a moving blocker.
+  - Code only plays almost the same game each time (1 life lost in each of 10 games), so its 10 of 10 is close to one game repeated, not 10 independent samples. Compare it with care.
 - `level1b` adds one rule to `level1`: "When no blocker is 3 steps or fewer away, go toward the nearest collectible." In 20 games on Normal it won 12 (60%), with 0 time-limit games but 2.05 lives lost on average. The corner loop disappeared, and an early death in a pincer between two blockers appeared in 8 games. Each sentence fixed one behavior and changed another.
 - One `level1` game reached the 240-second limit with 3 collectibles left.
 

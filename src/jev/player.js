@@ -205,7 +205,9 @@ export function createPlayer(scene, variant) {
     apply(choice, key);
     record({
       source: "code",
-      reason: options.length === 1 ? "one legal move" : "corridor",
+      reason: snapshot.removed_by_code
+        ? `code removed ${snapshot.removed_by_code.join(", ")} (blocker too near)`
+        : options.length === 1 ? "one legal move" : "corridor",
       tile: snapshot.tile,
       options,
       choice,
