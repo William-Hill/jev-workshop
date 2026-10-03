@@ -12,3 +12,9 @@ bundle/
 .env
 .env.*
 !.env.example
+
+# Benchmark output
+/bench-results/
+
+# macOS
+.DS_Store

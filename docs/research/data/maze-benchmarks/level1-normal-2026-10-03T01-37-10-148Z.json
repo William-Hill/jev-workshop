@@ -1,0 +1,168 @@
+{
+  "summary": {
+    "variant": "level1",
+    "difficulty": "normal",
+    "games": 5,
+    "mean_points": 121.4,
+    "mean_jev_share": 0.92,
+    "wins": 3,
+    "mean_lives_lost": 1.2,
+    "mean_collectibles_left": 0.8,
+    "input_tokens": 745850
+  },
+  "games": [
+    {
+      "result": "won",
+      "collectibles_left": 0,
+      "lives": 3,
+      "game_seconds": 51,
+      "latency_p50_ms": 159,
+      "input_tokens": 78551,
+      "model": "jev-1.13.0",
+      "fallback_reasons": {},
+      "score": {
+        "points": 159,
+        "jev_share": 1,
+        "decisions": {
+          "jev": 76,
+          "override": 0,
+          "fallback": 0,
+          "code": 263
+        },
+        "collected": {
+          "jev": 159,
+          "fallback": 0
+        },
+        "lives_lost": {
+          "jev": 0,
+          "fallback": 0
+        }
+      },
+      "wall_seconds": 39
+    },
+    {
+      "result": "lost",
+      "collectibles_left": 1,
+      "lives": 0,
+      "game_seconds": 86,
+      "latency_p50_ms": 165,
+      "input_tokens": 178377,
+      "model": "jev-1.13.0",
+      "fallback_reasons": {
+        "confidence is less than 0.2": 28
+      },
+      "score": {
+        "points": 66,
+        "jev_share": 0.84,
+        "decisions": {
+          "jev": 142,
+          "override": 0,
+          "fallback": 28,
+          "code": 404
+        },
+        "collected": {
+          "jev": 156,
+          "fallback": 2
+        },
+        "lives_lost": {
+          "jev": 3,
+          "fallback": 0
+        }
+      },
+      "wall_seconds": 75
+    },
+    {
+      "result": "won",
+      "collectibles_left": 0,
+      "lives": 2,
+      "game_seconds": 54,
+      "latency_p50_ms": 161,
+      "input_tokens": 102609,
+      "model": "jev-1.13.0",
+      "fallback_reasons": {
+        "confidence is less than 0.2": 7
+      },
+      "score": {
+        "points": 129,
+        "jev_share": 0.93,
+        "decisions": {
+          "jev": 90,
+          "override": 0,
+          "fallback": 7,
+          "code": 264
+        },
+        "collected": {
+          "jev": 159,
+          "fallback": 0
+        },
+        "lives_lost": {
+          "jev": 1,
+          "fallback": 0
+        }
+      },
+      "wall_seconds": 45
+    },
+    {
+      "result": "won",
+      "collectibles_left": 0,
+      "lives": 3,
+      "game_seconds": 121,
+      "latency_p50_ms": 164,
+      "input_tokens": 109561,
+      "model": "jev-1.13.0",
+      "fallback_reasons": {
+        "confidence is less than 0.2": 10
+      },
+      "score": {
+        "points": 157,
+        "jev_share": 0.9,
+        "decisions": {
+          "jev": 92,
+          "override": 0,
+          "fallback": 10,
+          "code": 709
+        },
+        "collected": {
+          "jev": 157,
+          "fallback": 2
+        },
+        "lives_lost": {
+          "jev": 0,
+          "fallback": 0
+        }
+      },
+      "wall_seconds": 79
+    },
+    {
+      "result": "time limit",
+      "collectibles_left": 3,
+      "lives": 1,
+      "game_seconds": 240,
+      "latency_p50_ms": 160,
+      "input_tokens": 276752,
+      "model": "jev-1.13.0",
+      "fallback_reasons": {
+        "confidence is less than 0.2": 16
+      },
+      "score": {
+        "points": 96,
+        "jev_share": 0.94,
+        "decisions": {
+          "jev": 246,
+          "override": 0,
+          "fallback": 16,
+          "code": 1348
+        },
+        "collected": {
+          "jev": 156,
+          "fallback": 0
+        },
+        "lives_lost": {
+          "jev": 2,
+          "fallback": 0
+        }
+      },
+      "wall_seconds": 167
+    }
+  ]
+}

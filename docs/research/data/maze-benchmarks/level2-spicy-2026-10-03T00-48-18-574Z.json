@@ -1,0 +1,108 @@
+{
+  "summary": {
+    "variant": "level2",
+    "difficulty": "spicy",
+    "games": 3,
+    "mean_points": 56.67,
+    "mean_jev_share": 0.93,
+    "wins": 1,
+    "mean_lives_lost": 2.67,
+    "mean_collectibles_left": 18.33,
+    "input_tokens": 376079
+  },
+  "games": [
+    {
+      "result": "lost",
+      "collectibles_left": 41,
+      "lives": 0,
+      "game_seconds": 78,
+      "latency_p50_ms": 166,
+      "input_tokens": 131541,
+      "model": "jev-1.13.0",
+      "fallback_reasons": {
+        "confidence is less than 0.2": 7
+      },
+      "score": {
+        "points": 27,
+        "jev_share": 0.94,
+        "decisions": {
+          "jev": 107,
+          "override": 0,
+          "fallback": 7,
+          "code": 408
+        },
+        "collected": {
+          "jev": 117,
+          "fallback": 1
+        },
+        "lives_lost": {
+          "jev": 3,
+          "fallback": 0
+        }
+      },
+      "wall_seconds": 62
+    },
+    {
+      "result": "lost",
+      "collectibles_left": 14,
+      "lives": 0,
+      "game_seconds": 74,
+      "latency_p50_ms": 167,
+      "input_tokens": 135933,
+      "model": "jev-1.13.0",
+      "fallback_reasons": {
+        "confidence is less than 0.2": 7
+      },
+      "score": {
+        "points": 49,
+        "jev_share": 0.94,
+        "decisions": {
+          "jev": 109,
+          "override": 0,
+          "fallback": 7,
+          "code": 384
+        },
+        "collected": {
+          "jev": 139,
+          "fallback": 6
+        },
+        "lives_lost": {
+          "jev": 3,
+          "fallback": 0
+        }
+      },
+      "wall_seconds": 60
+    },
+    {
+      "result": "won",
+      "collectibles_left": 0,
+      "lives": 1,
+      "game_seconds": 60,
+      "latency_p50_ms": 166,
+      "input_tokens": 108605,
+      "model": "jev-1.13.0",
+      "fallback_reasons": {
+        "confidence is less than 0.2": 7
+      },
+      "score": {
+        "points": 94,
+        "jev_share": 0.92,
+        "decisions": {
+          "jev": 85,
+          "override": 0,
+          "fallback": 7,
+          "code": 313
+        },
+        "collected": {
+          "jev": 154,
+          "fallback": 5
+        },
+        "lives_lost": {
+          "jev": 2,
+          "fallback": 0
+        }
+      },
+      "wall_seconds": 50
+    }
+  ]
+}

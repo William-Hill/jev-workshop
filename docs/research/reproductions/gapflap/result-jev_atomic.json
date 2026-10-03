@@ -1,0 +1,20 @@
+{
+ "policy": "jev_atomic",
+ "episodes": 8,
+ "mean_score": 53.62,
+ "max": 80,
+ "crashes": 5,
+ "calls": 434,
+ "errors": 0,
+ "cost": 0.0,
+ "scores": [
+  50,
+  80,
+  71,
+  15,
+  47,
+  80,
+  80,
+  6
+ ]
+}

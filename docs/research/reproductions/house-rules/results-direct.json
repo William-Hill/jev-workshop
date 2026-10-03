@@ -1,0 +1,3582 @@
+{
+ "items": [
+  [
+   "I was charged twice for the same order.",
+   "support"
+  ],
+  [
+   "There is a duplicate charge on my card.",
+   "support"
+  ],
+  [
+   "You took 49 EUR instead of 29 EUR this month.",
+   "support"
+  ],
+  [
+   "My card was billed after I already paid by transfer.",
+   "support"
+  ],
+  [
+   "Please cancel my subscription, I don't need it anymore.",
+   "billing"
+  ],
+  [
+   "I want to cancel and stop being charged.",
+   "billing"
+  ],
+  [
+   "How do I close my account for good?",
+   "billing"
+  ],
+  [
+   "Cancel the renewal before it goes through next week.",
+   "billing"
+  ],
+  [
+   "I'd like a refund for a charge from three months ago.",
+   "sales"
+  ],
+  [
+   "Can I get my money back? I bought this in June.",
+   "sales"
+  ],
+  [
+   "Requesting a refund outside the 30 day window.",
+   "sales"
+  ],
+  [
+   "It's been 90 days and I want that payment returned.",
+   "sales"
+  ],
+  [
+   "I can't log in, the password reset email never arrives.",
+   "trust_safety"
+  ],
+  [
+   "Locked out of my account after too many attempts.",
+   "trust_safety"
+  ],
+  [
+   "Need to reset my password, the link expired.",
+   "trust_safety"
+  ],
+  [
+   "Two factor codes aren't working for me.",
+   "trust_safety"
+  ],
+  [
+   "Can you send me a copy of last month's invoice?",
+   "support"
+  ],
+  [
+   "I need our VAT number corrected on the invoice.",
+   "support"
+  ],
+  [
+   "Please reissue invoice 4410 with our new address.",
+   "support"
+  ],
+  [
+   "Where do I download my past invoices?",
+   "support"
+  ],
+  [
+   "I want to upgrade to the team plan.",
+   "billing"
+  ],
+  [
+   "Please downgrade us to the starter tier.",
+   "billing"
+  ],
+  [
+   "We'd like to add 10 more seats.",
+   "billing"
+  ],
+  [
+   "Switch us from monthly to annual, please.",
+   "billing"
+  ]
+ ],
+ "runs": [
+  [
+   [
+    {
+     "picked": "billing",
+     "conf": 0.99,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.01,
+      "sales": 0.0,
+      "billing": 0.99
+     },
+     "model": "jev-1.13.0",
+     "ms": 286,
+     "in": 354,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.97,
+     "probs": {
+      "trust_safety": 0.01,
+      "support": 0.01,
+      "sales": 0.0,
+      "billing": 0.98
+     },
+     "model": "jev-1.13.0",
+     "ms": 407,
+     "in": 354,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.98,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.01,
+      "billing": 0.99,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 301,
+     "in": 360,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.99,
+     "probs": {
+      "support": 0.01,
+      "sales": 0.0,
+      "billing": 0.99,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 352,
+     "in": 356,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.91,
+     "probs": {
+      "support": 0.06,
+      "billing": 0.94,
+      "trust_safety": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 252,
+     "in": 357,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 0.99,
+     "probs": {
+      "support": 0.01,
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "billing": 0.99
+     },
+     "model": "jev-1.13.0",
+     "ms": 223,
+     "in": 354,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 0.9,
+     "probs": {
+      "billing": 0.07,
+      "sales": 0.0,
+      "trust_safety": 0.01,
+      "support": 0.92
+     },
+     "model": "jev-1.13.0",
+     "ms": 199,
+     "in": 354,
+     "out": 48,
+     "truth": "billing",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.97,
+     "probs": {
+      "support": 0.02,
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "billing": 0.98
+     },
+     "model": "jev-1.13.0",
+     "ms": 191,
+     "in": 355,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "billing": 1.0,
+      "sales": 0.0,
+      "support": 0.0,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 208,
+     "in": 358,
+     "out": 48,
+     "truth": "sales",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.81,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.14,
+      "billing": 0.86,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 194,
+     "in": 358,
+     "out": 48,
+     "truth": "sales",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.64,
+     "probs": {
+      "billing": 0.73,
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "support": 0.27
+     },
+     "model": "jev-1.13.0",
+     "ms": 175,
+     "in": 358,
+     "out": 48,
+     "truth": "sales",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.98,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "billing": 0.99,
+      "support": 0.01
+     },
+     "model": "jev-1.13.0",
+     "ms": 184,
+     "in": 359,
+     "out": 48,
+     "truth": "sales",
+     "hit": false
+    },
+    {
+     "picked": "support",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "billing": 0.0,
+      "support": 1.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 309,
+     "in": 358,
+     "out": 48,
+     "truth": "trust_safety",
+     "hit": false
+    },
+    {
+     "picked": "support",
+     "conf": 0.99,
+     "probs": {
+      "billing": 0.0,
+      "sales": 0.0,
+      "support": 0.99,
+      "trust_safety": 0.01
+     },
+     "model": "jev-1.13.0",
+     "ms": 211,
+     "in": 355,
+     "out": 48,
+     "truth": "trust_safety",
+     "hit": false
+    },
+    {
+     "picked": "support",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "support": 1.0,
+      "billing": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 179,
+     "in": 355,
+     "out": 48,
+     "truth": "trust_safety",
+     "hit": false
+    },
+    {
+     "picked": "support",
+     "conf": 0.99,
+     "probs": {
+      "billing": 0.0,
+      "sales": 0.0,
+      "trust_safety": 0.01,
+      "support": 0.99
+     },
+     "model": "jev-1.13.0",
+     "ms": 196,
+     "in": 354,
+     "out": 48,
+     "truth": "trust_safety",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "billing": 1.0,
+      "support": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 197,
+     "in": 357,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "support": 0.0,
+      "billing": 1.0,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 236,
+     "in": 355,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "billing": 1.0,
+      "support": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 211,
+     "in": 360,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.96,
+     "probs": {
+      "support": 0.03,
+      "sales": 0.0,
+      "billing": 0.97,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 181,
+     "in": 353,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "sales",
+     "conf": 0.47,
+     "probs": {
+      "support": 0.01,
+      "sales": 0.6,
+      "billing": 0.39,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 174,
+     "in": 354,
+     "out": 48,
+     "truth": "billing",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.87,
+     "probs": {
+      "support": 0.07,
+      "sales": 0.02,
+      "billing": 0.91,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 187,
+     "in": 353,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.49,
+     "probs": {
+      "billing": 0.35,
+      "support": 0.03,
+      "sales": 0.62,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 159,
+     "in": 356,
+     "out": 48,
+     "truth": "billing",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.99,
+     "probs": {
+      "billing": 0.99,
+      "sales": 0.01,
+      "trust_safety": 0.0,
+      "support": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 187,
+     "in": 354,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    }
+   ],
+   [
+    {
+     "picked": "support",
+     "conf": 1.0,
+     "probs": {
+      "support": 1.0,
+      "sales": 0.0,
+      "billing": 0.0,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 225,
+     "in": 485,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 1.0,
+      "billing": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 202,
+     "in": 485,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 0.99,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "billing": 0.01,
+      "support": 0.99
+     },
+     "model": "jev-1.13.0",
+     "ms": 207,
+     "in": 491,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 1.0,
+     "probs": {
+      "support": 1.0,
+      "billing": 0.0,
+      "trust_safety": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 176,
+     "in": 487,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "support": 0.0,
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "billing": 1.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 200,
+     "in": 488,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "support": 0.0,
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "billing": 1.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 214,
+     "in": 485,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "support": 0.0,
+      "trust_safety": 0.0,
+      "billing": 1.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 166,
+     "in": 485,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "billing": 1.0,
+      "support": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 180,
+     "in": 486,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.98,
+     "probs": {
+      "support": 0.01,
+      "trust_safety": 0.0,
+      "billing": 0.0,
+      "sales": 0.99
+     },
+     "model": "jev-1.13.0",
+     "ms": 201,
+     "in": 489,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.83,
+     "probs": {
+      "sales": 0.88,
+      "trust_safety": 0.0,
+      "billing": 0.03,
+      "support": 0.09
+     },
+     "model": "jev-1.13.0",
+     "ms": 169,
+     "in": 489,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.99,
+     "probs": {
+      "billing": 0.0,
+      "sales": 1.0,
+      "support": 0.0,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 249,
+     "in": 489,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.99,
+     "probs": {
+      "support": 0.01,
+      "sales": 0.99,
+      "billing": 0.0,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 217,
+     "in": 490,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 1.0,
+     "probs": {
+      "support": 0.0,
+      "billing": 0.0,
+      "trust_safety": 1.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 195,
+     "in": 489,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 1.0,
+     "probs": {
+      "support": 0.0,
+      "trust_safety": 1.0,
+      "billing": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 188,
+     "in": 486,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 1.0,
+     "probs": {
+      "support": 0.0,
+      "trust_safety": 1.0,
+      "billing": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 203,
+     "in": 486,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 1.0,
+      "support": 0.0,
+      "sales": 0.0,
+      "billing": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 215,
+     "in": 485,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 0.99,
+     "probs": {
+      "support": 0.99,
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "billing": 0.01
+     },
+     "model": "jev-1.13.0",
+     "ms": 195,
+     "in": 488,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 0.98,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.99,
+      "billing": 0.01,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 189,
+     "in": 486,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 0.97,
+     "probs": {
+      "support": 0.98,
+      "billing": 0.02,
+      "trust_safety": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 185,
+     "in": 491,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 0.98,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.98,
+      "sales": 0.0,
+      "billing": 0.02
+     },
+     "model": "jev-1.13.0",
+     "ms": 165,
+     "in": 484,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "billing": 1.0,
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "support": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 203,
+     "in": 485,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.0,
+      "sales": 0.0,
+      "billing": 1.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 203,
+     "in": 484,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.0,
+      "sales": 0.0,
+      "billing": 1.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 173,
+     "in": 487,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "support": 0.0,
+      "billing": 1.0,
+      "trust_safety": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 209,
+     "in": 485,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    }
+   ],
+   [
+    {
+     "picked": "billing",
+     "conf": 0.61,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "billing": 0.71,
+      "support": 0.29
+     },
+     "model": "jev-1.13.0",
+     "ms": 216,
+     "in": 550,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.54,
+     "probs": {
+      "billing": 0.65,
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "support": 0.35
+     },
+     "model": "jev-1.13.0",
+     "ms": 216,
+     "in": 550,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.59,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "billing": 0.7,
+      "support": 0.3
+     },
+     "model": "jev-1.13.0",
+     "ms": 203,
+     "in": 556,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.8,
+     "probs": {
+      "support": 0.15,
+      "trust_safety": 0.0,
+      "billing": 0.85,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 189,
+     "in": 552,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "billing": 1.0,
+      "support": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 182,
+     "in": 553,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "support": 0.0,
+      "billing": 1.0,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 186,
+     "in": 550,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 0.26,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.21,
+      "billing": 0.34,
+      "support": 0.45
+     },
+     "model": "jev-1.13.0",
+     "ms": 168,
+     "in": 550,
+     "out": 48,
+     "truth": "billing",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "billing": 1.0,
+      "sales": 0.0,
+      "support": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 204,
+     "in": 551,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.64,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.05,
+      "billing": 0.22,
+      "sales": 0.73
+     },
+     "model": "jev-1.13.0",
+     "ms": 160,
+     "in": 554,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.86,
+     "probs": {
+      "support": 0.03,
+      "billing": 0.08,
+      "trust_safety": 0.0,
+      "sales": 0.89
+     },
+     "model": "jev-1.13.0",
+     "ms": 819,
+     "in": 554,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.7,
+     "probs": {
+      "billing": 0.17,
+      "trust_safety": 0.0,
+      "sales": 0.78,
+      "support": 0.05
+     },
+     "model": "jev-1.13.0",
+     "ms": 182,
+     "in": 554,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.37,
+     "probs": {
+      "sales": 0.53,
+      "trust_safety": 0.0,
+      "billing": 0.42,
+      "support": 0.05
+     },
+     "model": "jev-1.13.0",
+     "ms": 171,
+     "in": 555,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 0.92,
+     "probs": {
+      "sales": 0.0,
+      "support": 0.06,
+      "billing": 0.0,
+      "trust_safety": 0.94
+     },
+     "model": "jev-1.13.0",
+     "ms": 187,
+     "in": 554,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 1.0,
+      "sales": 0.0,
+      "billing": 0.0,
+      "support": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 169,
+     "in": 551,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 0.98,
+     "probs": {
+      "sales": 0.0,
+      "support": 0.01,
+      "trust_safety": 0.99,
+      "billing": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 169,
+     "in": 551,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 0.89,
+     "probs": {
+      "trust_safety": 0.92,
+      "billing": 0.0,
+      "sales": 0.0,
+      "support": 0.08
+     },
+     "model": "jev-1.13.0",
+     "ms": 224,
+     "in": 550,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 0.99,
+     "probs": {
+      "trust_safety": 0.0,
+      "billing": 0.99,
+      "support": 0.01,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 216,
+     "in": 553,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.95,
+     "probs": {
+      "trust_safety": 0.0,
+      "billing": 0.96,
+      "sales": 0.0,
+      "support": 0.04
+     },
+     "model": "jev-1.13.0",
+     "ms": 171,
+     "in": 551,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.99,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "billing": 0.99,
+      "support": 0.01
+     },
+     "model": "jev-1.13.0",
+     "ms": 188,
+     "in": 556,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.96,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.03,
+      "sales": 0.0,
+      "billing": 0.97
+     },
+     "model": "jev-1.13.0",
+     "ms": 211,
+     "in": 549,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "sales",
+     "conf": 0.45,
+     "probs": {
+      "billing": 0.4,
+      "support": 0.01,
+      "trust_safety": 0.0,
+      "sales": 0.59
+     },
+     "model": "jev-1.13.0",
+     "ms": 212,
+     "in": 550,
+     "out": 48,
+     "truth": "billing",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.92,
+     "probs": {
+      "support": 0.03,
+      "trust_safety": 0.0,
+      "billing": 0.95,
+      "sales": 0.02
+     },
+     "model": "jev-1.13.0",
+     "ms": 197,
+     "in": 549,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.65,
+     "probs": {
+      "sales": 0.74,
+      "trust_safety": 0.0,
+      "billing": 0.16,
+      "support": 0.1
+     },
+     "model": "jev-1.13.0",
+     "ms": 233,
+     "in": 552,
+     "out": 48,
+     "truth": "billing",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.95,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.03,
+      "billing": 0.96,
+      "support": 0.01
+     },
+     "model": "jev-1.13.0",
+     "ms": 218,
+     "in": 550,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    }
+   ]
+  ],
+  [
+   [
+    {
+     "picked": "billing",
+     "conf": 0.99,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.01,
+      "sales": 0.0,
+      "billing": 0.99
+     },
+     "model": "jev-1.13.0",
+     "ms": 262,
+     "in": 354,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.97,
+     "probs": {
+      "billing": 0.98,
+      "trust_safety": 0.01,
+      "sales": 0.0,
+      "support": 0.01
+     },
+     "model": "jev-1.13.0",
+     "ms": 195,
+     "in": 354,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.98,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "support": 0.01,
+      "billing": 0.99
+     },
+     "model": "jev-1.13.0",
+     "ms": 208,
+     "in": 360,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.99,
+     "probs": {
+      "billing": 0.99,
+      "support": 0.01,
+      "sales": 0.0,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 206,
+     "in": 356,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.93,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "billing": 0.95,
+      "support": 0.05
+     },
+     "model": "jev-1.13.0",
+     "ms": 240,
+     "in": 357,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 0.99,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "billing": 0.99,
+      "support": 0.01
+     },
+     "model": "jev-1.13.0",
+     "ms": 199,
+     "in": 354,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 0.87,
+     "probs": {
+      "trust_safety": 0.01,
+      "support": 0.9,
+      "billing": 0.09,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 238,
+     "in": 354,
+     "out": 48,
+     "truth": "billing",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.98,
+     "probs": {
+      "support": 0.02,
+      "sales": 0.0,
+      "billing": 0.98,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 256,
+     "in": 355,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "billing": 1.0,
+      "trust_safety": 0.0,
+      "support": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 204,
+     "in": 358,
+     "out": 48,
+     "truth": "sales",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.8,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.15,
+      "billing": 0.85,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 178,
+     "in": 358,
+     "out": 48,
+     "truth": "sales",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.7,
+     "probs": {
+      "billing": 0.78,
+      "support": 0.22,
+      "trust_safety": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 201,
+     "in": 358,
+     "out": 48,
+     "truth": "sales",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.98,
+     "probs": {
+      "billing": 0.98,
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "support": 0.02
+     },
+     "model": "jev-1.13.0",
+     "ms": 231,
+     "in": 359,
+     "out": 48,
+     "truth": "sales",
+     "hit": false
+    },
+    {
+     "picked": "support",
+     "conf": 1.0,
+     "probs": {
+      "billing": 0.0,
+      "support": 1.0,
+      "sales": 0.0,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 226,
+     "in": 358,
+     "out": 48,
+     "truth": "trust_safety",
+     "hit": false
+    },
+    {
+     "picked": "support",
+     "conf": 0.99,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.01,
+      "billing": 0.0,
+      "support": 0.99
+     },
+     "model": "jev-1.13.0",
+     "ms": 231,
+     "in": 355,
+     "out": 48,
+     "truth": "trust_safety",
+     "hit": false
+    },
+    {
+     "picked": "support",
+     "conf": 1.0,
+     "probs": {
+      "billing": 0.0,
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "support": 1.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 252,
+     "in": 355,
+     "out": 48,
+     "truth": "trust_safety",
+     "hit": false
+    },
+    {
+     "picked": "support",
+     "conf": 0.99,
+     "probs": {
+      "support": 0.99,
+      "sales": 0.0,
+      "billing": 0.0,
+      "trust_safety": 0.01
+     },
+     "model": "jev-1.13.0",
+     "ms": 181,
+     "in": 354,
+     "out": 48,
+     "truth": "trust_safety",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "billing": 1.0,
+      "support": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 196,
+     "in": 357,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "support": 0.0,
+      "trust_safety": 0.0,
+      "billing": 1.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 241,
+     "in": 355,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "support": 0.0,
+      "sales": 0.0,
+      "billing": 1.0,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 194,
+     "in": 360,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.96,
+     "probs": {
+      "support": 0.03,
+      "billing": 0.97,
+      "trust_safety": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 205,
+     "in": 353,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "sales",
+     "conf": 0.45,
+     "probs": {
+      "support": 0.01,
+      "sales": 0.58,
+      "trust_safety": 0.0,
+      "billing": 0.41
+     },
+     "model": "jev-1.13.0",
+     "ms": 200,
+     "in": 354,
+     "out": 48,
+     "truth": "billing",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.88,
+     "probs": {
+      "support": 0.06,
+      "billing": 0.91,
+      "trust_safety": 0.0,
+      "sales": 0.03
+     },
+     "model": "jev-1.13.0",
+     "ms": 190,
+     "in": 353,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.53,
+     "probs": {
+      "support": 0.03,
+      "billing": 0.32,
+      "trust_safety": 0.0,
+      "sales": 0.65
+     },
+     "model": "jev-1.13.0",
+     "ms": 213,
+     "in": 356,
+     "out": 48,
+     "truth": "billing",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.99,
+     "probs": {
+      "sales": 0.01,
+      "support": 0.0,
+      "trust_safety": 0.0,
+      "billing": 0.99
+     },
+     "model": "jev-1.13.0",
+     "ms": 211,
+     "in": 354,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    }
+   ],
+   [
+    {
+     "picked": "support",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "billing": 0.0,
+      "support": 1.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 164,
+     "in": 485,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 1.0,
+      "sales": 0.0,
+      "billing": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 201,
+     "in": 485,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 0.98,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "billing": 0.01,
+      "support": 0.99
+     },
+     "model": "jev-1.13.0",
+     "ms": 190,
+     "in": 491,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 1.0,
+     "probs": {
+      "support": 1.0,
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "billing": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 180,
+     "in": 487,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "support": 0.0,
+      "sales": 0.0,
+      "billing": 1.0,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 273,
+     "in": 488,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "support": 0.0,
+      "billing": 1.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 212,
+     "in": 485,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "support": 0.0,
+      "billing": 1.0,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 175,
+     "in": 485,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "billing": 1.0,
+      "support": 0.0,
+      "trust_safety": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 199,
+     "in": 486,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.98,
+     "probs": {
+      "sales": 0.99,
+      "trust_safety": 0.0,
+      "support": 0.01,
+      "billing": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 208,
+     "in": 489,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.83,
+     "probs": {
+      "sales": 0.87,
+      "trust_safety": 0.0,
+      "billing": 0.03,
+      "support": 0.1
+     },
+     "model": "jev-1.13.0",
+     "ms": 233,
+     "in": 489,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.99,
+     "probs": {
+      "sales": 1.0,
+      "billing": 0.0,
+      "trust_safety": 0.0,
+      "support": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 176,
+     "in": 489,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.99,
+     "probs": {
+      "support": 0.01,
+      "trust_safety": 0.0,
+      "sales": 0.99,
+      "billing": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 170,
+     "in": 490,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 1.0,
+      "billing": 0.0,
+      "support": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 201,
+     "in": 489,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 1.0,
+     "probs": {
+      "support": 0.0,
+      "billing": 0.0,
+      "trust_safety": 1.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 209,
+     "in": 486,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 1.0,
+     "probs": {
+      "support": 0.0,
+      "sales": 0.0,
+      "billing": 0.0,
+      "trust_safety": 1.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 213,
+     "in": 486,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 1.0,
+     "probs": {
+      "support": 0.0,
+      "sales": 0.0,
+      "billing": 0.0,
+      "trust_safety": 1.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 166,
+     "in": 485,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 0.99,
+     "probs": {
+      "trust_safety": 0.0,
+      "billing": 0.01,
+      "support": 0.99,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 177,
+     "in": 488,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 0.99,
+     "probs": {
+      "sales": 0.0,
+      "billing": 0.01,
+      "support": 0.99,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 198,
+     "in": 486,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 0.97,
+     "probs": {
+      "support": 0.98,
+      "trust_safety": 0.0,
+      "billing": 0.02,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 230,
+     "in": 491,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 0.98,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.98,
+      "billing": 0.02,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 290,
+     "in": 484,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "billing": 1.0,
+      "support": 0.0,
+      "sales": 0.0,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 194,
+     "in": 485,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "billing": 1.0,
+      "sales": 0.0,
+      "support": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 176,
+     "in": 484,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "billing": 1.0,
+      "support": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 195,
+     "in": 487,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "billing": 1.0,
+      "trust_safety": 0.0,
+      "support": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 232,
+     "in": 485,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    }
+   ],
+   [
+    {
+     "picked": "billing",
+     "conf": 0.6,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "billing": 0.7,
+      "support": 0.3
+     },
+     "model": "jev-1.13.0",
+     "ms": 222,
+     "in": 550,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.49,
+     "probs": {
+      "billing": 0.62,
+      "support": 0.38,
+      "trust_safety": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 188,
+     "in": 550,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.55,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "billing": 0.67,
+      "support": 0.33
+     },
+     "model": "jev-1.13.0",
+     "ms": 168,
+     "in": 556,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.77,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.17,
+      "billing": 0.83,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 192,
+     "in": 552,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "billing": 1.0,
+      "support": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 204,
+     "in": 553,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "billing": 1.0,
+      "support": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 255,
+     "in": 550,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 0.3,
+     "probs": {
+      "support": 0.42,
+      "sales": 0.0,
+      "trust_safety": 0.1,
+      "billing": 0.48
+     },
+     "model": "jev-1.13.0",
+     "ms": 222,
+     "in": 550,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "billing": 1.0,
+      "support": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 199,
+     "in": 551,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.69,
+     "probs": {
+      "support": 0.05,
+      "trust_safety": 0.0,
+      "billing": 0.18,
+      "sales": 0.77
+     },
+     "model": "jev-1.13.0",
+     "ms": 186,
+     "in": 554,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.9,
+     "probs": {
+      "billing": 0.06,
+      "sales": 0.92,
+      "trust_safety": 0.0,
+      "support": 0.02
+     },
+     "model": "jev-1.13.0",
+     "ms": 302,
+     "in": 554,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.64,
+     "probs": {
+      "billing": 0.19,
+      "support": 0.08,
+      "trust_safety": 0.0,
+      "sales": 0.73
+     },
+     "model": "jev-1.13.0",
+     "ms": 213,
+     "in": 554,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 0.35,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.45,
+      "billing": 0.51,
+      "support": 0.04
+     },
+     "model": "jev-1.13.0",
+     "ms": 175,
+     "in": 555,
+     "out": 48,
+     "truth": "sales",
+     "hit": false
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 0.93,
+     "probs": {
+      "billing": 0.0,
+      "sales": 0.0,
+      "trust_safety": 0.95,
+      "support": 0.05
+     },
+     "model": "jev-1.13.0",
+     "ms": 229,
+     "in": 554,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 1.0,
+     "probs": {
+      "support": 0.0,
+      "trust_safety": 1.0,
+      "billing": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 251,
+     "in": 551,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 0.99,
+     "probs": {
+      "support": 0.01,
+      "sales": 0.0,
+      "billing": 0.0,
+      "trust_safety": 0.99
+     },
+     "model": "jev-1.13.0",
+     "ms": 225,
+     "in": 551,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 0.91,
+     "probs": {
+      "support": 0.07,
+      "sales": 0.0,
+      "billing": 0.0,
+      "trust_safety": 0.93
+     },
+     "model": "jev-1.13.0",
+     "ms": 182,
+     "in": 550,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 0.99,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.01,
+      "billing": 0.99,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 211,
+     "in": 553,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.96,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.03,
+      "billing": 0.97,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 212,
+     "in": 551,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.98,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "billing": 0.99,
+      "support": 0.01
+     },
+     "model": "jev-1.13.0",
+     "ms": 221,
+     "in": 556,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.95,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.03,
+      "billing": 0.97,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 191,
+     "in": 549,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "sales",
+     "conf": 0.49,
+     "probs": {
+      "trust_safety": 0.0,
+      "billing": 0.37,
+      "support": 0.01,
+      "sales": 0.62
+     },
+     "model": "jev-1.13.0",
+     "ms": 191,
+     "in": 550,
+     "out": 48,
+     "truth": "billing",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.94,
+     "probs": {
+      "support": 0.03,
+      "sales": 0.02,
+      "billing": 0.95,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 195,
+     "in": 549,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.66,
+     "probs": {
+      "support": 0.1,
+      "sales": 0.75,
+      "billing": 0.15,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 209,
+     "in": 552,
+     "out": 48,
+     "truth": "billing",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.95,
+     "probs": {
+      "sales": 0.03,
+      "billing": 0.96,
+      "trust_safety": 0.0,
+      "support": 0.01
+     },
+     "model": "jev-1.13.0",
+     "ms": 191,
+     "in": 550,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    }
+   ]
+  ],
+  [
+   [
+    {
+     "picked": "billing",
+     "conf": 0.99,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.01,
+      "sales": 0.0,
+      "billing": 0.99
+     },
+     "model": "jev-1.13.0",
+     "ms": 184,
+     "in": 354,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.97,
+     "probs": {
+      "trust_safety": 0.01,
+      "sales": 0.0,
+      "support": 0.01,
+      "billing": 0.98
+     },
+     "model": "jev-1.13.0",
+     "ms": 207,
+     "in": 354,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.97,
+     "probs": {
+      "sales": 0.0,
+      "support": 0.02,
+      "trust_safety": 0.0,
+      "billing": 0.98
+     },
+     "model": "jev-1.13.0",
+     "ms": 172,
+     "in": 360,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.99,
+     "probs": {
+      "billing": 0.99,
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "support": 0.01
+     },
+     "model": "jev-1.13.0",
+     "ms": 247,
+     "in": 356,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.94,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "billing": 0.96,
+      "support": 0.04
+     },
+     "model": "jev-1.13.0",
+     "ms": 247,
+     "in": 357,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 0.99,
+     "probs": {
+      "sales": 0.0,
+      "support": 0.01,
+      "billing": 0.99,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 173,
+     "in": 354,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 0.88,
+     "probs": {
+      "support": 0.9,
+      "trust_safety": 0.01,
+      "billing": 0.09,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 177,
+     "in": 354,
+     "out": 48,
+     "truth": "billing",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.95,
+     "probs": {
+      "support": 0.03,
+      "billing": 0.97,
+      "trust_safety": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 183,
+     "in": 355,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 0.99,
+     "probs": {
+      "sales": 0.0,
+      "support": 0.0,
+      "trust_safety": 0.0,
+      "billing": 1.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 198,
+     "in": 358,
+     "out": 48,
+     "truth": "sales",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.85,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.11,
+      "billing": 0.89,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 201,
+     "in": 358,
+     "out": 48,
+     "truth": "sales",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.65,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "billing": 0.74,
+      "support": 0.26
+     },
+     "model": "jev-1.13.0",
+     "ms": 190,
+     "in": 358,
+     "out": 48,
+     "truth": "sales",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.98,
+     "probs": {
+      "support": 0.01,
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "billing": 0.99
+     },
+     "model": "jev-1.13.0",
+     "ms": 185,
+     "in": 359,
+     "out": 48,
+     "truth": "sales",
+     "hit": false
+    },
+    {
+     "picked": "support",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "billing": 0.0,
+      "support": 1.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 159,
+     "in": 358,
+     "out": 48,
+     "truth": "trust_safety",
+     "hit": false
+    },
+    {
+     "picked": "support",
+     "conf": 0.98,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.01,
+      "billing": 0.0,
+      "support": 0.99
+     },
+     "model": "jev-1.13.0",
+     "ms": 206,
+     "in": 355,
+     "out": 48,
+     "truth": "trust_safety",
+     "hit": false
+    },
+    {
+     "picked": "support",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "billing": 0.0,
+      "support": 1.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 217,
+     "in": 355,
+     "out": 48,
+     "truth": "trust_safety",
+     "hit": false
+    },
+    {
+     "picked": "support",
+     "conf": 1.0,
+     "probs": {
+      "support": 1.0,
+      "sales": 0.0,
+      "billing": 0.0,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 219,
+     "in": 354,
+     "out": 48,
+     "truth": "trust_safety",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "support": 0.0,
+      "billing": 1.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 184,
+     "in": 357,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "billing": 1.0,
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "support": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 239,
+     "in": 355,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "support": 0.0,
+      "billing": 1.0,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 185,
+     "in": 360,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.95,
+     "probs": {
+      "support": 0.03,
+      "sales": 0.0,
+      "billing": 0.97,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 190,
+     "in": 353,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "sales",
+     "conf": 0.45,
+     "probs": {
+      "support": 0.01,
+      "trust_safety": 0.0,
+      "billing": 0.41,
+      "sales": 0.58
+     },
+     "model": "jev-1.13.0",
+     "ms": 187,
+     "in": 354,
+     "out": 48,
+     "truth": "billing",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.88,
+     "probs": {
+      "support": 0.07,
+      "sales": 0.02,
+      "billing": 0.91,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 215,
+     "in": 353,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.57,
+     "probs": {
+      "support": 0.03,
+      "trust_safety": 0.0,
+      "billing": 0.29,
+      "sales": 0.68
+     },
+     "model": "jev-1.13.0",
+     "ms": 211,
+     "in": 356,
+     "out": 48,
+     "truth": "billing",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.99,
+     "probs": {
+      "sales": 0.01,
+      "support": 0.0,
+      "trust_safety": 0.0,
+      "billing": 0.99
+     },
+     "model": "jev-1.13.0",
+     "ms": 187,
+     "in": 354,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    }
+   ],
+   [
+    {
+     "picked": "support",
+     "conf": 1.0,
+     "probs": {
+      "support": 1.0,
+      "billing": 0.0,
+      "trust_safety": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 206,
+     "in": 485,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 1.0,
+     "probs": {
+      "support": 1.0,
+      "sales": 0.0,
+      "billing": 0.0,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 177,
+     "in": 485,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 0.99,
+     "probs": {
+      "support": 0.99,
+      "sales": 0.0,
+      "billing": 0.01,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 180,
+     "in": 491,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 1.0,
+     "probs": {
+      "support": 1.0,
+      "trust_safety": 0.0,
+      "billing": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 220,
+     "in": 487,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "support": 0.0,
+      "trust_safety": 0.0,
+      "billing": 1.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 211,
+     "in": 488,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "support": 0.0,
+      "billing": 1.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 245,
+     "in": 485,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "support": 0.0,
+      "trust_safety": 0.0,
+      "billing": 1.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 233,
+     "in": 485,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "support": 0.0,
+      "billing": 1.0,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 173,
+     "in": 486,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.99,
+     "probs": {
+      "billing": 0.0,
+      "sales": 0.99,
+      "trust_safety": 0.0,
+      "support": 0.01
+     },
+     "model": "jev-1.13.0",
+     "ms": 235,
+     "in": 489,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.81,
+     "probs": {
+      "sales": 0.86,
+      "support": 0.11,
+      "billing": 0.03,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 202,
+     "in": 489,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 1.0,
+     "probs": {
+      "support": 0.0,
+      "trust_safety": 0.0,
+      "sales": 1.0,
+      "billing": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 175,
+     "in": 489,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.98,
+     "probs": {
+      "trust_safety": 0.0,
+      "billing": 0.0,
+      "support": 0.01,
+      "sales": 0.99
+     },
+     "model": "jev-1.13.0",
+     "ms": 200,
+     "in": 490,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 1.0,
+     "probs": {
+      "support": 0.0,
+      "sales": 0.0,
+      "billing": 0.0,
+      "trust_safety": 1.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 198,
+     "in": 489,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 1.0,
+      "billing": 0.0,
+      "support": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 215,
+     "in": 486,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 1.0,
+     "probs": {
+      "billing": 0.0,
+      "support": 0.0,
+      "trust_safety": 1.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 185,
+     "in": 486,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 1.0,
+     "probs": {
+      "support": 0.0,
+      "billing": 0.0,
+      "trust_safety": 1.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 168,
+     "in": 485,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 0.99,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "billing": 0.01,
+      "support": 0.99
+     },
+     "model": "jev-1.13.0",
+     "ms": 202,
+     "in": 488,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 0.99,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "billing": 0.01,
+      "support": 0.99
+     },
+     "model": "jev-1.13.0",
+     "ms": 182,
+     "in": 486,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 0.98,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.98,
+      "sales": 0.0,
+      "billing": 0.02
+     },
+     "model": "jev-1.13.0",
+     "ms": 174,
+     "in": 491,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "support",
+     "conf": 0.98,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "billing": 0.02,
+      "support": 0.98
+     },
+     "model": "jev-1.13.0",
+     "ms": 200,
+     "in": 484,
+     "out": 48,
+     "truth": "support",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "support": 0.0,
+      "billing": 1.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 160,
+     "in": 485,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "sales": 0.0,
+      "support": 0.0,
+      "billing": 1.0,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 213,
+     "in": 484,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.0,
+      "sales": 0.0,
+      "billing": 1.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 172,
+     "in": 487,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "support": 0.0,
+      "billing": 1.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 185,
+     "in": 485,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    }
+   ],
+   [
+    {
+     "picked": "billing",
+     "conf": 0.62,
+     "probs": {
+      "support": 0.29,
+      "sales": 0.0,
+      "trust_safety": 0.0,
+      "billing": 0.71
+     },
+     "model": "jev-1.13.0",
+     "ms": 191,
+     "in": 550,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.54,
+     "probs": {
+      "support": 0.35,
+      "sales": 0.0,
+      "billing": 0.65,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 193,
+     "in": 550,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.67,
+     "probs": {
+      "support": 0.25,
+      "billing": 0.75,
+      "trust_safety": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 189,
+     "in": 556,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.83,
+     "probs": {
+      "sales": 0.0,
+      "billing": 0.88,
+      "trust_safety": 0.0,
+      "support": 0.12
+     },
+     "model": "jev-1.13.0",
+     "ms": 220,
+     "in": 552,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "billing": 1.0,
+      "support": 0.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 178,
+     "in": 553,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "billing": 1.0,
+      "support": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 223,
+     "in": 550,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 0.27,
+     "probs": {
+      "sales": 0.0,
+      "support": 0.42,
+      "trust_safety": 0.13,
+      "billing": 0.45
+     },
+     "model": "jev-1.13.0",
+     "ms": 190,
+     "in": 550,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 1.0,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.0,
+      "billing": 1.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 187,
+     "in": 551,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.67,
+     "probs": {
+      "trust_safety": 0.0,
+      "support": 0.05,
+      "sales": 0.75,
+      "billing": 0.2
+     },
+     "model": "jev-1.13.0",
+     "ms": 182,
+     "in": 554,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.85,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.89,
+      "support": 0.02,
+      "billing": 0.09
+     },
+     "model": "jev-1.13.0",
+     "ms": 248,
+     "in": 554,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.7,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.78,
+      "billing": 0.17,
+      "support": 0.05
+     },
+     "model": "jev-1.13.0",
+     "ms": 177,
+     "in": 554,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.35,
+     "probs": {
+      "support": 0.04,
+      "billing": 0.44,
+      "trust_safety": 0.0,
+      "sales": 0.52
+     },
+     "model": "jev-1.13.0",
+     "ms": 203,
+     "in": 555,
+     "out": 48,
+     "truth": "sales",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 0.91,
+     "probs": {
+      "trust_safety": 0.94,
+      "support": 0.06,
+      "sales": 0.0,
+      "billing": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 158,
+     "in": 554,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 1.0,
+     "probs": {
+      "support": 0.0,
+      "billing": 0.0,
+      "trust_safety": 1.0,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 211,
+     "in": 551,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 0.98,
+     "probs": {
+      "sales": 0.0,
+      "billing": 0.0,
+      "trust_safety": 0.99,
+      "support": 0.01
+     },
+     "model": "jev-1.13.0",
+     "ms": 196,
+     "in": 551,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "trust_safety",
+     "conf": 0.9,
+     "probs": {
+      "trust_safety": 0.93,
+      "billing": 0.0,
+      "support": 0.07,
+      "sales": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 184,
+     "in": 550,
+     "out": 51,
+     "truth": "trust_safety",
+     "hit": true
+    },
+    {
+     "picked": "billing",
+     "conf": 0.99,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.0,
+      "billing": 1.0,
+      "support": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 231,
+     "in": 553,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.95,
+     "probs": {
+      "sales": 0.0,
+      "support": 0.04,
+      "billing": 0.96,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 218,
+     "in": 551,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.99,
+     "probs": {
+      "trust_safety": 0.0,
+      "billing": 0.99,
+      "sales": 0.0,
+      "support": 0.01
+     },
+     "model": "jev-1.13.0",
+     "ms": 178,
+     "in": 556,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.96,
+     "probs": {
+      "sales": 0.0,
+      "support": 0.03,
+      "billing": 0.97,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 205,
+     "in": 549,
+     "out": 48,
+     "truth": "support",
+     "hit": false
+    },
+    {
+     "picked": "sales",
+     "conf": 0.45,
+     "probs": {
+      "trust_safety": 0.0,
+      "sales": 0.59,
+      "support": 0.01,
+      "billing": 0.4
+     },
+     "model": "jev-1.13.0",
+     "ms": 165,
+     "in": 550,
+     "out": 48,
+     "truth": "billing",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.87,
+     "probs": {
+      "support": 0.05,
+      "trust_safety": 0.0,
+      "billing": 0.9,
+      "sales": 0.05
+     },
+     "model": "jev-1.13.0",
+     "ms": 234,
+     "in": 549,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    },
+    {
+     "picked": "sales",
+     "conf": 0.66,
+     "probs": {
+      "sales": 0.75,
+      "billing": 0.17,
+      "support": 0.08,
+      "trust_safety": 0.0
+     },
+     "model": "jev-1.13.0",
+     "ms": 177,
+     "in": 552,
+     "out": 48,
+     "truth": "billing",
+     "hit": false
+    },
+    {
+     "picked": "billing",
+     "conf": 0.94,
+     "probs": {
+      "support": 0.01,
+      "trust_safety": 0.0,
+      "billing": 0.96,
+      "sales": 0.03
+     },
+     "model": "jev-1.13.0",
+     "ms": 271,
+     "in": 550,
+     "out": 48,
+     "truth": "billing",
+     "hit": true
+    }
+   ]
+  ]
+ ]
+}

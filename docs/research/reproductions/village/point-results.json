@@ -1,0 +1,632 @@
+[
+ {
+  "case": "03h_hunger0",
+  "variant": "A_vague_oldstate",
+  "i": 0,
+  "choice": "eat",
+  "conf": 0.58,
+  "probs": {
+   "work": 0.01,
+   "socialize": 0.09,
+   "wander": 0.01,
+   "sleep": 0.23,
+   "eat": 0.66
+  },
+  "urgency": 2.24,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 509,
+   "output_tokens": 69
+  },
+  "ms": 230
+ },
+ {
+  "case": "03h_hunger0",
+  "variant": "A_vague_oldstate",
+  "i": 1,
+  "choice": "eat",
+  "conf": 0.55,
+  "probs": {
+   "socialize": 0.09,
+   "wander": 0.01,
+   "eat": 0.63,
+   "work": 0.01,
+   "sleep": 0.26
+  },
+  "urgency": 2.35,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 509,
+   "output_tokens": 69
+  },
+  "ms": 164
+ },
+ {
+  "case": "03h_hunger0",
+  "variant": "A_vague_oldstate",
+  "i": 2,
+  "choice": "eat",
+  "conf": 0.5,
+  "probs": {
+   "wander": 0.01,
+   "eat": 0.6,
+   "work": 0.01,
+   "sleep": 0.29,
+   "socialize": 0.09
+  },
+  "urgency": 2.44,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 509,
+   "output_tokens": 69
+  },
+  "ms": 135
+ },
+ {
+  "case": "03h_hunger0",
+  "variant": "A_vague_oldstate",
+  "i": 3,
+  "choice": "eat",
+  "conf": 0.54,
+  "probs": {
+   "work": 0.01,
+   "socialize": 0.1,
+   "sleep": 0.25,
+   "eat": 0.63,
+   "wander": 0.01
+  },
+  "urgency": 2.47,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 509,
+   "output_tokens": 69
+  },
+  "ms": 143
+ },
+ {
+  "case": "03h_hunger0",
+  "variant": "A_vague_oldstate",
+  "i": 4,
+  "choice": "eat",
+  "conf": 0.62,
+  "probs": {
+   "sleep": 0.23,
+   "eat": 0.69,
+   "work": 0,
+   "wander": 0.01,
+   "socialize": 0.07
+  },
+  "urgency": 2.62,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 509,
+   "output_tokens": 69
+  },
+  "ms": 157
+ },
+ {
+  "case": "03h_hunger0",
+  "variant": "B_explicit_newstate",
+  "i": 0,
+  "choice": "sleep",
+  "conf": 1,
+  "probs": {
+   "eat": 0,
+   "wander": 0,
+   "sleep": 1,
+   "work": 0,
+   "socialize": 0
+  },
+  "urgency": 1.72,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 622,
+   "output_tokens": 69
+  },
+  "ms": 138
+ },
+ {
+  "case": "03h_hunger0",
+  "variant": "B_explicit_newstate",
+  "i": 1,
+  "choice": "sleep",
+  "conf": 1,
+  "probs": {
+   "eat": 0,
+   "wander": 0,
+   "work": 0,
+   "socialize": 0,
+   "sleep": 1
+  },
+  "urgency": 1.34,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 622,
+   "output_tokens": 69
+  },
+  "ms": 175
+ },
+ {
+  "case": "03h_hunger0",
+  "variant": "B_explicit_newstate",
+  "i": 2,
+  "choice": "sleep",
+  "conf": 1,
+  "probs": {
+   "eat": 0,
+   "sleep": 1,
+   "socialize": 0,
+   "work": 0,
+   "wander": 0
+  },
+  "urgency": 1.15,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 622,
+   "output_tokens": 69
+  },
+  "ms": 142
+ },
+ {
+  "case": "03h_hunger0",
+  "variant": "B_explicit_newstate",
+  "i": 3,
+  "choice": "sleep",
+  "conf": 1,
+  "probs": {
+   "sleep": 1,
+   "eat": 0,
+   "work": 0,
+   "socialize": 0,
+   "wander": 0
+  },
+  "urgency": 1.2,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 622,
+   "output_tokens": 69
+  },
+  "ms": 171
+ },
+ {
+  "case": "03h_hunger0",
+  "variant": "B_explicit_newstate",
+  "i": 4,
+  "choice": "sleep",
+  "conf": 1,
+  "probs": {
+   "sleep": 1,
+   "eat": 0,
+   "work": 0,
+   "wander": 0,
+   "socialize": 0
+  },
+  "urgency": 1.28,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 622,
+   "output_tokens": 69
+  },
+  "ms": 146
+ },
+ {
+  "case": "03h_hunger0",
+  "variant": "C_vague_newstate",
+  "i": 0,
+  "choice": "eat",
+  "conf": 0.34,
+  "probs": {
+   "work": 0.03,
+   "socialize": 0.06,
+   "wander": 0.01,
+   "eat": 0.47,
+   "sleep": 0.43
+  },
+  "urgency": 1.1,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 533,
+   "output_tokens": 69
+  },
+  "ms": 152
+ },
+ {
+  "case": "03h_hunger0",
+  "variant": "C_vague_newstate",
+  "i": 1,
+  "choice": "sleep",
+  "conf": 0.4,
+  "probs": {
+   "socialize": 0.08,
+   "wander": 0.02,
+   "eat": 0.35,
+   "work": 0.04,
+   "sleep": 0.51
+  },
+  "urgency": 1.09,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 533,
+   "output_tokens": 69
+  },
+  "ms": 150
+ },
+ {
+  "case": "03h_hunger0",
+  "variant": "C_vague_newstate",
+  "i": 2,
+  "choice": "sleep",
+  "conf": 0.42,
+  "probs": {
+   "work": 0.03,
+   "socialize": 0.07,
+   "sleep": 0.53,
+   "eat": 0.35,
+   "wander": 0.02
+  },
+  "urgency": 0.98,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 533,
+   "output_tokens": 69
+  },
+  "ms": 139
+ },
+ {
+  "case": "03h_hunger0",
+  "variant": "C_vague_newstate",
+  "i": 3,
+  "choice": "sleep",
+  "conf": 0.45,
+  "probs": {
+   "socialize": 0.06,
+   "work": 0.02,
+   "sleep": 0.56,
+   "eat": 0.35,
+   "wander": 0.01
+  },
+  "urgency": 1.11,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 533,
+   "output_tokens": 69
+  },
+  "ms": 183
+ },
+ {
+  "case": "03h_hunger0",
+  "variant": "C_vague_newstate",
+  "i": 4,
+  "choice": "sleep",
+  "conf": 0.41,
+  "probs": {
+   "socialize": 0.05,
+   "sleep": 0.53,
+   "work": 0.02,
+   "eat": 0.39,
+   "wander": 0.01
+  },
+  "urgency": 1.06,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 533,
+   "output_tokens": 69
+  },
+  "ms": 235
+ },
+ {
+  "case": "22h_hunger30",
+  "variant": "A_vague_oldstate",
+  "i": 0,
+  "choice": "eat",
+  "conf": 0.5,
+  "probs": {
+   "work": 0,
+   "eat": 0.6,
+   "sleep": 0.27,
+   "socialize": 0.12,
+   "wander": 0.01
+  },
+  "urgency": 1.69,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 510,
+   "output_tokens": 69
+  },
+  "ms": 138
+ },
+ {
+  "case": "22h_hunger30",
+  "variant": "A_vague_oldstate",
+  "i": 1,
+  "choice": "eat",
+  "conf": 0.45,
+  "probs": {
+   "socialize": 0.12,
+   "wander": 0.01,
+   "eat": 0.55,
+   "work": 0,
+   "sleep": 0.32
+  },
+  "urgency": 1.75,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 510,
+   "output_tokens": 69
+  },
+  "ms": 136
+ },
+ {
+  "case": "22h_hunger30",
+  "variant": "A_vague_oldstate",
+  "i": 2,
+  "choice": "eat",
+  "conf": 0.56,
+  "probs": {
+   "eat": 0.64,
+   "wander": 0.01,
+   "work": 0,
+   "sleep": 0.2,
+   "socialize": 0.15
+  },
+  "urgency": 1.64,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 510,
+   "output_tokens": 69
+  },
+  "ms": 178
+ },
+ {
+  "case": "22h_hunger30",
+  "variant": "A_vague_oldstate",
+  "i": 3,
+  "choice": "eat",
+  "conf": 0.51,
+  "probs": {
+   "sleep": 0.27,
+   "socialize": 0.11,
+   "wander": 0.01,
+   "eat": 0.61,
+   "work": 0
+  },
+  "urgency": 1.67,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 510,
+   "output_tokens": 69
+  },
+  "ms": 142
+ },
+ {
+  "case": "22h_hunger30",
+  "variant": "A_vague_oldstate",
+  "i": 4,
+  "choice": "eat",
+  "conf": 0.47,
+  "probs": {
+   "work": 0,
+   "wander": 0.01,
+   "sleep": 0.27,
+   "eat": 0.58,
+   "socialize": 0.14
+  },
+  "urgency": 1.73,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 510,
+   "output_tokens": 69
+  },
+  "ms": 165
+ },
+ {
+  "case": "22h_hunger30",
+  "variant": "B_explicit_newstate",
+  "i": 0,
+  "choice": "sleep",
+  "conf": 1,
+  "probs": {
+   "work": 0,
+   "wander": 0,
+   "sleep": 1,
+   "eat": 0,
+   "socialize": 0
+  },
+  "urgency": 1.81,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 623,
+   "output_tokens": 69
+  },
+  "ms": 220
+ },
+ {
+  "case": "22h_hunger30",
+  "variant": "B_explicit_newstate",
+  "i": 1,
+  "choice": "sleep",
+  "conf": 1,
+  "probs": {
+   "sleep": 1,
+   "eat": 0,
+   "work": 0,
+   "socialize": 0,
+   "wander": 0
+  },
+  "urgency": 1.86,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 623,
+   "output_tokens": 69
+  },
+  "ms": 152
+ },
+ {
+  "case": "22h_hunger30",
+  "variant": "B_explicit_newstate",
+  "i": 2,
+  "choice": "sleep",
+  "conf": 1,
+  "probs": {
+   "sleep": 1,
+   "eat": 0,
+   "work": 0,
+   "socialize": 0,
+   "wander": 0
+  },
+  "urgency": 1.87,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 623,
+   "output_tokens": 69
+  },
+  "ms": 133
+ },
+ {
+  "case": "22h_hunger30",
+  "variant": "B_explicit_newstate",
+  "i": 3,
+  "choice": "sleep",
+  "conf": 1,
+  "probs": {
+   "socialize": 0,
+   "eat": 0,
+   "sleep": 1,
+   "wander": 0,
+   "work": 0
+  },
+  "urgency": 1.79,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 623,
+   "output_tokens": 69
+  },
+  "ms": 154
+ },
+ {
+  "case": "22h_hunger30",
+  "variant": "B_explicit_newstate",
+  "i": 4,
+  "choice": "sleep",
+  "conf": 1,
+  "probs": {
+   "eat": 0,
+   "wander": 0,
+   "work": 0,
+   "socialize": 0,
+   "sleep": 1
+  },
+  "urgency": 1.9,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 623,
+   "output_tokens": 69
+  },
+  "ms": 181
+ },
+ {
+  "case": "22h_hunger30",
+  "variant": "C_vague_newstate",
+  "i": 0,
+  "choice": "eat",
+  "conf": 0.52,
+  "probs": {
+   "sleep": 0.37,
+   "work": 0,
+   "eat": 0.62,
+   "wander": 0,
+   "socialize": 0.01
+  },
+  "urgency": 1.71,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 534,
+   "output_tokens": 69
+  },
+  "ms": 131
+ },
+ {
+  "case": "22h_hunger30",
+  "variant": "C_vague_newstate",
+  "i": 1,
+  "choice": "eat",
+  "conf": 0.52,
+  "probs": {
+   "sleep": 0.35,
+   "eat": 0.63,
+   "socialize": 0.02,
+   "wander": 0,
+   "work": 0
+  },
+  "urgency": 1.6,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 534,
+   "output_tokens": 69
+  },
+  "ms": 159
+ },
+ {
+  "case": "22h_hunger30",
+  "variant": "C_vague_newstate",
+  "i": 2,
+  "choice": "eat",
+  "conf": 0.53,
+  "probs": {
+   "eat": 0.64,
+   "work": 0,
+   "wander": 0,
+   "socialize": 0.02,
+   "sleep": 0.34
+  },
+  "urgency": 1.7,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 534,
+   "output_tokens": 69
+  },
+  "ms": 173
+ },
+ {
+  "case": "22h_hunger30",
+  "variant": "C_vague_newstate",
+  "i": 3,
+  "choice": "eat",
+  "conf": 0.59,
+  "probs": {
+   "eat": 0.6900000000000001,
+   "socialize": 0.02,
+   "wander": 0,
+   "sleep": 0.29,
+   "work": 0
+  },
+  "urgency": 1.67,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 534,
+   "output_tokens": 69
+  },
+  "ms": 152
+ },
+ {
+  "case": "22h_hunger30",
+  "variant": "C_vague_newstate",
+  "i": 4,
+  "choice": "eat",
+  "conf": 0.57,
+  "probs": {
+   "socialize": 0.02,
+   "sleep": 0.31,
+   "wander": 0,
+   "work": 0,
+   "eat": 0.67
+  },
+  "urgency": 1.71,
+  "model": "jev-1.13.0",
+  "usage": {
+   "input_tokens": 534,
+   "output_tokens": 69
+  },
+  "ms": 118
+ }
+]

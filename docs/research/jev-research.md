@@ -101,6 +101,15 @@ The `state` field accepts a string. One tutorial also sends an object with named
 
 ## 3. Price and limits
 
+Correction (2026-10-02): the first-party models page, <https://docs.typesafe.ai/models>, gives different limits from the third-party numbers below. Use the first-party numbers.
+
+- Rate limits: 100K tokens each second and 80 requests each second. "Rate limits are adjusting dynamically", and the limits "can change without notice".
+- Context: 64k tokens for each request, and 32k tokens for `state` plus the longest question.
+- Price: $0.042 for each 1 million input tokens. Output tokens are free.
+- Model IDs: `jev-1.13.0`. `jev-latest` and `jev-preview` both point to `jev-1.13.0`.
+
+The text below is the earlier third-party data.
+
 Source: a third-party tutorial and the Cloudflare model page. TypeSafe did not confirm these numbers to us.
 
 - Price: $0.042 for each 1 million input tokens. Output tokens are free.
@@ -180,16 +189,79 @@ We found no Pac-Man build and no maze build in these lists.
 5. Log each decision to a file.
 6. Label each decision that code made in place of Jev.
 
-## 6. Not verified
+## 6. Open models with the same protocol
+
+Jev has no open weights. Other groups released open models that use the same `/v1/systemone` protocol. Checked on 2026-10-02 from the project pages only. We did not run them.
+
+| Project | What it is | Use for this repository |
+|---|---|---|
+| [Ollama 0.35](https://ollama.com/blog/ollama-now-supports-jev-style-decision-models) | A local `/v1/systemone` endpoint. Models: `nimble` (9B, Bespoke Labs), `tev1` (4B), `tev1:0.8b`. | The first choice. Ollama reports 91 ms for each decision for `nimble` on an M5 Max. |
+| [wfzyx/von](https://github.com/wfzyx/von) | A 395M ModernBERT model with a server for the same protocol. Apache-2.0. Docker image `ghcr.io/wfzyx/von:cpu`. | The second choice. It runs on a CPU. |
+| [ikermoel/open-alternative-jev](https://github.com/ikermoel/open-alternative-jev) | A Python library. It has no HTTP server. | Not applicable without an adapter. |
+
+- Ollama reports a mean accuracy of 75.7% for `nimble` and 76.0% for Jev on 13 public datasets.
+- The Ollama example sends `state` as an object. This repository sends a string. This difference is not tested.
+- A threshold that you tune on an open model does not transfer to Jev.
+- The proxy uses a local server when `.env` has `JEV_UPSTREAM_URL` and `JEV_MODEL`. See `.env.example`.
+
+## 7. How TypeSafe trained Jev
+
+Source: public articles (2026-10-02), not TypeSafe documents.
+
+- TypeSafe names the method RLCD: Reinforcement Learning for Calibrated Decisions.
+- RLCD optimizes for calibrated probabilities on structured decision tasks, not for text that people prefer.
+- TypeSafe did not publish the reward function, the architecture, or the training procedure.
+- A customer cannot fine-tune Jev. TypeSafe serves the same weights to all customers.
+- To change the behavior, change the state, the instructions, and the criteria. Divide a broad judgment into atomic questions and combine the answers in code.
+- One third-party tool (SuperQode, with GEPA) uses 2 to 20 labeled examples to improve the question text automatically. We did not test it.
+
+### Research on RLCD (checked 2026-10-02)
+
+- No paper on RLCD exists. No reward function, no data description, and no calibration curve are public. No independent group reproduced RLCD.
+- All that we know comes from the launch materials of TypeSafe and from articles that explain them.
+- The stated goal: when the model gives 80% for an answer, the answer is correct in approximately 80% of such cases.
+- Commentators compare RLCD to a classifier that trains with a proper scoring rule. This is their opinion, not a statement from TypeSafe.
+- Related academic work, not from TypeSafe:
+  - Tan, Lin, Motani, Lee, "On the effectiveness of reward functions in reinforcement learning for confidence calibration of large language models", arXiv 2607.04332 (July 2026). A badly designed confidence reward makes a model answer wrongly with a high confidence ("confidence reward hacking"). The authors treat the reward scheme as a setting to tune for each application.
+  - "Rewarding Doubt", which one article names as earlier work on a reward for calibrated confidence. We did not read it.
+- An independent benchmark (arXiv 2610.00346, from a different session, not read in this session) reports that the calibration of Jev is good on some task families and bad on others.
+
+### What the game examples show about Jev (READMEs only, 2026-10-02)
+
+| Project | Jev decides | Code decides | Result that the README reports |
+|---|---|---|---|
+| typesafe-mario | One of 7 controller actions | All timing arithmetic, for example a `jump_must_start_this_decision` fact. No scripted override. | None |
+| jev-doom-agent | A tactical macro | The motor inputs for the macro. `FALLBACK` label for a failed or low-confidence call. | None |
+| jev-doom | One of the legal choices that code builds | Navigation, tactical assists, motors | "This repository makes no level-completion or model-performance claim." |
+| typesafe-nes | Move (Choice), danger (Score), stomp and full speed (Noul) | Tile scan, jump timing, a state machine for tall pipes, edge refusal | Mario World 1-1 complete with one death. Contra to screen 9 with several deaths. Mega Man stalls at the first ladder. 175 to 210 ms for each decision. |
+| jev-game-agent | One move from candidates | Emulator lookahead that removes fatal moves, checkpoint recovery. The game pauses for each request. | A "verified victory" exit code. Not continuous real-time play. |
+
+- The common pattern: code calculates the facts and builds the legal options, and Jev selects one option.
+- Most examples give no measured result. The examples that complete a level give code the most work (lookahead, jump timing, edge refusal).
+- typesafe-nes reports the same failure that we found: "Jev reads literally." A criterion about "a wall or a ladder" caused 90 seconds of an "up" hold with no ladder.
+- No example demonstrates RLCD or calibration. Each example demonstrates a harness around a fixed model.
+
+Articles:
+
+- <https://www.mindstudio.ai/blog/typesafe-jev-rlcd-vs-rlhf>
+- <https://systemonemodels.org/guides/rlcd-explained/>
+- <https://www.sanity.io/glossary/rlcd-reinforcement-learning-for-calibrated-decisions>
+- <https://arxiv.org/abs/2607.04332>
+- <https://analyticsmadesimple.com/tutorials/jev-typesafe-ai-system-one-model-rlcd-tutorial/>
+- <https://anthonymaio.substack.com/p/jev-the-language-model-that-wont>
+- <https://anth.us/blog/fine-tuning-jev/>
+- <https://medium.com/superagentic-ai/jev-systemone-tune-in-superqode-gepa-teach-decisions-from-unlabeled-examples-b17f074dfe94>
+
+## 8. Not verified
 
 - The name of a JavaScript SDK. The quickstart shows only Python and HTTP. Use `fetch` against the endpoint.
-- The CORS behavior of `api.typesafe.ai`. Plan for a local proxy.
+- The CORS behavior of `api.typesafe.ai` for a real `POST`. A preflight request on 2026-10-02 returned HTTP 400 with no `Access-Control-Allow-Origin` header, so we use a local proxy.
 - The price and the rate limits. The source is not TypeSafe.
 - Access for a room of attendees during early access.
 - The real latency from the venue network.
 - We read only the README of each example. We did not run an example or read its source.
 
-## 7. Sources
+## 9. Sources
 
 - <https://system-one-explainer.netlify.app/>
 - <https://docs.typesafe.ai/introduction/quickstart>

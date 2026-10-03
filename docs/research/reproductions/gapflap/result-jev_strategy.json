@@ -1,0 +1,20 @@
+{
+ "policy": "jev_strategy",
+ "episodes": 8,
+ "mean_score": 3.38,
+ "max": 6,
+ "crashes": 8,
+ "calls": 35,
+ "errors": 0,
+ "cost": 0.0,
+ "scores": [
+  3,
+  3,
+  3,
+  3,
+  3,
+  6,
+  3,
+  3
+ ]
+}

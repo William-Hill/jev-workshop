@@ -1,0 +1,24 @@
+{
+ "policy": "random",
+ "episodes": 12,
+ "mean_score": 5.0,
+ "max": 8,
+ "crashes": 12,
+ "calls": 0,
+ "errors": 0,
+ "cost": 0.0,
+ "scores": [
+  7,
+  3,
+  3,
+  6,
+  7,
+  3,
+  6,
+  4,
+  3,
+  7,
+  3,
+  8
+ ]
+}

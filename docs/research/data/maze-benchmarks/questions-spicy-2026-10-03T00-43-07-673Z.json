@@ -1,0 +1,108 @@
+{
+  "summary": {
+    "variant": "questions",
+    "difficulty": "spicy",
+    "games": 3,
+    "mean_points": 5.67,
+    "mean_jev_share": 0.96,
+    "wins": 0,
+    "mean_lives_lost": 3,
+    "mean_collectibles_left": 63,
+    "input_tokens": 86419
+  },
+  "games": [
+    {
+      "result": "lost",
+      "collectibles_left": 39,
+      "lives": 0,
+      "game_seconds": 26,
+      "latency_p50_ms": 176,
+      "input_tokens": 34117,
+      "model": "jev-1.13.0",
+      "fallback_reasons": {
+        "confidence is less than 0.2": 2
+      },
+      "score": {
+        "points": 29,
+        "jev_share": 0.95,
+        "decisions": {
+          "jev": 38,
+          "override": 0,
+          "fallback": 2,
+          "code": 137
+        },
+        "collected": {
+          "jev": 119,
+          "fallback": 1
+        },
+        "lives_lost": {
+          "jev": 2,
+          "fallback": 1
+        }
+      },
+      "wall_seconds": 23
+    },
+    {
+      "result": "lost",
+      "collectibles_left": 75,
+      "lives": 0,
+      "game_seconds": 19,
+      "latency_p50_ms": 169,
+      "input_tokens": 26152,
+      "model": "jev-1.13.0",
+      "fallback_reasons": {
+        "confidence is less than 0.2": 1
+      },
+      "score": {
+        "points": -6,
+        "jev_share": 0.97,
+        "decisions": {
+          "jev": 30,
+          "override": 0,
+          "fallback": 1,
+          "code": 98
+        },
+        "collected": {
+          "jev": 84,
+          "fallback": 0
+        },
+        "lives_lost": {
+          "jev": 2,
+          "fallback": 1
+        }
+      },
+      "wall_seconds": 17
+    },
+    {
+      "result": "lost",
+      "collectibles_left": 75,
+      "lives": 0,
+      "game_seconds": 19,
+      "latency_p50_ms": 183,
+      "input_tokens": 26150,
+      "model": "jev-1.13.0",
+      "fallback_reasons": {
+        "confidence is less than 0.2": 1
+      },
+      "score": {
+        "points": -6,
+        "jev_share": 0.97,
+        "decisions": {
+          "jev": 30,
+          "override": 0,
+          "fallback": 1,
+          "code": 98
+        },
+        "collected": {
+          "jev": 84,
+          "fallback": 0
+        },
+        "lives_lost": {
+          "jev": 2,
+          "fallback": 1
+        }
+      },
+      "wall_seconds": 18
+    }
+  ]
+}

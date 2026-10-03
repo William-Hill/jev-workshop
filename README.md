@@ -5,7 +5,8 @@ This repository is the base for a workshop and hackathon in which Jev, the Syste
 
 - Start with [`docs/HANDOFF.md`](./docs/HANDOFF.md) for the goal, the current state, and the next steps.
 - The Jev research is in [`docs/research/jev-research.md`](./docs/research/jev-research.md).
-- The repository contains the complete game. It does not contain Jev code at this time.
+- The repository contains the complete game and a Jev player in `src/jev/`.
+- The Jev player is off by default. Copy `.env.example` to `.env`, add the key, run `npm run dev`, and open `/?jev=1`.
 
 The game source is `Render-Atlanta/renderatl-demos`, path `workshops/render-maze-phaser`, `main` at `67e24415`.
 

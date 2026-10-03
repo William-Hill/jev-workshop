@@ -1,7 +1,9 @@
 import { defineConfig } from "vite";
+import { jevProxy } from "./src/jev/proxy.node.js";
 
 export default defineConfig({
   base: "./",
+  plugins: [jevProxy()],
   server: {
     fs: { allow: [".."] },
   },

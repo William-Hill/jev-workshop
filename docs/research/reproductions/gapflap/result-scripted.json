@@ -1,0 +1,24 @@
+{
+ "policy": "scripted",
+ "episodes": 12,
+ "mean_score": 80.0,
+ "max": 80,
+ "crashes": 0,
+ "calls": 0,
+ "errors": 0,
+ "cost": 0.0,
+ "scores": [
+  80,
+  80,
+  80,
+  80,
+  80,
+  80,
+  80,
+  80,
+  80,
+  80,
+  80,
+  80
+ ]
+}
