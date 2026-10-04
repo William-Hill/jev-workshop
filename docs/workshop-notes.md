@@ -58,6 +58,8 @@ Be accurate about the claim. No reinforcement learning occurred in our game. The
 
 ## Note 2b: the real Jev on the baseline (2026-10-02)
 
+Superseded for numbers: these runs used one fixed seed. Use the seeded results in `docs/research/question-design-finding.md` (first section, 2026-10-04).
+
 Source: `npm run bench`, wait mode, model `jev-1.13.0`. See `docs/HANDOFF.md`, "Benchmark with the real Jev".
 
 - The real Jev did better than `nimble` with the same baseline question. It cleared Chill in 2 of 2 games.
