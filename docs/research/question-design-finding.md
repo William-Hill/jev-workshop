@@ -119,6 +119,12 @@ Other Normal games, not in the table:
   - `level2c` is the best Jev version so far, and it used the fewest requests and tokens.
   - Against `level2b`, 18 of 20 compared with 15 of 20 is not a certain difference at this sample size. Against the first question (6 of 29), it is.
   - Both losses were the same game with the same two deaths. In each, all directions were dangerous, so step 3 ("choose the direction with the farthest blocker") applied. At tile (1,5), Jev chose left (blocker 2 steps) over down (blocker 4 steps), at confidence 0.21. At tile (9,7), it chose left (blocker 3 steps) over up (blocker 5 steps). This is failure mode 2, a number comparison. The next fix: code marks the direction with the farthest blocker, so that Jev does not compare the numbers.
+- `level2d` (2026-10-04) is `level2c` plus that one fact: code marks each direction with the farthest blocker ("farthest blocker"), and step 3 says to choose the marked direction.
+  - Won 18 of 20 on Normal, the same as `level2c`.
+  - Mean lives lost 0.45 (`level2c`: 0.7). Deaths 7 (`level2c`: 12). Input tokens 1.75 M.
+  - In decisions where all directions were dangerous, Jev picked the farthest blocker in 44 of 44 (`level2c`: 35 of 66, 53%). The mark removed the comparison error completely.
+  - The 2 losses came late, with 6 and 8 items left, not from step 3.
+  - This is rule 2 of the talk in one measurement: the same question, with one comparison moved into code, removed a whole class of errors.
 - `level1b` adds one rule to `level1`: "When no blocker is 3 steps or fewer away, go toward the nearest collectible." In 20 games on Normal it won 12 (60%), with 0 time-limit games but 2.05 lives lost on average. The corner loop disappeared, and an early death in a pincer between two blockers appeared in 8 games. Each sentence fixed one behavior and changed another.
 - One `level1` game reached the 240-second limit with 3 collectibles left.
 
