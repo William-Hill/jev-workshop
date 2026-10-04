@@ -186,6 +186,7 @@ Larger run on Normal (2026-10-02, after the staff-level review):
   - Lost 8 of 20, each at about 33 seconds of game time with 66 to 69 items left. In the logged loss, the runner was caught between two blockers at tiles (5,5) and (5,6): every option had a blocker 1 to 4 steps away.
   - The win rate is close to `level1` (54%). The failure mode moved from "circles a corner" to "dies early in a pincer".
   - The first 13 games ran in a run that hung on game 14; their logs were lost. The benchmark now ends a stuck game after 4 times the game limit in wall time, and `player.js` builds the questions inside the error handling.
+- `level2c` (2026-10-04, ranked rules + facts + "keep the current heading" tie-break) won 18 of 20 on Normal with 0.7 lives lost: the best Jev version. Its 2 losses come from a number comparison ("farthest blocker").
 - Three more versions, 20 games each on Normal (2026-10-03): `level1c` (one ranked list) 14 of 20; `level2b` (`level1b` words + "blocker approaches" fact) 15 of 20; `level1d` (`level1c` words, unsafe directions removed by code) 13 of 20. They are too close to rank. Details in `docs/research/question-design-finding.md`.
 - The code-only policy beats every Jev version in this maze. It plays almost the same game each time, so its 10 of 10 is close to one game repeated. The deck now says so: the maze is a teaching harness, not a reason to use Jev in a game.
 - `level3` lost each game. The cause is not known. Analyze its overrides before the workshop.

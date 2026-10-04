@@ -107,6 +107,18 @@ Other Normal games, not in the table:
   - `level2b` turned `level1b` (60%) into 75% with one added fact. This supports the idea that the pincer deaths came from a missing fact.
   - `level1d` did not beat `level1c`. Code removed a direction in only 101 of about 13,000 decision states. Most `level1d` losses came late (3 to 9 items left), from blockers that approached from more than 3 steps away. A fixed 3-step filter does not see a moving blocker.
   - Code only plays almost the same game each time (1 life lost in each of 10 games), so its 10 of 10 is close to one game repeated, not 10 independent samples. Compare it with care.
+- `level2c` (2026-10-04) combines the best parts and fixes two patterns from the logs of `level1c` and `level2b`: dithering (back-and-forth turns in a corridor between two blockers) and ties with no tie-break. It uses the `level2b` facts, one ranked list of five steps, "keep the current heading" as the tie-break, and plain words ("No blocker on this path", "No collectibles left in this direction") in place of "none".
+
+  | Variant | Games | Wins | Mean lives lost | Deaths | Back-and-forth turns | Fallback share | Input tokens |
+  |---|---|---|---|---|---|---|---|
+  | `level1c` | 20 | 14 | 1.55 | 25 | 14.5% | 8.6% | 2.70 M |
+  | `level2b` | 20 | 15 | 1.25 | 20 | 10.0% | 4.0% | 2.44 M |
+  | `level1d` | 20 | 13 | 1.8 | 29 | 3.3% | 6.1% | 3.08 M |
+  | `level2c` | 20 | 18 (90%) | 0.7 | 12 | 6.7% | 2.3% | 1.59 M |
+
+  - `level2c` is the best Jev version so far, and it used the fewest requests and tokens.
+  - Against `level2b`, 18 of 20 compared with 15 of 20 is not a certain difference at this sample size. Against the first question (6 of 29), it is.
+  - Both losses were the same game with the same two deaths. In each, all directions were dangerous, so step 3 ("choose the direction with the farthest blocker") applied. At tile (1,5), Jev chose left (blocker 2 steps) over down (blocker 4 steps), at confidence 0.21. At tile (9,7), it chose left (blocker 3 steps) over up (blocker 5 steps). This is failure mode 2, a number comparison. The next fix: code marks the direction with the farthest blocker, so that Jev does not compare the numbers.
 - `level1b` adds one rule to `level1`: "When no blocker is 3 steps or fewer away, go toward the nearest collectible." In 20 games on Normal it won 12 (60%), with 0 time-limit games but 2.05 lives lost on average. The corner loop disappeared, and an early death in a pincer between two blockers appeared in 8 games. Each sentence fixed one behavior and changed another.
 - One `level1` game reached the 240-second limit with 3 collectibles left.
 
