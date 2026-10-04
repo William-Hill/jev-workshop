@@ -556,22 +556,22 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
 
 <section class="slide" data-part="6">
   <div class="kicker">Case: RenderMaze</div>
-  <h2>Better words and facts took Jev from 21% to 90%.</h2>
+  <h2>Ranked rules and facts from code took Jev from 20% to 67%.</h2>
   <table class="cmp wide center">
-    <tr><th>Normal difficulty</th><th>Games won</th><th>Lives lost (mean)</th></tr>
-    <tr><td>Jev, first question</td><td>6 of 29 (21%)</td><td>2.6</td></tr>
-    <tr><td>Jev, new words (level 1)</td><td>15 of 28 (54%)</td><td>0.8</td></tr>
-    <tr><td>Jev, words + one fact (level 2b)</td><td>15 of 20 (75%)</td><td>1.25</td></tr>
-    <tr><td>Jev, ranked rules + facts (level 2c)</td><td>18 of 20 (90%)</td><td>0.7</td></tr>
-    <tr class="hot"><td>+ code marks the farthest blocker (level 2d)</td><td>18 of 20 (90%)</td><td>0.45</td></tr>
-    <tr><td>Code only, no Jev</td><td>10 of 10 (100%)</td><td>1.0</td></tr>
+    <tr><th>Normal, the same 30 games</th><th>Games won</th><th>Lives lost (mean)</th></tr>
+    <tr><td>Jev, first question</td><td>6 of 30 (20%)</td><td>2.7</td></tr>
+    <tr><td>Jev, priority words only (level 1)</td><td>4 of 28 (14%)</td><td>2.86</td></tr>
+    <tr><td>Jev, ranked rules + facts (level 2c)</td><td>15 of 30 (50%)</td><td>2.0</td></tr>
+    <tr class="hot"><td>+ code marks the farthest blocker (level 2d)</td><td>20 of 30 (67%)</td><td>2.3</td></tr>
+    <tr><td>Code only, no Jev</td><td>23 of 30 (77%)</td><td>1.47</td></tr>
   </table>
-  <p class="small">The new words also caused a new literal reading: Jev kept the runner circling a corner with no blocker, away from the last items.</p>
-  <p class="src">A win: all 159 items collected before 3 lives are lost. Normal: the default blocker speed. The Jev rows combine all our Normal runs. Code only plays almost the same game each time, so its 10 of 10 is close to one game repeated.</p>
+  <p class="src">A win: all 159 items collected before 3 lives are lost. Each version played the same 30 random seeds. 95% interval for level 2d: 49% to 81%.</p>
   <aside class="notes">
-    <p>Say: "Our first question listed the facts but did not say which fact matters more. The new words add one goal, 'Keep the runner alive first. Collect the collectibles second.', a danger rule, and the word DANGER in the option text. Same model, same numbers. The win rate went up."</p>
-    <p>Then the honest part: "We also ran a plain code policy with no Jev: avoid a blocker 3 steps or fewer away, else go to the nearest item. It played better than every Jev version. That is slide 22 in action: a maze is mostly numbers and exact rules, so code wins. The maze is a good place to practice writing questions. It is not a reason to put Jev in a game engine."</p>
-    <p>The numbers: the first question won 6 of 29 games on Normal, with 2.6 lives lost on average. The new words won 15 of 28, with 0.8 lives lost. Code only won 10 of 10, with 1 life lost each time. An earlier, smaller run showed the new words at 6 of 8; with more games the rate came down to 54 percent. That is why you must run at least 10 games before you believe a difference. Why the new words still fail: in 7 games the runner circled a corner loop until the time limit. At that intersection, Jev picked the loop, which had no items and no blocker, over the way to the last items, where the nearest blocker was 12 steps away. Our rule said "keep the runner alive first", and Jev read "no blocker at all" as the best move. The fix for one literal reading created another one. We tested the next fix, one more sentence: "When no blocker is 3 steps or fewer away, go toward the nearest collectible." In 20 games it won 12 (60 percent). The corner loop disappeared: no game hit the time limit. But 8 games now died early, at the same point in the maze, with 66 to 69 items left, and lives lost went up from 0.8 to 2.1 on average. The new sentence changed the route, and the new route walked into two blockers from both sides. Each sentence fixed one behavior and changed another. That is why you measure every change. We then tested three more versions, 20 games each on Normal. One ranked list of rules in place of separate rules (level1c): 14 of 20. The level1b words plus a fact that code calculates, "the blocker moves toward the runner" (level2b): 15 of 20, the best Jev result. The safety rule moved into code, so that code removes directions with a blocker 3 steps or fewer away before the request (level1d): 13 of 20. With 20 games each, these three are too close to rank. All three are far above the first question. Then we combined the best parts (level2c): the level2b facts, one ranked list of five steps, "keep the current heading" as the tie-break, and plain words in place of "none". It won 18 of 20 games with 0.7 lives lost, and it used fewer requests. Both losses were the same mistake: Jev had to pick the direction with the farthest blocker and picked the nearer one. That is failure mode 2 again, a number comparison, so the next fix belongs in code. We tested it (level2d): code marks the direction with the farthest blocker, and the rule says "choose the direction marked farthest blocker". Jev then followed that rule in 44 of 44 such decisions, against 35 of 66 before. Wins stayed at 18 of 20, but deaths fell from 12 to 7, and lives lost fell to 0.45 on average, below code only. Code only still won 10 of 10, but note that code only plays almost the same game each time, so its 10 of 10 is close to one game repeated, not 10 independent samples.</p>
+    <p>Say: "Our first question listed the facts but no priority. It won 6 of 30 games. Our first fix, priority words only, did not help on varied games: 4 of 28. What helped was two things together: one ranked list of rules, with a tie-break, and facts that code calculates, for example 'this blocker moves toward the runner'. That version won 15 of 30. When we also let code mark which direction has the farthest blocker, so that Jev did not compare numbers, it won 20 of 30."</p>
+    <p>The statistics, if asked: all versions played the same 30 seeds, so we compare game against game. Level 2d won 15 seeds that the first question lost, and lost only 1 that the first question won (exact McNemar p = 0.001). Level 2c against the first question: p = 0.035. Level 2d against level 2c, and level 2d against code only: not significant at 30 games.</p>
+    <p>Say the mistake openly, because it is a lesson: "Our first measurements used one fixed seed. The maze is almost deterministic, so 20 games were a few routes repeated. Those runs said 90 percent. On varied games it is 67 percent, and words-only fell from 54 to 14. Test question changes on varied inputs."</p>
+    <p>And the warning: "We changed one more sentence, about the end of power mode. That version won 2 of 30. The new text changed Jev's first move at the start tile from down to right, and that route ends in a trap. One sentence can break a question that works. Measure every change."</p>
+    <p>Code only, the plain rule "avoid a blocker 3 steps or fewer away, else go to the nearest item", won 23 of 30. The best Jev version is close but not better. The maze is mostly numbers, so this fits slide 22.</p>
     <p class="bridge">Bridge: "Now it is your turn to practice the same skill."</p>
   </aside>
 </section>
@@ -585,10 +585,10 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
     <tr><td>3 · Rule</td><td>Ask a danger Score, and change the move in <code>combine()</code>, the function that turns the answers into one move</td></tr>
     <tr><td>4 · Strategy</td><td>Ask a Noul: go for the power pellet now?</td></tr>
   </table>
-  <p class="src">Edit src/jev/questions.js · npm run bench -- --difficulty normal --games 10 · Compare your versions on the same number of games.</p>
+  <p class="src">Edit src/jev/questions.js · npm run bench -- --difficulty normal --games 20 --seed 1000 · Compare your versions on the same seeds.</p>
   <aside class="notes">
     <p>Say: "Everything is in one file, src/jev/questions.js. Level 1 is rule one: the words. Level 2 is rule two: a fact that code calculates. Level 3 is rules three and four: a narrow question, and a rule in code. Level 4 is a yes or no strategy question."</p>
-    <p>"After each change, run the benchmark. It plays games with no screen and prints wins, lives lost, and how many moves came from Jev. Use at least 10 games: the results vary a lot between games, and a difference of one or two wins can be chance."</p>
+    <p>"After each change, run the benchmark. It plays games with no screen and prints wins, lives lost, and how many moves came from Jev. Use --seed so that each version plays the same varied games, and use at least 20 games: a difference of one or two wins can be chance."</p>
     <p>A good stretch goal for a team: beat the code-only policy.</p>
     <p class="bridge">Bridge: go to the last slide and leave it up for the whole hack.</p>
   </aside>

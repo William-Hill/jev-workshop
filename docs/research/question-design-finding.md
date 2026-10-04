@@ -2,6 +2,41 @@
 
 Date: 2026-10-02. Status: supported by our benchmark, by the TypeSafe documents, and by two outside experiments that we reproduced.
 
+## Update 2026-10-04: seeded results replace the fixed-seed results
+
+The earlier maze runs used one fixed seed. The maze is almost deterministic, so a 20-game run was a few routes repeated. `npm run bench` now has `--seed N`: each game gets its own seed for the "wander" blockers (the game rules do not change). Each version below played the same 30 seeds (1000 to 1029) on Normal.
+
+| Version | Games | Wins | 95% interval | Mean lives lost | First move at (1,1) |
+|---|---|---|---|---|---|
+| First question (`questions`) | 30 | 6 (20%) | 10–37% | 2.70 | down 30 of 30 |
+| `level1` (priority words only) | 28 | 4 (14%) | 6–31% | 2.86 | right 27 of 28 |
+| `level2c` (ranked rules + facts + tie-break) | 30 | 15 (50%) | 33–67% | 2.00 | down 30 of 30 |
+| `level2d` (+ code marks the farthest blocker) | 30 | 20 (67%) | 49–81% | 2.30 | down 30 of 30 |
+| `level2e` (+ power mode under 2 s counts as off) | 30 | 2 (7%) | 2–21% | 2.87 | right 29 of 30 |
+| `code-only` (no Jev) | 30 | 23 (77%) | 59–88% | 1.47 | — |
+
+Paired comparisons on the same seeds (exact McNemar test on the seeds where only one version won):
+
+| Comparison | Only the first won | Only the second won | p |
+|---|---|---|---|
+| `level2d` against the first question | 15 | 1 | 0.001 |
+| `level2c` against the first question | 12 | 3 | 0.035 |
+| `level1` against the first question | 4 | 6 | 0.754 |
+| `level2d` against `level2c` | 8 | 3 | 0.227 |
+| `level2e` against `level2d` | 1 | 19 | < 0.001 |
+| `code-only` against `level2d` | 7 | 4 | 0.549 |
+
+What holds on varied games:
+
+- The ranked rules plus facts that code calculates (`level2c`, `level2d`) win clearly more often than the first question.
+- Priority words alone (`level1`) do not. Its fixed-seed 54% was route luck.
+- `level2d` against `level2c` is not significant at 30 games. The step-3 mechanism (44 of 44 against 35 of 66) is real, but the win gain is not proven.
+- `level2e` is clearly worse than `level2d`. The new text changed the first move at the start tile from down to right, and the two versions that open with "right" are the two worst.
+- Code only (77%) and `level2d` (67%) are not significantly different at 30 games.
+- Two `level1` games failed in the harness (one page lost its scene, one hung until the 16-minute limit) and are not counted.
+
+The sections below describe the earlier fixed-seed runs. Their numbers are superseded by this table.
+
 ## Summary
 
 - Jev does not learn from the game, and nobody can retrain it. The only parts that we control are the words of the question, the facts in the state, and the code around the answers.

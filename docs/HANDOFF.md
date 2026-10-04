@@ -141,6 +141,23 @@ The hackathon has no scoring or ranking (decision, 2026-10-02). The "points" num
 
 A code-only baseline exists: `/?jev=1&variant=code-only` (`src/jev/variants/code-only.js`). The fallback policy makes every decision, and the game sends no request. It beats every Jev version in this maze (see the benchmark below).
 
+## Seeded benchmark (2026-10-04): use these numbers
+
+The earlier maze runs used one fixed seed, so a run repeated a few routes. Use `npm run bench -- --difficulty normal --games 30 --seed 1000`: each game gets its own seed for the "wander" blockers, and each version plays the same games.
+
+| Version | Wins on the same 30 seeds | Mean lives lost |
+|---|---|---|
+| First question | 6 (20%) | 2.70 |
+| `level1` | 4 of 28 (14%) | 2.86 |
+| `level2c` | 15 (50%) | 2.00 |
+| `level2d` | 20 (67%) | 2.30 |
+| `level2e` | 2 (7%) | 2.87 |
+| `code-only` | 23 (77%) | 1.47 |
+
+- `level2d` beats the first question (paired exact p = 0.001). `level2c` too (p = 0.035). `level1` does not (p = 0.75).
+- `level2d` against `level2c`, and `code-only` against `level2d`, are not significant at 30 games.
+- Details and the paired tests: `docs/research/question-design-finding.md`, first section. The fixed-seed tables below are superseded.
+
 ## Benchmark with the real Jev (2026-10-02)
 
 The finding that these results support, with outside sources, is in [`docs/research/question-design-finding.md`](./research/question-design-finding.md).

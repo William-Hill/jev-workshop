@@ -10,6 +10,12 @@
 //   --speed S          the game speed (default 2)
 //   --max-seconds S    stop a game after S seconds of game time (default 240)
 //   --port P           the port of the local server (default 4199)
+//   --seed N           the seed of game 1; game k uses N + k - 1 (default: none, the fixed game seeds)
+//
+// The maze is almost deterministic: with the fixed seeds, a few early near-tie decisions fix the
+// route, and a run repeats a few routes. --seed gives each game its own seed for the "wander"
+// blockers. It changes only the starting state, not the game rules. Use the same --seed for each
+// variant, so that the variants play the same games.
 //
 // The results go to bench-results/. Each request uses the proxy and the key in .env.
 import { createServer } from "vite";
@@ -17,7 +23,7 @@ import { chromium } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
 
-const args = { variant: "questions", games: 3, difficulty: "chill", speed: 2, "max-seconds": 240, port: 4199 };
+const args = { variant: "questions", games: 3, difficulty: "chill", speed: 2, "max-seconds": 240, port: 4199, seed: NaN };
 for (let i = 2; i < process.argv.length; i += 2) {
   const key = process.argv[i].replace(/^--/, "");
   if (!(key in args)) { console.error(`Unknown option: ${process.argv[i]}`); process.exit(2); }
@@ -40,10 +46,14 @@ try {
       const loadError = await page.evaluate(() => window.__jevError);
       if (loadError) throw new Error(loadError);
 
-      await page.evaluate((difficulty) => {
-        window.__scene.setDifficulty(difficulty);
-        window.__scene.startGame();
-      }, args.difficulty);
+      const seed = Number.isFinite(args.seed) ? args.seed + g - 1 : null;
+      await page.evaluate(({ difficulty, seed }) => {
+        const s = window.__scene;
+        s.setDifficulty(difficulty);
+        s.startGame();
+        // The "wander" strategy uses e.seed for its random turns. Give each blocker a seed from the game seed.
+        if (seed !== null) s.enemies.forEach((e, i) => { e.seed = ((seed * 2654435761) ^ (i * 40503 + 7)) & 0x7fffffff; });
+      }, { difficulty: args.difficulty, seed });
       const started = Date.now();
       // A game that stops (for example, a stuck request) must not block the run: allow 4 times the game limit in wall time.
       await page.waitForFunction(
@@ -72,12 +82,14 @@ try {
         };
       });
       result.wall_seconds = Math.round((Date.now() - started) / 1000);
+      result.seed = seed;
       games.push(result);
       const s = result.score;
       console.log(
         `game ${g}: ${result.result}, points ${s.points}, jev share ${Math.round(s.jev_share * 100)}%, ` +
         `by Jev ${s.collected.jev}, by fallback ${s.collected.fallback}, lives lost ${s.lives_lost.jev + s.lives_lost.fallback}, ` +
-        `left ${result.collectibles_left}, ${result.game_seconds} s game, ${result.wall_seconds} s wall, p50 ${result.latency_p50_ms} ms`,
+        `left ${result.collectibles_left}, ${result.game_seconds} s game, ${result.wall_seconds} s wall, p50 ${result.latency_p50_ms} ms` +
+        (seed !== null ? `, seed ${seed}` : ""),
       );
     } catch (err) {
       // A variant that does not load stops the run. Any other failure loses only this game.
@@ -96,6 +108,7 @@ try {
 const mean = (f) => Math.round((games.reduce((sum, g) => sum + f(g), 0) / games.length) * 100) / 100;
 const summary = {
   variant: args.variant,
+  seed_base: Number.isFinite(args.seed) ? args.seed : null,
   difficulty: args.difficulty,
   games: games.length,
   mean_points: mean((g) => g.score.points),
