@@ -252,6 +252,22 @@ Articles:
 - <https://anth.us/blog/fine-tuning-jev/>
 - <https://medium.com/superagentic-ai/jev-systemone-tune-in-superqode-gepa-teach-decisions-from-unlabeled-examples-b17f074dfe94>
 
+## 7b. Documented accuracy (checked 2026-10-04)
+
+TypeSafe publishes no general accuracy benchmark for Jev. Its docs claim calibration and give per-cookbook results only, for example re-ranking 40 CLERC legal queries: top-1 accuracy from 5% to 18%, top-10 from 38% to 62%.
+
+| Source | Data | Jev result | Comparison |
+|---|---|---|---|
+| Rafe and Das, arXiv 2610.00346 (preprint, 29 Sep 2026), read in full HTML | D1 workflows 2,000; D2 CLINC-150 intents 800; D3 social science about 2,000 | D1 0.732, D2 0.913, D3 mean F1 55.0%. ECE 0.033 / 0.032 / 0.251 | D2: BGE-small + LR 0.948, BERT-base 0.940. Zero-shot DeBERTa: 0.411 / 0.507. Qwen3.6-27B option likelihood: 0.733 / 0.912 |
+| priorbench/jev (pre-registered, 5,721 calls) | 400 classification items | 95.9% zero-shot | Keywords 77.2%, TF-IDF + LR 66.0%. Number and date comparisons 99.6% over 13 designs. Option order up to 13 points |
+| ejs-5/jev-benchmark | 868 n8n commits, labels from git history | Route 85.6%, triage 70.9%, size 37.2%, risk 63.9% | GPT-5.6 Terra and Claude Opus 5 better on all tasks. Jev 5.7 to 11.8 times faster, 120 to 242 times cheaper |
+| Ollama blog (vendor of competing models) | 13 Bespoke Labs datasets, 3,880 decisions | 76.0% | nimble 75.7%, tev1 4B 73.3% |
+| anisselbd/jev-phishing-bench | 2,000 synthetic emails | One verdict 62.6%; 5 signals + regression 95.0% | Claude Haiku 4.5 81.3%, regex 91.6% |
+| fstandhartinger/jevbench (the builder runs the leaderboard site) | 534 decisions, 4 tiers | Score 63.29, rank 3 | Imajev-4B 67.37, Plumb-4B 65.84 |
+| dev.to survey "Jev after eight days" (secondary) | Aggregates 14 preprints, 104 repos | 72.5% on its pooled set | Mid-price LLMs 74.5 to 76.0%, frontier 79.0 to 84.0%. Median ECE 0.071 |
+
+Summary: Jev's accuracy depends strongly on the task (37% to 96% in these sources). With task labels, trained classifiers beat it on intents. Frontier LLMs beat it on accuracy, at much higher cost and latency. Its calibration is good on some task families (ECE about 0.03) and poor on others (0.25). Our own maze runs and reproductions are in this folder and in `question-design-finding.md`.
+
 ## 8. Not verified
 
 - The name of a JavaScript SDK. The quickstart shows only Python and HTTP. Use `fetch` against the endpoint.
