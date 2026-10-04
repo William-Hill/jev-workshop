@@ -125,6 +125,13 @@ Other Normal games, not in the table:
   - In decisions where all directions were dangerous, Jev picked the farthest blocker in 44 of 44 (`level2c`: 35 of 66, 53%). The mark removed the comparison error completely.
   - The 2 losses came late, with 6 and 8 items left, not from step 3.
   - This is rule 2 of the talk in one measurement: the same question, with one comparison moved into code, removed a whole class of errors.
+- `level2e` (2026-10-04) is `level2d` plus a power-mode fix: code treats power mode with 2 seconds or less left as "off" (a `level2d` loss came from a move toward a blocker with 0.1 seconds of power left).
+  - **It won only 3 of 50 games on Normal.** Mean lives lost 2.86.
+  - Cause: at the start tile (1,1), `level2d` chose "down" in all 19 logged openings, and `level2e` chose "right" in 47 of 50 games (probabilities 0.65 against 0.35). The new step 1 text and the `power_mode` field moved one near-tie.
+  - The maze is almost deterministic. After "right", the runner followed the same route and reached a trap at tiles (5,5) to (5,7) when two blockers closed in. The first death came at decision 52 in all 20 logged games.
+  - The power-mode fix itself was not tested, because almost no game reached a power-mode ending.
+- **Consequence for every maze result in this file:** a variant's result depends heavily on a few early near-tie decisions, which fix the route. `level2d` followed one route in 12 of its 19 logged openings. A 20-game run is therefore a few routes repeated, not 20 independent games. The large gains (first question 6 of 29 against 15 to 18 of 20) are real in direction, but the gaps between the improved versions are not reliable. A fair test needs variation between games, for example a different random seed for the "wander" blockers in each game.
+- Teaching point: a one-sentence change to a question can flip a close call, and in a deterministic system one flipped call can change every later outcome. Test question changes on varied inputs.
 - `level1b` adds one rule to `level1`: "When no blocker is 3 steps or fewer away, go toward the nearest collectible." In 20 games on Normal it won 12 (60%), with 0 time-limit games but 2.05 lives lost on average. The corner loop disappeared, and an early death in a pincer between two blockers appeared in 8 games. Each sentence fixed one behavior and changed another.
 - One `level1` game reached the 240-second limit with 3 collectibles left.
 
