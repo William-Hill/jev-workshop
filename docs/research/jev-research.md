@@ -268,6 +268,22 @@ TypeSafe publishes no general accuracy benchmark for Jev. Its docs claim calibra
 
 Summary: Jev's accuracy depends strongly on the task (37% to 96% in these sources). With task labels, trained classifiers beat it on intents. Frontier LLMs beat it on accuracy, at much higher cost and latency. Its calibration is good on some task families (ECE about 0.03) and poor on others (0.25). Our own maze runs and reproductions are in this folder and in `question-design-finding.md`.
 
+## 7c. Video: IBM Technology, "What Is Jev? The AI Model That Doesn't Generate Text"
+
+URL: <https://youtu.be/YGgNBcIgI4s> (15 minutes). We read the English transcript on 2026-10-04.
+
+- System 1 and System 2 come from Daniel Kahneman, Thinking, Fast and Slow (2011): 2 × 2 is System 1, 17 × 24 = 408 is System 2. (The terms were coined by Keith Stanovich and Richard West in 2000; that fact is not from the video.)
+- A chat model writes one token at a time. A reasoning model writes its chain of thought: the closest that AI gets to System 2. Many software decisions are System 1 judgment calls.
+- Example: a support email ("I was charged twice this month"). Three questions in one request: refund (Noul, 0.9), team (Choice, billing 0.85), urgency (Score).
+- An LLM that returns JSON gives no reliable sense of how sure it is. Asking the model for its confidence does not match its real probabilities.
+- RLHF: people prefer confident answers, so a model can learn to sound sure when it is wrong. RLVR rewards the right final answer, not knowing how sure to be. RLCD rewards probabilities that turn out right. TypeSafe has published little about the architecture.
+- Calibration: on a chart of stated probability against how often the answer is correct, a calibrated model lies on the diagonal.
+- Thresholds for the refund Noul: above 0.9 the refund queue; 0.1 to 0.9 a person; below 0.1 not a refund. The more a mistake costs, the higher the threshold.
+- Limits: text only, weak at math and counting, can be tricked by instructions hidden in the data.
+- Workflow: Jev for the fast calls, an LLM for the reply, Jev again for the customer's answer. This matches Kahneman: most work runs on System 1.
+- The name: William Stanley Jevons and the Jevons paradox (1865, more efficient steam engines, more coal burned). Other secondary sources report the same; we found no TypeSafe page that states it. TypeSafe's primer states the same bet: cheaper intelligence will create much more demand.
+- The video suggests Jev as a jailbreak guardrail. TypeSafe lists adversarial content as a failure mode, so the deck does not recommend it without tests.
+
 ## 8. Not verified
 
 - The name of a JavaScript SDK. The quickstart shows only Python and HTTP. Use `fetch` against the endpoint.
