@@ -35,6 +35,19 @@ What holds on varied games:
 - Code only (77%) and `level2d` (67%) are not significantly different at 30 games.
 - Two `level1` games failed in the harness (one page lost its scene, one hung until the 16-minute limit) and are not counted.
 
+Per-decision accuracy (computed offline from the seeded logs): a code version of the written `level2c` and `level2d` rules gives the answer that the rules require. Jev followed the written rules in 2,246 of 2,343 decisions for `level2c` (95.9%) and 2,625 of 2,753 for `level2d` (95.4%). When the rules give exactly one answer: 96.1% and 96.2%.
+
+| Confidence of the Jev answer | `level2c` follows the rules | `level2d` follows the rules |
+|---|---|---|
+| below 0.4 | 79% of 181 | 80% of 188 |
+| 0.4 to 0.7 | 87% of 469 | 84% of 420 |
+| 0.7 to 0.9 | 100% of 576 | 97% of 775 |
+| 0.9 or more | 100% of 1,117 | 100% of 1,370 |
+
+- About 96% per decision is in the range of the independent classification results (91.3% to 95.9%, see `jev-research.md` section 7b).
+- The confidence predicts rule-following well: errors are almost all below 0.7.
+- A game has about 80 to 100 Jev decisions, so a 4% error rate gives several errors in each game. Some are fatal. With imperfect rules on top, 96% per decision becomes 50% to 67% of games won.
+
 The sections below describe the earlier fixed-seed runs. Their numbers are superseded by this table.
 
 ## Summary
