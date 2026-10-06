@@ -284,6 +284,18 @@ URL: <https://youtu.be/YGgNBcIgI4s> (15 minutes). We read the English transcript
 - The name: William Stanley Jevons and the Jevons paradox (1865, more efficient steam engines, more coal burned). Other secondary sources report the same; we found no TypeSafe page that states it. TypeSafe's primer states the same bet: cheaper intelligence will create much more demand.
 - The video suggests Jev as a jailbreak guardrail. TypeSafe lists adversarial content as a failure mode, so the deck does not recommend it without tests.
 
+## 7d. Video: TypeSafe CEO talk, "Jev CEO: I made ChatGPT, now I'm building what's next"
+
+URL: <https://youtu.be/cJ0EOzey--o> (AI Engineer channel, 31 July 2026, 18 minutes, before the Jev launch). We read the auto-generated English transcript on 2026-10-06. The transcript has clear errors ("post-workout" for post-training, "Thiago" for the name), so this summary paraphrases and does not quote exact wording. The TypeSafe primer names the cofounder who co-invented RLHF as Diogo Almeida; the speaker introduces himself as that person (co-author of GPT-4, ChatGPT, and InstructGPT/RLHF).
+
+- Main thesis: tasks split into **assistance** (the goal is to please the person in the loop) and **automation** (the goal is to remove the person: the task runs in the background, repeatedly, at almost no cost). Today's AI, trained with RLHF, is very good at assistance and poor at automation.
+- Businesses have learned not to trust AI with decisions that the business depends on. They put AI where the cost of an error falls on the user (chat, support, documentation).
+- RLHF optimizes for human preference. A reward-model asymmetry rewards confident answers, so a model looks right even when it is wrong. His example: ChatGPT praised an audio file of fart sounds as "eerie, atmospheric" music. He calls hallucination a consequence of preference optimization.
+- He places Claude Code in the same "assistant era" (still RLHF). RLVR optimizes for correctness. TypeSafe's third target is calibrated decision making, with a different API shape.
+- SaaS has barely changed since 2019; AI is added as a side assistant. He wants "smarter software": new building blocks for routine decisions that run repeatedly in the background, not only cheaper code.
+- TypeSafe's question: what if the AI stack were redesigned for reliability and automation?
+- He gives no benchmark numbers, no architecture details, and no game examples.
+
 ## 8. Not verified
 
 - The name of a JavaScript SDK. The quickstart shows only Python and HTTP. Use `fetch` against the endpoint.
