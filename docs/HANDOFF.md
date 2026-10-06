@@ -221,6 +221,7 @@ The user decided: the main example of the talk moves to RenderATL attendee quest
 - Design: `docs/superpowers/specs/2026-10-06-system1-system2-design.md`
 - Plan A, the pivot: `docs/superpowers/plans/2026-10-06-ask-agent-system1-system2.md` (6 tasks)
 - Plan B, the maze backup: `docs/superpowers/plans/2026-10-06-maze-system2.md` (5 tasks)
+- Plan C, the optional F1 pit track: `docs/superpowers/plans/2026-10-06-f1-pit-system1.md` (7 tasks; design: `docs/superpowers/specs/2026-10-06-f1-pit-design.md`). Python, in `f1/`.
 - Order: Plan B Task 4 Steps 1, 2, and 4 first (the `/api/llm` route), then Plan A, then the rest of Plan B.
 - The user must add `ANTHROPIC_API_KEY` to `.env` before any System 2 or LLM-only run.
 
