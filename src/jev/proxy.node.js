@@ -35,6 +35,23 @@ function send(res, status, body) {
   res.end(typeof body === "string" ? body : JSON.stringify(body));
 }
 
+// Cross-site request forgery guard. A page on another site must not spend the user's Jev
+// credit or Claude quota. Accept only same-origin requests with a JSON body: a cross-site
+// JSON POST needs a CORS preflight, which this server never approves.
+function rejectForeign(req, res) {
+  const origin = req.headers.origin;
+  if (origin) {
+    let host = "";
+    try { host = new URL(origin).host; } catch { /* A bad Origin is foreign. */ }
+    if (host !== req.headers.host) { send(res, 403, { error: "Requests from another origin are not allowed." }); return true; }
+  }
+  if (!String(req.headers["content-type"] || "").toLowerCase().startsWith("application/json")) {
+    send(res, 415, { error: "Use Content-Type: application/json." });
+    return true;
+  }
+  return false;
+}
+
 export function jevProxy() {
   let key = "";
   let url = TYPESAFE_URL;
@@ -46,6 +63,7 @@ export function jevProxy() {
   // POST /api/llm { system, prompt, max_tokens } -> { text, model, usage, ms }
   async function llmHandler(req, res) {
     if (req.method !== "POST") return send(res, 405, { error: "Use POST." });
+    if (rejectForeign(req, res)) return;
     if (llmBackend === "none") return send(res, 503, { error: "System 2 is off. Set LLM_BACKEND=claude-cli, or LLM_BACKEND=anthropic with ANTHROPIC_API_KEY, in .env." });
     try {
       const body = JSON.parse((await readBody(req)).toString("utf8"));
@@ -60,6 +78,7 @@ export function jevProxy() {
 
   async function handler(req, res) {
     if (req.method !== "POST") return send(res, 405, { error: "Use POST." });
+    if (rejectForeign(req, res)) return;
     // Only the TypeSafe server needs the key.
     if (!key && url === TYPESAFE_URL) return send(res, 503, { error: "TYPESAFE_API_KEY is not set in .env." });
     try {
