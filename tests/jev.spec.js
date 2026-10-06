@@ -237,6 +237,42 @@ test("System 2 search: a low-confidence Jev answer goes to the code planner", as
   expect(entry.options).toContain(entry.choice);
 });
 
+// Jev answers with a confidence of 0.2, so the escalation rule sends each decision to System 2.
+async function mockUnsureJev(page) {
+  await page.route("**/api/jev", async (route) => {
+    const body = route.request().postDataJSON();
+    const options = Object.keys(body.questions.move.criteria);
+    const probabilities = Object.fromEntries(options.map((n) => [n, 1 / options.length]));
+    await route.fulfill({ json: { model: "jev-test", answers: { move: { type: "choice", choice: options[0], confidence: 0.2, probabilities } }, usage: { input_tokens: 1, output_tokens: 1 } } });
+  });
+}
+
+test("System 2 LLM: the LLM direction is used and labeled SYSTEM 2", async ({ page }) => {
+  await mockUnsureJev(page);
+  await page.route("**/api/llm", async (route) => {
+    const { prompt } = route.request().postDataJSON();
+    const legal = prompt.match(/Legal moves: ([a-z, ]+)/)[1].split(", ");
+    await route.fulfill({ json: { text: legal[legal.length - 1], model: "llm-test", usage: { input_tokens: 10, output_tokens: 1 }, ms: 5 } });
+  });
+  await bootJev(page, "&variant=level2d-s2llm");
+  await enterPlaying(page);
+  const entry = await firstDecision(page);
+  expect(entry.source).toBe("system2");
+  expect(entry.choice).toBe(entry.options[entry.options.length - 1]);
+  expect(entry.system2.model).toBe("llm-test");
+});
+
+test("System 2 LLM: an unavailable LLM (503) keeps the Jev move and labels FALLBACK", async ({ page }) => {
+  await mockUnsureJev(page);
+  await page.route("**/api/llm", (route) => route.fulfill({ status: 503, json: { error: "System 2 is off." } }));
+  await bootJev(page, "&variant=level2d-s2llm");
+  await enterPlaying(page);
+  const entry = await firstDecision(page);
+  expect(entry.source).toBe("fallback");
+  expect(entry.reason).toContain("System 2");
+  expect(entry.choice).toBe(entry.options[0]);
+});
+
 test("the decision log downloads as JSONL", async ({ page }) => {
   await mockJev(page, (options) => options[0]);
   await bootJev(page);
