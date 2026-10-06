@@ -1,0 +1,100 @@
+{"id": "q001", "question": "how much is a ticket for renderatl?", "intent": "price", "ticket": null, "expect": ["$350"], "split": "tune", "synthetic": true}
+{"id": "q002", "question": "whats the price of the gold pass", "intent": "price", "ticket": null, "expect": ["$800"], "split": "tune", "synthetic": true}
+{"id": "q003", "question": "cheapest way to get in?", "intent": "price", "ticket": null, "expect": ["$350"], "split": "tune", "synthetic": true}
+{"id": "q004", "question": "How much does General Admission cost right now?", "intent": "price", "ticket": null, "expect": ["$350"], "split": "tune", "synthetic": true}
+{"id": "q005", "question": "is gold worth the extra $$, how much is it", "intent": "price", "ticket": null, "expect": ["$800"], "split": "tune", "synthetic": true}
+{"id": "q006", "question": "what do tickets cost this year", "intent": "price", "ticket": null, "expect": ["$350", "$800"], "split": "tune", "synthetic": true}
+{"id": "q007", "question": "early bird price?", "intent": "price", "ticket": null, "expect": ["$350"], "split": "tune", "synthetic": true}
+{"id": "q008", "question": "how much r tix", "intent": "price", "ticket": null, "expect": ["$350"], "split": "heldout", "synthetic": true}
+{"id": "q009", "question": "Price for one GA badge please", "intent": "price", "ticket": null, "expect": ["$350"], "split": "heldout", "synthetic": true}
+{"id": "q010", "question": "what's gold cost vs general admission", "intent": "price", "ticket": null, "expect": ["$350", "$800"], "split": "heldout", "synthetic": true}
+{"id": "q011", "question": "How much is the Gold ticket?", "intent": "price", "ticket": null, "expect": ["$800"], "split": "heldout", "synthetic": true}
+{"id": "q012", "question": "¿Cuánto cuesta la entrada para RenderATL?", "intent": "price", "ticket": null, "expect": ["$350"], "split": "heldout", "synthetic": true}
+{"id": "q013", "question": "when is renderatl 2027", "intent": "dates_venue", "ticket": null, "expect": ["August 18 to 19, 2027"], "split": "tune", "synthetic": true}
+{"id": "q014", "question": "where is the conference held?", "intent": "dates_venue", "ticket": null, "expect": ["230 John Portman Blvd NW, Building 2, Atlanta, GA 30303"], "split": "tune", "synthetic": true}
+{"id": "q015", "question": "what dates should i block on my calendar", "intent": "dates_venue", "ticket": null, "expect": ["August 18 to 19, 2027"], "split": "tune", "synthetic": true}
+{"id": "q016", "question": "which building is it in", "intent": "dates_venue", "ticket": null, "expect": ["230 John Portman Blvd NW, Building 2, Atlanta, GA 30303"], "split": "tune", "synthetic": true}
+{"id": "q017", "question": "Is it in Atlanta? what's the address", "intent": "dates_venue", "ticket": null, "expect": ["230 John Portman Blvd NW, Building 2, Atlanta, GA 30303"], "split": "tune", "synthetic": true}
+{"id": "q018", "question": "what month is renderatl", "intent": "dates_venue", "ticket": null, "expect": ["August 18 to 19, 2027"], "split": "tune", "synthetic": true}
+{"id": "q019", "question": "how many days is the conference and when", "intent": "dates_venue", "ticket": null, "expect": ["August 18 to 19, 2027"], "split": "tune", "synthetic": true}
+{"id": "q020", "question": "where do i go for renderatl, address?", "intent": "dates_venue", "ticket": null, "expect": ["230 John Portman Blvd NW, Building 2, Atlanta, GA 30303"], "split": "heldout", "synthetic": true}
+{"id": "q021", "question": "dates for renderatl next year?", "intent": "dates_venue", "ticket": null, "expect": ["August 18 to 19, 2027"], "split": "heldout", "synthetic": true}
+{"id": "q022", "question": "is it still at the john portman building?", "intent": "dates_venue", "ticket": null, "expect": ["230 John Portman Blvd NW, Building 2, Atlanta, GA 30303"], "split": "heldout", "synthetic": true}
+{"id": "q023", "question": "we're 6 engineers, any group deal?", "intent": "group_discount", "ticket": null, "expect": ["20%", "$280"], "split": "tune", "synthetic": true}
+{"id": "q024", "question": "is there a team discount if 10 of us come", "intent": "group_discount", "ticket": null, "expect": ["20%", "$280"], "split": "tune", "synthetic": true}
+{"id": "q025", "question": "group pricing for 5 people?", "intent": "group_discount", "ticket": null, "expect": ["20%", "$280"], "split": "tune", "synthetic": true}
+{"id": "q026", "question": "do u do discounts for teams", "intent": "group_discount", "ticket": null, "expect": ["20%"], "split": "tune", "synthetic": true}
+{"id": "q027", "question": "can 3 of us get a discount", "intent": "group_discount", "ticket": null, "expect": ["5"], "split": "tune", "synthetic": true}
+{"id": "q028", "question": "bulk discount on gold tickets for 8 of us?", "intent": "group_discount", "ticket": null, "expect": ["Gold tickets are not eligible"], "split": "tune", "synthetic": true}
+{"id": "q029", "question": "my team is 12 devs, how much each with the group deal", "intent": "group_discount", "ticket": null, "expect": ["$280"], "split": "heldout", "synthetic": true}
+{"id": "q030", "question": "any discount for a group of four?", "intent": "group_discount", "ticket": null, "expect": ["5"], "split": "heldout", "synthetic": true}
+{"id": "q031", "question": "does my ticket include the concert?", "intent": "included", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q032", "question": "is the career fair included or extra", "intent": "included", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q033", "question": "do i get food with the badge", "intent": "included", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q034", "question": "are atlanta tech week events free w/ a badge", "intent": "included", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q035", "question": "are workshops included in GA", "intent": "included", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q036", "question": "is the AI expo part of the ticket", "intent": "included", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q037", "question": "does general admission get me into renderfest", "intent": "included", "ticket": null, "expect": [], "split": "heldout", "synthetic": true}
+{"id": "q038", "question": "are side events and parties included?", "intent": "included", "ticket": null, "expect": [], "split": "heldout", "synthetic": true}
+{"id": "q039", "question": "anything on observability?", "intent": "tracks", "ticket": null, "expect": ["New Relic RUNTIME"], "split": "tune", "synthetic": true}
+{"id": "q040", "question": "is there a design track", "intent": "tracks", "ticket": null, "expect": ["UI/UX Design"], "split": "tune", "synthetic": true}
+{"id": "q041", "question": "any legal or compliance content for lawyers", "intent": "tracks", "ticket": null, "expect": ["Legal-Tech Track"], "split": "tune", "synthetic": true}
+{"id": "q042", "question": "is there node.js stuff", "intent": "tracks", "ticket": null, "expect": ["OpenJS Node Interactive Summit"], "split": "tune", "synthetic": true}
+{"id": "q043", "question": "talks on go to market / devrel?", "intent": "tracks", "ticket": null, "expect": ["Go To Market Summit"], "split": "tune", "synthetic": true}
+{"id": "q044", "question": "is there an AI track", "intent": "tracks", "ticket": null, "expect": ["Atlanta AI Expo"], "split": "tune", "synthetic": true}
+{"id": "q045", "question": "anything for frontend web folks", "intent": "tracks", "ticket": null, "expect": ["Web Technologies"], "split": "heldout", "synthetic": true}
+{"id": "q046", "question": "what tracks are there this year", "intent": "tracks", "ticket": null, "expect": ["Web Technologies"], "split": "heldout", "synthetic": true}
+{"id": "q047", "question": "how do i get into the executive summit", "intent": "exec_summit", "ticket": null, "expect": ["complimentary if approved"], "split": "tune", "synthetic": true}
+{"id": "q048", "question": "is the exec summit included with gold", "intent": "exec_summit", "ticket": null, "expect": ["complimentary if approved"], "split": "tune", "synthetic": true}
+{"id": "q049", "question": "what does the executive summit cost", "intent": "exec_summit", "ticket": null, "expect": ["complimentary if approved"], "split": "tune", "synthetic": true}
+{"id": "q050", "question": "who can attend the intuit executive summit", "intent": "exec_summit", "ticket": null, "expect": ["complimentary if approved"], "split": "tune", "synthetic": true}
+{"id": "q051", "question": "can my CTO go to the exec summit, how", "intent": "exec_summit", "ticket": null, "expect": ["complimentary if approved"], "split": "heldout", "synthetic": true}
+{"id": "q052", "question": "exec summit application?", "intent": "exec_summit", "ticket": null, "expect": ["complimentary if approved"], "split": "heldout", "synthetic": true}
+{"id": "q053", "question": "is renderatl worth it for a junior designer?", "intent": "fit", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q054", "question": "i do mostly backend go, will i get value", "intent": "fit", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q055", "question": "is this conf good for a non-technical founder", "intent": "fit", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q056", "question": "would a data scientist like renderatl", "intent": "fit", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q057", "question": "is it worth flying from london for this", "intent": "fit", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q058", "question": "I'm a lawyer working on AI policy, is RenderATL for me", "intent": "fit", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q059", "question": "first conference ever, is renderatl a good one to start with", "intent": "fit", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q060", "question": "is renderatl good for a mobile dev", "intent": "fit", "ticket": null, "expect": [], "split": "heldout", "synthetic": true}
+{"id": "q061", "question": "should a product manager go", "intent": "fit", "ticket": null, "expect": [], "split": "heldout", "synthetic": true}
+{"id": "q062", "question": "worth it for someone looking for a job?", "intent": "fit", "ticket": null, "expect": [], "split": "heldout", "synthetic": true}
+{"id": "q063", "question": "help me convince my boss to pay for renderatl", "intent": "manager_email", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q064", "question": "write an email to my manager asking for the ticket", "intent": "manager_email", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q065", "question": "what arguments can i use to get my company to sponsor me", "intent": "manager_email", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q066", "question": "draft a note to my eng director about going to renderatl", "intent": "manager_email", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q067", "question": "how do i justify the cost of gold to my manager, it's $800 right?", "intent": "manager_email", "ticket": null, "expect": ["$800"], "split": "tune", "synthetic": true}
+{"id": "q068", "question": "help me ask my employer to cover 5 tickets for the team with the group discount", "intent": "manager_email", "ticket": null, "expect": ["20%"], "split": "tune", "synthetic": true}
+{"id": "q069", "question": "pitch to my boss why i should attend", "intent": "manager_email", "ticket": null, "expect": [], "split": "heldout", "synthetic": true}
+{"id": "q070", "question": "email template to get my company to pay for renderatl", "intent": "manager_email", "ticket": null, "expect": [], "split": "heldout", "synthetic": true}
+{"id": "q071", "question": "plan my 3 days in atlanta for renderatl", "intent": "trip_plan", "ticket": null, "expect": ["August 18 to 19, 2027"], "split": "tune", "synthetic": true}
+{"id": "q072", "question": "help me budget for renderatl, flights hotel and ticket", "intent": "trip_plan", "ticket": null, "expect": ["August 18 to 19, 2027"], "split": "tune", "synthetic": true}
+{"id": "q073", "question": "what should i do in atlanta around the conference", "intent": "trip_plan", "ticket": null, "expect": ["August 18 to 19, 2027"], "split": "tune", "synthetic": true}
+{"id": "q074", "question": "make me a schedule for the two days", "intent": "trip_plan", "ticket": null, "expect": ["August 18 to 19, 2027"], "split": "tune", "synthetic": true}
+{"id": "q075", "question": "when should i fly in and out for renderatl", "intent": "trip_plan", "ticket": null, "expect": ["August 18 to 19, 2027"], "split": "tune", "synthetic": true}
+{"id": "q076", "question": "plan a trip for me and 2 coworkers to renderatl", "intent": "trip_plan", "ticket": null, "expect": ["August 18 to 19, 2027"], "split": "tune", "synthetic": true}
+{"id": "q077", "question": "help me plan my renderatl week incl tech week events", "intent": "trip_plan", "ticket": null, "expect": ["August 18 to 19, 2027"], "split": "heldout", "synthetic": true}
+{"id": "q078", "question": "itinerary for renderatl from new york", "intent": "trip_plan", "ticket": null, "expect": ["August 18 to 19, 2027"], "split": "heldout", "synthetic": true}
+{"id": "q079", "question": "is parking free at the venue", "intent": "other", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q080", "question": "what hotels are close by", "intent": "other", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q081", "question": "can i get a refund if i cant go", "intent": "other", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q082", "question": "is there a code of conduct", "intent": "other", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q083", "question": "¿Habrá traducción al español en las charlas?", "intent": "other", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q084", "question": "can i transfer my ticket to a coworker", "intent": "other", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q085", "question": "is there a dress code", "intent": "other", "ticket": null, "expect": [], "split": "tune", "synthetic": true}
+{"id": "q086", "question": "is the venue wheelchair accessible", "intent": "other", "ticket": null, "expect": [], "split": "heldout", "synthetic": true}
+{"id": "q087", "question": "is there wifi", "intent": "other", "ticket": null, "expect": [], "split": "heldout", "synthetic": true}
+{"id": "q088", "question": "can i bring my kid", "intent": "other", "ticket": null, "expect": [], "split": "heldout", "synthetic": true}
+{"id": "q089", "question": "im a junior frontend dev, which ticket should i get", "intent": "ticket_choice", "ticket": "general_admission", "expect": ["$350"], "split": "tune", "synthetic": true}
+{"id": "q090", "question": "I'm a VP of engineering, what pass makes sense", "intent": "ticket_choice", "ticket": "exec_summit", "expect": [], "split": "tune", "synthetic": true}
+{"id": "q091", "question": "engineering manager here, want to meet other leaders, which ticket", "intent": "ticket_choice", "ticket": "gold", "expect": ["$800"], "split": "tune", "synthetic": true}
+{"id": "q092", "question": "student on a budget, what ticket", "intent": "ticket_choice", "ticket": "general_admission", "expect": ["$350"], "split": "tune", "synthetic": true}
+{"id": "q093", "question": "I lead a team of 12 and want the leaders lounge, which ticket", "intent": "ticket_choice", "ticket": "gold", "expect": ["$800"], "split": "tune", "synthetic": true}
+{"id": "q094", "question": "designer interested in the ui/ux talks, which pass", "intent": "ticket_choice", "ticket": "general_admission", "expect": ["$350"], "split": "tune", "synthetic": true}
+{"id": "q095", "question": "CEO of a 200-person company, what should I buy", "intent": "ticket_choice", "ticket": "exec_summit", "expect": [], "split": "tune", "synthetic": true}
+{"id": "q096", "question": "open source maintainer, want to be at the commits award show, which ticket", "intent": "ticket_choice", "ticket": "gold", "expect": ["$800"], "split": "tune", "synthetic": true}
+{"id": "q097", "question": "backend engineer, just want sessions + workshops, which ticket", "intent": "ticket_choice", "ticket": "general_admission", "expect": ["$350"], "split": "heldout", "synthetic": true}
+{"id": "q098", "question": "director of eng who wants networking with execs, which ticket", "intent": "ticket_choice", "ticket": "gold", "expect": ["$800"], "split": "heldout", "synthetic": true}
+{"id": "q099", "question": "CTO here, which option is for me", "intent": "ticket_choice", "ticket": "exec_summit", "expect": [], "split": "heldout", "synthetic": true}
+{"id": "q100", "question": "bootcamp grad looking for a job, which ticket", "intent": "ticket_choice", "ticket": "general_admission", "expect": ["$350"], "split": "heldout", "synthetic": true}
