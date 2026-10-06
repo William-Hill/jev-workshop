@@ -222,6 +222,21 @@ test("System 2: an illegal System 2 answer falls back to the Jev move", async ({
   expect(entry.choice).toBe(entry.options[0]);
 });
 
+test("System 2 search: a low-confidence Jev answer goes to the code planner", async ({ page }) => {
+  await page.route("**/api/jev", async (route) => {
+    const body = route.request().postDataJSON();
+    const options = Object.keys(body.questions.move.criteria);
+    const probabilities = Object.fromEntries(options.map((n) => [n, 1 / options.length]));
+    await route.fulfill({ json: { model: "jev-test", answers: { move: { type: "choice", choice: options[0], confidence: 0.3, probabilities } }, usage: { input_tokens: 1, output_tokens: 1 } } });
+  });
+  await bootJev(page, "&variant=level2d-s2search");
+  await enterPlaying(page);
+  const entry = await firstDecision(page);
+  expect(entry.source).toBe("system2");
+  expect(entry.reason).toContain("look-ahead 8 steps");
+  expect(entry.options).toContain(entry.choice);
+});
+
 test("the decision log downloads as JSONL", async ({ page }) => {
   await mockJev(page, (options) => options[0]);
   await bootJev(page);
