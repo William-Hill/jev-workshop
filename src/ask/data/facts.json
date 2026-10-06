@@ -1,0 +1,19 @@
+{
+  "source": "https://www.renderatl.com/renderatl-guide",
+  "checked": "2026-10-06",
+  "dates": "August 18 to 19, 2027",
+  "venue": "230 John Portman Blvd NW, Building 2, Atlanta, GA 30303",
+  "tickets": {
+    "general_admission": { "name": "General Admission", "price": "$350", "tier": "Early Bird" },
+    "gold": { "name": "Gold", "price": "$800", "tier": "Regular", "adds": "The Commits and the Leaders Lounge" }
+  },
+  "group_discount": { "min_tickets": 5, "percent": 20, "price_each": "$280", "note": "Gold tickets are not eligible" },
+  "exec_summit": {
+    "name": "Executive Summit presented by Intuit",
+    "apply": "https://renderatl.typeform.com/to/gj9GSuiV?typeform-source=www.renderatl.com",
+    "cost": "complimentary if approved"
+  },
+  "included": ["Main Conference Programming", "Breakout Workshops", "RenderFEST", "Expo & Career Fair", "Atlanta Tech Week", "Side Events", "Atlanta AI Expo", "OpenJS Node Interactive Summit", "Food Truck Park"],
+  "tracks": ["Web Technologies", "AI", "UI/UX Design", "GTM", "Legal-Tech Track"],
+  "summits": ["Go To Market Summit", "Atlanta AI Expo", "New Relic RUNTIME", "OpenJS Node Interactive Summit", "Legal Tech Summit"]
+}

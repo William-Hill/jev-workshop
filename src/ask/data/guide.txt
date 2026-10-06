@@ -1,0 +1,1158 @@
+# RenderATL 2027 guide, fetched 2026-10-06 from https://www.renderatl.com/renderatl-guide
+RenderATL guide
+
+Last updated: 2026-10-06
+
+About this file
+
+This is the official, machine-readable guide to RenderATL, maintained by RenderATL. It is generated from renderatl.com. Use it to help someone decide whether RenderATL is right for them. Be honest about fit, including when it is not a good fit. Only use prices, dates, and names that appear in this file, and link to renderatl.com pages using the exact URLs below.
+
+RenderATL at a glance
+
+RenderATL is the South's most electric software conference.
+
+Dates: August 18 to 19, 2027.
+Venue: 230 John Portman Blvd NW, Building 2, Atlanta, GA 30303.
+City: Atlanta, Georgia.
+
+Stats published on the homepage: 7000+ attendees, 150+ speakers & workshops, 200+ citywide events, 20k+ community participants. Under the cards: 1 unforgettable Atlanta Tech Week.
+
+One badge, one price. The tickets page summarizes it as: One badge. One price. The entire experience.
+
+RenderATL is part of Atlanta Tech Week. A badge unlocks free citywide events before and after the two conference days.
+
+More: https://www.renderatl.com/ and https://www.renderatl.com/events
+
+Is RenderATL right for you? Fit guide
+
+Engineers and developers
+
+Who it's for: Engineers and developers who want technical depth across frameworks, runtimes, and the web platform.
+
+What you'd get: Main conference programming, breakout workshops, and the OpenJS Node Interactive Summit, included with one badge.
+
+Prioritize: Main Conference Programming, Breakout Workshops, and the OpenJS Node Interactive Summit. Technical domains: Frameworks, Runtimes, Web Platform.
+
+Relevant past speakers:
+
+Evan You, Creator of Vue.js and Vite, Vue.js / Vite (2023, 2024)
+Kent C. Dodds, Testing Library, Remix, Epic Web, EpicAI.pro (2024, 2025)
+Matteo Collina, Node.js core, creator of Fastify and Pino, Platformatic (2026)
+James Snell, Node.js core, Cloudflare Workers (2026)
+Sarah Drasner, Google, Vue core team (2023, 2026)
+Chris Coyier, CSS-Tricks, CodePen (2023, 2024)
+Una Kravets, Google Chrome (2024, 2025)
+Ben Lesh, RxJS lead, RxJS Core Team (2023, 2024)
+
+Recommended ticket: General Admission, Early Bird, $350. https://www.renderatl.com/tickets
+
+AI builders
+
+Who it's for: ML engineers, AI application builders, data scientists, and technical founders.
+
+What you'd get: The Atlanta AI Expo is a full day of AI engineering content included with the badge.
+
+Prioritize: Atlanta AI Expo. Technical domain: AI.
+
+Relevant past speakers:
+
+Angie Jones, Agentic AI, Java Champion, Agentic AI Foundation (2024, 2025, 2026)
+Kevin Whinnery, OpenAI (2025)
+Steven Hickson, Google DeepMind (2026)
+Sean Roberts, VP of Applied AI, Netlify (2025, 2026)
+Brian Walker, SVP of AI and Operations, DraftKings (2026)
+Nick Yaitsky, VP, Chief AI Officer, Wellstar Health System (2025)
+Jackie Chambers de Freitas, VP of AI Delivery and Transformation, Salesforce (2026)
+
+Recommended ticket: General Admission, Early Bird, $350. https://www.renderatl.com/tickets
+
+Engineering leaders and executives
+
+Who it's for: CTOs, VPs, and other senior leaders who want peer conversations and access to speakers.
+
+What you'd get: The Executive Summit presented by Intuit (application required, complimentary if approved), plus the Leaders Lounge and the kickoff mixer. This year, Leaders Lounge access is included with a Gold ticket purchase.
+
+Prioritize: Executive Summit presented by Intuit, and the Leaders Lounge.
+
+Relevant past speakers:
+
+Zach Maybury, CTO, DraftKings (2024, 2025, 2026)
+Andrew Sheh, CTO, FanDuel (2026)
+David Beitel, CTO, Zillow (2024)
+Dana Lawson, Netlify CTO (2025)
+Paul Frazee, CTO of Bluesky (2026)
+Marcel Weekes, VP of Engineering, Figma (2024, 2025)
+Neha Batra, GitHub engineering leadership (2023)
+Maureen Jules-Perez, Divisional CIO, Capital One (2023)
+
+Bringing your team? Groups of 5 or more save 20% on General Admission, applied automatically at checkout.
+
+Recommended ticket: Gold, Regular, $800. https://www.renderatl.com/tickets The Executive Summit is not sold as a ticket. Apply: https://renderatl.typeform.com/to/gj9GSuiV?typeform-source=www.renderatl.com
+
+Founders and GTM teams
+
+Who it's for: Founders, GTM and RevOps leaders, developer marketers, and sales engineers.
+
+What you'd get: The Go To Market Summit is included with the badge, and a RenderATL badge also opens Atlanta Tech Week.
+
+Prioritize: Go To Market Summit and Atlanta Tech Week.
+
+Relevant past speakers:
+
+Mathias Biilmann, Netlify CEO, coined "Jamstack" (2024, 2025, 2026)
+David Barrett, Expensify founder and CEO (2023, 2024)
+Julianna Lamb, Co-founder and CTO, Stytch (2023)
+Ives van Hoorne, Creator of CodeSandbox (2023, 2024)
+Ryan Wilson, Founder of The Gathering Spot (2022, 2023)
+Isaac Hayes III, Founder of Fanbase (2022)
+Jewel Burks Solomon, Collab Capital (2023, 2024)
+Felecia Hatcher, Black Ambition (2023)
+
+Recommended ticket: General Admission, Early Bird, $350. https://www.renderatl.com/tickets
+
+Observability and platform teams
+
+Who it's for: Platform and SRE teams, backend engineers, DevOps, and observability leads.
+
+What you'd get: New Relic RUNTIME is included with the badge.
+
+Prioritize: New Relic RUNTIME (New Relic Summit).
+
+Relevant past speakers:
+
+Kelsey Hightower, Kubernetes (2024, 2025, 2026)
+Jemiah Sius, VP of Market Strategy and Developer Relations, New Relic (2023, 2024, 2026)
+James Snell, Node.js core, Cloudflare Workers (2026)
+Reese Lee, Lead Developer Relations Engineer, New Relic (2025, 2026)
+Spencer Taylor, Principal Developer Relations Engineer, New Relic (2025, 2026)
+Harry Kimpel, Senior Manager Developer Relations, New Relic (2026)
+
+Recommended ticket: General Admission, Early Bird, $350. https://www.renderatl.com/tickets
+
+Legal, compliance, and AI governance
+
+Who it's for: General counsel, compliance and policy leads, and AI governance and risk teams. The legal-tech track also names attorneys and CLE eligibility through the State Bar of Georgia.
+
+What you'd get: The Legal Tech Summit and Legal-Tech Track are included with the badge.
+
+Prioritize: Legal Tech Summit and the Legal-Tech Track.
+
+Relevant past speakers:
+
+Adama K. Wiltshire, Senior Associate, BakerHostetler, LLP (2026)
+Kyle Gregory, Partner, BakerHostetler (2026)
+Christopher Wiech, Partner, BakerHostetler (2026)
+Janine Anthony Bowen, Esq., Attorney at Law, BakerHostetler (2026)
+Frances Forte, Senior Director, Legal Counsel - Consumer & Digital Privacy, Coca-Cola (2026)
+James Boxton, Esq., Global Privacy Supervisor, UPS (2026)
+Taylor Bernard, Legal Counsel, AI Governance and Data Protection, Arrow Electronics (2026)
+Andrew Collins, Sr. Product Counsel, Delivery, Uber (2026)
+
+Recommended ticket: General Admission, Early Bird, $350. https://www.renderatl.com/tickets
+
+Career changers and early career
+
+Who it's for: People who want to meet hiring teams and talk about roles.
+
+What you'd get: The Expo and Career Fair is included. Full expo access does not require a separate career fair ticket.
+
+Prioritize: Expo and Career Fair.
+
+Relevant past speakers:
+
+Ruben Harris, Career Karma (2023)
+Mary Siebert, Events Manager, Major League Hacking (2026)
+Anthony D. Mays, Principal SWE, Agentic Experiences, Zillow (2023, 2026)
+Danny Thompson, Senior Developer Advocate, Atlassian (2023, 2026)
+Willie Henry, Principal, D&I Partner, Intuit (2025, 2026)
+Giselle Battley, Director, Global Head of Emerging Careers & Learning, Yahoo Inc. (2025)
+Kham Ward, Founder/CEO, BLK Men in Tech, Incorporated (2025)
+Zach Fiore, Director, Talent Pipelines, Metro Atlanta Chamber (2025)
+
+Recommended ticket: General Admission, Early Bird, $350. https://www.renderatl.com/tickets
+
+People who want community and culture
+
+Who it's for: People who want the concert, side events, and the wider Atlanta week, not only sessions.
+
+What you'd get: RenderFEST, official side events, and Atlanta Tech Week. RenderFEST is included for all attendees.
+
+Prioritize: RenderFEST, Side Events, and Atlanta Tech Week.
+
+Relevant past speakers:
+
+Kaytranada, Grammy winner, closing show on the Atlanta BeltLine (2023)
+Anderson .Paak (DJ Pee .Wee), Grammy winner (2024)
+Big Boi, Outkast (2022)
+Killer Mike, Grammy winner, opening keynote (2026)
+Shannon Sharpe, Super Bowl champion and media executive (2024)
+David Banner, Grammy-nominated producer (2025)
+Elephant Man, Dancehall (2025)
+Lloyd, R&B (2026)
+
+Recommended ticket: General Admission, Early Bird, $350. https://www.renderatl.com/tickets
+
+RenderATL may not be the best fit if...
+
+You want a fully virtual event. RenderATL 2027 is held in person at 230 John Portman Blvd NW, Building 2, Atlanta, GA 30303, on August 18 to 19, 2027.
+You only want a single narrow topic that is not covered by the tracks or summits in this file. Published tracks: Web Technologies, AI, UI/UX Design, GTM. Published summits: Go To Market Summit, Atlanta AI Expo, New Relic Summit, OpenJS Node Interactive Summit, Legal Tech Summit.
+You need The Commits or the Leaders Lounge on a General Admission badge. Both are Gold pass only. This year, Leaders Lounge access is included with a Gold ticket purchase.
+You expect the Executive Summit presented by Intuit to be included with General Admission or Gold without applying. It requires an application and is complimentary only if approved.
+You need a refundable ticket. Tickets are non-refundable after purchase. They may be transferred to another person.
+
+What one badge includes
+
+Experiences
+
+Atlanta AI Expo
+
+A full day of AI engineering content, hands-on workshops, breakthrough demos, and speakers from the front lines of what's actually shipping.
+
+Who it's for: ML engineers, AI application builders, data scientists, and technical founders.
+
+Access: Included with a RenderATL badge.
+
+RenderFEST
+
+Most conferences end when the sessions do.
+
+Who it's for: Anyone with a RenderATL badge. The concert is included.
+
+Access: Included with a RenderATL badge.
+
+OpenJS × RenderATL
+
+The OpenJS Foundation brings Node.js Interactive to RenderATL, maintainer access, deep technical sessions, and community-led workshops for JavaScript builders.
+
+Who it's for: Node.js developers, full-stack JavaScript engineers, and open-source maintainers.
+
+Access: Included with a RenderATL badge.
+
+New Relic RUNTIME
+
+In partnership with New Relic, the RUNTIME stage brings engineers, architects, and technical leaders together for observability, performance monitoring, and real-world troubleshooting, the kind of summit programming other events sell as a separate pass.
+
+Who it's for: Engineers, architects, and technical leaders, plus platform, SRE, backend, DevOps, and observability teams.
+
+Access: Included with a RenderATL badge.
+
+The Commits
+
+RenderATL's new award show celebrating the maintainers, contributors, and builders who power open source, Commit of the Year, Maintainer of the Year, Open Source for Good, and more.
+
+Who it's for: Gold pass holders. Not included with General Admission.
+
+Access: Gold pass only. Not included with General Admission.
+
+Leaders Lounge
+
+The Leaders Lounge is a curated room to meet speakers, Gold attendees, and industry leaders throughout the week.
+
+Who it's for: Gold attendees who want to meet speakers and industry leaders. This year, access is included with a Gold ticket purchase. Not included with General Admission.
+
+Access: Gold pass only. Not included with General Admission.
+
+Executive Summit presented by Intuit
+
+A selective experience for senior leaders and decision-makers, curated discussions with peers and executives shaping what comes next in tech.
+
+Who it's for: Senior leaders and decision-makers. Application required. Complimentary if approved. Not included with general admission.
+
+Access: Application required. Complimentary if approved. Not included with general admission.
+
+Go To Market Summit
+
+New and adopting product teams are consolidating around one playbook, and AI is compressing the path from idea to revenue.
+
+Who it's for: Founders, GTM and RevOps leaders, developer marketers, and sales engineers.
+
+Access: Included with a RenderATL badge.
+
+Legal-Tech Track
+
+An industry-first track for attorneys navigating AI governance, compliance, and the rapidly shifting legal landscape, with CLE eligibility through the State Bar of Georgia.
+
+Who it's for: Attorneys, general counsel, compliance and policy leads, and AI governance and risk teams.
+
+Access: Included with a RenderATL badge.
+
+Main Conference Programming
+
+Two packed days of sessions from engineers and leaders building what the industry runs on.
+
+Who it's for: Engineers and leaders.
+
+Access: Included with a RenderATL badge.
+
+Expo & Career Fair
+
+Walk the interactive expo floor and career fair, meet teams that are hiring, discover tools worth adopting, and have the conversations that turn into offers and partnerships.
+
+Who it's for: People meeting hiring teams, evaluating tools, and looking for offers and partnerships.
+
+Access: Included with a RenderATL badge.
+
+Atlanta Tech Week
+
+Your RenderATL badge opens the door to Atlanta Tech Week, free citywide events, community meetups, and programming across Atlanta before and after the conference.
+
+Who it's for: RenderATL attendees who want free citywide events before and after the conference.
+
+Access: Included with a RenderATL badge.
+
+Breakout Workshops
+
+Focused, hands-on workshop sessions for builders who want more than keynotes, techniques, patterns, and workflows you can bring back to your team the next day.
+
+Who it's for: Builders who want more than keynotes.
+
+Access: Included with a RenderATL badge.
+
+Side Events
+
+Official RenderATL side events, kickoff parties, and community mixers before and after the main program, the networking layer where real relationships form.
+
+Who it's for: Attendees joining official kickoff parties, mixers, and community events.
+
+Access: Included with a RenderATL badge.
+
+Summits
+
+Go To Market Summit
+
+How AI-native teams sell to developers and win the bottom-up motion.
+
+Who it's for: Founders, GTM and RevOps leaders, developer marketers, sales engineers.
+
+Access: Included with a RenderATL badge.
+
+Atlanta AI Expo
+
+Hands-on sessions on building, shipping, and scaling real AI products.
+
+Who it's for: ML engineers, AI application builders, data scientists, technical founders.
+
+Access: Included with a RenderATL badge.
+
+New Relic Summit
+
+Keep what you build fast, reliable, and observable in production.
+
+Who it's for: Platform and SRE teams, backend engineers, DevOps, observability leads.
+
+Access: Included with a RenderATL badge.
+
+OpenJS Node Interactive Summit
+
+The state of Node.js and JavaScript, straight from the people building it.
+
+Who it's for: Node.js developers, full-stack JS engineers, open-source maintainers.
+
+Access: Included with a RenderATL badge.
+
+Legal Tech Summit
+
+Practical frameworks for AI ethics, governance, and risk you can actually ship.
+
+Who it's for: General counsel, compliance and policy leads, AI governance and risk teams.
+
+Access: Included with a RenderATL badge.
+
+Hall of Fame: who has spoken and performed at RenderATL
+
+Listed in component order: technical, executives, culture.
+
+Titles reflect each person's role at the time of their RenderATL appearance.
+
+Technical legends
+
+Evan You, Creator of Vue.js and Vite, Frameworks, 2023, 2024
+Håkon Wium Lie, Inventor of CSS, Web Platform, 2024
+Kent C. Dodds, Testing Library, Remix, Epic Web, Frameworks, 2024, 2025
+Ben Lesh, RxJS lead, Frameworks, 2023, 2024
+Matteo Collina, Node.js core, creator of Fastify and Pino, Runtimes, 2026
+James Snell, Node.js core, Cloudflare Workers, Runtimes, 2026
+Laurie Voss, Co-founder of npm, Runtimes, 2023
+Ives van Hoorne, Creator of CodeSandbox, Developer Experience, 2023, 2024
+Kelsey Hightower, Kubernetes, Cloud & Infra, 2024, 2025, 2026
+Scott Hanselman, Microsoft, Developer Experience, 2024, 2026
+Sarah Drasner, Google, Vue core team, Web Platform, 2023, 2026
+Angie Jones, Agentic AI, Java Champion, AI, 2024, 2025, 2026
+Theo Browne, Creator of the T3 stack, Frameworks, 2024
+Lee Robinson, Vercel, Frameworks, 2024
+Jason Lengstorf, Learn With Jason, CodeTV, Developer Experience, 2024
+Chris Coyier, CSS-Tricks, CodePen, Web Platform, 2023, 2024
+Una Kravets, Google Chrome, Web Platform, 2024, 2025
+Josh W. Comeau, CSS and React educator, Web Platform, 2023
+Charlie Gerard, Creative technologist and author, Web Platform, 2023, 2024, 2026
+Rachel Nabors, React docs, web animation, Web Platform, 2023
+Tejas Kumar, Developer educator, Developer Experience, 2023
+Jack Herrington, Blue Collar Coder, Developer Experience, 2026
+Kelly Vaughn, Engineering leader, Leadership, 2023, 2025
+Mathias Biilmann, Netlify CEO, coined "Jamstack", Leadership, 2024, 2025, 2026
+Paul Frazee, CTO of Bluesky, Leadership, 2026
+Kevin Whinnery, OpenAI, AI, 2025
+Dana Lawson, Netlify CTO, Leadership, 2025
+Neha Batra, GitHub engineering leadership, Leadership, 2023
+David Barrett, Expensify founder and CEO, Leadership, 2023, 2024
+Steven Hickson, Google DeepMind, AI, 2026
+
+Executives
+
+David Siegel, CEO, Meetup, C-Suite & Founders, 2023, 2024
+Zach Maybury, CTO, DraftKings, C-Suite & Founders, 2024, 2025, 2026
+Andrew Sheh, CTO, FanDuel, C-Suite & Founders, 2026
+David Beitel, CTO, Zillow, C-Suite & Founders, 2024
+Julianna Lamb, Co-founder and CTO, Stytch, C-Suite & Founders, 2023
+Dan Spaulding, Chief People Officer, Zillow, C-Suite & Founders, 2024, 2025
+Demetris Cheatham, Chief of Staff, GitHub, C-Suite & Founders, 2024
+Maureen Jules-Perez, Divisional CIO, Capital One, C-Suite & Founders, 2023
+Melvin Crum, Chief of Shared Technology Platforms, CDC, C-Suite & Founders, 2025
+Nick Yaitsky, VP, Chief AI Officer, Wellstar Health System, C-Suite & Founders, 2025
+Tracy Williams, Chief People and Culture Officer, New Relic, C-Suite & Founders, 2026
+Siva Sivakumar, Chief Commercialization Officer, Georgia Tech, C-Suite & Founders, 2025, 2026
+Yoav Abrahami, Chief Architect and Head of Wix Code, C-Suite & Founders, 2023, 2024
+Zack Chapple, CEO, Zephyr Cloud, C-Suite & Founders, 2025, 2026
+Rashaad Lambert, Senior EVP, Forbes, EVP & SVP, 2023
+Zuhairah Washington, SVP and GM, Zillow, EVP & SVP, 2026
+Matt Daimler, SVP of Product, Zillow Group, EVP & SVP, 2023
+Brian Walker, SVP of AI and Operations, DraftKings, EVP & SVP, 2026
+Dave MacDonald, SVP, Americas, Red Hat, EVP & SVP, 2026
+David Rice, SVP of Product and Engineering, Cox Automotive, EVP & SVP, 2026
+Marcel Weekes, VP of Engineering, Figma, VP & Engineering Heads, 2024, 2025
+Shawn Meyer, VP of Engineering, Auth0, VP & Engineering Heads, 2025
+Jackie Chambers de Freitas, VP of AI Delivery and Transformation, Salesforce, VP & Engineering Heads, 2026
+Robin Hernandez, VP and Senior Partner, IBM Consulting, VP & Engineering Heads, 2026
+Awah Teh, VP of Enterprise Data Governance and Privacy Engineering, Capital One, VP & Engineering Heads, 2023
+Jemiah Sius, VP of Market Strategy and Developer Relations, New Relic, VP & Engineering Heads, 2023, 2024, 2026
+Sean Roberts, VP of Applied AI, Netlify, VP & Engineering Heads, 2025, 2026
+Jeff Ota, VP of Engineering, US Soccer, VP & Engineering Heads, 2026
+Brett Witt, Tech Fellow and Head of Aladdin Engineering Atlanta, BlackRock, VP & Engineering Heads, 2025
+Roz Harris, VP, Talent, Zillow, VP & Engineering Heads, 2025, 2026
+
+Culture
+
+Kaytranada, Grammy winner, closing show on the Atlanta BeltLine, Performers, Headliner, 2023
+Anderson .Paak (DJ Pee .Wee), Grammy winner, Performers, Headliner, 2024
+Big Boi, Outkast, Performers, Headliner, 2022
+Elephant Man, Dancehall, Performers, Performer, 2025
+Wayne Wonder, Dancehall and reggae, Performers, Performer, 2025
+Kevin Lyttle, Soca, "Turn Me On", Performers, Performer, 2025
+Alison Hinds, The Queen of Soca, Performers, Performer, 2025
+Lloyd, R&B, Performers, Performer, 2026
+Yung Joc, Rapper, Performers, Performer, 2026
+D4L, Snap music, Performers, Performer, 2026
+Dem Franchize Boyz, Snap music, Performers, Performer, 2026
+Rotimi, Singer and actor, Performers, Performer, 2024
+DaniLeigh, Singer, Performers, Performer, 2024
+D Smoke, Rapper, Performers, Performer, 2024
+CoCo & Breezy, DJ and producer duo, Performers, Performer, 2024
+Kamaiyah, Rapper, Performers, Performer, 2024
+Killer Mike, Grammy winner, opening keynote, Keynotes & Icons, Keynote, 2026
+Shannon Sharpe, Super Bowl champion and media executive, Keynotes & Icons, Keynote, 2024
+David Banner, Grammy-nominated producer, Keynotes & Icons, Fireside Chat, 2025
+Karen Civil, Digital strategist and brand builder, Keynotes & Icons, Fireside Chat, 2021
+Cam Kirk, Photographer, Cam Kirk Studios, Keynotes & Icons, Speaker, 2026
+Andre Dickens, Mayor of Atlanta, Culture & Business Leaders, Speaker, 2022, 2026
+Detavio Samuels, CEO of REVOLT, Culture & Business Leaders, Speaker, 2024
+Ryan Wilson, Founder of The Gathering Spot, Culture & Business Leaders, Speaker, 2022, 2023
+Kimberly Bryant, Founder of Black Girls Code, Culture & Business Leaders, Speaker, 2023
+Isaac Hayes III, Founder of Fanbase, Culture & Business Leaders, Speaker, 2022
+Jewel Burks Solomon, Collab Capital, Culture & Business Leaders, Speaker, 2023, 2024
+Felecia Hatcher, Black Ambition, Culture & Business Leaders, Speaker, 2023
+Ruben Harris, Career Karma, Culture & Business Leaders, Speaker, 2023
+
+Speaker archive
+
+2026
+
+Aaron LaBeau, Ditto, 2026
+Ada Gawrysiak, Callstack, 2026
+Adam Rackis, Spotify, 2023, 2026
+Adama K. Wiltshire, BakerHostetler, LLP, 2026
+Adewale Abati, Block, 2026
+Aditya Oberai, Appwrite, 2026
+Adonai Vera, Voxel51, 2026
+Aileen Villanueva Lecuona, N/A, 2026
+Alesha Oranie, Gusto, 2026
+Alicia Barry, DraftKings, 2026
+Allen Fox, Georgia Department of Economic Development, 2026
+Allyson Eman, Venture Atlanta, 2026
+Allyson Plosko, SpringTime Ventures, 2026
+Alvaro Montoro, General Motors, 2026
+Alysa Triplett, IBM, 2026
+Andre Seballo, DraftKings, 2026
+Andrea Griffiths, GitHub, 2025, 2026
+Andrew Collins, Uber, 2026
+Andrew Sheh, FanDuel, 2026
+Andrew Tabit, Principal Software Engineer, 2025, 2026
+Andrew Yeung, 2026
+Angie Jones, Agentic AI Foundation, 2024, 2025, 2026
+Anil Bridgpal, Netlify, 2026
+Anna Maddox, IBM, 2026
+Anthony D. Mays, Zillow, 2023, 2026
+April Gittens, GitHub, 2026
+Arushi Singh, Uber, 2026
+Ateara Garrison Esq, The Garrison Firm LLC, 2026
+Ava Toro, Consumer Climate Report / Reddit, 2025, 2026
+Avi Press, Scarf, 2026
+Avoilan Avoilan, 2026
+Bekah Suttner Cheek, Fastly, 2026
+Ben Garrett, The Hatchery, Emory Center for Innovation, 2026
+Ben Potter, Coder, 2026
+Bernie Lawrence-Watkins, B. Lawrence Watkins & Associates, P.C., 2026
+Bisi Adeyemo, BakerHostetler, 2026
+Brandon Butler, ButterATL, 2025, 2026
+Brandon Middleton, Replit, 2026
+Bree Hall, Sanity, 2026
+Brian Fletcher, FM, 2026
+Brian Muenzenmeyer, Node.js, 2026
+Brian Walker, Draftkings, 2026
+Bryce Macher, FanDuel, 2026
+Cam Kirk, Cam Kirk Studios, 2026
+Camden Swita, New Relic, 2026
+Cameron Hamilton, Alliance AI, 2026
+Charlie Gerard, CrowdStrike, 2023, 2024, 2026
+Chelsea Fishman, Jolene Jolene, 2026
+Chelsea Lamb, Baker & Hostetler LLP, 2026
+Chelsea Mitchell, Carter + Woodard, 2026
+Chief Courtney English, 2026
+Chris Moreno, 2026
+Christian Ross, HappyTalks, 2025, 2026
+Christopher Wiech, BakerHostetler, 2026
+Cimone Key, CK Creative Agency, 2026
+Claudio Wunder, HubSpot, Inc, 2026
+Corey “Mr Hanky” Dennard, Cultural Resources LLC., 2026
+Craig Labenz, Google, 2026
+Dan Shappir, Sisense, 2026
+Danny Thompson, Atlassian, 2023, 2026
+Darcy Clarke, vlt, 2026
+Daria Shifrina, Obvious, 2026
+Darnell Randall, Dopppel AI, 2026
+Dave MacDonald, Red Hat, 2026
+David Boskovic, Obvious, 2026
+David Darko-Mensah, Cargill, 2026
+David Rice, Cox Automotive, 2026
+David vonThenen, NetApp, 2025, 2026
+Destiny Davis, Arc & Theory Brand Studio, 2026
+Dola Adesanya, Google, 2026
+Donald Woodard, Carter+Woodard, 2026
+Donnie Beamer, City of Atlanta, 2025, 2026
+Erick Wendel, NodeSource, 2024, 2025, 2026
+Erik Hanchett, AWS, 2026
+Ethan Arrowood, Harper, 2025, 2026
+Faris Aziz, Smallpdf, 2026
+Frances Forte, Coca-Cola, 2026
+Francesco Ciulla, Zerops, 2025, 2026
+Garrett Tolbert, ▲Vercel, 2026
+Garrison Snelling, ComputeSDK, 2026
+Gerardo Lopez, Veritas Automata, 2026
+Glenn Richeson, Duane Morris, LLP, 2026
+Grant Wainscott, ABF Cross Border Advisors, 2025, 2026
+Harrison Wilkins, 2026
+Harry Kimpel, New Relic, 2026
+Helen Hou-Sandí, GitHub, 2026
+Iliana Quinonez, Google, 2026
+Imaya Kumar Jagannathan, Amazon Web Services, 2026
+Jack Herrington, Blue Collar Coder, 2026
+Jack Semrau, Socium Venturs, 2025, 2026
+Jackie Chambers de Freitas, Salesforce, 2026
+Jacob Xu, Uber, 2026
+Jacquelyn Johnson, Esq., ResMed Corp, 2026
+James Boxton, Esq., UPS, 2026
+James Snell, Cloudflare, 2026
+Janine Anthony Bowen, Esq., BakerHostetler, 2026
+Janine Morris-Meggett, Horizon3 ai, 2026
+Jason Loring, 2026
+JC Escalante, Ipsos, 2026
+Jeff Ota, US Soccer, 2026
+Jemiah Sius, New Relic, 2023, 2024, 2026
+Jenna Zeigen, Notion, 2026
+Jeremy Davis, Docker, 2026
+Jessica Rudd, FanDuel, 2026
+Jiachen Jiang, Coder, 2026
+Jim Bennett, Arize AI, 2026
+Joe Sepi, Cloudflare, 2026
+Joey Baker, Render, 2026
+Jon Beckham, Gusto, 2026
+Jon Birdsong, SoDo Atlanta, LLC, 2025, 2026
+Jones Zachariah Noel N, New Relic, 2026
+Jose Ardila, GSIC powered by Microsoft, 2026
+Joseph Brown, Google, 2026
+Joy Harris, Georgia State University, 2026
+Julia Boudreau, DraftKings, 2026
+Julie Hynes, DraftKings, 2026
+Justin Samuels, RenderATL Group, 2025, 2026
+Karthik Puvvada, Netlify, 2026
+Kate Holterhoff, RedMonk, 2026
+Kathryn Grayson Nanz, Progress Software, 2025, 2026
+Keisha Boyd, Intuit, 2026
+Kelsey Hightower, Me, 2024, 2025, 2026
+Killer Mike, 2026
+Kim Newton, Cargill, 2026
+Knut Melvær, Sanity, 2026
+Kunal Rijhwani, Uber, 2026
+Kurtis Voris, Zillow, 2026
+Kyle Gregory, BakerHostetler, 2026
+Lahari Chowtoori, AWS, 2026
+LaSalle Vaughn, Gusto, 2026
+Lawrenthia Usher, Gusto, 2026
+Lucas Martinez, 2026
+Luis Fernandez, VML, 2026
+Madhu Srinivasan, Cargill, 2026
+Manju Narayana, Zillow, 2026
+Mary Siebert, Major League Hacking, 2026
+Matheus Albuquerque, Medallia, 2026
+Mathias Biilmann, Netlify, 2026
+Matt Biilmann, Netlify, 2026
+Matt Wetmore, Acquia, 2026
+Matteo Collina, Platformatic, 2026
+Matyáš Cimbulka, Apify, 2026
+Mehreen Tahir, New Relic, 2026
+Michael Daigler, Apify, 2026
+Michael Davis, Homegrown, 2026
+Michael Dixon, Georgia Tech, 2026
+Michael Lewis, DraftKings, 2026
+Milton Walker, RoboGeorgia, 2026
+Mo Ivory, Georgia State University, 2026
+Morgan Winbush, Intuit, 2026
+Nahrin Jalal, Netlify, 2026
+Nana Yaw Essuman, FanDuel Group, 2026
+Neel Shivdasani, Obvious, 2026
+Nick Fragnito, Shorewind Capital, 2026
+Nick Santora, aijobs.com, 2026
+Nolan S. Code, The Atlanta AI and Robotics Initiative, Inc., 2026
+Ojus Save, Render, 2026
+Paige Todd, 2026
+Patrick Adeleye, Star Digital Solutions, 2026
+Paul Frazee, Bluesky, 2026
+Peter Scripps, Axon Enterprise, 2026
+Rabimba Karanjai, Google Developer Expert / PayPal, 2026
+Raviteja Sunkavalli, Amazon Web Services, 2026
+Raymond Camden, Cursor, 2026
+Raymond Perkins, Intuit, 2026
+Rebecca Beliard, RPB Law Firm, 2026
+Reese Lee, New Relic, 2025, 2026
+Reggie Chatman Jr., 11 Alive, 2026
+Remington A. Rolé, Silicon South Foundation (RenderATL), 2026
+Rishab Kumar, Twilio, 2026
+Rob Herrig, Metro Atlanta Chamber, 2026
+Robin Ginn, OpenJS Foundation, 2026
+Robin Hernandez, IBM, 2026
+Rohan Hardas, DraftKings, 2026
+Roz Harris, Zillow, 2025, 2026
+Sarah Drasner, Google, 2023, 2026
+Saurabh Dahal, Amazon Web Services (AWS), 2026
+Scott Hanselman, Microsoft/GitHub, 2024, 2026
+Sean Roberts, Netlify, 2025, 2026
+Sebastian Witalec, Namespace Labs, 2026
+Sequoia Blodgett, Simply Built, 2026
+Seve Savoie Teruel, Reactvts, 2026
+Shani Boston, Intuit, 2026
+Shantanu Mukherjee, Uber, 2026
+Shawn Wilson, Gusto, 2026
+Sheldon M. Stoney, IBM, 2026
+Siva Raghapathy, 2026
+Sophia Van, The Home Depot, 2026
+Spencer Taylor, New Relic, 2025, 2026
+Stef Crum, Reditus Space, 2026
+Stephen German, Cox Automotive, 2026
+Steven Hickson, Google Deepmind, 2026
+Tania Chakraborty, Netlify, 2026
+Tatyana Arrington, What The Film, 2026
+Taylor Bernard, Arrow Electronics, 2026
+Terrance Pryor, Pryor Innovations LLC, 2026
+Thomas Taieb, Uber, 2026
+Todd Densmore, Docker, 2026
+Toni Igbenoba, AXIS, 2026
+Tope Mitchell, PhD, Invest Atlanta, 2026
+Tracy Williams, New Relic, 2026
+Uday Ghatikar, Google, 2026
+Ward Broom, RoboGeorgia, Inc., 2026
+Will Martin, Bitwarden, 2026
+William Hill, RenderATL, 2026
+Willie Henry, Intuit, 2025, 2026
+Zach Johnson, Vercel, 2026
+Zachary Maybury, Draftkings, 2026
+Zackary Chapple, Zephyr Cloud, 2025, 2026
+Zameer Fouzan, New Relic, 2026
+Zuhairah Washington, Zillow Group, 2026
+
+2025
+
+A.J. Angus, Axon, 2025
+Alexus Washington, TrellVision Studio, 2025
+Alicee Chen, 2025
+Amitha Sampath Kumar, Hopper Inc, 2025
+Anand Chowdhary, FirstQuadrant, 2025
+Andres Castro, CastroForGeorgia, 2025
+Andrew Thankson, Google, 2025
+Apurva Misra, Sentick, 2025
+Ashley Willis, GitHub, 2024, 2025
+Austin Akers, HarperDB, 2025
+Avoilan Bingham, Atlanta Tech Week, 2025
+Barry Givens, Collab Capital, 2025
+Berto Horne, RenderATL, 2025
+Blake Patton, Tech Square Ventures, 2025
+Brett Witt, BlackRock, 2025
+Brian McGowan, Centennial Yards, 2025
+Brian T. O'Neill, Designing for Analytics, 2025
+Brianna Jackson, Heart of South Downtown, 2025
+Brice Nguoghia, Google, 2025
+Byron Gaskin, Self, 2025
+Carl Toner, Southern Company, 2025
+Cassia Baker, Georgia Tech, 2025
+Cha-Cha Figueroa, Zillow, 2025
+Chad Prosser, Cox Enterprises, 2025
+Chris Bautista, Netflix, 2025
+Chris Dillon, 2025
+Chris Ozgo, Undaunted, 2025
+Connor Offutt, Aetos Imaging, 2025
+Corey Breton, Cosm, 2025
+Cynthia Curry, MEtro Atlanta Chamber, 2025
+Dan Spaulding, Zillow, 2024, 2025
+Dana Lawson, Netlify, 2025
+Daniel Madalitso Phiri, Weaviate, 2025
+Darren Alphonse, Disney, 2025
+Darshun Kendrick, Georgia House of Representatives, 2025
+David Banner, 2025
+Daylon Goff, Black Ambition, 2025
+Dedren Snead, SUBSUME, 2025
+Devanshu (Devin) Mehrotra, Gartner & General Assembly, 2025
+Diksha Gulati, Google, LLC, 2025
+Dr. Loretta Daniels, TAG, 2025
+Dr. Shante Lyons, 2025
+Dwight Turner, Trustology, 2025
+Ebony Louis, Block Inc., 2025
+Eden Rorabaugh, Google, 2025
+Eric Heyward, RenderATL, 2025
+Eugene Strawn, Delta Airlines, 2025
+Evan Forester, Axon Enterprise, Inc., 2025
+Gabrielle Cadurim, Nubank, 2025
+Genavous Bell, Axon Enterprise, Inc., 2025
+Gerald Dagher, HashiCorp, an IBM Company, 2025
+Giselle Battley, Yahoo Inc., 2025
+Hamza Farooq, https://traversaal.ai/, 2025
+Hanna Figueiredo, Nubank, 2025
+Harold Hughes, NFNTE Capital, 2025
+Imad Abusam, Uber, 2025
+Isaac Attuah, Google, 2025
+Ishana Shinde, Google Cloud, 2025
+Iwo Plaza, Software Mansion, 2025
+J Chris Anderson, Vibes DIY, 2025
+Jackson Morgan, SetMeld, 2025
+Jake Albaugh, Figma, 2025
+James Quick, Makeswift, 2025
+Jana Sloane, Microsoft, 2025
+Jarrod Taylor, Nubank, 2025
+Jean-Luc Vanhulst, Valor Ventures, 2025
+Jeffrey Gray, AgeTech Atlanta, 2025
+Jennifer Ready, Alloy, 2025
+John Carroll, Microsoft, 2025
+John Coghlan, GitLab, 2025
+Johnny Sneh, 2025
+Josh Wootonn, Makeswift, 2025
+Joya Woodard, IBM, 2025
+Karthik Narasimhan, Axon, 2025
+Katelyn Snow, Delta Air Lines, 2025
+Kedasha Kerr, GitHub, 2025
+Kedron Abbott, HashiCorp, an IBM Company, 2025
+Kelly Vaughn, Zapier, 2023, 2025
+Kent C. Dodds, EpicAI.pro, 2025
+Ketta Crawford, The Mom Project, 2025
+Kevin Whinnery, OpenAI, 2025
+Kham Ward, BLK Men in Tech, Incorporated, 2025
+Kierra Dotson, The Data Bloq, 2025
+Kirk-Anthony Hamilton, Tech Beach Retreat, 2025
+LaDarius Owens, DraftKings, 2025
+Lindsey Rafalsky, Google, 2025
+Lois Zhao, Zephyr Cloud Inc, 2025
+Luca Mezzalira, AWS, 2025
+M. Cole Jones, RIISE Ventures / VSP Global Innovation Center, 2025
+Marc Backes, Directus, 2025
+Marcel Weekes, Figma, 2024, 2025
+Marisa Morby, Observable, 2025
+Marissa Brooks, Zillow, 2025
+Mark Flickinger, BIP Ventures, 2025
+Mathias (Matt) Biilmann, Netlify, 2025
+Max Kless, Nx, 2025
+Meghann Gibbons, Atlanta Beltline, 2025
+Melvin Crum, Centers For Disease Control and Prevention, 2025
+Mezu Ofoegbu, Infinity Village Lab, 2025
+Miguel Granier, Cox Cleantech Accelerator, 2025
+Nathalia Alicea, Google Cloud, 2025
+Nick Yaitsky, Wellstar Health System, 2025
+Nicole Guido-Estrada, Intuit Credit Karma, 2024, 2025
+NJ Njoku, Google, 2025
+Norelie García, Showcase Atlanta, 2025
+Okla Jones, III, ESSENCE Magazine, 2025
+Pascal Van Hentenryck, Georgia Institute of Technology, 2025
+Paul Zikopoulos, IBM, 2025
+Paul-Louis Nech, Algolia, 2025
+Pete Buczkowski, 2025
+Piyush Gupta, Expedia, 2025
+Prahlad Venkatesh, Salesforce, 2025
+Preetish Kakkar, Adobe, 2025
+Raghupathy "Siva" Sivakumar, Georgia Tech, 2025
+Rejoice Jones, Vower, 2025
+Rick Pack, Fidelity Investments, 2025
+Robert Ocel, This Dot Labs, 2025
+Robert Ola, Axon Enterprise, Inc., 2025
+Roger Peters, Alloy, 2025
+Rohini Pradeep, Gusto, 2025
+Ryan Johnson, Cxmmunity Media, 2025
+Sasha Smith, Blacks in Technology, 2025
+Saurabh Rajole, Delta Air Lines, 2025
+Savneet Singh, Google, 2025
+Scott Lopano, Tech Square Ventures, 2025
+Scott Stewart, Intuit Mailchimp, 2025
+Sean McQuaid, Chick-fil-A, 2025
+Shannon Jenkins, Black Genius Academy, 2025
+Shashi Lo, Microsoft, 2025
+Shawn Meyer, Auth0, 2025
+Shila Nieves Burney, Zane Venture Fund, 2025
+Sig Mosley, Zane Venture Fund, 2025
+Swati Sharma, Amazon Web Services, 2025
+Tandreia Dixon, AVI-SPL, 2025
+TaQuonda Hill, Delta Airlines, 2025
+Tobin South, WorkOS, 2025
+Todd Harris, Resurgens Gaming, 2025
+Tony Owens, Direct Systems Support, 2025
+Tracy Lee, This Dot, 2023, 2025
+Una Kravets, Google, 2024, 2025
+Veronica Sandoval, Google Cloud, 2025
+Vikash Makani, Google, 2025
+Wayne Sutton, Convex, 2025
+Winston Nwanne, Microsoft, 2025
+Xavier Thomas, Southern Glazers Wine & Spirits, 2025
+Yemi Akisanya, Axon, 2025
+Yoni Goldberg, Yoni Goldberg, 2024, 2025
+Zach Fiore, Metro Atlanta Chamber, 2025
+Zach Maybury, DraftKings, 2024, 2025
+
+2024
+
+Ben Lesh, RxJS Core Team, 2023, 2024
+Chris Coyier, CodePen, 2023, 2024
+Dan Mall, Dan Mall Teaches, 2023, 2024
+David Barrett, Expensify, 2023, 2024
+David Beitel, Zillow, 2024
+David Siegel, Meetup, 2024
+Demetris Cheatham, Github, 2024
+Detavio Samuels, Revolt, 2024
+Evan You, Vue.js / Vite, 2023, 2024
+Gant Laborde, Infinite Red, 2023, 2024
+Håkon Wium Lie, Mozilla, 2024
+Ives van Hoorne, CodeSandBox, 2023, 2024
+Jason Lengstorf, CodeTV, 2024
+Jewel Burks Solomon, Collab Capital, 2023, 2024
+Justin E. Samuels, RenderATL, 2023, 2024
+Kent C Dodds, EpicAI.pro, 2024
+Lee Robinson, Vercel, 2024
+Mathias Biilmann Christensen, Netlify, 2024
+Scott Toliniski, Level Up Tutorials, 2023, 2024
+Shannon Sharpe, 2024
+Shaundai Pearson, Netflix, 2023, 2024
+Theo Browne, Ping Labs, 2024
+Yoav Abrahami, Wix, 2023, 2024
+
+2023
+
+Aaron Saunders, Clearly Innovative Inc., 2023
+Ady Ngom, TechLabs 28, 2023
+Aisha Blake, Pluralsight, 2023
+Ashley Narcisse, Apollo GraphQL, 2023
+Ashten Fizer, Dropbox, 2023
+Awah Teh, Capital One, 2023
+Ayo K. Duyile, Google, 2023
+Banjo Obayomi, Amazon Web Services, 2023
+Brenda Hoyle, RSM US, 2023
+Bria Sullivan, Honey B Games, 2023
+Byron Woodfork, self, 2023
+Carlos Kidman, Qualiti.ai, 2023
+Cat Ballar, StoryBlok, 2023
+Cecellia Martinez, Appflow by Ionic, 2023
+Cesar Mateus, Delta Air Lines, 2023
+Charles Kuykendoll, Stripe, 2023
+Colby Fayock, Cloudinary, 2023
+Dana Even Haim, Swimm, 2023
+David Tenorio, Google, 2023
+Daylon A. Goff, JET, 2023
+DeVonta Johnson, Dayslice, 2023
+Dr. Lakeysha Hallmon, The Village Market ATL, 2023
+Du'An Lightfoot, Amazon Web Services, 2023
+Dwane Hemmings, Vonage, 2023
+Felecia Hatcher, Black Ambition, 2023
+Felix Jr, Google, 2023
+Gerald Gordon, Credit Karma, 2023
+Homer Gaines, Self, 2023
+Izhar Buendia, Netflix, 2023
+James Q Quick, Learn Build Teach LLC, 2023
+Janackeh Blackwell, Sauce Labs, Black Tech Denver, 2023
+Jarell Oshodi, YourCPO, 2023
+Jasmine Crowe-Houston, Goodr, 2023
+Jem Young, Netflix, 2023
+Jina Anne, Clarity, 2023
+Joedian Reid, Google, 2023
+Jose Rodriguez Salinas, Dropbox, 2023
+Josh W. Comeau, Josh W. Comeau Courses, 2023
+Julián Duque, Salesforce, 2023
+Julianna Lamb, Stytch, 2023
+Katrina Tucker, KPMG, LLC, 2023
+Kimberly Bryant, Black Girls Code, 2023
+Kristina (KD) Dixon, RenderATL, 2023
+Kunbi Tinuoye, UrbanGeekz, 2023
+Laura Bell Main, SafeStack, 2023
+Laurie Voss, Netlify, 2023
+Lawrence Lockhart, FedEx Services, 2023
+Leesa Ward, Various, 2023
+Madona Wambua, Jibu Labs, 2023
+Margarita Caraballo, MailChimp, 2023
+Mark Techson, Google, 2023
+Martie Burris, Salesforce, 2023
+Maureen Jules-Perez, Capital One, 2023
+Michael Brown, Microsoft, 2023
+Michael Liendo, Amazon Web Services, 2023
+Michelle "MishManners" Mannering, GitHub, 2023
+Milecia McGregor, Self, 2023
+Monet Spells, Square, 2023
+Monica Powell, Newsela, 2023
+Nadia Anderson, Ph.D., Silicon Valley Leadership Group, 2023
+Natalie Davis, Foxtrot, 2023
+Neha Batra, GitHub, 2023
+Paola Mariselli, Bumble, 2023
+Rachel Nabors, funemployed, 2023
+Rachelle C. Olden, Tech Equity Collective, a Google Initiative, 2023
+Randy Kinne, Mailchimp, 2023
+Rashaad Lambert, Forbes, 2023
+Rizel Scarlet, GitHub, 2023
+ROMAN JAQUEZ, Philips Health Systems, 2023
+Ruben Harris, Career Karma, 2023
+Ryan Burgess, Netflix, 2023
+Ryan Wilson, The Gathering Spot, 2023
+Sheena Allen, CapWay, 2023
+Sherrell Dorsey, The Plug, 2023
+Stephon Parker, The New York Times, 2023
+Stevenson Jean-Pierre, PagerDuty, 2023
+Taylor Poindexter, Spotify, 2023
+Tejas Kumar, Xata, 2023
+Tom Raviv, Codux, 2023
+Wesley Faulkner, AWS, 2023
+XUNY HALEY, Epic Games, 2023
+
+Tickets
+
+General Admission
+- Early Bird: $350
+
+Included with General Admission, from the tickets page:
+- All days with access to all conference programming & workshops.
+- Access to the interactive product exhibition hall & career fair expo
+- Admission to official RenderATL Side Events & kickoff party
+- Free events across Atlanta during Atlanta Tech Week, open to RenderATL attendees. RSVP and go.
+- Access to the OpenJS Node Interactive Summit at RenderATL
+- Admission to the Atlanta AI Expo
+- RenderFEST (music concert) access is included for all attendees
+- Payment plans available at checkout via Buy Now Pay Later providers.
+- And MORE listed at checkout.
+
+Also listed on the FAQ as included with a General Admission pass: coffee and water, admission to the Food Truck Park, and an exclusive 2027 Gold Chain Lanyard.
+
+Gold
+- Regular: $800
+
+Gold also includes everything in General Admission, plus:
+- The Commits: NOT ON GA. INCLUDED WITH GOLD.
+- Leaders Lounge: THIS YEAR. INCLUDED WITH A GOLD TICKET.
+
+Not included with General Admission or Gold:
+- Executive Summit presented by Intuit: SELECTIVE ACCESS. COMPLIMENTARY IF APPROVED. Apply: https://renderatl.typeform.com/to/gj9GSuiV?typeform-source=www.renderatl.com
+
+Prices increase in stages. The current rate is the lowest it will be.
+
+Group discount: buy 5 or more General Admission tickets and save 20% on each ticket, applied automatically at checkout. At the current Early Bird price, that's $280 per ticket, or $1,400 for 5 instead of $1,750. Gold tickets are not eligible.
+
+Payment plans are available at checkout through Buy Now Pay Later providers.
+
+Tickets: https://www.renderatl.com/tickets
+
+Getting your employer to pay
+
+Skills That Ship Immediately
+
+Your team learns code-level, practical sessions across AI, web, testing, and design, taught by people who actually build this stuff. They come back with patterns to use now, not a tote bag and a hangover.
+
+The Real Signal, Not The Sales Pitch
+
+Cut through vendor noise. Hear straight from practitioners shipping AI, platform, and product at scale: what they kept, what they killed, what's worth piloting. No booth-speak.
+
+The Cheapest Retention Move You'll Make
+
+Sending your team to a flagship event is one of the loudest ways to say this company backs its engineers. It shows up in retention, and it shows up in offers.
+
+Five Summits, One Badge
+
+The Land of the Summits bundles GTM, AI, observability, open source, and legal-tech programming into one pass, so you can route cross-functional colleagues to the right track without buying separate summit tickets.
+
+A Room Full Of People To Call Later
+
+Two days shoulder to shoulder with builders from across the South and beyond. The hallway talks and RenderFEST nights turn into future hires, partners, and the people you text when you're stuck.
+
+Email template: https://www.renderatl.com/convince-your-boss#email
+ROI calculator: https://www.renderatl.com/convince-your-boss#roi-calculator
+
+Travel and logistics
+
+Host hotel: The Indigo Hotel. Stay at The Indigo Hotel, inside the RenderATL venue and at the heart of Atlanta Tech Week. No commuting, easy access to events, and a convenient, cost-effective place to rest and recharge. The official speaker and partner hotel.
+Booking: https://www.renderatl.com/hotel
+The convince-your-boss FAQ says the host hotel discounted rate for attendees is available until July 25th. No year is published with that date.
+
+Trip efficiency, from the budget travel callout:
+- ONE HOTEL NIGHT: Not three. Ask your hotel for late checkout on Thursday and skip the extra night.
+- MINIMAL TIME OUT OF OFFICE: Wednesday morning to Thursday evening, that's it.
+- NOTHING SKIPPED: RenderFEST is night one, so you don't trade the culture for the savings.
+- WE START LATE SO YOU ARRIVE ON TIME: Sessions kick off at 10am. Take the red-eye, land Wednesday morning, and still catch the opening keynotes without the sprint from the airport.
+
+Venue: 230 John Portman Blvd NW, Building 2, Atlanta, GA 30303.
+
+What attendees and partners say
+
+"Render isn't just another conference. It's professional continuing education in real time. The kind that sharpens how you think, lead, and contribute in this industry." Victoria E., Slalom Build.
+"Great energy at RenderATL! We cut through the AI hype and dove deep into the real-world challenges of building secure, enterprise-ready workflows." Shawn M., VP Security, Okta.
+"Render is truly one of the marquee events for the developer community, bringing together incredible energy and innovation like no other tech conference. At Netlify, we look forward to RenderATL each year and are thrilled to be a part of it." Mathias B., CEO, Netlify.
+"A unique opportunity to deep-dive into technical talks and workshops to gain practical knowledge." Angie Jones, Agentic AI Foundation.
+
+Partners
+
+BigCommerce
+Netflix
+Auth0 by Okta
+GitHub
+WorkOS
+MUX
+Cisco Systems
+Intuit
+Anthropic
+Shopify Inc.
+Square
+Trinet
+Justworks
+Dropbox Inc
+Block
+Reddit
+Appwrite
+DraftKings
+Expensify
+PagerDuty
+Home Depot
+Hashicorp
+Vercel
+Capital One
+Zillow
+FanDuel
+Uber
+VML
+IBM
+Docusign
+Axon
+Netlify
+Epic Games
+Delta
+Contentful
+Callstack
+Black Ambition
+T. Rowe Price
+Karat
+Prizepicks
+Fastly
+Workday
+Roblox
+GitLab
+AWS
+The Home Depot
+Vibes.diy
+New Belgium Brewing
+Microsoft
+Auth0
+Monogram
+Gusto
+Microsoft - Azure Core
+Fidelity Investments
+SeatGeek
+Expedia Group
+Cloudflare
+Google
+National Society of Black Engineers
+Honeycomb
+Klaviyo
+Credit Karma
+Stickermule
+Knock
+Anduril Industries
+Wix
+CircleCI
+GFiber
+Couchbase
+warner
+SafeStack
+New Relic
+Butter.ATL
+
+Loyalty: Render Pink Points
+
+Render Pink Points is the loyalty program in the RenderATL app.
+
+Render Core: 0 points
+Render Plus: 500 points
+Render Black: 1,000 points
+Render Pink: 1,750 points (top tier)
+
+Details: https://www.renderatl.com/points
+App: https://www.renderatl.com/app
+
+FAQ
+
+Are payment plans available?
+
+Yes, payment plans are available. You can choose to pay in full or in installments. Please view plans available at checkout by selecting your preferred Buy Now Pay Later provider.
+
+When and where is RenderATL 2027?
+
+RenderATL 2027 takes place August 18 to 19, 2027 in Atlanta, GA. The conference is held at 230 John Portman Blvd NW, Building 2, Atlanta, GA 30303, bringing together world-class engineers, builders, and culture-shapers.
+
+What's included with my ticket?
+
+Your General Admission pass includes all days of conference programming, access to the interactive product exhibition hall & career fair expo, admission to official RenderATL Side Events, coffee & water, admission to the Food Truck Park, an exclusive 2027 Gold Chain Lanyard, access to the OpenJS Summit at RenderATL, admission to the Atlanta AI Expo, and RenderFEST (music concert) access.
+
+Are tickets refundable?
+
+Tickets are non-refundable after purchase but may be transferred to another individual. Please review the full Terms of Service before completing your purchase.
+
+How do I become a sponsor or exhibitor?
+
+We'd love to have you as a partner! Fill out our sponsorship inquiry form and a member of our team will be in touch with available packages and pricing.
+
+Do you offer group discounts?
+
+Yes. Buy 5 or more General Admission tickets and save 20% on each ticket. The discount is applied automatically at checkout. It does not apply to Gold tickets.
+
+How do I subscribe to get 10% off my tickets?
+
+Sign up for our newsletter using the form in the footer of this page. Subscribers receive an exclusive discount code for 10% off their ticket purchase, plus early access to speaker announcements and agenda releases.
+
+Key links
+
+Tickets
+Convince your boss
+Email template
+ROI calculator
+Schedule
+Speakers
+Sponsors
+Events
+Hotel
+App
+Render Pink Points
+FAQ
+This file
+This guide as HTML

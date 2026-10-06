@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
     "test": "playwright test",
-    "bench": "node scripts/benchmark.mjs"
+    "bench": "node scripts/benchmark.mjs",
+    "test:ask": "node --test \"tests-node/*.test.mjs\""
   },
   "dependencies": {
     "phaser": "^3.90.0",
