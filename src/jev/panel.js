@@ -2,7 +2,7 @@
 import "./panel.css";
 
 const NAMES = ["up", "left", "right", "down"];
-const LABEL = { jev: "JEV", override: "OVERRIDE", fallback: "FALLBACK", code: "CODE" };
+const LABEL = { jev: "JEV", override: "OVERRIDE", system2: "SYSTEM 2", fallback: "FALLBACK", code: "CODE" };
 const SPEEDS = [0.25, 0.5, 1, 2];
 const LOG_ROWS = 40;
 

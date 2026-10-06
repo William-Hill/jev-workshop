@@ -193,6 +193,35 @@ test("the score gives points only for collectibles after a Jev decision", async 
   await expect(page.locator('.jevpanel [data-jev="points"]')).toHaveText("0");
 });
 
+test("System 2: an escalated decision uses the System 2 choice and the SYSTEM 2 label", async ({ page }) => {
+  await mockJev(page, (options) => options[0]);
+  await bootJev(page, "&variant=test-s2");
+  await enterPlaying(page);
+  const entry = await firstDecision(page);
+  expect(entry.source).toBe("system2");
+  expect(entry.choice).toBe(entry.options[entry.options.length - 1]);
+  expect(entry.jev_choice).toBe(entry.options[0]);
+  expect(entry.reason).toContain("test: always escalate");
+  await expect(page.locator('.jevpanel [data-jev="source"]')).toHaveText("SYSTEM 2");
+  const s = await page.evaluate(() => window.__jev.score.summary());
+  expect(Number.isNaN(s.points)).toBe(false);
+  expect(s.decisions.system2).toBeGreaterThanOrEqual(1);
+});
+
+test("System 2: an illegal System 2 answer falls back to the Jev move", async ({ page }) => {
+  await mockJev(page, (options) => options[0]);
+  await bootJev(page, "&variant=test-s2");
+  await page.evaluate(() => {
+    // Replace the test System 2 with one that answers an illegal direction.
+    window.__jev.overrideSystem2 = async () => ({ choice: "north", reason: "bad" });
+  });
+  await enterPlaying(page);
+  const entry = await firstDecision(page);
+  expect(entry.source).toBe("fallback");
+  expect(entry.reason).toContain("System 2");
+  expect(entry.choice).toBe(entry.options[0]);
+});
+
 test("the decision log downloads as JSONL", async ({ page }) => {
   await mockJev(page, (options) => options[0]);
   await bootJev(page);

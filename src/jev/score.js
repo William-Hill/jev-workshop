@@ -1,7 +1,7 @@
 // The score for the hackathon. Only the decisions that come from Jev get points.
 //
 // Each collectible goes to the source of the last decision before it:
-//   jev       a JEV or an OVERRIDE decision (code combined the answers of Jev)
+//   jev       a JEV, an OVERRIDE, or a SYSTEM 2 decision (code combined the answers of Jev)
 //   fallback  a FALLBACK decision, or no decision yet
 // Each life lost costs points, whatever the source.
 
@@ -9,7 +9,7 @@ export const LIFE_COST = 30;
 
 function empty() {
   return {
-    decisions: { jev: 0, override: 0, fallback: 0, code: 0 },
+    decisions: { jev: 0, override: 0, system2: 0, fallback: 0, code: 0 },
     collected: { jev: 0, fallback: 0 },
     lives_lost: { jev: 0, fallback: 0 },
   };
@@ -32,17 +32,17 @@ export function createScore(scene) {
     },
     // Call this for each applied decision.
     record(source) {
-      stats.decisions[source] += 1;
-      if (source === "jev" || source === "override") owner = "jev";
+      stats.decisions[source] = (stats.decisions[source] || 0) + 1;
+      if (source === "jev" || source === "override" || source === "system2") owner = "jev";
       else if (source === "fallback") owner = "fallback";
     },
     summary() {
       const d = stats.decisions;
-      const asked = d.jev + d.override + d.fallback;
+      const asked = d.jev + d.override + d.system2 + d.fallback;
       const lost = stats.lives_lost.jev + stats.lives_lost.fallback;
       return {
         points: stats.collected.jev - LIFE_COST * lost,
-        jev_share: asked ? Math.round(((d.jev + d.override) / asked) * 100) / 100 : 0,
+        jev_share: asked ? Math.round(((d.jev + d.override + d.system2) / asked) * 100) / 100 : 0,
         ...JSON.parse(JSON.stringify(stats)),
       };
     },

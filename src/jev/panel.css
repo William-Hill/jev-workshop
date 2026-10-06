@@ -13,6 +13,7 @@ aside.jevpanel{flex:1 1 340px;max-width:420px;min-width:300px;display:flex;flex-
 .jevpanel[data-source="jev"] .jev-source{background:#ff88df}
 .jevpanel[data-source="fallback"] .jev-source{background:#711b43;color:#fcf9ee}
 .jevpanel[data-source="override"] .jev-source{background:#df9718}
+.jevpanel[data-source="system2"] .jev-source{background:#015a55;color:#fcf9ee}
 .jev-variant{color:#2b292d;letter-spacing:.04em;text-transform:none;font-weight:700}
 .jev-score{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:0;border:2px solid #2b292d;background:#fcf9ee}
 .jev-score > div{padding:6px 8px;border-right:1.5px solid #2b292d;min-width:0}
@@ -20,6 +21,7 @@ aside.jevpanel{flex:1 1 340px;max-width:420px;min-width:300px;display:flex;flex-
 .jev-score dt{font-size:8px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#711b43}
 .jev-score dd{margin:2px 0 0;font-size:16px;font-weight:800}
 .jev-log li[data-source="override"]{color:#8a5a00;font-weight:700}
+.jev-log li[data-source="system2"]{color:#015a55;font-weight:700}
 .jev-reason{margin:0;font-size:11px;color:#711b43;font-weight:700}
 .jev-bars{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
 .jev-bars li{display:grid;grid-template-columns:44px 1fr 44px;gap:8px;align-items:center;font-size:11px;font-weight:700;text-transform:uppercase}

@@ -142,6 +142,29 @@ export function createPlayer(scene, variant) {
         entry.source = "override";
         entry.reason = result.reason || "combine() changed the move";
       }
+
+      // SYSTEM 2: code decides from the Jev answer whether a slower system takes the decision.
+      const gate = variant.shouldEscalate ? variant.shouldEscalate(answers, snapshot, result) : { escalate: false };
+      const system2 = jev.overrideSystem2 || variant.system2;
+      if (gate.escalate && system2) {
+        const s2Started = performance.now();
+        let s2;
+        try {
+          s2 = await system2(snapshot, scene);
+        } catch (err) {
+          s2 = { choice: null, reason: String((err && err.message) || err) };
+        }
+        entry.system2 = { ms: Math.round(performance.now() - s2Started), model: s2.model || null, usage: s2.usage || null };
+        if (options.includes(s2.choice)) {
+          entry.source = "system2";
+          entry.choice = s2.choice;
+          entry.reason = `${gate.why}; ${s2.reason}`;
+        } else {
+          // CODE DECISION: System 2 failed, so code keeps the Jev move.
+          entry.source = "fallback";
+          entry.reason = `System 2 answer "${s2.choice}" is not legal (${s2.reason}); kept the Jev move`;
+        }
+      }
     } catch (err) {
       entry.source = "fallback";
       entry.reason = err && err.name === "TimeoutError" ? `no answer in ${TIMEOUT_MS} ms` : String((err && err.message) || err);
