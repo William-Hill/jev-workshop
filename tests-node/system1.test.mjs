@@ -36,7 +36,7 @@ test("a low intent probability goes to System 2", () => {
 });
 
 test("a question that the facts cannot answer goes to System 2", () => {
-  const d = decideRoute(answers("included", 0.9, 0.2));
+  const d = decideRoute(answers("included", 0.9, 0.1));
   assert.equal(d.path, "system2");
   assert.match(d.why, /answerable/);
 });

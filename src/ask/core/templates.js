@@ -1,6 +1,7 @@
 // System 1 answers. Code writes every answer from facts.json, so every number is exact.
+// A template returns null when the facts do not answer the question.
 
-// Words that attendees use for each included item. Code matches them; Jev does not.
+// Words that attendees use for each included item. Code matches them at the start of a word; Jev does not.
 const ITEM_WORDS = {
   "RenderFEST": ["renderfest", "concert", "music"],
   "Food Truck Park": ["food", "lunch", "eat"],
@@ -38,10 +39,10 @@ export function answerFromFacts(intent, ticket, question, f) {
     case "included": {
       const notes = exclusions(q, f);
       if (notes.length) return notes.join(" ");
-      const hit = f.included.find((item) => (ITEM_WORDS[item] || [item.toLowerCase()]).some((w) => q.includes(w)));
-      return hit
-        ? `Yes. The badge includes ${hit}. It also includes: ${f.included.filter((i) => i !== hit).join(", ")}.`
-        : `The badge includes: ${f.included.join(", ")}.`;
+      const hit = f.included.find((item) => (ITEM_WORDS[item] || [item.toLowerCase()]).some((w) => new RegExp(`\\b${w}`).test(q)));
+      if (hit) return `Yes. The badge includes ${hit}. It also includes: ${f.included.filter((i) => i !== hit).join(", ")}.`;
+      // A general question gets the list. A question about an item that is not in the facts gets null: System 2 answers it.
+      return /\b(what|which|everything|all|list)\b/.test(q) ? `The badge includes: ${f.included.join(", ")}.` : null;
     }
     case "tracks":
       return `Published tracks: ${f.tracks.join(", ")}. Summits: ${f.summits.join(", ")}. All are included with the badge.`;

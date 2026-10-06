@@ -42,6 +42,7 @@ $("form").addEventListener("submit", (ev) => {
   if (!q) return;
   for (const id of ["jev-path", "jev-meta", "jev-why", "jev-answer", "llm-meta", "llm-answer"]) $(id).textContent = "…";
   $("jev-bars").innerHTML = "";
-  jevFirst(q, { jev, llm, guide: guideText, facts }).then(showJev);
-  llmOnly(q, { llm, guide: guideText }).then(showLlm);
+  const fail = (id) => (err) => { $(id).textContent = `Error: ${String((err && err.message) || err)}`; };
+  jevFirst(q, { jev, llm, guide: guideText, facts }).then(showJev, fail("jev-answer"));
+  llmOnly(q, { llm, guide: guideText }).then(showLlm, fail("llm-answer"));
 });

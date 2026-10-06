@@ -9,7 +9,7 @@ export function checkFacts(answer, expect) {
 const pct = (xs, p) => { const s = xs.slice().sort((a, b) => a - b); return s.length ? s[Math.min(s.length - 1, Math.floor(p * s.length))] : null; };
 
 // The LLM cost of one row: the reported cost (claude -p) when it exists, else tokens times list prices.
-function llmCost(x, prices) {
+export function llmCost(x, prices) {
   if (typeof x.llmCostUsd === "number") return x.llmCostUsd;
   const u = x.llmUsage || {};
   return (u.input_tokens || 0) * prices.llmInPerMTok / 1e6 + (u.output_tokens || 0) * prices.llmOutPerMTok / 1e6;
@@ -25,6 +25,9 @@ export function summarize(rows, prices) {
     out[variant] = {
       n: r.length,
       factAccuracy: r.filter((x) => x.ok).length / r.length,
+      // Rows with no expected facts pass with no check. Report them apart.
+      unchecked: r.filter((x) => x.checked === false).length,
+      factAccuracyChecked: r.filter((x) => x.checked !== false && x.ok).length / (r.filter((x) => x.checked !== false).length || 1),
       msMean: Math.round(ms.reduce((a, b) => a + b, 0) / r.length),
       msP50: pct(ms, 0.5),
       msP95: pct(ms, 0.95),

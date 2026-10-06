@@ -38,8 +38,15 @@ export async function jevFirst(question, { jev, llm, guide, facts, thresholds = 
     route = { path: "system2", intent: null, probability: 0, why: `Jev failed: ${String((err && err.message) || err)}` };
   }
   if (route.path === "system1") {
-    const answer = answerFromFacts(route.intent, response.answers.ticket.choice, question, facts);
-    return { path: "system1", answer, route, jev: response.answers, jevUsage: response.usage, ms: Math.round(now() - t0) };
+    let answer = null;
+    try {
+      answer = answerFromFacts(route.intent, response.answers.ticket && response.answers.ticket.choice, question, facts);
+      // Code decided, in place of Jev: the template found no fact for this question.
+      if (answer === null) route = { ...route, path: "system2", why: `no fact in facts.json answers this "${route.intent}" question` };
+    } catch (err) {
+      route = { ...route, path: "system2", why: `the template failed: ${String((err && err.message) || err)}` };
+    }
+    if (answer !== null && route.path === "system1") return { path: "system1", answer, route, jev: response.answers, jevUsage: response.usage, ms: Math.round(now() - t0) };
   }
   const hint = route.intent ? `\n\n(Topic of this question, from a classifier: ${route.intent}.)` : "";
   const r = await callLlm(llm, guide, question + hint);

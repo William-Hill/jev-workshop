@@ -54,7 +54,10 @@ export function buildJevRequest(question, facts) {
   };
 }
 
-export function decideRoute(answers, { minProbability = 0.7, minAnswerable = 0.5 } = {}) {
+// Tuned on the 70 tune questions (docs/research/ask-agent-ab.md). The demo, the benchmark, and the tests use these.
+export const ROUTE_THRESHOLDS = Object.freeze({ minProbability: 0.7, minAnswerable: 0.2 });
+
+export function decideRoute(answers, { minProbability = ROUTE_THRESHOLDS.minProbability, minAnswerable = ROUTE_THRESHOLDS.minAnswerable } = {}) {
   const intent = answers.intent.choice;
   const probability = answers.intent.probabilities[intent] ?? 0;
   if (SYSTEM2_INTENTS.has(intent)) return { path: "system2", intent, probability, why: `intent "${intent}" needs writing or judgment` };
