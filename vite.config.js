@@ -16,6 +16,7 @@ export default defineConfig({
     // a real file URL so the loader always gets a fetchable path.
     assetsInlineLimit: 0,
     rollupOptions: {
+      input: { main: "index.html", ask: "ask.html" },
       output: {
         entryFileNames: "build/[name].js",
         chunkFileNames: "build/[name].js",

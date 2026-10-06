@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ask RenderATL: System 1 and System 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Instrument+Sans:wght@400;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./src/ask/app.css">
+</head>
+<body>
+  <main class="ask">
+    <div class="eyebrow mono">★ System 1 and System 2</div>
+    <h1 class="title disp">Ask RenderATL</h1>
+    <form id="form" class="ask-form">
+      <label for="question" class="mono">Your question</label>
+      <input id="question" autocomplete="off" placeholder="How much is a ticket?">
+      <button id="ask" class="btn-sm disp" type="submit">Ask</button>
+    </form>
+    <section class="ask-cols">
+      <article class="ask-col">
+        <h2 class="mono">Jev first <span id="jev-path" class="ask-path"></span></h2>
+        <p id="jev-meta" class="mono ask-meta"></p>
+        <ul id="jev-bars" class="ask-bars"></ul>
+        <p id="jev-why" class="mono ask-why"></p>
+        <div id="jev-answer" class="ask-answer"></div>
+      </article>
+      <article class="ask-col">
+        <h2 class="mono">LLM only</h2>
+        <p id="llm-meta" class="mono ask-meta"></p>
+        <div id="llm-answer" class="ask-answer"></div>
+      </article>
+    </section>
+  </main>
+  <script type="module" src="./src/ask/app.js"></script>
+</body>
+</html>

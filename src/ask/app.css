@@ -1,0 +1,16 @@
+.ask{width:100%;max-width:1100px;margin:32px auto;display:flex;flex-direction:column;gap:20px}
+.ask .title{font-size:clamp(40px,7vw,72px);line-height:.9;margin:0}
+.ask-form{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.ask-form label{font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:12px}
+.ask-form input{flex:1 1 320px;min-width:0;font:inherit;font-size:18px;padding:10px;border:2px solid #2b292d;background:#fff7cf}
+.ask-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.ask-col{border:2px solid #2b292d;background:#fff7cf;box-shadow:6px 6px 0 #2b292d;padding:16px;min-width:0}
+.ask-col h2{margin:0 0 8px;font-size:14px;text-transform:uppercase;letter-spacing:.1em;color:#711b43}
+.ask-path{margin-left:8px;padding:2px 6px;border:2px solid #2b292d;background:#ff88df;color:#2b292d}
+.ask-path:empty{display:none}
+.ask-path[data-path="system2"]{background:#015a55;color:#fcf9ee}
+.ask-meta,.ask-why{margin:0 0 8px;font-size:12px}
+.ask-why{color:#711b43}
+.ask-bars{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-direction:column;gap:4px;font:12px/1.4 "JetBrains Mono",monospace}
+.ask-bars li{background:linear-gradient(90deg,#ff88df calc(var(--p)*100%),#fcf9ee 0);border:1.5px solid #2b292d;padding:2px 6px}
+.ask-answer{white-space:pre-wrap;font-size:16px;line-height:1.5}
