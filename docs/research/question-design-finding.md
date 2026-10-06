@@ -2,6 +2,40 @@
 
 Date: 2026-10-02. Status: supported by our benchmark, by the TypeSafe documents, and by two outside experiments that we reproduced.
 
+## Held-out seeds 5000–5029 (2026-10-06)
+
+No version was tuned on these seeds. Each version played 30 games on Normal, model `jev-1.13.0`, with `--seed 5000`.
+
+| Version | Games | Wins | 95% interval | Mean lives lost | Seeds 1000–1029 (tuning) |
+|---|---|---|---|---|---|
+| First question (`questions`) | 30 | 7 (23%) | 12–41% | 2.60 | 6 of 30 (20%) |
+| `level2c` | 30 | 12 (40%) | 25–58% | 2.37 | 15 of 30 (50%) |
+| `level2d` | 30 | 6 (20%) | 10–37% | 2.63 | 20 of 30 (67%) |
+| `code-only` (no Jev) | 29 | 26 (90%) | 74–96% | 1.52 | 23 of 30 (77%) |
+
+Paired comparisons on the same seeds (exact McNemar test):
+
+| Comparison | Only the first won | Only the second won | p |
+|---|---|---|---|
+| `code-only` against the first question | 19 | 0 | < 0.001 |
+| `code-only` against `level2c` | 15 | 1 | 0.001 |
+| `code-only` against `level2d` | 22 | 1 | < 0.001 |
+| `level2c` against the first question | 10 | 5 | 0.302 |
+| `level2d` against the first question | 5 | 6 | 1.000 |
+| `level2c` against `level2d` | 11 | 5 | 0.210 |
+
+- `code-only` wins more often than each Jev version. The difference is significant for each pair.
+- `level2c` against the first question is not significant on these seeds (p = 0.302). On the tuning seeds it was significant (p = 0.035).
+- `level2d` does not beat the first question on these seeds (6 of 30 against 7 of 30). On the tuning seeds, `level2d` won 20 of 30 (p = 0.001). That gain does not hold on new seeds. Treat the 67% as a result of tuning on seeds 1000–1029.
+- Each Jev version opened with "down" at the start tile (1,1) in 30 of 30 games.
+- Tokens: the first question 1.11 million, `level2c` 3.17 million, `level2d` 3.09 million (about $0.05 to $0.13 for each run).
+
+Limits of this run:
+
+- The runs are not fully repeatable. We ran `code-only` two times on the same seeds. Seeds 5004, 5021, 5022, and 5023 gave a different result (25 of 29 wins, then 26 of 29). The first run had 6 benchmarks in parallel, and the second run had 3. A frame-time effect under CPU load is the probable cause. We did not prove the cause. The table uses the second run.
+- In each `code-only` run, one game did not load in 30 seconds (seed 5025, then seed 5024). The benchmark did not count that game.
+- The 4 versions ran in parallel. The Jev versions ran one time each.
+
 ## Update 2026-10-04: seeded results replace the fixed-seed results
 
 The earlier maze runs used one fixed seed. The maze is almost deterministic, so a 20-game run was a few routes repeated. `npm run bench` now has `--seed N`: each game gets its own seed for the "wander" blockers (the game rules do not change). Each version below played the same 30 seeds (1000 to 1029) on Normal.
