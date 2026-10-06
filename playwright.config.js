@@ -32,6 +32,8 @@ export default defineConfig({
     // the suite against a stale bundle (or a dev server on raw source), which
     // would pass green without exercising the change under review.
     reuseExistingServer: false,
+    // No test may call a real LLM: the /api/llm route is off in the test server.
+    env: { LLM_BACKEND: "none" },
     timeout: 120_000,
   },
 });
