@@ -27,15 +27,26 @@ const TICKET_CRITERIA = {
   exec_summit: "Executive Summit: for senior executives (VP, CTO, CEO level); it needs a separate application.",
 };
 
-export function buildJevRequest(question) {
+// The facts that Jev sees, so that it can judge if they answer the question.
+function factsState(f) {
+  return {
+    dates: f.dates, venue: f.venue,
+    tickets: { general_admission: f.tickets.general_admission, gold: f.tickets.gold },
+    group_discount: f.group_discount,
+    executive_summit: f.exec_summit && { name: f.exec_summit.name, cost: f.exec_summit.cost, how: "separate application" },
+    included: f.included, tracks: f.tracks, summits: f.summits,
+  };
+}
+
+export function buildJevRequest(question, facts) {
   return {
     model: JEV_MODEL,
-    state: { question },
+    state: { question, facts: factsState(facts) },
     questions: {
       intent: { type: "choice", instructions: "Which topic does the attendee question in `question` ask about?", criteria: INTENT_CRITERIA },
       answerable: {
         type: "noul",
-        instructions: "Can the question in `question` be answered completely with only these facts about RenderATL 2027: ticket prices, the dates, the venue address, the group discount, what the badge includes, the list of tracks and summits, and how to apply to the Executive Summit?",
+        instructions: "Can the question in `question` be answered completely with only the RenderATL 2027 facts in `facts`? A recommendation of one ticket for the person described counts as answerable when `facts.tickets` covers it.",
         criteria: { true: "These facts answer the whole question.", false: "The question needs other information, advice, or writing." },
       },
       ticket: { type: "choice", instructions: "Which RenderATL 2027 ticket fits the person described in `question` best?", criteria: TICKET_CRITERIA },

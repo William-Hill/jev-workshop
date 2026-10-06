@@ -21,3 +21,6 @@ bundle/
 
 # Plan execution workspace
 /.superpowers/
+
+# A/B benchmark output
+/ask-results/

@@ -12,9 +12,13 @@ const answers = (intent, p, answerable = 0.9, ticket = "general_admission") => (
 });
 
 test("the request pins the model and asks three questions about one state", () => {
-  const r = buildJevRequest("How much is Gold?");
+  const r = buildJevRequest("How much is Gold?", facts);
   assert.equal(r.model, "jev-1.13.0");
-  assert.deepEqual(r.state, { question: "How much is Gold?" });
+  assert.equal(r.state.question, "How much is Gold?");
+  // Jev must see the checked facts to judge if they answer the question (rule 1: give it the state it needs).
+  assert.deepEqual(r.state.facts.tracks, facts.tracks);
+  assert.deepEqual(r.state.facts.included, facts.included);
+  assert.match(r.questions.answerable.instructions, /`facts`/);
   assert.deepEqual(Object.keys(r.questions).sort(), ["answerable", "intent", "ticket"]);
   assert.equal(Object.keys(r.questions.intent.criteria).length, 11);
 });
@@ -50,6 +54,11 @@ test("templates take every number from facts.json", () => {
 test("the included template names the item that the question asks about", () => {
   assert.match(answerFromFacts("included", null, "does my ticket include the concert?", facts), /^Yes\. The badge includes RenderFEST/);
   assert.match(answerFromFacts("included", null, "do i get food with the badge", facts), /^Yes\. The badge includes Food Truck Park/);
+});
+
+test("the included template states the exclusions that the guide states", () => {
+  assert.match(answerFromFacts("included", null, "is the exec summit included with gold", facts), /not included.*complimentary if approved/i);
+  assert.match(answerFromFacts("included", null, "do i get the leaders lounge with GA", facts), /Gold only/);
 });
 
 test("a template for a System 2 intent is an error", () => {
