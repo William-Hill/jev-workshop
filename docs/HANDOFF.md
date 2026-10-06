@@ -224,15 +224,18 @@ Plan A Tasks 1 to 5 are done. Jev picks the intent of an attendee question. Code
 | `node scripts/ask-bench.mjs --split heldout --min-probability 0.7 --min-answerable 0.2` | The A/B run. Writes `ask-results/<split>-ab-<stamp>.json`. Spend cap $5. |
 | `node scripts/ask-bench.mjs --split tune --llm off` | A Jev-only pass, with no LLM calls. |
 | `npm run dev`, then open `/ask.html` | The demo page: Jev first beside LLM only. |
+| `npm run check:guide` | Fetches the live guide and checks `facts.json`. Run it before the workshop. |
 
 System 2 uses headless Claude Code (`LLM_BACKEND=claude-cli`, the default with no `ANTHROPIC_API_KEY`). The `/api` routes accept same-origin JSON requests to `localhost`, `127.0.0.1`, or `[::1]` only.
 
 Held-out results (30 questions, one run):
 
-| Path | Fact accuracy | p50 ms | p95 ms | Cost / 1,000 | Mean words |
+| Path | Facts right (checked) | p50 ms | p95 ms | Cost / 1,000 | Mean words |
 |---|---|---|---|---|---|
-| LLM only | 93.3% | 5,322 | 13,071 | $86.47 | 149 |
-| Jev first | 93.3% | 237 | 9,882 | $8.74 | 98 |
+| LLM only | 17 of 19 | 5,322 | 13,071 | $20.71 to $86.47 | 149 |
+| Jev first | 17 of 19 | 237 | 9,882 | $8.05 to $8.74 | 98 |
+
+11 of the 30 questions have no fact check. The cost range depends on 3 large LLM calls; see the A/B document.
 
 Jev first: intent accuracy 100%, System 2 share 36.7%, one real fact error (q098, a ticket pick). Two of the misses in the table are strict string checks, not wrong facts.
 

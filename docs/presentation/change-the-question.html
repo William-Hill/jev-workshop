@@ -630,20 +630,21 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
 
 <section class="slide" data-part="6">
   <div class="kicker">Case: Ask Your Agent</div>
-  <h2>On 30 held-out questions: the same accuracy, a faster median, one tenth of the cost.</h2>
+  <h2>On 30 held-out questions: the same accuracy, a faster median, a lower cost.</h2>
   <table class="cmp wide tight center">
-    <tr><th>30 held-out questions</th><th>Facts right</th><th>Median</th><th>p95</th><th>Cost / 1,000</th><th>Words</th></tr>
-    <tr><td>LLM only</td><td>28 of 30</td><td>5,322 ms</td><td>13,071 ms</td><td>$86.47</td><td>149</td></tr>
-    <tr class="hot"><td>Jev first</td><td>28 of 30</td><td>237 ms</td><td>9,882 ms</td><td>$8.74</td><td>98</td></tr>
+    <tr><th>30 held-out questions</th><th>Facts right (checked)</th><th>Median</th><th>p95</th><th>Cost / 1,000</th><th>Words</th></tr>
+    <tr><td>LLM only</td><td>17 of 19</td><td>5,322 ms</td><td>13,071 ms</td><td>$21 to $86</td><td>149</td></tr>
+    <tr class="hot"><td>Jev first</td><td>17 of 19</td><td>237 ms</td><td>9,882 ms</td><td>$8 to $9</td><td>98</td></tr>
   </table>
   <p class="src">Jev first sent 19 of 30 to System 1. Intent right: 30 of 30. One real fact error: a ticket pick at probability 1. Synthetic questions, one run, list prices.</p>
   <aside class="notes">
     <p>Say: "We wrote 100 attendee questions and labeled each one: the intent, the right ticket, and the facts that a right answer must contain. We tuned on 70. We ran these 30 once, at the end."</p>
-    <p>"Both paths got the facts right 28 times out of 30. So this is not a story about accuracy. With the whole guide in its prompt, the LLM knows the facts too. The difference is speed, cost, and length."</p>
+    <p>"19 questions had facts that a right answer must contain. Both paths got 17 of those 19 right. The other 11, for example the emails, had no automatic check."</p>
+    <p>"So this is not a story about accuracy. With the whole guide in its prompt, the LLM knows the facts too. The difference is speed, cost, and length."</p>
     <p>"The median is the typical question: 237 milliseconds against 5.3 seconds. The p95 of the Jev-first path is still 10 seconds, because 11 questions went to the LLM. You do not remove the slow path. You use it less."</p>
     <p>The misses, if asked. Jev first, q098, "director of eng who wants networking with execs, which ticket": Jev picked General Admission plus an application to the Executive Summit. The label says Gold. Its probability was 1. "A probability of 1 is not proof. The code sent that answer with no check." Two other misses, on both paths, are a strict string check: the LLM wrote the right dates in a different form.</p>
     <p>How we chose the thresholds: on the 70 tune questions, the pair 0.7 and 0.2 gave 41 right System 1 answers and 0 wrong ones. Any lower threshold added a wrong answer. One fact question in this run (q045, probability 0.51) went to the LLM, which answered it correctly.</p>
-    <p>Cost: the LLM cost is the list price that Claude Code reports. Each call wrote the 22,000-token guide to the prompt cache, and that write is most of the cost. A warm cache costs less. A Jev request is about 1,360 tokens, at $0.042 for each million.</p>
+    <p>Cost: the LLM cost is the list price that Claude Code reports. Three LLM-only calls wrote 114,000 to 209,000 tokens to the prompt cache and cost $2.03 together. Without them, the ratio is 2.6 times, not 10. So say "lower", and give the range. The benchmark now runs the two paths in random order, because the first path paid more cache writes. A Jev request is about 1,360 tokens, at $0.042 for each million.</p>
     <p>Limits: synthetic questions, one guide snapshot, one LLM, one run. One question is 3.3 points. Full write-up: docs/research/ask-agent-ab.md.</p>
     <p class="bridge">Bridge: "Now it is your turn. You get two practice fields."</p>
   </aside>
