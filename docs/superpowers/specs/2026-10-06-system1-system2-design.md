@@ -101,3 +101,35 @@ Metrics for each path, on the same labeled questions:
 - Real attendee questions, if available.
 - The sponsorship disclosure: any relationship between TypeSafe or IBM and RenderATL.
 - A review of the 100 synthetic questions and their labels.
+
+## Amendment 2026-10-06: run System 2 without an Anthropic API key
+
+The user can run System 2 (and the LLM-only path) through headless Claude Code, which uses the user's own Claude login. Checked on 2026-10-06 with Claude Code 2.1.289:
+
+```bash
+claude -p "<prompt>" --model haiku --output-format json
+```
+
+- The JSON output has `result` (the text), `duration_ms` (model time), `total_cost_usd` (an estimate), `usage`, and `is_error`.
+- One small request took 7.3 s wall time and 1.9 s model time. The program start adds about 5 s to each call.
+- Without other flags, each call carries Claude Code's own system prompt. Use `--system-prompt "<text>"` to replace it, so that the token count reflects only our prompt.
+- On a Claude subscription, the calls count against the plan's usage limits, not dollars. `total_cost_usd` is an estimate of the API price.
+
+Changes to the plans when `LLM_BACKEND=claude-cli` is set in `.env`:
+
+- **Plan A, `scripts/ask-clients.mjs`:** `llm()` runs the command below and maps `result` to `text`, `usage` to `usage`, and `total_cost_usd` to a new field `costUsd`. `summarize()` uses `costUsd` when it exists, in place of the price constants.
+
+```js
+import { spawnSync } from "node:child_process";
+export function llmCli({ system, prompt }) {
+  const r = spawnSync("claude", ["-p", "--model", process.env.LLM_MODEL || "sonnet", "--output-format", "json", "--system-prompt", system], { input: prompt, encoding: "utf8", maxBuffer: 20e6, timeout: 120000 });
+  if (r.status !== 0) throw new Error(`claude -p failed: ${r.stderr.slice(0, 200)}`);
+  const d = JSON.parse(r.stdout);
+  if (d.is_error) throw new Error(`claude -p error: ${String(d.result).slice(0, 200)}`);
+  return { text: d.result, usage: d.usage, model: process.env.LLM_MODEL || "sonnet", costUsd: d.total_cost_usd, modelMs: d.duration_ms };
+}
+```
+
+- **Plan B, `/api/llm` in `src/jev/proxy.node.js`:** when `LLM_BACKEND=claude-cli`, call `llmCli()` (the same code, with `spawn` and a Promise so that the server does not block) in place of the SDK.
+- **Latency:** report the model time (`duration_ms`) and the wall time separately. The 5 s program start is a cost of this setup, not of the model.
+- **Fairness:** the LLM-only path and the System 2 path must use the same backend in one run.
