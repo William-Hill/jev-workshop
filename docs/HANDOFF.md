@@ -214,6 +214,28 @@ Larger run on Normal (2026-10-02, after the staff-level review):
 - A level game uses 100k to 165k input tokens, which is less than $0.01 at $0.042 for each 1 million.
 - The levels send more fallback decisions than the baseline. The structured criteria give lower confidence values. This is a tuning point for `MIN_CONFIDENCE`.
 
+## Ask Your Agent demo (2026-10-06)
+
+Plan A Tasks 1 to 5 are done. Jev picks the intent of an attendee question. Code answers fact questions from `src/ask/data/facts.json` (System 1). An LLM answers writing and judgment questions (System 2). Full results: [`docs/research/ask-agent-ab.md`](./research/ask-agent-ab.md).
+
+| Command | Result |
+|---|---|
+| `npm run test:ask` | The Node tests for the facts, the questions, System 1, and the pipelines. |
+| `node scripts/ask-bench.mjs --split heldout --min-probability 0.7 --min-answerable 0.2` | The A/B run. Writes `ask-results/<split>-ab-<stamp>.json`. Spend cap $5. |
+| `node scripts/ask-bench.mjs --split tune --llm off` | A Jev-only pass, with no LLM calls. |
+| `npm run dev`, then open `/ask.html` | The demo page: Jev first beside LLM only. |
+
+System 2 uses headless Claude Code (`LLM_BACKEND=claude-cli`, the default with no `ANTHROPIC_API_KEY`). The `/api` routes accept same-origin JSON requests to `localhost`, `127.0.0.1`, or `[::1]` only.
+
+Held-out results (30 questions, one run):
+
+| Path | Fact accuracy | p50 ms | p95 ms | Cost / 1,000 | Mean words |
+|---|---|---|---|---|---|
+| LLM only | 93.3% | 5,322 | 13,071 | $86.47 | 149 |
+| Jev first | 93.3% | 237 | 9,882 | $8.74 | 98 |
+
+Jev first: intent accuracy 100%, System 2 share 36.7%, one real fact error (q098, a ticket pick). Two of the misses in the table are strict string checks, not wrong facts.
+
 ## Start here in the next session (2026-10-06)
 
 The user decided: the main example of the talk moves to RenderATL attendee questions; the maze stays as the backup and the hackathon practice field. Both parts add a System 1 (Jev) to System 2 (an LLM or a code planner) chain.
@@ -223,7 +245,7 @@ The user decided: the main example of the talk moves to RenderATL attendee quest
 - Plan B, the maze backup: `docs/superpowers/plans/2026-10-06-maze-system2.md` (5 tasks)
 - Plan C, the optional F1 pit track: `docs/superpowers/plans/2026-10-06-f1-pit-system1.md` (7 tasks; design: `docs/superpowers/specs/2026-10-06-f1-pit-design.md`). Python, in `f1/`.
 - Order: Plan B Task 4 Steps 1, 2, and 4 first (the `/api/llm` route), then Plan A, then the rest of Plan B.
-- The user must add `ANTHROPIC_API_KEY` to `.env` before any System 2 or LLM-only run.
+- System 2 runs through headless Claude Code by default. An `ANTHROPIC_API_KEY` in `.env` is optional.
 
 ## Next steps
 
