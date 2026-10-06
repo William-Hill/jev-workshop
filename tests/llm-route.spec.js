@@ -23,4 +23,10 @@ for (const route of ["/api/llm", "/api/jev"]) {
     const r = await request.post(route, { data: '{"prompt":"p"}', headers: { "Content-Type": "text/plain" } });
     expect(r.status()).toBe(415);
   });
+
+  // DNS rebinding: the attacker's name points at 127.0.0.1, so Origin and Host match.
+  test(`${route} rejects a request to a host name that is not local`, async ({ request }) => {
+    const r = await request.post(route, { data: { prompt: "p" }, headers: { Host: "evil.example:4180", Origin: "http://evil.example:4180" } });
+    expect(r.status()).toBe(403);
+  });
 }

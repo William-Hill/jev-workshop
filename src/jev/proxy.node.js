@@ -38,7 +38,14 @@ function send(res, status, body) {
 // Cross-site request forgery guard. A page on another site must not spend the user's Jev
 // credit or Claude quota. Accept only same-origin requests with a JSON body: a cross-site
 // JSON POST needs a CORS preflight, which this server never approves.
+// DNS rebinding guard: an attacker's name can point at 127.0.0.1, so Origin and Host can match.
+// Accept local host names only.
+const LOCAL_HOSTS = new Set(["localhost", "127.0.0.1", "[::1]"]);
+
 function rejectForeign(req, res) {
+  let hostname = "";
+  try { hostname = new URL(`http://${req.headers.host}`).hostname; } catch { /* A bad Host is foreign. */ }
+  if (!LOCAL_HOSTS.has(hostname)) { send(res, 403, { error: "Use localhost to reach this server." }); return true; }
   const origin = req.headers.origin;
   if (origin) {
     let host = "";
