@@ -214,6 +214,16 @@ Larger run on Normal (2026-10-02, after the staff-level review):
 - A level game uses 100k to 165k input tokens, which is less than $0.01 at $0.042 for each 1 million.
 - The levels send more fallback decisions than the baseline. The structured criteria give lower confidence values. This is a tuning point for `MIN_CONFIDENCE`.
 
+## Start here in the next session (2026-10-06)
+
+The user decided: the main example of the talk moves to RenderATL attendee questions; the maze stays as the backup and the hackathon practice field. Both parts add a System 1 (Jev) to System 2 (an LLM or a code planner) chain.
+
+- Design: `docs/superpowers/specs/2026-10-06-system1-system2-design.md`
+- Plan A, the pivot: `docs/superpowers/plans/2026-10-06-ask-agent-system1-system2.md` (6 tasks)
+- Plan B, the maze backup: `docs/superpowers/plans/2026-10-06-maze-system2.md` (5 tasks)
+- Order: Plan B Task 4 Steps 1, 2, and 4 first (the `/api/llm` route), then Plan A, then the rest of Plan B.
+- The user must add `ANTHROPIC_API_KEY` to `.env` before any System 2 or LLM-only run.
+
 ## Next steps
 
 Done (2026-10-02): the CORS check, the proxy, the snapshot, the Choice question, the decision panel, the fallback policy, the decision log, the real key, the fair score, the wait mode, the extension points, the instructor solutions, and the benchmark.
