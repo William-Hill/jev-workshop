@@ -1,0 +1,6 @@
+fastf1==3.8.3
+pandas==2.3.3
+scikit-learn==1.9.1
+typesafe-sdk==0.7.2
+anthropic==1.8.0
+pytest==9.1.1

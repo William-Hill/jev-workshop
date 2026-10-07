@@ -4,7 +4,7 @@ Date: 2026-10-06. Owner: William MJ Hill (@emjay_hill). Repository: `render-maze
 
 ## Goal
 
-Test Jev on a real decision with real labels: **"Should this driver pit at the end of this lap?"** Use historical Formula 1 races from FastF1 (<https://github.com/theOehrly/Fast-F1>).
+Test Jev on a real decision with real labels: **"Should this driver pit at the end of this lap?"** Use the completed races of the 2026 Formula 1 season from FastF1 (<https://github.com/theOehrly/Fast-F1>).
 
 - **System 1 = Jev:** one Noul for each driver and lap. Code calculates every number first.
 - **System 2 = an LLM:** only for uncertain laps or when the race changes (safety car, rain).
@@ -28,8 +28,8 @@ For each driver and lap: the lap, laps remaining, compound, tire age, the typica
 
 ## Splits
 
-- **Train and tune:** 2023 races (the logistic regression, the typical stint lengths, the Jev threshold). The Jev threshold uses 2 races only, to keep the cost low.
-- **Held-out test:** 6 races from 2024, chosen to include a safety car and rain: Bahrain, Saudi Arabia, Spain, Great Britain, Hungary, Italy. Task 1 checks that each one loads.
+- **Train and tune:** 2026 rounds 1 to 10 (the logistic regression, the typical stint lengths, the Jev threshold). The Jev threshold uses 2 races only, to keep the cost low.
+- **Held-out test:** 2026 rounds 11 to 16, the last 6 completed races on 2026-10-06: Hungary, the Netherlands, Italy, Spain (Madrid), Azerbaijan, Bahrain. They include safety cars (Italy, Azerbaijan, Bahrain), rain (the Netherlands, Bahrain), and red flags (the Netherlands, Italy). Task 1 checks that each one loads.
 - Exclude lap 1, the last lap, and laps under a red flag.
 
 ## Metrics
@@ -48,7 +48,7 @@ Pit laps are rare (a few percent of laps), so accuracy alone misleads.
 - Pin `jev-1.13.0`.
 - System 2 backend: the Anthropic API (`ANTHROPIC_API_KEY`) or headless Claude Code (`LLM_BACKEND=claude-cli`), as in the amendment to `2026-10-06-system1-system2-design.md`.
 - Spend cap: $5 for each run. About 1,100 driver-laps for each race; at about 600 input tokens each, one race costs about $0.03 in Jev tokens.
-- Tune on 2023 only. Report on 2024 only, once.
+- Tune on rounds 1 to 10 only. Report on rounds 11 to 16 only, once. Do not train on 2023 to 2025: new technical rules started in 2026, so tire wear and stint lengths can differ.
 - Write docs and comments in ASD-STE100 Simplified Technical English.
 
 ## What needs the user

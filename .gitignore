@@ -24,3 +24,11 @@ bundle/
 
 # A/B benchmark output
 /ask-results/
+
+# F1 pit test (Python)
+/f1/.venv/
+/f1/cache/
+/f1/data/
+/f1/results/
+__pycache__/
+.pytest_cache/
