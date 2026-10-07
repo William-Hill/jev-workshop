@@ -295,7 +295,7 @@ Done (2026-10-02): the CORS check, the proxy, the snapshot, the Choice question,
 2. Pin the model version (`jev-1.13.0`) in `src/jev/questions.js` before the workshop.
 3. Decide the key plan and test the rate for the room (see the open decisions).
 4. Prepare the backup: the local `nimble` model or the mock.
-5. Write the attendee guide. The lecture deck is done: [`docs/presentation/change-the-question.html`](./presentation/change-the-question.html) (31 slides: the problem, what Jev is and the Jevons name, its limits, how to use it, use cases, and the case; speaker notes on the N key).
+5. Write the attendee guide. The lecture deck is done: [`docs/presentation/change-the-question.html`](./presentation/change-the-question.html) (32 slides: the problem, what Jev is and the Jevons name, its limits, how to use it, use cases with the F1 test, and the case; speaker notes on the N key).
 6. Rehearse the full hackathon with one person outside the project.
 
 ## Local test with Ollama (2026-10-02)

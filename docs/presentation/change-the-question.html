@@ -619,7 +619,29 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
   </table>
   <aside class="notes">
     <p>Say: "Read top to bottom, and stop at the first row that matches. If code can decide exactly, use code. If you have labeled data, a trained classifier can be more accurate, and Jev can take the uncertain cases. If you need words out, use an LLM. If you need a chain of reasoning, use a reasoning model. Jev fits the last row."</p>
-    <p class="bridge">Bridge: "Now one complete case: the questions that people ask about this conference."</p>
+    <p class="bridge">Bridge: "We tested the second row on this season of Formula 1."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="5">
+  <div class="kicker">Use cases · a test with labels</div>
+  <h2>F1 2026: should this driver pit now? The trained model wins.</h2>
+  <table class="cmp center">
+    <tr><th>Method</th><th>All laps</th><th>Safety-car laps</th></tr>
+    <tr><td>Hand-written rule</td><td>0.061</td><td>0.233</td></tr>
+    <tr class="hot"><td>Trained model</td><td>0.147</td><td>0.292</td></tr>
+    <tr><td>Jev</td><td>0.076</td><td>0.381</td></tr>
+    <tr><td>Jev + Claude</td><td>0.082</td><td>0.290</td></tr>
+  </table>
+  <p class="src">Average precision against the teams' real stops (higher is better). Trained on 2026 rounds 1 to 10, tested once on rounds 11 to 16: 6,839 driver-laps, 242 stops. Data: FastF1.</p>
+  <aside class="notes">
+    <p>Say: "We took every lap of the last six races of this season, Hungary to Bahrain, and asked one question for each driver: must this car pit at the end of this lap? The answer key is what the team really did. Code calculated every fact first: tire age against a typical stint, safety car, the gap behind, the pit loss."</p>
+    <p>"A logistic regression, trained on the first ten races, wins on all laps: 0.147 against 0.076 for Jev. That is the second row of the last slide. With labels and numbers, train a model."</p>
+    <p>"But look at the safety-car laps. That is a quick judgment with a clear written rule, 'pit under a safety car when the tires are near the end of their life', plus race-control text. There Jev is the best of the four: 0.381."</p>
+    <p>"And System 2 did not help here. Claude got the 1 lap in 20 where Jev was unsure, and changed 270 of 390 answers. It found fewer stops, not more. A slow model is not always a better model."</p>
+    <p>Be exact if asked: the safety-car slice is 632 laps with 102 stops in 6 races. We did not test whether 0.381 against 0.292 is significant. Jev also found the most stops overall (66%), but only 17% of its calls were right, because the rule says "pit" on every lap after the tires pass their typical life. Average precision is the area under the precision-recall curve: it scores the ranking of laps, with no threshold.</p>
+    <p>Cost: Jev for all 9,122 laps was about $0.28. The Claude calls used about 42 million tokens of a Claude Max plan, because headless Claude Code adds about 76,000 tokens of context to each call. Details: docs/research/f1-pit-results.md.</p>
+    <p class="bridge">Bridge: "Now one complete case where Jev does fit: the questions that people ask about this conference."</p>
   </aside>
 </section>
 
