@@ -291,7 +291,7 @@ URL: <https://youtu.be/cJ0EOzey--o> (AI Engineer channel, 31 July 2026, 18 minut
 - Main thesis: tasks split into **assistance** (the goal is to please the person in the loop) and **automation** (the goal is to remove the person: the task runs in the background, repeatedly, at almost no cost). Today's AI, trained with RLHF, is very good at assistance and poor at automation.
 - Businesses have learned not to trust AI with decisions that the business depends on. They put AI where the cost of an error falls on the user (chat, support, documentation).
 - RLHF optimizes for human preference. A reward-model asymmetry rewards confident answers, so a model looks right even when it is wrong. His example: ChatGPT praised an audio file of fart sounds as "eerie, atmospheric" music. He calls hallucination a consequence of preference optimization.
-- He places Claude Code in the same "assistant era" (still RLHF). RLVR optimizes for correctness. TypeSafe's third target is calibrated decision making, with a different API shape.
+- He places Claude Code in the same "assistant era" (still RLHF). RLVR optimizes for correctness. TypeSafe's third target is calibrated decision making, with a different API shape. The talk does not name the method; the launch post calls it Reinforcement Learning for Calibrated Decisions (RLCD). More quotes and the RenderATL use cases: `renderatl-jev-opportunities.md`.
 - SaaS has barely changed since 2019; AI is added as a side assistant. He wants "smarter software": new building blocks for routine decisions that run repeatedly in the background, not only cheaper code.
 - TypeSafe's question: what if the AI stack were redesigned for reliability and automation?
 - He gives no benchmark numbers, no architecture details, and no game examples.

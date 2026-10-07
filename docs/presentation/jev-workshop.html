@@ -216,17 +216,22 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
 <section class="slide" data-part="1">
   <div class="kicker">The problem</div>
   <h2>Most AI today assists a person. Automation is a different job.</h2>
-  <table class="cmp center">
+  <table class="cmp tight center">
     <tr><th></th><th>Assistance</th><th>Automation</th></tr>
     <tr><td>The goal</td><td>Help the person in the loop</td><td>Remove the person from the loop</td></tr>
-    <tr><td>How it runs</td><td>Once, while someone reads the answer</td><td>In the background, many times, at low cost</td></tr>
-    <tr><td>Who sees an error</td><td>The user, who fixes it</td><td>Often nobody, until it costs the business</td></tr>
-    <tr><td>What it needs</td><td>Good text</td><td>A fixed answer, and a probability that code can trust</td></tr>
+    <tr><td>How it runs</td><td>Once, while a person reads it</td><td>In the background, many times</td></tr>
+    <tr><td>Who sees an error</td><td>The user, who fixes it</td><td>Often nobody, until it costs money</td></tr>
+    <tr><td>What it needs</td><td>Good text</td><td>A fixed answer and a probability</td></tr>
+    <tr class="hot"><td>Trained for</td><td>Human preference (RLHF)</td><td>Calibrated decisions (RLCD)</td></tr>
+    <tr><td>Examples</td><td>Chat, coding agents</td><td>Jev</td></tr>
   </table>
-  <p class="src">Paraphrase of the TypeSafe CEO, AI Engineer talk, 31 July 2026. This is the vendor's framing. He gave no benchmark numbers.</p>
+  <p class="src">Paraphrase of the TypeSafe CEO, AI Engineer, 31 July 2026. RLCD: the TypeSafe launch post. The vendor's framing, with no benchmark numbers.</p>
   <aside class="notes">
     <p>Say: "The CEO of TypeSafe, the company that makes Jev, co-authored the RLHF work behind ChatGPT. His argument: today's chat models are trained to please the person who reads the answer. That is good for assistance. It is a poor fit for automation, where no person reads each answer."</p>
-    <p>RLHF, if asked now: reinforcement learning from human feedback. People rank model answers, a reward model learns their preferences, and the model is trained toward answers that people prefer. Slide 13 has the full definitions.</p>
+    <p>His own words, worth quoting: assistance tasks are ones where "the goal of it is to please the human in the loop." Automation should run "in the background in a server that you never even look at." And: "Today's AI, everything inherited from RLHF, is incredible at the human in the loop stuff, but not for automation tasks." Why does every LLM need a human in the loop? "We literally put them in the loop."</p>
+    <p>The last row: he names three training targets. "RLHF is optimizing for human preference. RLVR is optimizing for pure correctness, but we are doing a third thing that is optimized for calibrated decision-making." The launch post calls that third thing RLCD, reinforcement learning for calibrated decisions. He puts Claude Code on the assistance side too: a great tool, but one with a person who reads each step.</p>
+    <p>Say: "Most of the AI tools that you use today are assistance tools: a chat window, a coding agent, a person who reads every answer. Jev is built for the other column: thousands of small decisions that nobody reads."</p>
+    <p>RLHF, if asked now: reinforcement learning from human feedback. People rank model answers, a reward model learns their preferences, and the model is trained toward answers that people prefer. Slide 13 has all three definitions.</p>
     <p>His point about errors: a reward model that learns from people tends to reward answers that sound confident. So a chat model can sound right when it is wrong. In assistance, the user catches that. In automation, nobody does.</p>
     <p>Be clear about the source: this is the vendor's own story, from a talk before the Jev launch. It is a useful way to sort tasks. It is not evidence that Jev is more accurate. I have no relationship with TypeSafe.</p>
     <p>Source: "Jev CEO: I made ChatGPT, now I'm building what's next", AI Engineer channel, youtu.be/cJ0EOzey--o. Notes in docs/research/jev-research.md, section 7d.</p>
@@ -606,6 +611,28 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
     <p>"This is how Kahneman says people work: most of what we do runs on fast, automatic System 1, and slow, careful System 2 starts only when something needs real thought."</p>
     <p>The case in this talk uses exactly this pattern, on RenderATL's own "Ask Your Agent" idea: Jev routes an attendee's question, code answers the facts, and an LLM writes the plan or the email.</p>
     <p>The IBM video also suggests Jev as a guardrail for jailbreak attempts. TypeSafe itself lists adversarial content as a known failure mode, so test that use carefully before you rely on it.</p>
+    <p class="bridge">Bridge: "Here is the same pattern on a tool that RenderATL runs every weekday."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="5">
+  <div class="kicker">Use cases · at RenderATL</div>
+  <h2>Our sponsor pipeline makes small decisions all day.</h2>
+  <ol class="flow3 center">
+    <li><b>Code</b>Is the deal due? On the Do Not Contact list? Did the email bounce?</li>
+    <li class="jev"><b>Jev, System 1</b>What does the prospect want? Send the deck? Follow up, stop, or escalate?</li>
+    <li><b>Claude, System 2</b>Writes the draft in the rep's voice. The rep approves and sends.</li>
+  </ol>
+  <p class="src">A proposal, not measured. The steps come from RenderATL's pipeline follow-up tool. Today one LLM prompt makes every one of these decisions.</p>
+  <aside class="notes">
+    <p>Say: "RenderATL has a sales tool that an AI coding agent helped us build. Every weekday it finds the sponsor deals that are due, reads the email threads and the call notes, and writes follow-up drafts for each rep. Today one big LLM prompt does all of it: every judgment and every draft. That is an assistance design. The rep must read everything."</p>
+    <p>"But most of the work is small decisions. Which of eight actions does this thread owe: answer a question, send the contract, send the deck, send pricing, schedule, an intro, another promise, or nothing? Which sales stage is it in? Did they say 'not this year'? Does this need Justin now? Those are System 1 questions."</p>
+    <p>"So split it. Code keeps the exact rules: the due date, the Do Not Contact list, the bounce check, the pricing gate. Jev answers the judgment questions in one call, with a probability for each. Claude writes only the drafts that need writing. And the confidence decides how much the rep reads: high confidence on 'nothing owed' is one line; low confidence, or a security flag, means the rep reads the thread."</p>
+    <p>The new "Jev Explained" video (Mr. Cloud Book, 6 October 2026) uses a sponsor form as its first example: is it a sponsor inquiry, what product, how specific, then code sends the rate card or queues a person. Same shape.</p>
+    <p>How we would test it: run Jev beside the current flow for a week in shadow mode, log every answer, and compare with what the reps decided. Let Jev skip threads only after that. We have not done this yet. The threads hold prospect names and prices, so check the data rules first.</p>
+    <p>Tie-in to the Devin workshop: an agent helped build the tool, with a person who reviews each change. That is assistance. Jev is the automation primitive inside the finished tool.</p>
+    <p>Tie-in to Obvious, our sponsor: Obvious runs "factories", always-on agent workflows, with "humans at the points of imagination and judgment". Its support agent flags high-risk requests for a person. Each of those flags is a System 1 gate, the kind of decision Jev makes.</p>
+    <p>Other RenderATL decisions with the same shape: the call for speakers (which track, is it a sales pitch), scholarship and Fellowship applications (one yes or no for each requirement), the support inbox (refund, transfer, badge, travel), code of conduct reports (always a person, Jev only flags urgency), and spam in Slack. Details: docs/research/renderatl-jev-opportunities.md.</p>
     <p class="bridge">Bridge: "And here is where Jev does not fit at all."</p>
   </aside>
 </section>
@@ -715,7 +742,7 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
     <p>And the warning: "We changed one more sentence, about the end of power mode. That version won 2 of 30. The new text changed Jev's first move at the start tile from down to right, and that route ends in a trap. One sentence can break a question that works. Measure every change."</p>
     <p>Say the second mistake openly too: "We tuned those questions on the same 30 games that we scored them on. Then we played 30 new games. Level 2d fell from 20 wins to 6, the same as the first question. Keep a held-out set, and score on it once."</p>
     <p>Say the System 1 to System 2 result: "Then we added a System 2. When Jev was unsure, below 0.5 confidence, or every direction had a blocker near, code handed the move to a slower step. That was about 1 move in 5. A code planner that looks 8 steps ahead took level 2d from 6 wins to 28 of 30 on the new games. An LLM in the same place won 13, and took about 5 seconds for each move. In that time the runner crosses about 33 tiles, so it works only when the game waits."</p>
-    <p>Code only, the plain rule "avoid a blocker 3 steps or fewer away, else go to the nearest item", won 26 of 29 new games. Jev with the code planner is level with it (28 of 30, p = 1.000). The maze is mostly numbers, so this fits slide 26.</p>
+    <p>Code only, the plain rule "avoid a blocker 3 steps or fewer away, else go to the nearest item", won 26 of 29 new games. Jev with the code planner is level with it (28 of 30, p = 1.000). The maze is mostly numbers, so this fits slide 27.</p>
     <p>The statistics, if asked. Seeds 1000 to 1029 (tuning): first question 6 of 30; level 2c 15; level 2d 20; code only 23. Seeds 5000 to 5029 (held out): first question 7 of 30; level 2c 12; level 2d 6; level 2d with the code planner 28; level 2d with the LLM 13; code only 26 of 29. Planner against level 2d: 22 seeds to 0, exact p &lt; 0.001. Planner against LLM: 16 to 1, p &lt; 0.001. Details: docs/research/question-design-finding.md.</p>
     <p class="bridge">Bridge: "Here is what to change, in each track."</p>
   </aside>
