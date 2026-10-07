@@ -244,9 +244,27 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
   <aside class="notes">
     <p>Say: "That is the whole definition. Input: text and a question with options that you write. Output: one option, and a probability for each option."</p>
     <p>"Typed answer" means the answer is always one of the options that you defined, so code never parses free text.</p>
-    <p>The name, as reported by IBM Technology and others: Jev is named after the economist William Stanley Jevons. In 1865 he pointed out that as steam engines became more efficient, Britain used more coal, not less: the Jevons paradox. The bet is the same for decisions. When a judgment call is fast and cheap enough, it goes into places where an LLM is too slow or too expensive today, for example every row of a database or every line of a log file. TypeSafe's own primer states the same bet: cheaper intelligence will create much more demand. We found no TypeSafe page that names Jevons directly.</p>
+    <p>The name: the next slide explains it.</p>
     <p>Speed: the median request time in our maze benchmark was 166 to 204 ms, from a laptop in Atlanta, through a local proxy. Current version: jev-1.13.0.</p>
-    <p class="bridge">Bridge: "The name System One comes from psychology. Here is the idea."</p>
+    <p class="bridge">Bridge: "Why the name Jev? It comes from a book about coal."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="2">
+  <div class="kicker">What Jev is · the name "Jev"</div>
+  <h2>Named after Jevons: when a resource gets cheaper, we use more of it.</h2>
+  <div class="row center">
+    <div class="box"><h3>1865: coal</h3><p>Steam engines used less coal for each job.</p><p>Britain burned more coal in total.</p></div>
+    <div class="box hot"><h3>2026: decisions</h3><p>A judgment call costs less than a cent.</p><p>TypeSafe bets that software will make many more of them.</p></div>
+  </div>
+  <p class="src">"It is wholly a confusion of ideas to suppose that the economical use of fuel is equivalent to a diminished consumption. The very contrary is the truth." Jevons, The Coal Question (1865). TypeSafe, 2026: "We named Jev after William Stanley Jevons."</p>
+  <aside class="notes">
+    <p>Say: "In 1865 the economist William Stanley Jevons asked a simple question: Britain's steam engines get more efficient every year, so why does Britain burn more coal every year? His answer: a cheaper job finds more uses. More factories bought engines, and total coal use went up. Economists now call this the Jevons paradox."</p>
+    <p>"TypeSafe named Jev after him on purpose. Its launch post says it expects machine intelligence to follow the same path as coal: each large drop in the cost of a decision opens many more uses. A call that takes 170 ms and costs a small part of a cent can go where an LLM is too slow or too expensive today: every row of a table, every line of a log, every move in a game."</p>
+    <p>The other side, say it: more decisions also means more total mistakes. Sophos calls this "Jev's paradox": when automated decisions are cheap enough to run on everything, any error rate adds up. Our maze shows it at small scale. Jev followed our written rules in about 96 percent of decisions, but a game has about 90 decisions, so each game had about 4 wrong moves, and some of them cost a life.</p>
+    <p>Be exact if asked: the paradox is not a law. It happens only when demand grows faster than the cost falls. Farm productivity is the standard counter-example: food got cheaper, and people did not eat much more food.</p>
+    <p>Sources: TypeSafe, "Introducing System One Models &amp; Jev", typesafe.ai/blog, 15 Sept 2026. IBM Technology, "What Is Jev?", also tells the story. Jevons, The Coal Question, chapter 7, "Of the Economy of Fuel". Sophos, "Jev's Paradox: the hidden cost of cheap AI decisions". Maze numbers: docs/research/question-design-finding.md.</p>
+    <p class="bridge">Bridge: "The other name, System One, comes from psychology. Here is the idea."</p>
   </aside>
 </section>
 

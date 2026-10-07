@@ -281,7 +281,7 @@ URL: <https://youtu.be/YGgNBcIgI4s> (15 minutes). We read the English transcript
 - Thresholds for the refund Noul: above 0.9 the refund queue; 0.1 to 0.9 a person; below 0.1 not a refund. The more a mistake costs, the higher the threshold.
 - Limits: text only, weak at math and counting, can be tricked by instructions hidden in the data.
 - Workflow: Jev for the fast calls, an LLM for the reply, Jev again for the customer's answer. This matches Kahneman: most work runs on System 1.
-- The name: William Stanley Jevons and the Jevons paradox (1865, more efficient steam engines, more coal burned). Other secondary sources report the same; we found no TypeSafe page that states it. TypeSafe's primer states the same bet: cheaper intelligence will create much more demand.
+- The name: William Stanley Jevons and the Jevons paradox (1865, more efficient steam engines, more coal burned). Correction (2026-10-07): the TypeSafe launch post states it: "We named Jev after William Stanley Jevons. We expect machine intelligence to follow a similar path to coal" (<https://typesafe.ai/blog/introducing-system-one-models-and-jev>, 15 Sept 2026). The quote from Jevons, The Coal Question (1865), chapter 7: "It is wholly a confusion of ideas to suppose that the economical use of fuel is equivalent to a diminished consumption. The very contrary is the truth." The counter-argument, "Jev's paradox" (Sophos): when cheap decisions run on everything, any error rate gives more total mistakes.
 - The video suggests Jev as a jailbreak guardrail. TypeSafe lists adversarial content as a failure mode, so the deck does not recommend it without tests.
 
 ## 7d. Video: TypeSafe CEO talk, "Jev CEO: I made ChatGPT, now I'm building what's next"
