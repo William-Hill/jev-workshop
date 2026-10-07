@@ -299,7 +299,12 @@ Done (2026-10-02): the CORS check, the proxy, the snapshot, the Choice question,
 2. Pin the model version (`jev-1.13.0`) in `src/jev/questions.js` before the workshop.
 3. Decide the key plan and test the rate for the room (see the open decisions).
 4. Prepare the backup: the local `nimble` model or the mock.
-5. Write the attendee guide. The lecture deck is done: [`docs/presentation/jev-workshop.html`](./presentation/jev-workshop.html) (33 slides: the problem with assistance against automation, what Jev is and the Jevons name, its limits, how to use it, use cases with the RenderATL sponsor pipeline and the F1 test, and the case; speaker notes on the N key). The RenderATL and Obvious use cases are in [`docs/research/renderatl-jev-opportunities.md`](./research/renderatl-jev-opportunities.md).
+5. Write the attendee guide. The lecture deck has three files in `docs/presentation/`:
+   - `jev-workshop.html`: the full deck, 38 slides. It adds the Decision Desk, the cost run, the real sales email test, the PTSO A/B test, and the maze video to the 33-slide version.
+   - `jev-workshop-original-33.html`: the 33-slide version before those additions, unchanged.
+   - `jev-workshop-25min.html`: the short deck for a 25-minute talk (when it exists).
+   - Videos: `docs/presentation/media/` (desk demo, desk cost, maze teaser, maze full). The decks play them from that folder, so keep the folder next to the HTML files.
+   - The results behind the new slides: [`docs/research/decision-desk-and-ptso-results.md`](./research/decision-desk-and-ptso-results.md). The RenderATL and Obvious use cases are in [`docs/research/renderatl-jev-opportunities.md`](./research/renderatl-jev-opportunities.md).
 6. Rehearse the full hackathon with one person outside the project.
 
 ## Local test with Ollama (2026-10-02)

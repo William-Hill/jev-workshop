@@ -85,6 +85,8 @@ table.cmp.wide td:first-child { width: 40%; }
 table.cmp.tight { font-size: 27px; }
 table.cmp.tight td { padding: 9px 18px; }
 table.cmp.tight td:first-child { font-size: 27px; }
+table.cmp.tight[style*="24px"] td, table.cmp.tight[style*="24px"] td:first-child { font-size: 24px; padding: 7px 14px; }
+table.cmp.tight[style*="24px"] .ev { font-size: 19px; }
 table.cmp tr.hot td { background: var(--pink); }
 table.cmp .ev { font: 500 22px/1.3 var(--mono); color: var(--muted); }
 
@@ -112,6 +114,7 @@ ol.ev.cols2 li { font-size: 36px; }
 ol.flow3 { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; counter-reset: f; }
 ol.flow3 li { counter-increment: f; border: 3px solid var(--ink); background: var(--butter); box-shadow: 10px 10px 0 var(--ink); padding: 26px 28px; font-size: 38px; line-height: 1.25; }
 ol.flow3 li.jev { background: var(--pink); }
+ol.flow3.nonum li::before { display: none; }
 ol.flow3 li::before { content: counter(f); display: block; font: 400 60px/1 var(--display); color: var(--plum); margin-bottom: 10px; }
 ol.flow3 li b { display: block; font: 700 24px/1.1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--plum); margin-bottom: 10px; }
 
@@ -124,6 +127,7 @@ ol.flow3 li b { display: block; font: 700 24px/1.1 var(--mono); letter-spacing: 
 
 code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08); padding: 0 .2em; }
 .dark code { background: rgba(252,249,238,.12); }
+video.vid { border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); background: var(--night); display: block; max-width: 100%; height: 520px; }
 .shot { border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); max-width: 100%; height: 440px; object-fit: cover; object-position: left top; display: block; }
 
 .rail { position: absolute; left: 96px; right: 96px; bottom: 40px; display: flex; gap: 12px; font: 700 17px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
@@ -578,12 +582,14 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
 <section class="slide" data-part="5">
   <div class="kicker">Use cases</div>
   <h2>Where Jev fits, and how strong the evidence is.</h2>
-  <table class="cmp center">
+  <table class="cmp tight center" style="font-size:24px">
     <tr><th>Use case</th><th>Jev decides</th><th>Code does</th><th>Evidence</th></tr>
     <tr><td>Ticket routing</td><td>The team for each ticket</td><td>Policy checks, queues</td><td class="ev">Public experiment, rerun by us</td></tr>
     <tr><td>Hard-case tier</td><td>Only the cases a cheap classifier is unsure about</td><td>Runs the classifier first</td><td class="ev">Preprint: same accuracy as Jev alone, 0.43 of the cost</td></tr>
     <tr><td>Moderation</td><td>Which written rule a post breaks</td><td>Allow, warn, block</td><td class="ev">Vendor idea, not tested</td></tr>
     <tr><td>Game characters</td><td>The next action</td><td>Rules, timing, legal moves</td><td class="ev">Village experiment (partly held up), our maze</td></tr>
+    <tr><td>Sales email</td><td>The rep's next step</td><td>Gates, drafts, the send</td><td class="ev">Our real-email test: equal to Sonnet, 2% of its cost</td></tr>
+    <tr><td>Before an LLM</td><td>Which inputs fit the request</td><td>The cap, the ontology check</td><td class="ev">Our PTSO A/B: better outfits, one run</td></tr>
   </table>
   <aside class="notes">
     <p>Say: "Four places where the shape fits: fixed options, text input, many decisions. The right column says how much to believe each one."</p>
@@ -623,7 +629,7 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
     <li class="jev"><b>Jev, System 1</b>What does the prospect want? Send the deck? Follow up, stop, or escalate?</li>
     <li><b>Claude, System 2</b>Writes the draft in the rep's voice. The rep approves and sends.</li>
   </ol>
-  <p class="src">A proposal, not measured. The steps come from RenderATL's pipeline follow-up tool. Today one LLM prompt makes every one of these decisions.</p>
+  <p class="src">The steps come from RenderATL's pipeline follow-up tool. Today one LLM prompt makes every one of these decisions. The next slides show what we built and measured.</p>
   <aside class="notes">
     <p>Say: "RenderATL has a sales tool that an AI coding agent helped us build. Every weekday it finds the sponsor deals that are due, reads the email threads and the call notes, and writes follow-up drafts for each rep. Today one big LLM prompt does all of it: every judgment and every draft. That is an assistance design. The rep must read everything."</p>
     <p>"But most of the work is small decisions. Which of eight actions does this thread owe: answer a question, send the contract, send the deck, send pricing, schedule, an intro, another promise, or nothing? Which sales stage is it in? Did they say 'not this year'? Does this need Justin now? Those are System 1 questions."</p>
@@ -633,6 +639,91 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
     <p>Tie-in to the Devin workshop: an agent helped build the tool, with a person who reviews each change. That is assistance. Jev is the automation primitive inside the finished tool.</p>
     <p>Tie-in to Obvious, our sponsor: Obvious runs "factories", always-on agent workflows, with "humans at the points of imagination and judgment". Its support agent flags high-risk requests for a person. Each of those flags is a System 1 gate, the kind of decision Jev makes.</p>
     <p>Other RenderATL decisions with the same shape: the call for speakers (which track, is it a sales pitch), scholarship and Fellowship applications (one yes or no for each requirement), the support inbox (refund, transfer, badge, travel), code of conduct reports (always a person, Jev only flags urgency), and spam in Slack. Details: docs/research/renderatl-jev-opportunities.md.</p>
+    <p class="bridge">Bridge: "So we built it."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="5">
+  <div class="kicker">Use cases · RenderATL Decision Desk</div>
+  <h2>The Decision Desk: Jev decides, code checks, Claude writes, a person sends.</h2>
+  <div class="row center" style="align-items:center">
+    <video class="vid" style="flex:1.5 1 0;height:400px" src="media/decision-desk-demo.mp4" controls muted playsinline preload="metadata"></video>
+    <ul class="ev" style="gap:22px">
+      <li style="font-size:30px">One Jev call: 7 typed decisions for each email.</li>
+      <li style="font-size:30px">Code: Do Not Contact, the pricing gate, no deck twice.</li>
+      <li style="font-size:30px">Contracts, money, safety, injection: a person.</li>
+      <li style="font-size:30px">The Jev wire shows the raw request and response.</li>
+    </ul>
+  </div>
+  <p class="src">Synthetic emails. Video: media/decision-desk-demo.mp4 (1:46). Repo: William-Hill/renderatl-decision-desk.</p>
+  <aside class="notes">
+    <p>Say: "This is the desk. Each email gets one Jev request with seven questions: who wrote it, what they want, the sales stage, a 'not this year', an escalation, the urgency, and an injection attempt. Code applies the exact rules. Claude writes only the replies that need writing. A person sends every email."</p>
+    <p>Point at the dark panel on the right: "That is the Jev wire. It shows the exact request and the exact response for each email. No prompt to parse, no text to trust: typed answers with probabilities."</p>
+    <p>Show in the video: the pricing request (Jev: send pricing, 99%; code opens the pricing gate), the repeat deck request (code: do not resend the deck), the email that tells the 'AI assistant' to CC a competitor (held for a person, no draft), and the Do Not Contact sender (no Jev call at all).</p>
+    <p>The 36 emails are synthetic. On them, after one tuning pass: lane 32 of 32, action 30 of 32. Those are tuning numbers.</p>
+    <p class="bridge">Bridge: "What does that split save?"</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="5">
+  <div class="kicker">Use cases · Cost</div>
+  <h2>Same 36 emails: Jev first cost 69% less.</h2>
+  <div class="row center" style="align-items:center">
+    <div class="nums" style="flex:1 1 0;grid-template-columns:1fr;gap:22px">
+      <div class="num" style="padding:16px 28px"><div class="lab">Cost, 36 emails</div><div class="val pair" style="font-size:56px"><span class="was">$0.226</span><span class="to">→</span>$0.070</div></div>
+      <div class="num" style="padding:16px 28px"><div class="lab">Claude calls</div><div class="val pair" style="font-size:56px"><span class="was">36</span><span class="to">→</span>25</div></div>
+      <div class="num" style="padding:16px 28px"><div class="lab">Time to a decision</div><div class="val pair" style="font-size:56px"><span class="was">6.5 s</span><span class="to">→</span>0.19 s</div></div>
+    </div>
+    <video class="vid" style="flex:1.2 1 0;height:380px" src="media/decision-desk-cost.mp4" controls muted playsinline preload="metadata"></video>
+  </div>
+  <p class="src">Synthetic emails, one run. Same accuracy (action 27 vs 28 of 32). Claude tokens estimated at Sonnet list price.</p>
+  <aside class="notes">
+    <p>Say: "We ran both designs on the same 36 emails. LLM only: Claude reads every email, makes every decision, and writes every reply. Jev first: Jev makes the decisions for a fraction of a cent, and Claude writes only where a reply is needed."</p>
+    <p>"Same accuracy on the decisions. 69 percent less money. And the route is known in under 200 milliseconds, not six and a half seconds. Almost all of the money that remains is the writing. Do not pay a model that writes to make a decision."</p>
+    <p>Honest limits: synthetic emails, one run, Claude tokens estimated. The real-email test is next.</p>
+    <p class="bridge">Bridge: "Synthetic data is easy. So we ran it on real sales email."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="5">
+  <div class="kicker">Use cases · Real sales email</div>
+  <h2>Real sales email: Jev matched Sonnet and Haiku at 2% to 4% of the cost.</h2>
+  <table class="cmp tight center">
+    <tr><th>Held-out threads, 45 messages</th><th>Right</th><th>Cost, 138 messages</th><th>Median time</th></tr>
+    <tr class="hot"><td>Jev, playbook + thread facts</td><td>28 (62%)</td><td>$0.012</td><td>0.19 s</td></tr>
+    <tr><td>Sonnet, same context</td><td>26 (58%)</td><td>$0.60</td><td>4.0 s</td></tr>
+    <tr><td>Haiku, same context</td><td>28 (62%)</td><td>$0.30</td><td>13.6 s</td></tr>
+    <tr><td>Jev, latest message only</td><td>19 (42%)</td><td></td><td></td></tr>
+  </table>
+  <p class="src">268 redacted messages, 70 sales threads. Tuned on one half, scored once on the other. Context: 19 → 28 (p = 0.012). Jev vs Sonnet: p = 0.69. Not accurate enough to act alone.</p>
+  <aside class="notes">
+    <p>Say: "We exported William's sales mailbox, kept the sponsor threads, and removed names, emails, phone numbers, and prices on the laptop before anything went to a model. The question: given the thread, what must the rep do next? Send the contract, pricing, the deck, schedule a call, another reply, or nothing."</p>
+    <p>"First version: Jev saw only the latest message. 19 of 45 right. Then we gave it the stage playbook from our sales tool, facts that code computes from the whole thread, and the rep's own last message. 28 of 45. Same model. Better question, more context. That is the lesson of this talk again."</p>
+    <p>"With the same context, Sonnet got 26 and Haiku 28. Jev agreed with Sonnet on 33 of 45. Jev cost a cent for 138 messages. Sonnet cost 60 cents. Jev answered in under 200 milliseconds."</p>
+    <p>Say the limits plainly: "This is one mailbox and 45 scored messages. 'Always send contract' also gets 28, because many of these threads were at the contract stage; the mean recall over the four actions is 0.51 against 0.25. William checked 50 of the automatic labels and 19 were wrong, so we scored only the reliable kinds. Adding call notes did not help. No method is accurate enough to send email on its own. What the data shows is that Jev can replace the LLM for this decision at a small part of the cost."</p>
+    <p>Earlier version, all 268 messages, latest message only: Jev 108, Sonnet 107, Haiku 109, keyword rules 97 (40 percent each). Details: docs/research/decision-desk-and-ptso-results.md.</p>
+    <p class="bridge">Bridge: "The same idea works one step earlier: before the expensive model runs."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="5">
+  <div class="kicker">Use cases · PTSO</div>
+  <h2>PTSO: Jev narrows the closet before the model proposes.</h2>
+  <ol class="flow3 nonum" style="gap:28px">
+    <li style="font-size:30px;padding:18px 24px"><b>Code</b>Weather, season, a cap of 5 per category.</li>
+    <li class="jev" style="font-size:30px;padding:18px 24px"><b>Jev</b>Rules out and orders garments for the request.</li>
+    <li style="font-size:30px;padding:18px 24px"><b>Model, then ontology</b>Gemini proposes. The ontology checks.</li>
+  </ol>
+  <div class="nums">
+    <div class="num" style="padding:20px 30px"><div class="lab">Blind judge, Jev first vs today</div><div class="val pair" style="font-size:56px">16 <span class="to">to</span> 2</div><p style="font-size:28px">17 ties, p = 0.0013</p></div>
+    <div class="num" style="padding:20px 30px"><div class="lab">Gemini cost, 39 requests</div><div class="val pair" style="font-size:56px"><span class="was">$1.34</span><span class="to">→</span>$1.29</div><p style="font-size:28px">Same cost, better inputs.</p></div>
+  </div>
+  <p class="src">One real closet (145 garments), 39 requests, one run, Claude as the blind judge. The "skip the model" gate failed once and stays off.</p>
+  <aside class="notes">
+    <p>Say: "PTSO, my outfit agent, follows one rule: the model proposes, the ontology disposes. But the ontology runs after the expensive model call. So we asked: what if Jev narrows the closet before the model sees it?"</p>
+    <p>"The closet has 62 tops and 63 bottoms. The route sends only 5 of each to the model, in database order. For 'gym session after work', none of the gym clothes reached the model. Jev reads the request and puts the right garments first. It can only remove or reorder; the ontology still checks every outfit."</p>
+    <p>"On 39 requests, a blind judge preferred the Jev-first outfit 16 times to 2. Against a plain 'requested style first' rule: 18 to 5. Same Gemini cost."</p>
+    <p>Limits: one closet, one run, a Claude judge, not a person. Jev also tried to skip the model for requests that are not outfit requests; it skipped one real outfit request ("Running errands, nothing special"), so that gate stays off. On the synthetic seed closet, 5 of 14 requests skipped the model correctly.</p>
     <p class="bridge">Bridge: "And here is where Jev does not fit at all."</p>
   </aside>
 </section>
@@ -721,6 +812,18 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
   </aside>
 </section>
 
+<section class="slide dark" data-part="6">
+  <div class="kicker">Build time · Watch it play</div>
+  <h2>Jev plus a code planner clears the maze.</h2>
+  <video class="vid center" style="height:400px" src="media/maze-teaser.mp4" controls muted playsinline preload="metadata"></video>
+  <p class="src">A chosen game (seed 5003, 0 lives lost), shown at 2x. Typical result on 30 held-out games: 28 wins. Full speed: media/maze-full.mp4.</p>
+  <aside class="notes">
+    <p>Say: "Here is what you will build on. The panel on the right shows each decision: JEV means Jev chose, SYSTEM 2 means the code planner took a hard move, CODE means a corridor with one way forward."</p>
+    <p>Say plainly that this is a chosen game: "We picked a clean win to show. On 30 new games, this version won 28."</p>
+    <p class="bridge">Bridge: "Now your turn."</p>
+  </aside>
+</section>
+
 <section class="slide" data-part="6">
   <div class="kicker">Build time</div>
   <h2>Build time: practice on a game.</h2>
@@ -742,7 +845,7 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
     <p>And the warning: "We changed one more sentence, about the end of power mode. That version won 2 of 30. The new text changed Jev's first move at the start tile from down to right, and that route ends in a trap. One sentence can break a question that works. Measure every change."</p>
     <p>Say the second mistake openly too: "We tuned those questions on the same 30 games that we scored them on. Then we played 30 new games. Level 2d fell from 20 wins to 6, the same as the first question. Keep a held-out set, and score on it once."</p>
     <p>Say the System 1 to System 2 result: "Then we added a System 2. When Jev was unsure, below 0.5 confidence, or every direction had a blocker near, code handed the move to a slower step. That was about 1 move in 5. A code planner that looks 8 steps ahead took level 2d from 6 wins to 28 of 30 on the new games. An LLM in the same place won 13, and took about 5 seconds for each move. In that time the runner crosses about 33 tiles, so it works only when the game waits."</p>
-    <p>Code only, the plain rule "avoid a blocker 3 steps or fewer away, else go to the nearest item", won 26 of 29 new games. Jev with the code planner is level with it (28 of 30, p = 1.000). The maze is mostly numbers, so this fits slide 27.</p>
+    <p>Code only, the plain rule "avoid a blocker 3 steps or fewer away, else go to the nearest item", won 26 of 29 new games. Jev with the code planner is level with it (28 of 30, p = 1.000). The maze is mostly numbers, so this fits slide 31.</p>
     <p>The statistics, if asked. Seeds 1000 to 1029 (tuning): first question 6 of 30; level 2c 15; level 2d 20; code only 23. Seeds 5000 to 5029 (held out): first question 7 of 30; level 2c 12; level 2d 6; level 2d with the code planner 28; level 2d with the LLM 13; code only 26 of 29. Planner against level 2d: 22 seeds to 0, exact p &lt; 0.001. Planner against LLM: 16 to 1, p &lt; 0.001. Details: docs/research/question-design-finding.md.</p>
     <p class="bridge">Bridge: "Here is what to change, in each track."</p>
   </aside>
