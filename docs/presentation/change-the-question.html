@@ -205,7 +205,7 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
     <p>Zero-shot classifier: for example the Hugging Face zero-shot pipeline, which uses an entailment model. You give the labels as text at run time.</p>
     <p>LLM prompt: "Here is a ticket, reply with billing, technical, or sales." JSON mode fixes the format. For a probability, you can limit the output to the option tokens and read their log probabilities, then calibrate them with temperature scaling. That works, but it is extra work, and not every API exposes log probabilities.</p>
     <p>A documented example of text output that drifts: Anthropic's own guide for Claude Opus 5 says that its "default user-facing responses run longer than prior Opus models'", that a lower effort setting does not reliably shorten them, and that it "can also expand the scope of a task, adding steps that weren't requested." Users on Hacker News and Reddit made the same complaint. If your code parses an LLM's answer to make a decision, that drift becomes your problem.</p>
-    <p>Be honest if asked: we did not measure Jev against an LLM on the same task. The one public comparison that we found is on slide 20.</p>
+    <p>Be honest if asked: we did not measure Jev against an LLM on the same task. The one public comparison that we found is on slide 21.</p>
     <p class="bridge">Bridge: "Before we look at Jev, one idea from the people who built it: assistance is not the same job as automation."</p>
   </aside>
 </section>
@@ -223,7 +223,7 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
   <p class="src">Paraphrase of the TypeSafe CEO, AI Engineer talk, 31 July 2026. This is the vendor's framing. He gave no benchmark numbers.</p>
   <aside class="notes">
     <p>Say: "The CEO of TypeSafe, the company that makes Jev, co-authored the RLHF work behind ChatGPT. His argument: today's chat models are trained to please the person who reads the answer. That is good for assistance. It is a poor fit for automation, where no person reads each answer."</p>
-    <p>RLHF, if asked now: reinforcement learning from human feedback. People rank model answers, a reward model learns their preferences, and the model is trained toward answers that people prefer. Slide 12 has the full definitions.</p>
+    <p>RLHF, if asked now: reinforcement learning from human feedback. People rank model answers, a reward model learns their preferences, and the model is trained toward answers that people prefer. Slide 13 has the full definitions.</p>
     <p>His point about errors: a reward model that learns from people tends to reward answers that sound confident. So a chat model can sound right when it is wrong. In assistance, the user catches that. In automation, nobody does.</p>
     <p>Be clear about the source: this is the vendor's own story, from a talk before the Jev launch. It is a useful way to sort tasks. It is not evidence that Jev is more accurate. I have no relationship with TypeSafe.</p>
     <p>Source: "Jev CEO: I made ChatGPT, now I'm building what's next", AI Engineer channel, youtu.be/cJ0EOzey--o. Notes in docs/research/jev-research.md, section 7d.</p>
@@ -486,7 +486,7 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
     <div class="num"><div class="lab">Company rule left out</div><div class="val">5 / 24</div></div>
     <div class="num"><div class="lab">Company rule written in</div><div class="val">24 / 24</div></div>
   </div>
-  <p class="src">Same experiment as slide 14 (phuryn/experiments, 24 support messages). The rule was written for these messages and scored on them, so this shows the effect of the words, not accuracy on new messages.</p>
+  <p class="src">Same experiment as slide 15 (phuryn/experiments, 24 support messages). The rule was written for these messages and scored on them, so this shows the effect of the words, not accuracy on new messages.</p>
   <aside class="notes">
     <p>Say: "Same model, same 24 messages. The only change: the company's routing rule went into the option descriptions. Correct answers went from 5 to 24."</p>
     <p>The caveat, said plainly: the rule was written for these 24 messages and scored on the same 24. That proves that the words change the answer. It does not prove 100 percent accuracy on messages that nobody has seen. For that, keep a held-out test set.</p>
@@ -578,7 +578,7 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
   </table>
   <aside class="notes">
     <p>Say: "Four places where the shape fits: fixed options, text input, many decisions. The right column says how much to believe each one."</p>
-    <p>Ticket routing: the experiment from slides 14 and 18.</p>
+    <p>Ticket routing: the experiment from slides 15 and 19.</p>
     <p>Hard-case tier: the preprint's most practical result. A classifier trained on intents handles most requests, and only the uncertain ones go to Jev. That matched Jev's accuracy at 0.43 of its cost, in their setup.</p>
     <p>Moderation: from TypeSafe's own list of use cases. We did not test it. Remember failure mode 6: hostile users write hostile text, so moderation needs your own tests. We removed "jailbreak detection" from this table for the same reason.</p>
     <p>Game characters: a public village simulation, where Jev picks what each villager does. Vague option text sent a villager with zero hunger to eat at 3 a.m., 5 times out of 5. Explicit thresholds sent them to bed. Our rerun matched both results, but the author changed the state text in the same commit, so the words were not the only cause. And our maze, which is next.</p>
@@ -686,7 +686,7 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
     <p>The statistics, if asked: all versions played the same 30 seeds, so we compare game against game. Level 2d won 15 seeds that the first question lost, and lost only 1 that the first question won (exact McNemar p = 0.001). Level 2c against the first question: p = 0.035. Level 2d against level 2c, and level 2d against code only: not significant at 30 games.</p>
     <p>Say the mistake openly, because it is a lesson: "Our first measurements used one fixed seed. The maze is almost deterministic, so 20 games were a few routes repeated. Those runs said 90 percent. On varied games it is 67 percent, and words-only fell from 54 to 14. Test question changes on varied inputs."</p>
     <p>And the warning: "We changed one more sentence, about the end of power mode. That version won 2 of 30. The new text changed Jev's first move at the start tile from down to right, and that route ends in a trap. One sentence can break a question that works. Measure every change."</p>
-    <p>Code only, the plain rule "avoid a blocker 3 steps or fewer away, else go to the nearest item", won 23 of 30. The best Jev version is close but not better. The maze is mostly numbers, so this fits slide 25.</p>
+    <p>Code only, the plain rule "avoid a blocker 3 steps or fewer away, else go to the nearest item", won 23 of 30. The best Jev version is close but not better. The maze is mostly numbers, so this fits slide 26.</p>
     <p>The seeded results, Normal, seeds 1000 to 1029: first question 6 of 30 (20%); priority words only 4 of 28 (14%); ranked rules and facts (level 2c) 15 of 30 (50%); plus code marks the farthest blocker (level 2d) 20 of 30 (67%, 95% interval 49% to 81%); code only 23 of 30 (77%).</p>
     <p class="bridge">Bridge: "Here is what to change, in each track."</p>
   </aside>
