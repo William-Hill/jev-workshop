@@ -643,7 +643,7 @@ git commit -m "Add level2d-s2llm and the /api/llm route: an LLM as System 2"
 
 **Files:**
 - Modify: `docs/research/question-design-finding.md`, `docs/HANDOFF.md`
-- Modify: `docs/presentation/change-the-question.html` (the maze slides only; the deck source of truth is this file)
+- Modify: `docs/presentation/jev-workshop.html` (the maze slides only; the deck source of truth is this file)
 
 - [ ] **Step 1: Add a results section**
 
@@ -660,6 +660,6 @@ In the deck, add a row for each System 2 variant to the maze results table, and 
 - [ ] **Step 4: Commit**
 
 ```bash
-git add docs/research/question-design-finding.md docs/HANDOFF.md docs/presentation/change-the-question.html docs/research/data/maze-benchmarks
+git add docs/research/question-design-finding.md docs/HANDOFF.md docs/presentation/jev-workshop.html docs/research/data/maze-benchmarks
 git commit -m "Record the System 2 maze results"
 ```

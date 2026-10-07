@@ -907,7 +907,7 @@ git commit -m "Add the Ask RenderATL demo page: Jev first beside LLM only"
 **Files:**
 - Create: `docs/research/ask-agent-ab.md`
 - Modify: `docs/HANDOFF.md`
-- Modify: `docs/presentation/change-the-question.html`
+- Modify: `docs/presentation/jev-workshop.html`
 
 - [ ] **Step 1: Write the results doc**
 
@@ -924,7 +924,7 @@ In `docs/HANDOFF.md`, add a section "Ask Your Agent demo" with the commands (`np
 
 - [ ] **Step 3: Rebuild the case-study part of the deck**
 
-In `docs/presentation/change-the-question.html`:
+In `docs/presentation/jev-workshop.html`:
 1. Add a slide after the "four tools" slide: "Assistance against automation" (the TypeSafe CEO's idea, `docs/research/jev-research.md` section 7d).
 2. Replace the maze case slides (the screenshot slide and the results slide) with: one slide for the demo page (a screenshot of `ask.html` with a System 1 answer), and one slide with the held-out A/B table.
 3. Move the maze to one slide titled "Hackathon: practice on a game", before the "Your turn" slide. Keep its seeded result line in the notes.
@@ -934,6 +934,6 @@ In `docs/presentation/change-the-question.html`:
 - [ ] **Step 4: Commit**
 
 ```bash
-git add docs/research/ask-agent-ab.md docs/HANDOFF.md docs/presentation/change-the-question.html
+git add docs/research/ask-agent-ab.md docs/HANDOFF.md docs/presentation/jev-workshop.html
 git commit -m "Record the Ask Your Agent A/B results and rebuild the deck around the pivot"
 ```
