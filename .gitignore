@@ -32,3 +32,6 @@ bundle/
 /f1/results/
 __pycache__/
 .pytest_cache/
+
+# Demo videos
+/recordings/
