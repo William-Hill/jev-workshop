@@ -270,8 +270,22 @@ The user decided: the main example of the talk moves to RenderATL attendee quest
 - Plan C, the optional F1 pit track: `docs/superpowers/plans/2026-10-06-f1-pit-system1.md` (7 tasks; design: `docs/superpowers/specs/2026-10-06-f1-pit-design.md`). Python, in `f1/`.
 - Order: Plan B Task 4 Steps 1, 2, and 4 first (the `/api/llm` route), then Plan A, then the rest of Plan B.
 - System 2 runs through headless Claude Code by default. An `ANTHROPIC_API_KEY` in `.env` is optional.
-- Status (2026-10-07): Plan A is done. Plan B is done (Tasks 1 to 5). Plan C is not started.
+- Status (2026-10-07): Plan A is done. Plan B is done (Tasks 1 to 5). Plan C is done on the 2026 season (see "F1 pit test" below).
 - Cost warning: headless Claude Code adds 50,000 to 60,000 tokens of its own context to each call. One 30-game `level2d-s2llm` run used about 32 million tokens of the user's subscription. Use `LLM_BACKEND=anthropic` for a cheaper run.
+
+## F1 pit test (2026-10-06)
+
+"Must this driver pit at the end of this lap?" on the 2026 season: train on rounds 1 to 10, test once on rounds 11 to 16. Full results: [`docs/research/f1-pit-results.md`](./research/f1-pit-results.md).
+
+| Method | Average precision, all laps | Event F1, all laps | Average precision, safety-car and VSC laps |
+|---|---|---|---|
+| Rule | 0.061 | 0.245 | 0.233 |
+| Logistic regression | **0.147** | **0.381** | 0.292 |
+| Jev | 0.076 | 0.273 | **0.381** |
+| Jev + Claude (System 2) | 0.082 | 0.231 | 0.290 |
+
+- The trained model wins on all laps. Jev wins on safety-car laps (not tested for significance). Claude as System 2 made the result worse.
+- Commands: `cd f1 && .venv/bin/python -m f1pit.run train|tune|test`. Python 3.13 in `f1/.venv`. Tests: `cd f1 && .venv/bin/pytest -q`.
 
 ## Next steps
 
