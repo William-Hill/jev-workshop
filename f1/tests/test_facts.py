@@ -20,6 +20,12 @@ def test_position_loss_and_last_car():
     f = lap_facts(row(gap_behind_s=float("nan")), TYPICAL, 22.0)
     assert f["gap_behind_s"] is None and f["stop_now_loses_position"] is False
 
+def test_facts_encode_as_json_with_numpy_values():
+    import json
+    import numpy as np
+    f = lap_facts(row(gap_behind_s=np.float64(7.0), tyre_life=np.float64(26), stops_done=np.int64(1)), TYPICAL, 20.4)
+    json.dumps(f)
+
 def test_wet_tyres_do_not_need_a_stop():
     assert lap_facts(row(compound="INTERMEDIATE"), TYPICAL, 22.0)["stop_still_required"] is False
     assert lap_facts(row(), TYPICAL, 22.0)["stop_still_required"] is True

@@ -33,7 +33,7 @@ def lap_facts(r, typical: dict, pit_loss: float) -> dict:
         "rain": bool(r["rain"]),
         "gap_behind_s": None if gap is None else round(float(gap), 1),
         "pit_loss_s": round(float(pit_loss), 1),
-        "stop_now_loses_position": gap is not None and gap < pit_loss,
+        "stop_now_loses_position": gap is not None and bool(gap < pit_loss),
         "stops_done": int(r["stops_done"]),
         "stop_still_required": int(r["stops_done"]) == 0 and not wet,
         "race_control_messages": list(r["messages"])[-5:],
