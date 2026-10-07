@@ -273,6 +273,10 @@ The user decided: the main example of the talk moves to RenderATL attendee quest
 - Status (2026-10-07): Plan A is done. Plan B is done (Tasks 1 to 5). Plan C is done on the 2026 season (see "F1 pit test" below).
 - Cost warning: headless Claude Code adds 50,000 to 60,000 tokens of its own context to each call. One 30-game `level2d-s2llm` run used about 32 million tokens of the user's subscription. Use `LLM_BACKEND=anthropic` for a cheaper run.
 
+## RenderATL Decision Desk (2026-10-07)
+
+A separate private repo: <https://github.com/William-Hill/renderatl-decision-desk> (local: `~/Development/renderatl-decision-desk`). Triage for sponsor sales, partner success, and inbound questions: Jev decides, code applies the rules, Claude writes, a person sends. Working draft on 36 synthetic messages. Design, results, demo script, and the Obvious demo: `docs/design.md` in that repo.
+
 ## F1 pit test (2026-10-06)
 
 "Must this driver pit at the end of this lap?" on the 2026 season: train on rounds 1 to 10, test once on rounds 11 to 16. Full results: [`docs/research/f1-pit-results.md`](./research/f1-pit-results.md).
