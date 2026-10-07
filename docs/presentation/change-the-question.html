@@ -676,7 +676,8 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
     <ul class="ev" style="gap:22px">
       <li style="font-size:30px">Code counts the steps to each blocker.</li>
       <li style="font-size:30px">Jev picks a direction at each intersection.</li>
-      <li style="font-size:30px">Our best question won 20 of 30 games. Plain code won 23.</li>
+      <li style="font-size:30px">On new games, our best question won 6 of 30.</li>
+      <li style="font-size:30px">With a code planner for the hard 1 in 5 moves: 28 of 30.</li>
     </ul>
   </div>
   <aside class="notes">
@@ -684,10 +685,12 @@ code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08
     <p>The labels on the panel: JEV means Jev decided. FALLBACK means code decided, because the request failed or the confidence was below 0.2. CODE means a corridor with only one way forward. OVERRIDE means your own code changed Jev's move.</p>
     <p>Say: "Our first question listed the facts but no priority. It won 6 of 30 games. Our first fix, priority words only, did not help on varied games: 4 of 28. What helped was two things together: one ranked list of rules, with a tie-break, and facts that code calculates, for example 'this blocker moves toward the runner'. That version won 15 of 30. When we also let code mark which direction has the farthest blocker, so that Jev did not compare numbers, it won 20 of 30."</p>
     <p>The statistics, if asked: all versions played the same 30 seeds, so we compare game against game. Level 2d won 15 seeds that the first question lost, and lost only 1 that the first question won (exact McNemar p = 0.001). Level 2c against the first question: p = 0.035. Level 2d against level 2c, and level 2d against code only: not significant at 30 games.</p>
-    <p>Say the mistake openly, because it is a lesson: "Our first measurements used one fixed seed. The maze is almost deterministic, so 20 games were a few routes repeated. Those runs said 90 percent. On varied games it is 67 percent, and words-only fell from 54 to 14. Test question changes on varied inputs."</p>
+    <p>Say the mistake openly, because it is a lesson: "Our first measurements used one fixed seed. The maze is almost deterministic, so 20 games were a few routes repeated. Those runs said 90 percent. On varied games it was 67 percent, and words-only fell from 54 to 14. On new games that we did not tune on, it was 20 percent. Test question changes on varied inputs."</p>
     <p>And the warning: "We changed one more sentence, about the end of power mode. That version won 2 of 30. The new text changed Jev's first move at the start tile from down to right, and that route ends in a trap. One sentence can break a question that works. Measure every change."</p>
-    <p>Code only, the plain rule "avoid a blocker 3 steps or fewer away, else go to the nearest item", won 23 of 30. The best Jev version is close but not better. The maze is mostly numbers, so this fits slide 26.</p>
-    <p>The seeded results, Normal, seeds 1000 to 1029: first question 6 of 30 (20%); priority words only 4 of 28 (14%); ranked rules and facts (level 2c) 15 of 30 (50%); plus code marks the farthest blocker (level 2d) 20 of 30 (67%, 95% interval 49% to 81%); code only 23 of 30 (77%).</p>
+    <p>Say the second mistake openly too: "We tuned those questions on the same 30 games that we scored them on. Then we played 30 new games. Level 2d fell from 20 wins to 6, the same as the first question. Keep a held-out set, and score on it once."</p>
+    <p>Say the System 1 to System 2 result: "Then we added a System 2. When Jev was unsure, below 0.5 confidence, or every direction had a blocker near, code handed the move to a slower step. That was about 1 move in 5. A code planner that looks 8 steps ahead took level 2d from 6 wins to 28 of 30 on the new games. An LLM in the same place won 13, and took about 5 seconds for each move. In that time the runner crosses about 33 tiles, so it works only when the game waits."</p>
+    <p>Code only, the plain rule "avoid a blocker 3 steps or fewer away, else go to the nearest item", won 26 of 29 new games. Jev with the code planner is level with it (28 of 30, p = 1.000). The maze is mostly numbers, so this fits slide 26.</p>
+    <p>The statistics, if asked. Seeds 1000 to 1029 (tuning): first question 6 of 30; level 2c 15; level 2d 20; code only 23. Seeds 5000 to 5029 (held out): first question 7 of 30; level 2c 12; level 2d 6; level 2d with the code planner 28; level 2d with the LLM 13; code only 26 of 29. Planner against level 2d: 22 seeds to 0, exact p &lt; 0.001. Planner against LLM: 16 to 1, p &lt; 0.001. Details: docs/research/question-design-finding.md.</p>
     <p class="bridge">Bridge: "Here is what to change, in each track."</p>
   </aside>
 </section>

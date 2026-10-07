@@ -2,6 +2,58 @@
 
 Date: 2026-10-02. Status: supported by our benchmark, by the TypeSafe documents, and by two outside experiments that we reproduced.
 
+## System 2 in the maze (2026-10-07)
+
+Two variants add a System 2 step to `level2d`. Code sends a decision to System 2 when one of these conditions is true:
+
+1. The Jev confidence for "move" is below 0.5.
+2. Every direction is dangerous, and power mode is off. A direction is dangerous when a blocker is 3 steps or fewer away, or 6 steps or fewer away and approaching.
+
+- `level2d-s2search`: System 2 is code. It simulates each option for 8 steps and picks the option where the runner survives longest.
+- `level2d-s2llm`: System 2 is Claude Sonnet through headless Claude Code (`LLM_BACKEND=claude-cli`). It gets an ASCII map, the facts for each option, and the legal moves, and it answers with one word.
+
+We did not tune the rule or the horizon. Each variant ran on seeds 1000–1029, then one time on the held-out seeds 5000–5029. The wait mode stopped the game during each System 2 call.
+
+| Version | Seeds 1000–1029 | Seeds 5000–5029 | 95% interval (5000) | Mean lives lost (5000) |
+|---|---|---|---|---|
+| `level2d` (no System 2) | 20 of 30 (67%) | 6 of 30 (20%) | 10–37% | 2.63 |
+| `level2d-s2search` | 26 of 30 (87%) | 28 of 30 (93%) | 79–98% | 0.77 |
+| `level2d-s2llm` | 16 of 30 (53%) | 13 of 30 (43%) | 27–61% | 1.97 |
+| `code-only` | 23 of 30 (77%) | 26 of 29 (90%) | 74–96% | 1.52 |
+
+Paired comparisons on seeds 5000–5029 (exact McNemar test):
+
+| Comparison | Only the first won | Only the second won | p |
+|---|---|---|---|
+| `level2d-s2search` against `level2d` | 22 | 0 | < 0.001 |
+| `level2d-s2llm` against `level2d` | 9 | 2 | 0.065 |
+| `level2d-s2search` against `level2d-s2llm` | 16 | 1 | < 0.001 |
+| `code-only` against `level2d-s2search` | 2 | 3 | 1.000 |
+| `code-only` against `level2d-s2llm` | 15 | 2 | 0.002 |
+
+The System 2 calls on seeds 5000–5029:
+
+| | `level2d-s2search` | `level2d-s2llm` |
+|---|---|---|
+| Decisions sent to Jev | 2,795 | 2,810 |
+| Sent to System 2 | 523 (18.7%) | 639 (22.7%) |
+| Cause: low confidence / all dangerous | 309 / 214 | 341 / 298 |
+| System 2 changed the Jev move | 255 | 170 |
+| System 2 time, median / p95 | under 1 ms / under 1 ms | 4,959 ms / 10,670 ms |
+| Illegal System 2 answers | 0 | 0 |
+| Jev input tokens | 3.41 million | 3.39 million |
+| LLM tokens | none | 30.3 million cache read, 1.66 million cache write, 233,000 output |
+
+Findings:
+
+- The code planner is the better System 2. It beats `level2d` on 22 seeds and loses on none. It beats the LLM on 16 seeds and loses on 1. It is level with `code-only` (p = 1.000).
+- The LLM System 2 helps `level2d` (13 against 6 wins), but the difference is not significant at 30 games (p = 0.065). It is clearly worse than `code-only`.
+- The LLM is too slow for live play. Its median answer took 4,959 ms. At 6.7 tiles each second, the runner moves about 33 tiles in that time. These results are valid only because the wait mode stopped the game.
+- The LLM cost: headless Claude Code adds its own context to each call: 50,000 to 60,000 tokens on average. Our prompt is about 1,200 tokens. The runs used the subscription of the user, not API billing. At Sonnet API list prices, the same tokens cost about $23 (seeds 5000) and $25 (seeds 1000). A direct API call (`LLM_BACKEND=anthropic`) sends only our prompt.
+- The escalation rule is the part that works. Jev is unsure or every direction is dangerous in about 1 decision of 5. A slow, careful step on only those decisions takes `level2d` from 20% to 93% on new seeds.
+
+Limits: one run for each variant and seed set. The runs are not fully repeatable (see the next section). The LLM model is the `sonnet` alias of Claude Code on 2026-10-06.
+
 ## Held-out seeds 5000–5029 (2026-10-06)
 
 No version was tuned on these seeds. Each version played 30 games on Normal, model `jev-1.13.0`, with `--seed 5000`.

@@ -29,6 +29,9 @@ A workshop and hackathon in which Jev plays RenderMaze.
 | `/?jev=1&wait=0` | Real-time play. The game does not stop during a request. |
 | `/?jev=1&speed=0.25` | Slow play for the demo. |
 | `npm run bench -- --variant level3 --difficulty spicy --games 3` | N headless games and the score. The results go to `bench-results/` (git ignores it). |
+| `/?jev=1&variant=level2d-s2search` | `level2d` with System 2 as a code planner (8-step look-ahead). |
+| `/?jev=1&variant=level2d-s2llm&timeout=30000` | `level2d` with System 2 as an LLM through `/api/llm`. Too slow for real-time play: use the wait mode. |
+| `node scripts/compare-seeds.mjs 5000 code-only level2d` | Wins, 95% intervals, and paired tests for the runs on one seed set. |
 - The research is in [`docs/research/jev-research.md`](./research/jev-research.md).
 - The repository has no GitHub remote.
 
@@ -141,7 +144,25 @@ The hackathon has no scoring or ranking (decision, 2026-10-02). The "points" num
 
 A code-only baseline exists: `/?jev=1&variant=code-only` (`src/jev/variants/code-only.js`). The fallback policy makes every decision, and the game sends no request. It beats every Jev version in this maze (see the benchmark below).
 
-## Seeded benchmark (2026-10-04): use these numbers
+## Held-out benchmark and System 2 (2026-10-07): use these numbers
+
+Seeds 5000–5029 on Normal. No version was tuned on them. Details: `docs/research/question-design-finding.md`, first two sections.
+
+| Version | Seeds 1000–1029 (tuning) | Seeds 5000–5029 (held out) |
+|---|---|---|
+| First question | 6 (20%) | 7 (23%) |
+| `level2c` | 15 (50%) | 12 (40%) |
+| `level2d` | 20 (67%) | 6 (20%) |
+| `level2d-s2search` | 26 (87%) | 28 (93%) |
+| `level2d-s2llm` | 16 (53%) | 13 (43%) |
+| `code-only` | 23 (77%) | 26 of 29 (90%) |
+
+- The 67% for `level2d` does not hold on new seeds. Do not use it in the talk.
+- A code planner as System 2, on about 1 decision of 5, takes `level2d` from 6 to 28 wins (paired p < 0.001). It is level with `code-only`.
+- The LLM as System 2 is worse than the code planner (p < 0.001), and too slow for real-time play (median 4,959 ms for each call).
+- The runs are not fully repeatable: two `code-only` runs on the same seeds differed on 4 seeds.
+
+## Seeded benchmark (2026-10-04): superseded by the held-out table above
 
 The earlier maze runs used one fixed seed, so a run repeated a few routes. Use `npm run bench -- --difficulty normal --games 30 --seed 1000`: each game gets its own seed for the "wander" blockers, and each version plays the same games.
 
@@ -249,6 +270,8 @@ The user decided: the main example of the talk moves to RenderATL attendee quest
 - Plan C, the optional F1 pit track: `docs/superpowers/plans/2026-10-06-f1-pit-system1.md` (7 tasks; design: `docs/superpowers/specs/2026-10-06-f1-pit-design.md`). Python, in `f1/`.
 - Order: Plan B Task 4 Steps 1, 2, and 4 first (the `/api/llm` route), then Plan A, then the rest of Plan B.
 - System 2 runs through headless Claude Code by default. An `ANTHROPIC_API_KEY` in `.env` is optional.
+- Status (2026-10-07): Plan A is done. Plan B is done (Tasks 1 to 5). Plan C is not started.
+- Cost warning: headless Claude Code adds 50,000 to 60,000 tokens of its own context to each call. One 30-game `level2d-s2llm` run used about 32 million tokens of the user's subscription. Use `LLM_BACKEND=anthropic` for a cheaper run.
 
 ## Next steps
 
