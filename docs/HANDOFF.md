@@ -302,7 +302,7 @@ Done (2026-10-02): the CORS check, the proxy, the snapshot, the Choice question,
 5. Write the attendee guide. The lecture deck has three files in `docs/presentation/`:
    - `jev-workshop.html`: the full deck, 38 slides. It adds the Decision Desk, the cost run, the real sales email test, the PTSO A/B test, and the maze video to the 33-slide version.
    - `jev-workshop-original-33.html`: the 33-slide version before those additions, unchanged.
-   - `jev-workshop-25min.html`: the short deck for a 25-minute talk (when it exists).
+   - `jev-workshop-25min.html`: the 22-slide deck for the 25-minute talk. It is generated from the full deck by `python3 scripts/build-short-deck.py`. The review behind it: `docs/presentation/review/README.md`.
    - Videos: `docs/presentation/media/` (desk demo, desk cost, maze teaser, maze full). The decks play them from that folder, so keep the folder next to the HTML files.
    - The results behind the new slides: [`docs/research/decision-desk-and-ptso-results.md`](./research/decision-desk-and-ptso-results.md). The RenderATL and Obvious use cases are in [`docs/research/renderatl-jev-opportunities.md`](./research/renderatl-jev-opportunities.md).
 6. Rehearse the full hackathon with one person outside the project.

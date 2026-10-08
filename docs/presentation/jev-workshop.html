@@ -164,7 +164,7 @@ video.vid { border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); ba
     <p>Say: "Thank you to AI Ship &amp; Social for co-hosting, and to Obvious for the food, the drinks, and your Jev access today."</p>
     <p>Introduce yourself in one sentence: "I am William MJ Hill, a Forward Deploy Engineer at RenderATL. You can find me at @emjay_hill."</p>
     <p>Disclosure, say it early: "I have no relationship with TypeSafe AI, the company that makes Jev. Obvious sponsors this event and gives you Jev access. I used my own API key for every test in this talk, and no sponsor reviewed these results." An audience of engineers will ask.</p>
-    <p>Obvious (obvious.ai) is an AI agent company in San Francisco, formerly Flatfile. Do not confuse it with Obviously AI, a different company.</p>
+    <p>Obvious (obvious.ai) is an AI workspace company in San Francisco, formerly Flatfile, with multi-agent workflows that it calls factories. Do not confuse it with Obviously AI, a different company. As far as we know, Obvious is a sponsor, not a TypeSafe partner, and there is no public Obvious and Jev integration. Every test in this talk used our own TypeSafe key.</p>
   </aside>
 </section>
 
@@ -249,7 +249,7 @@ video.vid { border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); ba
   <h2>Jev answers a fixed-option question about text, and returns a probability for each option.</h2>
   <div class="row center">
     <div class="box"><h3>Who</h3><p>A hosted model from TypeSafe AI, in early access since 15 Sept 2026</p></div>
-    <div class="box"><h3>Speed</h3><p>About 170 ms for each request in our tests</p></div>
+    <div class="box"><h3>Speed</h3><p>About 170 to 250 ms for each request in our tests</p></div>
     <div class="box"><h3>Name</h3><p>After economist William Stanley Jevons</p></div>
   </div>
   <p class="small">It reads natural language, like an LLM. It returns a typed answer, one of your options, and it writes no text.</p>
@@ -363,7 +363,7 @@ video.vid { border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); ba
   <h2>Probabilities and confidence are two different numbers.</h2>
   <div class="row center">
     <div class="box"><h3>Probability</h3><p>Billing 0.88</p><p>TypeSafe says these are calibrated: of many answers at 0.8, about 80% are correct.</p></div>
-    <div class="box"><h3>Confidence</h3><p>(n × top − 1) / (n − 1)</p><p>How concentrated the probabilities are. It is not the chance of being correct.</p></div>
+    <div class="box"><h3>Confidence</h3><p>≈ (n × top − 1) / (n − 1)</p><p>How concentrated the probabilities are. It is not the chance of being correct.</p></div>
   </div>
   <p class="src">TypeSafe docs: Confidence; System One. Calibration "does not guarantee that an individual answer is correct."</p>
   <aside class="notes">
@@ -425,10 +425,10 @@ video.vid { border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); ba
   <div class="kicker">What it does not solve</div>
   <h2>Confidence cannot tell you that the question is wrong.</h2>
   <div class="row center">
-    <div class="box"><h3>An incomplete question</h3><p>24 support messages, 4 teams. The question left out a company rule.</p><p>19 wrong. 15 of the 19 had confidence above 0.90.</p></div>
-    <div class="box"><h3>Option order and scope</h3><p>A swap of the yes and no labels changed 50.5 of every 100 answers.</p><p>A threshold set for 5% risk still accepted 31% of out-of-scope requests.</p></div>
+    <div class="box"><h3>An incomplete question</h3><p>24 support messages, 4 teams. The question left out a company rule.</p><p>19 wrong. 15 of them had confidence above 0.90.</p></div>
+    <div class="box"><h3>Option order and scope</h3><p>A swap of the yes and no labels changed 50.5 of 100 answers.</p><p>A 5% risk threshold still let in 31% of out-of-scope requests.</p></div>
   </div>
-  <p class="src">Left: phuryn/experiments on GitHub, rerun 3 times by us. Right: Rafe and Das preprint.</p>
+  <p class="src">Left: phuryn/experiments on GitHub, rerun 3 times by us. Right: Rafe and Das preprint, not rerun by us.</p>
   <aside class="notes">
     <p>Left, say: "Someone published an experiment on GitHub: 24 support messages to route to 4 teams. The company had a routing rule that a new employee would not guess, and the question did not state it. Jev routed 19 messages wrong, and 15 of those 19 had a confidence above 0.90. We ran the same code three times and got the same accuracy; 14 of the 19 errors were above 0.90 in our runs."</p>
     <p>The lesson on the left is about the question, not about Jev alone: any model would miss a rule that nobody wrote down. The point is that the confidence cannot warn you. It describes the words you wrote, not your intent.</p>
@@ -632,12 +632,12 @@ video.vid { border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); ba
   <p class="src">The steps come from RenderATL's pipeline follow-up tool. Today one LLM prompt makes every one of these decisions. The next slides show what we built and measured.</p>
   <aside class="notes">
     <p>Say: "RenderATL has a sales tool that an AI coding agent helped us build. Every weekday it finds the sponsor deals that are due, reads the email threads and the call notes, and writes follow-up drafts for each rep. Today one big LLM prompt does all of it: every judgment and every draft. That is an assistance design. The rep must read everything."</p>
-    <p>"But most of the work is small decisions. Which of eight actions does this thread owe: answer a question, send the contract, send the deck, send pricing, schedule, an intro, another promise, or nothing? Which sales stage is it in? Did they say 'not this year'? Does this need Justin now? Those are System 1 questions."</p>
+    <p>"But most of the work is small decisions. Which of eight actions does this thread owe: answer a question, send the contract, send the deck, send pricing, schedule, an intro, another promise, or nothing? Which sales stage is it in? Did they say 'not this year'? Does this need a senior person now? Those are System 1 questions."</p>
     <p>"So split it. Code keeps the exact rules: the due date, the Do Not Contact list, the bounce check, the pricing gate. Jev answers the judgment questions in one call, with a probability for each. Claude writes only the drafts that need writing. And the confidence decides how much the rep reads: high confidence on 'nothing owed' is one line; low confidence, or a security flag, means the rep reads the thread."</p>
     <p>The new "Jev Explained" video (Mr. Cloud Book, 6 October 2026) uses a sponsor form as its first example: is it a sponsor inquiry, what product, how specific, then code sends the rate card or queues a person. Same shape.</p>
     <p>How we would test it: run Jev beside the current flow for a week in shadow mode, log every answer, and compare with what the reps decided. Let Jev skip threads only after that. We have not done this yet. The threads hold prospect names and prices, so check the data rules first.</p>
     <p>Tie-in to the Devin workshop: an agent helped build the tool, with a person who reviews each change. That is assistance. Jev is the automation primitive inside the finished tool.</p>
-    <p>Tie-in to Obvious, our sponsor: Obvious runs "factories", always-on agent workflows, with "humans at the points of imagination and judgment". Its support agent flags high-risk requests for a person. Each of those flags is a System 1 gate, the kind of decision Jev makes.</p>
+    <p>Tie-in to Obvious, our sponsor: Obvious runs "factories", always-on agent workflows, with "humans at the points of imagination and judgment". Its support agent flags high-risk requests for a person. Each of those flags is a System 1 gate, the kind of decision Jev makes. Say it as a fit, not a product: there is no public Obvious and Jev integration that we know of.</p>
     <p>Other RenderATL decisions with the same shape: the call for speakers (which track, is it a sales pitch), scholarship and Fellowship applications (one yes or no for each requirement), the support inbox (refund, transfer, badge, travel), code of conduct reports (always a person, Jev only flags urgency), and spam in Slack. Details: docs/research/renderatl-jev-opportunities.md.</p>
     <p class="bridge">Bridge: "So we built it."</p>
   </aside>
@@ -649,7 +649,7 @@ video.vid { border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); ba
   <div class="row center" style="align-items:center">
     <video class="vid" style="flex:1.5 1 0;height:400px" src="media/decision-desk-demo.mp4" controls muted playsinline preload="metadata"></video>
     <ul class="ev" style="gap:22px">
-      <li style="font-size:30px">One Jev call: 7 typed decisions for each email.</li>
+      <li style="font-size:30px">One Jev call: 7 typed decisions for each email that code does not stop first.</li>
       <li style="font-size:30px">Code: Do Not Contact, the pricing gate, no deck twice.</li>
       <li style="font-size:30px">Contracts, money, safety, injection: a person.</li>
       <li style="font-size:30px">The Jev wire shows the raw request and response.</li>
@@ -688,14 +688,15 @@ video.vid { border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); ba
 <section class="slide" data-part="5">
   <div class="kicker">Use cases · Real sales email</div>
   <h2>Real sales email: Jev matched Sonnet and Haiku at 2% to 4% of the cost.</h2>
-  <table class="cmp tight center">
-    <tr><th>Held-out threads, 45 messages</th><th>Right</th><th>Cost, 138 messages</th><th>Median time</th></tr>
-    <tr class="hot"><td>Jev, playbook + thread facts</td><td>28 (62%)</td><td>$0.012</td><td>0.19 s</td></tr>
-    <tr><td>Sonnet, same context</td><td>26 (58%)</td><td>$0.60</td><td>4.0 s</td></tr>
-    <tr><td>Haiku, same context</td><td>28 (62%)</td><td>$0.30</td><td>13.6 s</td></tr>
-    <tr><td>Jev, latest message only</td><td>19 (42%)</td><td></td><td></td></tr>
+  <table class="cmp tight center" style="font-size:24px">
+    <tr><th>Held out, 45</th><th>Right</th><th>Recall, 4 actions</th><th>Cost, 138 messages</th><th>Median time</th></tr>
+    <tr class="hot"><td>Jev, playbook + thread facts</td><td>28 (62%)</td><td>0.51</td><td>$0.012</td><td>0.19 s</td></tr>
+    <tr><td>Sonnet, same context</td><td>26 (58%)</td><td>0.49</td><td>$0.60</td><td>4.0 s</td></tr>
+    <tr><td>Haiku, same context</td><td>28 (62%)</td><td>0.51</td><td>$0.30</td><td>13.6 s</td></tr>
+    <tr><td>Jev, latest message only</td><td>19 (42%)</td><td>0.41</td><td></td><td></td></tr>
+    <tr><td>Always "send contract"</td><td>28 (62%)</td><td>0.25</td><td>$0</td><td></td></tr>
   </table>
-  <p class="src">268 redacted messages, 70 sales threads. Tuned on one half, scored once on the other. Context: 19 → 28 (p = 0.012). Jev vs Sonnet: p = 0.69. Not accurate enough to act alone.</p>
+  <p class="src">One RenderATL sales mailbox, redacted locally; counts only. Tuned on one half, scored once. Context: 19 → 28 (p = 0.012). Jev vs Sonnet: p = 0.69.</p>
   <aside class="notes">
     <p>Say: "We exported William's sales mailbox, kept the sponsor threads, and removed names, emails, phone numbers, and prices on the laptop before anything went to a model. The question: given the thread, what must the rep do next? Send the contract, pricing, the deck, schedule a call, another reply, or nothing."</p>
     <p>"First version: Jev saw only the latest message. 19 of 45 right. Then we gave it the stage playbook from our sales tool, facts that code computes from the whole thread, and the rep's own last message. 28 of 45. Same model. Better question, more context. That is the lesson of this talk again."</p>
@@ -718,7 +719,7 @@ video.vid { border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); ba
     <div class="num" style="padding:20px 30px"><div class="lab">Blind judge, Jev first vs today</div><div class="val pair" style="font-size:56px">16 <span class="to">to</span> 2</div><p style="font-size:28px">17 ties, p = 0.0013</p></div>
     <div class="num" style="padding:20px 30px"><div class="lab">Gemini cost, 39 requests</div><div class="val pair" style="font-size:56px"><span class="was">$1.34</span><span class="to">→</span>$1.29</div><p style="font-size:28px">Same cost, better inputs.</p></div>
   </div>
-  <p class="src">One real closet (145 garments), 39 requests, one run, Claude as the blind judge. The "skip the model" gate failed once and stays off.</p>
+  <p class="src">One closet, 39 requests, one run. The judge is Claude, not a person (35 judged pairs). A human check is pending. The "skip the model" gate failed once and stays off.</p>
   <aside class="notes">
     <p>Say: "PTSO, my outfit agent, follows one rule: the model proposes, the ontology disposes. But the ontology runs after the expensive model call. So we asked: what if Jev narrows the closet before the model sees it?"</p>
     <p>"The closet has 62 tops and 63 bottoms. The route sends only 5 of each to the model, in database order. For 'gym session after work', none of the gym clothes reached the model. Jev reads the request and puts the right garments first. It can only remove or reorder; the ontology still checks every outfit."</p>
@@ -755,7 +756,7 @@ video.vid { border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); ba
     <tr><td>Jev</td><td>0.076</td><td>0.381</td></tr>
     <tr><td>Jev + Claude</td><td>0.082</td><td>0.290</td></tr>
   </table>
-  <p class="src">Average precision against the teams' real stops (higher is better). Trained on 2026 rounds 1 to 10, tested once on rounds 11 to 16: 6,839 driver-laps, 242 stops. Data: FastF1.</p>
+  <p class="src">Average precision against the teams' real stops (higher is better). Trained on 2026 rounds 1 to 10, tested once on rounds 11 to 16: 6,839 driver-laps, 242 stops. Data: FastF1. The safety-car difference was not tested for significance.</p>
   <aside class="notes">
     <p>Say: "We took every lap of the last six races of this season, Hungary to Bahrain, and asked one question for each driver: must this car pit at the end of this lap? The answer key is what the team really did. Code calculated every fact first: tire age against a typical stint, safety car, the gap behind, the pit loss."</p>
     <p>"A logistic regression, trained on the first ten races, wins on all laps: 0.147 against 0.076 for Jev. That is the second row of the last slide. With labels and numbers, train a model."</p>
@@ -792,13 +793,13 @@ video.vid { border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); ba
 
 <section class="slide" data-part="6">
   <div class="kicker">Case: Ask Your Agent</div>
-  <h2>On 30 held-out questions: the same accuracy, a faster median, a lower cost.</h2>
+  <h2>On 30 held-out questions: the same checked accuracy, a faster median, a lower cost.</h2>
   <table class="cmp wide tight center">
     <tr><th>30 held-out questions</th><th>Facts right (checked)</th><th>Median</th><th>p95</th><th>Cost / 1,000</th><th>Words</th></tr>
     <tr><td>LLM only</td><td>17 of 19</td><td>5,322 ms</td><td>13,071 ms</td><td>$21 to $86</td><td>149</td></tr>
     <tr class="hot"><td>Jev first</td><td>17 of 19</td><td>237 ms</td><td>9,882 ms</td><td>$8 to $9</td><td>98</td></tr>
   </table>
-  <p class="src">Jev first sent 19 of 30 to System 1. Intent right: 30 of 30. One real fact error: a ticket pick at probability 1. Synthetic questions, one run, list prices.</p>
+  <p class="src">19 of 30 questions had a fact check. Jev first sent 19 of 30 to System 1. The high LLM cost includes 3 cache-write outliers. Synthetic questions, one run, list prices.</p>
   <aside class="notes">
     <p>Say: "We wrote 100 attendee questions and labeled each one: the intent, the right ticket, and the facts that a right answer must contain. We tuned on 70. We ran these 30 once, at the end."</p>
     <p>"19 questions had facts that a right answer must contain. Both paths got 17 of those 19 right. The other 11, for example the emails, had no automatic check."</p>
@@ -854,14 +855,14 @@ video.vid { border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); ba
 <section class="slide" data-part="6">
   <div class="kicker">Your turn</div>
   <h2>Change the question, measure it, and keep the better version.</h2>
-  <table class="cmp wide tight center">
+  <table class="cmp wide tight center" style="font-size:24px">
     <tr><th></th><th>Track A · The maze</th><th>Track B · Attendee questions</th></tr>
     <tr><td>1 · Words</td><td>Rewrite the text for each direction</td><td>Rewrite an intent in <code>INTENT_CRITERIA</code></td></tr>
     <tr><td>2 · Facts</td><td>Add a fact that code calculates</td><td>Add a fact and its template</td></tr>
     <tr><td>3 · Rule</td><td>Ask a danger Score, and change <code>combine()</code></td><td>Change the route thresholds</td></tr>
     <tr><td>4 · Strategy</td><td>Ask a Noul: go for the power pellet now?</td><td>Ask a Noul: does this question need a person?</td></tr>
   </table>
-  <p class="src">A: src/jev/questions.js · npm run bench -- --difficulty normal --games 20 --seed 1000<br>B: src/ask/core/system1.js · node scripts/ask-bench.mjs --split tune --llm off</p>
+  <p class="src">Setup: npm install · Jev key in .env as TYPESAFE_API_KEY · npm run dev · /?jev=1 · a 20-game bench costs under $0.15<br>A: src/jev/questions.js · npm run bench -- --games 20 --seed 1000 · B: node scripts/ask-bench.mjs --split tune --llm off</p>
   <aside class="notes">
     <p>Say: "Pick one track. Both use the same four rules from this talk."</p>
     <p>Track A, the maze: everything is in one file, src/jev/questions.js. Level 1 is rule one: the words. Level 2 is rule two: a fact that code calculates. Level 3 is rules three and four: a narrow question, and a rule in code. Level 4 is a yes or no strategy question. After each change, run the benchmark. Use --seed so that each version plays the same varied games, and use at least 20 games: a difference of one or two wins can be chance. A stretch goal: beat the code-only policy.</p>

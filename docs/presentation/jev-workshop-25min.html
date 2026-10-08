@@ -1,0 +1,739 @@
+<title>Jev Workshop (25 min) | RenderATL × AI Ship & Social</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Instrument+Sans:wght@400;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: a fixed 1600x900 stage, scaled to the window. RenderMaze brand: cream paper, ink borders, hard shadows.
+   Single light look by choice (a projected deck), so every color is set explicitly. */
+:root {
+  --paper: #fcf9ee;
+  --butter: #fff7cf;
+  --ink: #2b292d;
+  --night: #211c22;
+  --pink: #ff88df;
+  --gold: #df9718;
+  --teal: #015a55;
+  --plum: #711b43;
+  --muted: #6b6470;
+  --display: "Archivo Black", "Arial Black", Impact, sans-serif;
+  --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+html, body { height: 100%; }
+body { margin: 0; background: var(--night); color: var(--ink); font-family: var(--body); overflow: hidden; }
+.viewport { position: fixed; inset: 0; }
+.stage { position: absolute; width: 1600px; height: 900px; transform-origin: 0 0; }
+
+.slide {
+  position: absolute; inset: 0; display: none; box-sizing: border-box;
+  padding: 64px 96px 120px; background: var(--paper);
+  background-image: linear-gradient(90deg, rgba(43,41,45,.05) 1px, transparent 1px), linear-gradient(0deg, rgba(43,41,45,.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  flex-direction: column; gap: 36px;
+}
+.slide.on { display: flex; }
+.slide.dark { background: var(--night); color: var(--paper); background-image: none; }
+.slide .notes { display: none; }
+
+.kicker { font: 700 22px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--plum); }
+.dark .kicker { color: var(--pink); }
+h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+h1 { font-size: 148px; line-height: .86; text-transform: uppercase; }
+h2 { font-size: 64px; line-height: 1.04; max-width: 1400px; }
+p { margin: 0; }
+.lead { font-size: 48px; line-height: 1.25; max-width: 1340px; }
+.small { font-size: 40px; line-height: 1.3; color: var(--muted); max-width: 1380px; }
+.dark .small { color: rgba(252,249,238,.72); }
+.src { font: 500 24px/1.35 var(--mono); color: var(--muted); max-width: 1408px; }
+.dark .src { color: rgba(252,249,238,.6); }
+.pink { color: var(--pink); }
+.speaker { font: 500 30px/1.3 var(--mono); color: rgba(252,249,238,.85); }
+.speaker b { font-weight: 700; color: var(--paper); }
+.mark { background: var(--pink); color: var(--ink); padding: 0 .18em; }
+
+.box { border: 3px solid var(--ink); background: var(--butter); box-shadow: 10px 10px 0 var(--ink); padding: 28px 32px; }
+.box.hot { background: var(--pink); }
+.dark .box { border-color: var(--paper); background: var(--night); box-shadow: 10px 10px 0 var(--pink); }
+.box h3, .tile h3 { margin: 0 0 14px; font: 700 24px/1.1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--plum); }
+.box p, .tile p { font-size: 40px; line-height: 1.25; }
+.box p + p, .tile p + p { margin-top: 14px; }
+.tile p.like { font: 500 26px/1.3 var(--mono); color: var(--muted); }
+.row { display: flex; gap: 44px; align-items: stretch; }
+.row > * { flex: 1 1 0; min-width: 0; }
+.center { margin-block: auto; }
+
+/* Quoted requests and question text. These blocks use 28-30px: the exact words are the evidence. */
+pre.q {
+  margin: 0; font: 500 28px/1.42 var(--mono); white-space: pre-wrap; background: var(--night); color: var(--paper);
+  border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); padding: 28px 34px;
+}
+pre.q .k { color: var(--pink); }
+pre.q .v { color: #ffd88a; }
+pre.q .c { color: rgba(252,249,238,.55); }
+
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.tile { border: 3px solid var(--ink); background: var(--butter); box-shadow: 10px 10px 0 var(--ink); padding: 28px 30px; display: flex; flex-direction: column; gap: 14px; }
+.tile.hot { background: var(--pink); }
+
+/* Comparison tables. Table text is 34px so that four or five rows fit. */
+table.cmp { border-collapse: collapse; width: 100%; font-size: 30px; line-height: 1.22; }
+table.cmp th { text-align: left; font: 700 20px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--plum); padding: 0 20px 10px; }
+table.cmp td { border: 3px solid var(--ink); padding: 13px 20px; background: var(--butter); vertical-align: top; }
+table.cmp td:first-child { font-family: var(--display); font-size: 30px; background: var(--paper); width: 25%; }
+table.cmp.wide td:first-child { width: 40%; }
+table.cmp.tight { font-size: 27px; }
+table.cmp.tight td { padding: 9px 18px; }
+table.cmp.tight td:first-child { font-size: 27px; }
+table.cmp.tight[style*="24px"] td, table.cmp.tight[style*="24px"] td:first-child { font-size: 24px; padding: 7px 14px; }
+table.cmp.tight[style*="24px"] .ev { font-size: 19px; }
+table.cmp tr.hot td { background: var(--pink); }
+table.cmp .ev { font: 500 22px/1.3 var(--mono); color: var(--muted); }
+
+.nums { display: grid; grid-template-columns: repeat(2, 1fr); gap: 44px; }
+.num { border: 3px solid var(--ink); background: var(--butter); box-shadow: 10px 10px 0 var(--ink); padding: 28px 36px; }
+.num .lab { font: 700 24px/1.2 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--plum); }
+.num .val { font: 400 96px/1.05 var(--display); margin-top: 14px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.num .val.pair { font-size: 74px; }
+.num .val .to { color: var(--pink); padding: 0 .12em; }
+.num .val .was { color: var(--muted); }
+.num p { font-size: 34px; line-height: 1.25; margin-top: 12px; }
+
+.formula { font: 700 52px/1.2 var(--mono); background: var(--night); color: var(--paper); border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); padding: 28px 36px; }
+.formula .v { color: #ffd88a; }
+
+ul.ev, ol.ev { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 18px; }
+ul.ev li, ol.ev li { font-size: 42px; line-height: 1.25; padding-left: 56px; position: relative; }
+ul.ev li::before { content: "★"; position: absolute; left: 0; color: var(--pink); }
+ol.ev { counter-reset: e; }
+ol.ev li { counter-increment: e; }
+ol.ev li::before { content: counter(e); position: absolute; left: 0; font-family: var(--display); color: var(--plum); }
+ol.ev.cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 56px; }
+ol.ev.cols2 li { font-size: 36px; }
+
+ol.flow3 { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; counter-reset: f; }
+ol.flow3 li { counter-increment: f; border: 3px solid var(--ink); background: var(--butter); box-shadow: 10px 10px 0 var(--ink); padding: 26px 28px; font-size: 38px; line-height: 1.25; }
+ol.flow3 li.jev { background: var(--pink); }
+ol.flow3.nonum li::before { display: none; }
+ol.flow3 li::before { content: counter(f); display: block; font: 400 60px/1 var(--display); color: var(--plum); margin-bottom: 10px; }
+ol.flow3 li b { display: block; font: 700 24px/1.1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--plum); margin-bottom: 10px; }
+
+.gate { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); }
+.gate > div { padding: 26px 28px; border-right: 3px solid var(--ink); background: var(--butter); }
+.gate > div:last-child { border-right: 0; background: var(--pink); }
+.gate > div:first-child { background: var(--plum); color: var(--paper); }
+.gate b { display: block; font: 700 24px/1.1 var(--mono); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 12px; }
+.gate p { font-size: 38px; line-height: 1.25; }
+
+code { font-family: var(--mono); font-size: .82em; background: rgba(43,41,45,.08); padding: 0 .2em; }
+.dark code { background: rgba(252,249,238,.12); }
+video.vid { border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); background: var(--night); display: block; max-width: 100%; height: 520px; }
+.shot { border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); max-width: 100%; height: 440px; object-fit: cover; object-position: left top; display: block; }
+
+.rail { position: absolute; left: 96px; right: 96px; bottom: 40px; display: flex; gap: 12px; font: 700 17px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+.rail span { flex: 1; border-top: 6px solid rgba(43,41,45,.18); padding-top: 12px; color: rgba(43,41,45,.45); }
+.rail span.on { border-color: var(--pink); color: var(--ink); }
+.dark .rail span { border-color: rgba(252,249,238,.2); color: rgba(252,249,238,.45); }
+.dark .rail span.on { border-color: var(--pink); color: var(--paper); }
+
+.controls { transition: opacity .3s; position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); display: flex; gap: 8px; align-items: center; z-index: 5; font: 700 14px/1 var(--mono); }
+.controls.idle { opacity: 0; }
+.controls.idle:focus-within { opacity: 1; }
+.controls button { font: inherit; border: 2px solid var(--ink); background: var(--paper); color: var(--ink); padding: 8px 12px; cursor: pointer; box-shadow: 3px 3px 0 var(--ink); }
+.controls button:focus-visible { outline: 3px solid var(--pink); outline-offset: 2px; }
+.controls .count { background: var(--paper); color: var(--ink); border: 2px solid var(--ink); padding: 8px 10px; font-variant-numeric: tabular-nums; }
+.notesPanel { position: fixed; left: 16px; right: 16px; bottom: calc(64px + env(safe-area-inset-bottom, 0px)); max-height: 44vh; overflow: auto; z-index: 4; background: var(--paper); color: var(--ink); border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 16px 20px; font: 17px/1.5 var(--body); }
+.notesPanel h4 { margin: 0 0 8px; font: 700 13px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--plum); }
+.notesPanel p { margin: 0 0 10px; max-width: 78ch; }
+.notesPanel .bridge { border-left: 4px solid var(--pink); padding-left: 10px; }
+@media (prefers-reduced-motion: no-preference) { .slide.on { animation: in .18s ease-out; } @keyframes in { from { opacity: .4; } to { opacity: 1; } } }
+</style>
+
+<div class="viewport" id="viewport">
+<div class="stage" id="stage">
+
+<!-- PART 0: Promise -->
+<section class="slide dark" data-part="0">
+  <div class="kicker">RenderATL × AI Ship &amp; Social · Thursday, October 15, 2026</div>
+  <h1 class="center">Jev<br><span class="pink">Workshop</span></h1>
+  <p class="small">What Jev is, where it fits, and how to use it in your own projects</p>
+  <p class="speaker"><b>William MJ Hill</b> · Forward Deploy Engineer, RenderATL · <span class="pink">@emjay_hill</span></p>
+  <p class="src">Co-hosted by RenderATL and AI Ship &amp; Social · Food, drinks, and Jev access by Obvious</p>
+  <aside class="notes">
+    <p>Do not open with an agenda. Thank the hosts in one sentence, then go to the next slide.</p>
+    <p>Say: "Thank you to AI Ship &amp; Social for co-hosting, and to Obvious for the food, the drinks, and your Jev access today."</p>
+    <p>Introduce yourself in one sentence: "I am William MJ Hill, a Forward Deploy Engineer at RenderATL. You can find me at @emjay_hill."</p>
+    <p>Disclosure, say it early: "I have no relationship with TypeSafe AI, the company that makes Jev. Obvious sponsors this event and gives you Jev access. I used my own API key for every test in this talk, and no sponsor reviewed these results." An audience of engineers will ask.</p>
+    <p>Obvious (obvious.ai) is an AI workspace company in San Francisco, formerly Flatfile, with multi-agent workflows that it calls factories. Do not confuse it with Obviously AI, a different company. As far as we know, Obvious is a sponsor, not a TypeSafe partner, and there is no public Obvious and Jev integration. Every test in this talk used our own TypeSafe key.</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="0">
+  <div class="kicker">The promise</div>
+  <h2 class="center">By the end of this talk, you will know when to use Jev, when to use something else, and how to write a question that it answers well.</h2>
+  <p class="small">Then you will build with it yourself, with free Jev access from Obvious.</p>
+  <aside class="notes">
+    <p>Say: "Jev is new. It went into early access on September 15, one month ago. In thirty minutes you will know what it does, what it does not do, and how it compares with tools that you already use. I will show where the evidence is strong, where it is weak, and where we have none."</p>
+    <p class="bridge">Bridge: "Every tool exists for a problem. Let us start with the problem."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="1">
+  <div class="kicker">The problem</div>
+  <h2>Software makes many small decisions about text.</h2>
+  <ul class="ev center">
+    <li>Which team gets this support ticket?</li>
+    <li>Is this message a refund request?</li>
+    <li>Does this post break our community rules?</li>
+    <li>Which model must answer this prompt?</li>
+  </ul>
+  <p class="small">Each decision has a fixed set of answers, and it runs many times a day.</p>
+  <aside class="notes">
+    <p>Say: "A person answers each of these in a second. Each one has a short, known list of answers. And each one runs thousands of times, with no person watching."</p>
+    <p>Ask the room: "How do you build this today?" Take two answers at most, to keep the time.</p>
+    <p class="bridge">Bridge: "Most answers fall into four tools."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="1">
+  <div class="kicker">The problem</div>
+  <h2>Today we have four tools for these decisions.</h2>
+  <table class="cmp center">
+    <tr><th>Tool</th><th>Good at</th><th>Weak at</th></tr>
+    <tr><td>Rules and regex</td><td>Exact, cheap, easy to audit</td><td>New wording breaks them</td></tr>
+    <tr><td>Trained classifier</td><td>Fast and cheap for each call</td><td>Needs labeled training data. A new label needs new training.</td></tr>
+    <tr><td>Zero-shot classifier</td><td>Labels as text at run time</td><td>Lower accuracy. Test its scores before code acts on them.</td></tr>
+    <tr><td>LLM prompt</td><td>Reads anything, follows instructions</td><td>Returns text to parse. A probability for each option needs extra work.</td></tr>
+  </table>
+  <aside class="notes">
+    <p>Rules: "if the subject contains 'refund', send it to billing". A customer who writes "I want my money back" gets past it.</p>
+    <p>Trained classifier: logistic regression or a fine-tuned BERT model. You need hundreds or thousands of labeled examples, and a new team means new training.</p>
+    <p>Zero-shot classifier: for example the Hugging Face zero-shot pipeline, which uses an entailment model. You give the labels as text at run time.</p>
+    <p>LLM prompt: "Here is a ticket, reply with billing, technical, or sales." JSON mode fixes the format. For a probability, you can limit the output to the option tokens and read their log probabilities, then calibrate them with temperature scaling. That works, but it is extra work, and not every API exposes log probabilities.</p>
+    <p>A documented example of text output that drifts: Anthropic's own guide for Claude Opus 5 says that its "default user-facing responses run longer than prior Opus models'", that a lower effort setting does not reliably shorten them, and that it "can also expand the scope of a task, adding steps that weren't requested." Users on Hacker News and Reddit made the same complaint. If your code parses an LLM's answer to make a decision, that drift becomes your problem.</p>
+    <p>Be honest if asked: we did not measure Jev against an LLM on the same task. The one public comparison that we found is on full-deck slide 21.</p>
+    <p class="bridge">Bridge: "Before we look at Jev, one idea from the people who built it: assistance is not the same job as automation."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="1">
+  <div class="kicker">The problem</div>
+  <h2>Most AI today assists a person. Automation is a different job.</h2>
+  <table class="cmp tight center">
+    <tr><th></th><th>Assistance</th><th>Automation</th></tr>
+    <tr><td>The goal</td><td>Help the person in the loop</td><td>Remove the person from the loop</td></tr>
+    <tr><td>How it runs</td><td>Once, while a person reads it</td><td>In the background, many times</td></tr>
+    <tr><td>Who sees an error</td><td>The user, who fixes it</td><td>Often nobody, until it costs money</td></tr>
+    <tr><td>What it needs</td><td>Good text</td><td>A fixed answer and a probability</td></tr>
+    <tr class="hot"><td>Trained for</td><td>Human preference (RLHF)</td><td>Calibrated decisions (RLCD)</td></tr>
+    <tr><td>Examples</td><td>Chat, coding agents</td><td>Jev</td></tr>
+  </table>
+  <p class="src">Paraphrase of the TypeSafe CEO, AI Engineer, 31 July 2026. RLCD: the TypeSafe launch post. The vendor's framing, with no benchmark numbers.</p>
+  <aside class="notes">
+    <p>Say: "The CEO of TypeSafe, the company that makes Jev, co-authored the RLHF work behind ChatGPT. His argument: today's chat models are trained to please the person who reads the answer. That is good for assistance. It is a poor fit for automation, where no person reads each answer."</p>
+    <p>His own words, worth quoting: assistance tasks are ones where "the goal of it is to please the human in the loop." Automation should run "in the background in a server that you never even look at." And: "Today's AI, everything inherited from RLHF, is incredible at the human in the loop stuff, but not for automation tasks." Why does every LLM need a human in the loop? "We literally put them in the loop."</p>
+    <p>The last row: he names three training targets. "RLHF is optimizing for human preference. RLVR is optimizing for pure correctness, but we are doing a third thing that is optimized for calibrated decision-making." The launch post calls that third thing RLCD, reinforcement learning for calibrated decisions. He puts Claude Code on the assistance side too: a great tool, but one with a person who reads each step.</p>
+    <p>Say: "Most of the AI tools that you use today are assistance tools: a chat window, a coding agent, a person who reads every answer. Jev is built for the other column: thousands of small decisions that nobody reads."</p>
+    <p>RLHF, if asked now: reinforcement learning from human feedback. People rank model answers, a reward model learns their preferences, and the model is trained toward answers that people prefer. Slide 13 has all three definitions.</p>
+    <p>His point about errors: a reward model that learns from people tends to reward answers that sound confident. So a chat model can sound right when it is wrong. In assistance, the user catches that. In automation, nobody does.</p>
+    <p>Be clear about the source: this is the vendor's own story, from a talk before the Jev launch. It is a useful way to sort tasks. It is not evidence that Jev is more accurate. I have no relationship with TypeSafe.</p>
+    <p>Source: "Jev CEO: I made ChatGPT, now I'm building what's next", AI Engineer channel, youtu.be/cJ0EOzey--o. Notes in docs/research/jev-research.md, section 7d.</p>
+    <p class="bridge">Bridge: "Jev aims at the automation side, and at the gap between the last two rows of the table before: labels as text, with a probability for each option built in."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="2">
+  <div class="kicker">What Jev is</div>
+  <h2>Jev answers a fixed-option question about text, and returns a probability for each option.</h2>
+  <div class="row center">
+    <div class="box"><h3>Who</h3><p>A hosted model from TypeSafe AI, in early access since 15 Sept 2026</p></div>
+    <div class="box"><h3>Speed</h3><p>About 170 to 250 ms for each request in our tests</p></div>
+    <div class="box"><h3>Name</h3><p>After economist William Stanley Jevons</p></div>
+  </div>
+  <p class="small">It reads language like an LLM and returns one of your options. Think of a classifier whose labels you write in English.</p>
+  <aside class="notes">
+    <p>Say: "That is the whole definition. Input: text and a question with options that you write. Output: one option, and a probability for each option."</p>
+    <p>"Typed answer" means the answer is always one of the options that you defined, so code never parses free text.</p>
+    <p>The name: the next slide explains it.</p>
+    <p>Speed: the median request time in our maze benchmark was 166 to 204 ms, from a laptop in Atlanta, through a local proxy. Current version: jev-1.13.0.</p>
+    <p><b>From full-deck full-deck slide 7:</b></p>
+    <p>Say: "In 1865 the economist William Stanley Jevons asked a simple question: Britain's steam engines get more efficient every year, so why does Britain burn more coal every year? His answer: a cheaper job finds more uses. More factories bought engines, and total coal use went up. Economists now call this the Jevons paradox."</p>
+    <p>"TypeSafe named Jev after him on purpose. Its launch post says it expects machine intelligence to follow the same path as coal: each large drop in the cost of a decision opens many more uses. A call that takes 170 ms and costs a small part of a cent can go where an LLM is too slow or too expensive today: every row of a table, every line of a log, every move in a game."</p>
+    <p>The other side, say it: more decisions also means more total mistakes. Sophos calls this "Jev's paradox": when automated decisions are cheap enough to run on everything, any error rate adds up. Our maze shows it at small scale. Jev followed our written rules in about 96 percent of decisions, but a game has about 90 decisions, so each game had about 4 wrong moves, and some of them cost a life.</p>
+    <p>Be exact if asked: the paradox is not a law. It happens only when demand grows faster than the cost falls. Farm productivity is the standard counter-example: food got cheaper, and people did not eat much more food.</p>
+    <p>Sources: TypeSafe, "Introducing System One Models &amp; Jev", typesafe.ai/blog, 15 Sept 2026. IBM Technology, "What Is Jev?", also tells the story. Jevons, The Coal Question, chapter 7, "Of the Economy of Fuel". Sophos, "Jev's Paradox: the hidden cost of cheap AI decisions". Maze numbers: docs/research/question-design-finding.md.</p>
+    <p><b>From full-deck full-deck slide 8:</b></p>
+    <p>Say: "TypeSafe borrowed the name from Daniel Kahneman's book Thinking, Fast and Slow. Kahneman describes two modes of human thinking. System 1 is fast and automatic: what is 2 times 2? You know it is 4 without any work. System 2 is slow and deliberate: what is 17 times 24? You must work through it, step by step, to get 408."</p>
+    <p>"Most AI models are built to write. A chat model writes its answer one token at a time. A reasoning model goes further and writes out its chain of thought before it answers. That is as close to System 2 as AI gets today."</p>
+    <p>"But many decisions inside software are not System 2. They are quick judgment calls. Look at a support email that says 'I was charged twice this month, please fix it.' Is it a refund request? A person who skims it knows at once: yes. That is System 1 work, and that is the kind of work Jev is built for."</p>
+    <p>Origin, if asked: Kahneman made the terms famous in 2011. The terms "System 1" and "System 2" come from the psychologists Keith Stanovich and Richard West, in a 2000 paper on reasoning. Kahneman won the 2002 Nobel prize in economics for his work with Amos Tversky on judgment and decision making.</p>
+    <p>Source for the examples: IBM Technology, "What Is Jev? The AI Model That Doesn't Generate Text" (YouTube, 15 minutes). A good link to share after the talk.</p>
+    <p><b>From full-deck full-deck slide 9:</b></p>
+    <p>Say: "A trained classifier learns its labels from examples. Jev gets its labels in the request, as words. You can change a label or add a rule, and the next request uses it."</p>
+    <p>The event page calls Jev "a zero-shot classifier". That is a fair short name: it classifies with no training examples. The difference from the older zero-shot method in the table on full-deck slide 4: Jev also takes written rules for each option, and TypeSafe trains its probabilities to match outcomes.</p>
+    <p>Be exact about "no labels": you need no training data, but you still need a set of labeled test cases to know how well it works and where to put thresholds. That set can be small compared with training data, but it is not zero.</p>
+    <p>The preprint: published September 29, about two weeks before this talk, not peer reviewed. It compared model classes on workflow, intent, and social-science decisions. Its summary: the ranking depends on the conditions. With the task's own labels, small trained classifiers win on intents. Without labels, Jev and similar models beat the older zero-shot method.</p>
+    <p class="bridge">Bridge: "Here is what one request looks like."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="2">
+  <div class="kicker">What Jev is · how to call it</div>
+  <h2>One request, one answer.</h2>
+  <div class="row center">
+<pre class="q"><span class="c">POST /v1/systemone</span>
+<span class="k">state</span>  "Help! My payouts have
+        been failing for 3 days."
+<span class="k">question</span> department <span class="c">(choice)</span>
+  "Which team should handle this?"
+  <span class="k">billing</span>    Payments, invoicing, refunds
+  <span class="k">technical</span>  Bugs, outages, integrations
+  <span class="k">sales</span>      Pricing, upgrades, new accounts</pre>
+<pre class="q" style="flex:.6 1 0"><span class="k">choice</span>      <span class="v">billing</span>
+
+<span class="k">billing</span>     0.88
+<span class="k">technical</span>   0.12
+<span class="k">sales</span>       0.00
+
+<span class="k">confidence</span>  0.81</pre>
+  </div>
+  <p class="src">The example from the TypeSafe API reference, shortened. One request can carry many questions.</p>
+  <p class="src">Three question types: Choice (one option), Score (a level), Noul (the probability of yes).</p>
+  <aside class="notes">
+    <p>Say: "Three parts. The state is the content: here, one support message. The question has instructions and a list of options, and each option has a short description. The answer names one option and gives a probability for each."</p>
+    <p>Details for questions: The question name, "department", is not sent to the model, so all the meaning must be in the instructions and the descriptions. A request can carry many questions, answered in parallel. Limits: up to 255 options for each Choice, and 64,000 tokens for each request.</p>
+    <p><b>From full-deck full-deck slide 11:</b></p>
+    <p>Choice picks one of your options. Score rates on ordered levels that you describe, for example 0 calm, 1 frustrated, 2 very frustrated; the answer is the probability-weighted level, so 1.4 lies between "frustrated" and "very frustrated". Noul, TypeSafe's name for a yes or no question, gives the probability of yes.</p>
+    <p>Tie: "Each one is a classic machine learning output. You already know how to use these in code: an argmax, a threshold, a sort."</p>
+    <p class="bridge">Bridge: "This was a Choice. There are three question types."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="2">
+  <div class="kicker">What Jev is · probability and confidence</div>
+  <h2>Probabilities and confidence are two different numbers.</h2>
+  <div class="row center">
+    <div class="box"><h3>Probability</h3><p>Billing 0.88</p><p>TypeSafe says these are calibrated: of many answers at 0.8, about 80% are correct.</p></div>
+    <div class="box"><h3>Confidence</h3><p>≈ (n × top − 1) / (n − 1)</p><p>How concentrated the probabilities are. It is not the chance of being correct.</p></div>
+  </div>
+  <p class="src">TypeSafe docs: Confidence; System One. Calibration "does not guarantee that an individual answer is correct."</p>
+  <aside class="notes">
+    <p>Say: "The probabilities are the model's estimate for each option. TypeSafe claims they are calibrated. That is a claim about groups: of a thousand answers at 0.8, about 800 are correct."</p>
+    <p>Draw it in the air, from the IBM video: put the stated probability on the bottom axis and how often the answer is correct on the side axis. A calibrated model lies on the diagonal: answers at 0.8 are correct about 80 percent of the time.</p>
+    <p>"Confidence is arithmetic on those probabilities. n is the number of options, top is the highest probability. All the probability on one option gives 1. An even spread gives 0. With 3 options and a top of 0.88, confidence is 0.81. So 'confidence 0.81' does not mean '81 percent correct'."</p>
+    <p>For a Score, TypeSafe uses a different spread formula over the levels. A Noul has no confidence field: a value near 0.5 means "not sure".</p>
+    <p>Tie: "With a classifier that you train, you calibrate it yourself, with Platt scaling or temperature scaling on a held-out set. TypeSafe says it does that work in training. You still must check it on your own data, as the next part shows."</p>
+    <p><b>From full-deck full-deck slide 13:</b></p>
+    <p>Keep this slide to about one minute.</p>
+    <p>Define the shared term: "All three start with RL, reinforcement learning. A model produces an output, a reward function scores it, and training makes high-scoring outputs more probable. The methods differ in where the score comes from."</p>
+    <p>Context: a model first learns from a huge amount of text (pre-training), then learns to be useful in a second stage (post-training). Much of post-training uses reinforcement learning.</p>
+    <p><b>RLHF, reinforcement learning from human feedback.</b> People compare answers and pick the better one. A reward model learns those choices, and training moves the language model toward answers that score high. OpenAI used it for InstructGPT and ChatGPT. Side effect: people tend to like answers that sound confident, so a model can learn to sound sure even when it is wrong.</p>
+    <p><b>RLVR, reinforcement learning with verifiable rewards.</b> A program checks each answer: is the math correct, do the unit tests pass? This produced the reasoning models. The reward checks only the final answer. It does not reward the model for knowing how sure it should be.</p>
+    <p><b>RLCD, reinforcement learning for calibrated decisions.</b> TypeSafe's name for its own method. The model gives a probability for each option, and the reward depends on whether those probabilities match how often the answers are correct.</p>
+    <p>If asked "why reinforcement learning, when a normal classifier loss such as log loss already rewards calibration?": TypeSafe does not explain this, and it has not published a paper, a reward function, the base model, or its size. Say that you do not know.</p>
+    <p class="bridge">Bridge: "Calibrated or not, confidence has a blind spot."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="3">
+  <div class="kicker">What it does not solve</div>
+  <h2>Confidence cannot tell you that the question is wrong.</h2>
+  <div class="row center">
+    <div class="box"><h3>An incomplete question</h3><p>24 support messages, 4 teams. The question left out a company rule.</p><p>19 wrong. 15 of them had confidence above 0.90.</p></div>
+    <div class="box"><h3>Option order and scope</h3><p>A swap of the yes and no labels changed 50.5 of 100 answers.</p><p>A 5% risk threshold still let in 31% of out-of-scope requests.</p></div>
+  </div>
+  <p class="src">Left: phuryn/experiments, rerun 3 times by us. Right: Rafe and Das preprint, not rerun. TypeSafe lists 9 failure modes, for example math, dates, and option order.</p>
+  <aside class="notes">
+    <p>Left, say: "Someone published an experiment on GitHub: 24 support messages to route to 4 teams. The company had a routing rule that a new employee would not guess, and the question did not state it. Jev routed 19 messages wrong, and 15 of those 19 had a confidence above 0.90. We ran the same code three times and got the same accuracy; 14 of the 19 errors were above 0.90 in our runs."</p>
+    <p>The lesson on the left is about the question, not about Jev alone: any model would miss a rule that nobody wrote down. The point is that the confidence cannot warn you. It describes the words you wrote, not your intent.</p>
+    <p>Right, say: "The preprint found two other problems. When they swapped which label meant yes and which meant no, about half of the answers changed. And a threshold tuned to accept only 5 percent risky answers still accepted 31 percent of requests that were outside the question's scope."</p>
+    <p>What to do: test each Noul and Choice with the options in a different order, and add an explicit "none of these" option for requests outside the scope. Each extra order costs one more request.</p>
+    <p><b>From full-deck full-deck slide 14:</b></p>
+    <p>Say: "Every tool on the earlier table had a weak column. This is Jev's, from TypeSafe itself. A published list is useful, because it tells you what to test."</p>
+    <p>For each mode, the test to run:</p>
+    <p>1. Literal reading: "jev-1.13 answers the question you wrote, not the one you meant." Test: write the exact condition, and check boundary cases. 2 and 3. Math, counting, dates: test any question that compares numbers or dates, and move it to code. 4. Indirection, for example a property of a property: point at the exact field. 5. Large state: send only the fields that the question needs. 6. Adversarial content: text in the state can steer the answer. 7. Contradiction: keep the instructions and the option text in agreement. 8. Option order: reorder the options and check that the answer stays the same. 9. Generation: Jev does not write text; use an LLM for that.</p>
+    <p class="bridge">Bridge: "So how do you build with it? Code owns the workflow."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker">How to use it</div>
+  <h2>Code owns the workflow. Jev makes one narrow judgment inside it.</h2>
+  <ol class="flow3 center">
+    <li><b>Code</b>Builds the state. Checks the refund window and the amount.</li>
+    <li class="jev"><b>Jev</b>Answers the language questions: refund asked? Duplicate charge described?</li>
+    <li><b>Code</b>Combines the answers with the exact checks, then acts or sends it to a person.</li>
+  </ol>
+  <p class="src">Adapted from the refund example in the TypeSafe docs, System One.</p>
+  <aside class="notes">
+    <p>Say: "This is the shape of every good Jev system. Code collects the facts and does every exact check: dates, amounts, account status. Jev answers only the questions that need language understanding, in one request. Code makes the decision and sends unclear cases to a person."</p>
+    <p>Tie: "You have seen this shape before. It is a rules engine or a workflow, where one step is a classifier. The difference is that the classifier's labels are words that you can change."</p>
+    <p><b>From full-deck full-deck slide 16:</b></p>
+    <p>Price: our maze games used about 100,000 to 250,000 input tokens each, which is about one cent or less.</p>
+    <p>Rate limits: TypeSafe says the limits are adjusting while demand grows, and higher limits are on custom plans. The docs do not say if the limit is for each key or for each account.</p>
+    <p>Errors: the TypeSafe SDKs retry 429 and 529 with backoff by default. A timeout or a 5xx error needs a fallback in your code: in our maze, code makes the move and labels it FALLBACK. The docs state no SLA.</p>
+    <p>Versions: the response reports the exact version that answered, so log it. TypeSafe does not state a deprecation notice period.</p>
+    <p>Repeatability: in our 3 reruns of the house-rules experiment (72 requests each), 70 requests got the same answer each time. The probabilities moved slightly between runs, for example 0.92 against 0.87.</p>
+    <p><b>From full-deck full-deck slide 17:</b></p>
+    <p>Say: "Four facts before you send customer data. The service runs in the U.S. The privacy policy says TypeSafe will not train or fine-tune models on your inputs, but it gives no fixed retention period. The public site lists no SOC 2 report and no data processing agreement; ask TypeSafe if you need them."</p>
+    <p>Prompt injection: "TypeSafe's docs say that Jev does not treat the state as hostile by default, and that content written to steer the model can move the answer. The request separates the state from the questions, but the docs do not promise that text in the state cannot influence the answer. So treat the answer as untrusted input: code checks any action with real consequences."</p>
+    <p class="bridge">Bridge: "Three rules make this work. The first one is about the words."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker">How to use it · rule 1</div>
+  <h2>Write the exact condition in the words.</h2>
+  <div class="nums center">
+    <div class="num"><div class="lab">Company rule left out</div><div class="val">5 / 24</div></div>
+    <div class="num"><div class="lab">Company rule written in</div><div class="val">24 / 24</div></div>
+  </div>
+  <p class="src">Same experiment as full-deck slide 15 (phuryn/experiments, 24 support messages). The rule was written for these messages and scored on them, so this shows the effect of the words, not accuracy on new messages.</p>
+  <aside class="notes">
+    <p>Say: "Same model, same 24 messages. The only change: the company's routing rule went into the option descriptions. Correct answers went from 5 to 24."</p>
+    <p>The caveat, said plainly: the rule was written for these 24 messages and scored on the same 24. That proves that the words change the answer. It does not prove 100 percent accuracy on messages that nobody has seen. For that, keep a held-out test set.</p>
+    <p>TypeSafe's advice: "When you look at a wrong answer and find yourself explaining what you really meant, that explanation is the missing half of the instruction."</p>
+    <p class="bridge">Bridge: "Rule two is about what not to ask at all."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker">How to use it · rule 2</div>
+  <h2>Keep counting, math, and dates in code.</h2>
+  <div class="row center">
+    <div class="box"><h3>Asked of Jev</h3><p>"Is the bird below the opening?"</p><p>Correct in 35% of 434 answers, worse than a coin flip</p></div>
+    <div class="box hot"><h3>Done in code</h3><p><code>bird_row &gt; opening_bottom</code></p><p>Correct every time, for free</p></div>
+  </div>
+  <p class="src">GapFlap, a public Flappy Bird game on GitHub (gdchaochao/lunar-terminal) that asks Jev about row numbers. Our rerun: "below" 0.353, "above" 0.433, "inside" 0.894.</p>
+  <aside class="notes">
+    <p>Say: "A public Flappy Bird project gives Jev the bird's row number and the rows of the opening, for example 'bird row 6, opening rows 3 to 5', and asks yes or no questions about position. We ran it. On 'is the bird below the opening', Jev was correct 35 percent of the time."</p>
+    <p>Why 35 percent matters: a coin flip gets 50 percent on a yes or no question. Below 50 percent means a systematic error, most likely a misread of the row direction (row numbers grow downward). That is failure mode 1 and 2 together: literal reading of numbers.</p>
+    <p>The design rule: code calculates the numbers, and Jev weighs their meaning. In our maze, code counts the steps to each blocker.</p>
+    <p class="bridge">Bridge: "Rule three: let your test results and the stakes decide what code does."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker">How to use it · rule 3</div>
+  <h2>Let your test results and the stakes decide what code does.</h2>
+  <div class="gate center">
+    <div><b>Low probability</b><p>Send it to a person, or use a fallback</p></div>
+    <div><b>Low stakes</b><p>Act at a lower threshold. A mistake is easy to undo.</p></div>
+    <div><b>High stakes</b><p>Act only at a high threshold. Below it, ask to confirm.</p></div>
+  </div>
+  <p class="small">Choose each threshold from a labeled test set: plot the share of cases that code automates against the error rate.</p>
+  <p class="src">Pin jev-1.13.0, keep a held-out test set, and log every decision.</p>
+  <aside class="notes">
+    <p>Say: "One threshold is not enough. TypeSafe's docs show a voice banking app: below a confidence of 0.6, a person handles it; a balance check can act at 0.6; a money transfer needs more than 0.85, and below that the app asks the user to confirm. Those numbers are TypeSafe's example, not a recommendation."</p>
+    <p>How to get your own numbers: run your labeled test set, sort the answers by probability, and for each possible threshold compute two things: what share of cases code would handle alone, and how many of those it gets wrong. Pick the point that fits the cost of a mistake. Use the probability of the chosen option for this, because that is the number TypeSafe claims is calibrated.</p>
+    <p>A second example, from the IBM video, for a refund Noul: above 0.9, send it straight to the refund queue; between 0.1 and 0.9, a person checks it; below 0.1, it is not a refund request. Because the numbers are calibrated, the threshold also tells you roughly how often the automatic path is wrong. The more a mistake costs, the higher the threshold.</p>
+    <p>Tie: "This is the same method that you use for any classifier with a review queue."</p>
+    <p>In our maze, code uses the fallback policy below a confidence of 0.2. We set it low on purpose, so that most moves stay with Jev for the teaching demo. We did not tune it.</p>
+    <p><b>From full-deck full-deck slide 21:</b></p>
+    <p>Say: "TypeSafe calls this 'probably the most important concept' in its guide: a broad question hides several judgments, and narrow questions show each one. Here is the best public evidence we found. One broad phishing verdict from Jev: 62.6 percent. Claude Haiku on the same verdict: 81.3. A plain regex: 91.6. Five narrow Jev questions, combined by a logistic regression: 95."</p>
+    <p>Three cautions. It is self-reported. The emails are synthetic, and a regex gets most of the way. And the regression is trained on labels, so this design needs labeled data. In our own maze, the version with an extra danger question did worse than the version with only better words. Splitting is a design option. Measure it.</p>
+    <p>This is also the only Jev-against-LLM comparison that we found. We did not measure one ourselves.</p>
+    <p><b>From full-deck full-deck slide 23:</b></p>
+    <p>Say: "The preprint's summary was that the best model class depends on the conditions. Your conditions are your data. Keep a labeled test set, hold some of it back so that you do not tune on it, log everything, and compare versions on the same cases."</p>
+    <p class="bridge">Bridge: "Here is one real workflow at RenderATL."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="5">
+  <div class="kicker">Use cases · at RenderATL</div>
+  <h2>Our sponsor pipeline makes small decisions all day.</h2>
+  <ol class="flow3 center">
+    <li><b>Code</b>Is the deal due? On the Do Not Contact list? Did the email bounce?</li>
+    <li class="jev"><b>Jev, System 1</b>What does the prospect want? Send the deck? Follow up, stop, or escalate?</li>
+    <li><b>Claude, System 2</b>Writes the draft in the rep's voice. The rep approves and sends.</li>
+  </ol>
+  <p class="src">The steps come from RenderATL's pipeline follow-up tool. Today one LLM prompt makes every one of these decisions. The next slides show what we built and measured.</p>
+  <aside class="notes">
+    <p>Say: "RenderATL has a sales tool that an AI coding agent helped us build. Every weekday it finds the sponsor deals that are due, reads the email threads and the call notes, and writes follow-up drafts for each rep. Today one big LLM prompt does all of it: every judgment and every draft. That is an assistance design. The rep must read everything."</p>
+    <p>"But most of the work is small decisions. Which of eight actions does this thread owe: answer a question, send the contract, send the deck, send pricing, schedule, an intro, another promise, or nothing? Which sales stage is it in? Did they say 'not this year'? Does this need a senior person now? Those are System 1 questions."</p>
+    <p>"So split it. Code keeps the exact rules: the due date, the Do Not Contact list, the bounce check, the pricing gate. Jev answers the judgment questions in one call, with a probability for each. Claude writes only the drafts that need writing. And the confidence decides how much the rep reads: high confidence on 'nothing owed' is one line; low confidence, or a security flag, means the rep reads the thread."</p>
+    <p>The new "Jev Explained" video (Mr. Cloud Book, 6 October 2026) uses a sponsor form as its first example: is it a sponsor inquiry, what product, how specific, then code sends the rate card or queues a person. Same shape.</p>
+    <p>How we would test it: run Jev beside the current flow for a week in shadow mode, log every answer, and compare with what the reps decided. Let Jev skip threads only after that. We have not done this yet. The threads hold prospect names and prices, so check the data rules first.</p>
+    <p>Tie-in to the Devin workshop: an agent helped build the tool, with a person who reviews each change. That is assistance. Jev is the automation primitive inside the finished tool.</p>
+    <p>Tie-in to Obvious, our sponsor: Obvious runs "factories", always-on agent workflows, with "humans at the points of imagination and judgment". Its support agent flags high-risk requests for a person. Each of those flags is a System 1 gate, the kind of decision Jev makes. Say it as a fit, not a product: there is no public Obvious and Jev integration that we know of.</p>
+    <p>Other RenderATL decisions with the same shape: the call for speakers (which track, is it a sales pitch), scholarship and Fellowship applications (one yes or no for each requirement), the support inbox (refund, transfer, badge, travel), code of conduct reports (always a person, Jev only flags urgency), and spam in Slack. Details: docs/research/renderatl-jev-opportunities.md.</p>
+    <p><b>From full-deck full-deck slide 24:</b></p>
+    <p>Say: "Four places where the shape fits: fixed options, text input, many decisions. The right column says how much to believe each one."</p>
+    <p>Ticket routing: the experiment from full-deck slides 15 and 19.</p>
+    <p>Hard-case tier: the preprint's most practical result. A classifier trained on intents handles most requests, and only the uncertain ones go to Jev. That matched Jev's accuracy at 0.43 of its cost, in their setup.</p>
+    <p>Moderation: from TypeSafe's own list of use cases. We did not test it. Remember failure mode 6: hostile users write hostile text, so moderation needs your own tests. We removed "jailbreak detection" from this table for the same reason.</p>
+    <p>Game characters: a public village simulation, where Jev picks what each villager does. Vague option text sent a villager with zero hunger to eat at 3 a.m., 5 times out of 5. Explicit thresholds sent them to bed. Our rerun matched both results, but the author changed the state text in the same commit, so the words were not the only cause. And our maze, which is next.</p>
+    <p><b>From full-deck full-deck slide 25:</b></p>
+    <p>Say: "You do not throw away large language models. You put each one where it fits. Jev makes the quick calls: is this a refund request, which team, how urgent. Code routes the email. An LLM does the slow work: it writes the reply. When the customer answers, Jev classifies that answer, and the loop continues."</p>
+    <p>Why the decision step must not depend on generated text: a model that writes can make its answer longer, change its format, or add work that nobody asked for. Anthropic documents exactly this for Claude Opus 5 ("default user-facing responses run longer than prior Opus models'"). Jev cannot do any of that, because it can only return one of your options. Say it this way: "When the task is a decision, do not ask a model that writes. Ask a model that picks." Do not say that Jev fixes Claude's verbosity: for anything a person reads, you still need an LLM and a length instruction in the prompt.</p>
+    <p>Sources: Prompting Claude Opus 5, Claude Platform Docs (platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5); Hacker News thread "Why does Opus 5 feel worse to work with?". Note: Anthropic never released a model named "Opus 5.1".</p>
+    <p>"This is how Kahneman says people work: most of what we do runs on fast, automatic System 1, and slow, careful System 2 starts only when something needs real thought."</p>
+    <p>The case in this talk uses exactly this pattern, on RenderATL's own "Ask Your Agent" idea: Jev routes an attendee's question, code answers the facts, and an LLM writes the plan or the email.</p>
+    <p>The IBM video also suggests Jev as a guardrail for jailbreak attempts. TypeSafe itself lists adversarial content as a known failure mode, so test that use carefully before you rely on it.</p>
+    <p class="bridge">Bridge: "So we built it."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="5">
+  <div class="kicker">Use cases · RenderATL Decision Desk</div>
+  <h2>The Decision Desk: Jev decides, code checks, Claude writes, a person sends.</h2>
+  <div class="row center" style="align-items:center">
+    <video class="vid" style="flex:1.5 1 0;height:400px" src="media/decision-desk-demo.mp4" controls muted playsinline preload="metadata"></video>
+    <ul class="ev" style="gap:22px">
+      <li style="font-size:30px">One Jev call: 7 typed decisions for each email that code does not stop first.</li>
+      <li style="font-size:30px">Code: Do Not Contact, the pricing gate, no deck twice.</li>
+      <li style="font-size:30px">Contracts, money, safety, injection: a person.</li>
+      <li style="font-size:30px">The Jev wire shows the raw request and response.</li>
+    </ul>
+  </div>
+  <p class="src">Synthetic emails. Video: media/decision-desk-demo.mp4 (1:46). Repo: William-Hill/renderatl-decision-desk.</p>
+  <aside class="notes">
+    <p>Say: "This is the desk. Each email gets one Jev request with seven questions: who wrote it, what they want, the sales stage, a 'not this year', an escalation, the urgency, and an injection attempt. Code applies the exact rules. Claude writes only the replies that need writing. A person sends every email."</p>
+    <p>Point at the dark panel on the right: "That is the Jev wire. It shows the exact request and the exact response for each email. No prompt to parse, no text to trust: typed answers with probabilities."</p>
+    <p>Show in the video: the pricing request (Jev: send pricing, 99%; code opens the pricing gate), the repeat deck request (code: do not resend the deck), the email that tells the 'AI assistant' to CC a competitor (held for a person, no draft), and the Do Not Contact sender (no Jev call at all).</p>
+    <p>The 36 emails are synthetic. On them, after one tuning pass: lane 32 of 32, action 30 of 32. Those are tuning numbers.</p>
+    <p class="bridge">Bridge: "What does that split save?"</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="5">
+  <div class="kicker">Use cases · Cost</div>
+  <h2>Same 36 emails: Jev first cost 69% less.</h2>
+  <div class="row center" style="align-items:center">
+    <div class="nums" style="flex:1 1 0;grid-template-columns:1fr;gap:22px">
+      <div class="num" style="padding:16px 28px"><div class="lab">Cost, 36 emails</div><div class="val pair" style="font-size:56px"><span class="was">$0.226</span><span class="to">→</span>$0.070</div></div>
+      <div class="num" style="padding:16px 28px"><div class="lab">Claude calls</div><div class="val pair" style="font-size:56px"><span class="was">36</span><span class="to">→</span>25</div></div>
+      <div class="num" style="padding:16px 28px"><div class="lab">Time to a decision</div><div class="val pair" style="font-size:56px"><span class="was">6.5 s</span><span class="to">→</span>0.19 s</div></div>
+    </div>
+    <video class="vid" style="flex:1.2 1 0;height:380px" src="media/decision-desk-cost.mp4" controls muted playsinline preload="metadata"></video>
+  </div>
+  <p class="src">Synthetic emails, one run. Same accuracy (action 27 vs 28 of 32). Claude tokens estimated at Sonnet list price.</p>
+  <aside class="notes">
+    <p>Say: "We ran both designs on the same 36 emails. LLM only: Claude reads every email, makes every decision, and writes every reply. Jev first: Jev makes the decisions for a fraction of a cent, and Claude writes only where a reply is needed."</p>
+    <p>"Same accuracy on the decisions. 69 percent less money. And the route is known in under 200 milliseconds, not six and a half seconds. Almost all of the money that remains is the writing. Do not pay a model that writes to make a decision."</p>
+    <p>Honest limits: synthetic emails, one run, Claude tokens estimated. The real-email test is next.</p>
+    <p>Jevons, if there is time: TypeSafe named Jev after William Stanley Jevons. When a resource gets cheaper, we use more of it. Cheaper decisions mean more decisions. That is TypeSafe's bet, and also the risk: many cheap decisions add up to more total mistakes.</p>
+    <p class="bridge">Bridge: "Synthetic data is easy. So we ran it on real sales email."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="5">
+  <div class="kicker">Use cases · Real sales email</div>
+  <h2>Real sales email: Jev matched Sonnet and Haiku at 2% to 4% of the cost.</h2>
+  <table class="cmp tight center" style="font-size:24px">
+    <tr><th>Held out, 45</th><th>Right</th><th>Recall, 4 actions</th><th>Cost, 138 messages</th><th>Median time</th></tr>
+    <tr class="hot"><td>Jev, playbook + thread facts</td><td>28 (62%)</td><td>0.51</td><td>$0.012</td><td>0.19 s</td></tr>
+    <tr><td>Sonnet, same context</td><td>26 (58%)</td><td>0.49</td><td>$0.60</td><td>4.0 s</td></tr>
+    <tr><td>Haiku, same context</td><td>28 (62%)</td><td>0.51</td><td>$0.30</td><td>13.6 s</td></tr>
+    <tr><td>Jev, latest message only</td><td>19 (42%)</td><td>0.41</td><td></td><td></td></tr>
+    <tr><td>Always "send contract"</td><td>28 (62%)</td><td>0.25</td><td>$0</td><td></td></tr>
+  </table>
+  <p class="src">One RenderATL sales mailbox, redacted locally; counts only. Tuned on one half, scored once. Context: 19 → 28 (p = 0.012). Jev vs Sonnet: p = 0.69.</p>
+  <aside class="notes">
+    <p>Say: "We exported William's sales mailbox, kept the sponsor threads, and removed names, emails, phone numbers, and prices on the laptop before anything went to a model. The question: given the thread, what must the rep do next? Send the contract, pricing, the deck, schedule a call, another reply, or nothing."</p>
+    <p>"First version: Jev saw only the latest message. 19 of 45 right. Then we gave it the stage playbook from our sales tool, facts that code computes from the whole thread, and the rep's own last message. 28 of 45. Same model. Better question, more context. That is the lesson of this talk again."</p>
+    <p>"With the same context, Sonnet got 26 and Haiku 28. Jev agreed with Sonnet on 33 of 45. Jev cost a cent for 138 messages. Sonnet cost 60 cents. Jev answered in under 200 milliseconds."</p>
+    <p>Say the limits plainly: "This is one mailbox and 45 scored messages. 'Always send contract' also gets 28, because many of these threads were at the contract stage; the mean recall over the four actions is 0.51 against 0.25. William checked 50 of the automatic labels and 19 were wrong, so we scored only the reliable kinds. Adding call notes did not help. No method is accurate enough to send email on its own. What the data shows is that Jev can replace the LLM for this decision at a small part of the cost."</p>
+    <p>Earlier version, all 268 messages, latest message only: Jev 108, Sonnet 107, Haiku 109, keyword rules 97 (40 percent each). Details: docs/research/decision-desk-and-ptso-results.md.</p>
+    <p class="bridge">Bridge: "So where does Jev not fit?"</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="5">
+  <div class="kicker">Use cases</div>
+  <h2>When to use something else.</h2>
+  <table class="cmp wide center">
+    <tr><th>When</th><th>Use</th></tr>
+    <tr><td>The rule is exact</td><td>Code: a comparison, a regex, a date library</td></tr>
+    <tr><td>You have labeled training data</td><td>A trained classifier, with Jev for the hard cases</td></tr>
+    <tr><td>You need text or code</td><td>An LLM</td></tr>
+    <tr><td>You need many steps of reasoning</td><td>A reasoning model</td></tr>
+    <tr class="hot"><td>A fixed set of answers about language</td><td>Jev, with code around it</td></tr>
+  </table>
+  <p class="src">F1 2026 pit stops: a trained model beat Jev on all laps (0.147 against 0.076).</p>
+  <aside class="notes">
+    <p>Say: "Read top to bottom, and stop at the first row that matches. If code can decide exactly, use code. If you have labeled data, a trained classifier can be more accurate, and Jev can take the uncertain cases. If you need words out, use an LLM. If you need a chain of reasoning, use a reasoning model. Jev fits the last row."</p>
+    <p><b>From full-deck full-deck slide 32:</b></p>
+    <p>Say: "We took every lap of the last six races of this season, Hungary to Bahrain, and asked one question for each driver: must this car pit at the end of this lap? The answer key is what the team really did. Code calculated every fact first: tire age against a typical stint, safety car, the gap behind, the pit loss."</p>
+    <p>"A logistic regression, trained on the first ten races, wins on all laps: 0.147 against 0.076 for Jev. That is the second row of the last slide. With labels and numbers, train a model."</p>
+    <p>"But look at the safety-car laps. That is a quick judgment with a clear written rule, 'pit under a safety car when the tires are near the end of their life', plus race-control text. There Jev is the best of the four: 0.381."</p>
+    <p>"And System 2 did not help here. Claude got the 1 lap in 20 where Jev was unsure, and changed 270 of 390 answers. It found fewer stops, not more. A slow model is not always a better model."</p>
+    <p>Be exact if asked: the safety-car slice is 632 laps with 102 stops in 6 races. We did not test whether 0.381 against 0.292 is significant. Jev also found the most stops overall (66%), but only 17% of its calls were right, because the rule says "pit" on every lap after the tires pass their typical life. Average precision is the area under the precision-recall curve: it scores the ranking of laps, with no threshold.</p>
+    <p>Cost: Jev for all 9,122 laps was about $0.28. The Claude calls used about 42 million tokens of a Claude Max plan, because headless Claude Code adds about 76,000 tokens of context to each call. Details: docs/research/f1-pit-results.md.</p>
+    <p class="bridge">Bridge: "Where it does fit, here is a second measured case: attendee questions."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="6">
+  <div class="kicker">Case: Ask Your Agent</div>
+  <h2>On 30 held-out questions: the same checked accuracy, a faster median, a lower cost.</h2>
+  <table class="cmp wide tight center">
+    <tr><th>30 held-out questions</th><th>Facts right (checked)</th><th>Median</th><th>p95</th><th>Cost / 1,000</th><th>Words</th></tr>
+    <tr><td>LLM only</td><td>17 of 19</td><td>5,322 ms</td><td>13,071 ms</td><td>$21 to $86</td><td>149</td></tr>
+    <tr class="hot"><td>Jev first</td><td>17 of 19</td><td>237 ms</td><td>9,882 ms</td><td>$8 to $9</td><td>98</td></tr>
+  </table>
+  <p class="src">19 of 30 questions had a fact check. Jev first sent 19 of 30 to System 1. The high LLM cost includes 3 cache-write outliers. Synthetic questions, one run, list prices.</p>
+  <aside class="notes">
+    <p>Say: "We wrote 100 attendee questions and labeled each one: the intent, the right ticket, and the facts that a right answer must contain. We tuned on 70. We ran these 30 once, at the end."</p>
+    <p>"19 questions had facts that a right answer must contain. Both paths got 17 of those 19 right. The other 11, for example the emails, had no automatic check."</p>
+    <p>"So this is not a story about accuracy. With the whole guide in its prompt, the LLM knows the facts too. The difference is speed, cost, and length."</p>
+    <p>"The median is the typical question: 237 milliseconds against 5.3 seconds. The p95 of the Jev-first path is still 10 seconds, because 11 questions went to the LLM. You do not remove the slow path. You use it less."</p>
+    <p>The misses, if asked. Jev first, q098, "director of eng who wants networking with execs, which ticket": Jev picked General Admission plus an application to the Executive Summit. The label says Gold. Its probability was 1. "A probability of 1 is not proof. The code sent that answer with no check." Two other misses, on both paths, are a strict string check: the LLM wrote the right dates in a different form.</p>
+    <p>How we chose the thresholds: on the 70 tune questions, the pair 0.7 and 0.2 gave 41 right System 1 answers and 0 wrong ones. Any lower threshold added a wrong answer. One fact question in this run (q045, probability 0.51) went to the LLM, which answered it correctly.</p>
+    <p>Cost: the LLM cost is the list price that Claude Code reports. Three LLM-only calls wrote 114,000 to 209,000 tokens to the prompt cache and cost $2.03 together. Without them, the ratio is 2.6 times, not 10. So say "lower", and give the range. The benchmark now runs the two paths in random order, because the first path paid more cache writes. A Jev request is about 1,360 tokens, at $0.042 for each million.</p>
+    <p>Limits: synthetic questions, one guide snapshot, one LLM, one run. One question is 3.3 points. Full write-up: docs/research/ask-agent-ab.md.</p>
+    <p><b>From full-deck full-deck slide 33:</b></p>
+    <p>Say: "RenderATL's site has an 'Ask Your Agent' idea: attendees ask an AI about the conference. Here are two ways to build it. On the right, every question goes to an LLM with the whole guide in its prompt. On the left, Jev reads the question first."</p>
+    <p>"Jev answers three questions in one request: which of 11 intents is this, can the facts answer it, and which ticket fits. If the intent is a fact intent, the probability is at least 0.7, and the facts can answer it, code writes the answer from a facts file. Every value in that file is checked against the published guide by a test. That is System 1."</p>
+    <p>"Otherwise the question goes to the LLM: an email to your manager, a trip plan, 'is this conference for me'. That is System 2."</p>
+    <p>Point at the right side, and be fair: "The LLM did more here. It multiplied: 6 tickets at $280 is $1,680. The template does not do that. Code could add it, because it is arithmetic, and arithmetic belongs in code. But today the template answer is shorter and less complete."</p>
+    <p>This is a real run (2026-10-06): real Jev, and Claude Sonnet through headless Claude Code. The page is ask.html in the repository.</p>
+    <p class="bridge">Bridge: "Before you build, watch Jev play."</p>
+  </aside>
+</section>
+
+<section class="slide dark" data-part="6">
+  <div class="kicker">Build time · Watch it play</div>
+  <h2>Jev plus a code planner clears the maze.</h2>
+  <div class="row center" style="align-items:center"><video class="vid" style="flex:1.4 1 0;height:400px" src="media/maze-teaser.mp4" controls muted playsinline preload="metadata"></video><ul class="ev" style="gap:22px"><li style="font-size:30px">Code counts the steps to each blocker.</li><li style="font-size:30px">Jev picks a direction at each intersection.</li><li style="font-size:30px">Our best question alone: 6 of 30 new games.</li><li style="font-size:30px">With a code planner on the hard 1 in 5 moves: 28 of 30.</li></ul></div>
+  <p class="src">A chosen game (seed 5003, 0 lives lost), shown at 2x. Typical result on 30 held-out games: 28 wins. Full speed: media/maze-full.mp4.</p>
+  <aside class="notes">
+    <p>Say: "Here is what you will build on. The panel on the right shows each decision: JEV means Jev chose, SYSTEM 2 means the code planner took a hard move, CODE means a corridor with one way forward."</p>
+    <p>Say plainly that this is a chosen game: "We picked a clean win to show. On 30 new games, this version won 28."</p>
+    <p><b>From full-deck full-deck slide 36:</b></p>
+    <p>Say: "RenderMaze is a Pac-Man style game. A runner collects 159 items and must not touch 5 blockers; it has 3 lives. At each intersection, code sends Jev the facts for each legal direction: the steps to the nearest item, blocker, and power pellet. Jev picks a direction. Code checks the answer and moves the runner."</p>
+    <p>The labels on the panel: JEV means Jev decided. FALLBACK means code decided, because the request failed or the confidence was below 0.2. CODE means a corridor with only one way forward. OVERRIDE means your own code changed Jev's move.</p>
+    <p>Say: "Our first question listed the facts but no priority. It won 6 of 30 games. Our first fix, priority words only, did not help on varied games: 4 of 28. What helped was two things together: one ranked list of rules, with a tie-break, and facts that code calculates, for example 'this blocker moves toward the runner'. That version won 15 of 30. When we also let code mark which direction has the farthest blocker, so that Jev did not compare numbers, it won 20 of 30."</p>
+    <p>The statistics, if asked: all versions played the same 30 seeds, so we compare game against game. Level 2d won 15 seeds that the first question lost, and lost only 1 that the first question won (exact McNemar p = 0.001). Level 2c against the first question: p = 0.035. Level 2d against level 2c, and level 2d against code only: not significant at 30 games.</p>
+    <p>Say the mistake openly, because it is a lesson: "Our first measurements used one fixed seed. The maze is almost deterministic, so 20 games were a few routes repeated. Those runs said 90 percent. On varied games it was 67 percent, and words-only fell from 54 to 14. On new games that we did not tune on, it was 20 percent. Test question changes on varied inputs."</p>
+    <p>And the warning: "We changed one more sentence, about the end of power mode. That version won 2 of 30. The new text changed Jev's first move at the start tile from down to right, and that route ends in a trap. One sentence can break a question that works. Measure every change."</p>
+    <p>Say the second mistake openly too: "We tuned those questions on the same 30 games that we scored them on. Then we played 30 new games. Level 2d fell from 20 wins to 6, the same as the first question. Keep a held-out set, and score on it once."</p>
+    <p>Say the System 1 to System 2 result: "Then we added a System 2. When Jev was unsure, below 0.5 confidence, or every direction had a blocker near, code handed the move to a slower step. That was about 1 move in 5. A code planner that looks 8 steps ahead took level 2d from 6 wins to 28 of 30 on the new games. An LLM in the same place won 13, and took about 5 seconds for each move. In that time the runner crosses about 33 tiles, so it works only when the game waits."</p>
+    <p>Code only, the plain rule "avoid a blocker 3 steps or fewer away, else go to the nearest item", won 26 of 29 new games. Jev with the code planner is level with it (28 of 30, p = 1.000). The maze is mostly numbers, so this fits full-deck slide 31.</p>
+    <p>The statistics, if asked. Seeds 1000 to 1029 (tuning): first question 6 of 30; level 2c 15; level 2d 20; code only 23. Seeds 5000 to 5029 (held out): first question 7 of 30; level 2c 12; level 2d 6; level 2d with the code planner 28; level 2d with the LLM 13; code only 26 of 29. Planner against level 2d: 22 seeds to 0, exact p &lt; 0.001. Planner against LLM: 16 to 1, p &lt; 0.001. Details: docs/research/question-design-finding.md.</p>
+    <p class="bridge">Bridge: "Now your turn."</p>
+  </aside>
+</section>
+
+<section class="slide" data-part="6">
+  <div class="kicker">Your turn</div>
+  <h2>Change the question, measure it, and keep the better version.</h2>
+  <table class="cmp wide tight center" style="font-size:24px">
+    <tr><th></th><th>Track A · The maze</th><th>Track B · Attendee questions</th></tr>
+    <tr><td>1 · Words</td><td>Rewrite the text for each direction</td><td>Rewrite an intent in <code>INTENT_CRITERIA</code></td></tr>
+    <tr><td>2 · Facts</td><td>Add a fact that code calculates</td><td>Add a fact and its template</td></tr>
+    <tr><td>3 · Rule</td><td>Ask a danger Score, and change <code>combine()</code></td><td>Change the route thresholds</td></tr>
+    <tr><td>4 · Strategy</td><td>Ask a Noul: go for the power pellet now?</td><td>Ask a Noul: does this question need a person?</td></tr>
+  </table>
+  <p class="src">Setup: npm install · Jev key in .env as TYPESAFE_API_KEY · npm run dev · /?jev=1 · a 20-game bench costs under $0.15<br>A: src/jev/questions.js · npm run bench -- --games 20 --seed 1000 · B: node scripts/ask-bench.mjs --split tune --llm off</p>
+  <aside class="notes">
+    <p>Say: "Pick one track. Both use the same four rules from this talk."</p>
+    <p>Track A, the maze: everything is in one file, src/jev/questions.js. Level 1 is rule one: the words. Level 2 is rule two: a fact that code calculates. Level 3 is rules three and four: a narrow question, and a rule in code. Level 4 is a yes or no strategy question. After each change, run the benchmark. Use --seed so that each version plays the same varied games, and use at least 20 games: a difference of one or two wins can be chance. A stretch goal: beat the code-only policy.</p>
+    <p>Track B, attendee questions: the Jev request is in src/ask/core/system1.js, and the answers are in src/ask/core/templates.js. Run the tune split with --llm off: it calls Jev only, takes about a minute, and costs well under one cent. It prints the intent accuracy and how many questions go to System 2. Do not tune on the held-out split. Run it once, at the end, if you want a fair number.</p>
+    <p>"In both tracks, measure every change. One sentence can break a question that works."</p>
+    <p class="bridge">Bridge: go to the last slide and leave it up for the whole hack.</p>
+  </aside>
+</section>
+
+<section class="slide dark" data-part="6">
+  <div class="kicker">What you know now</div>
+  <ul class="ev center">
+    <li>Jev answers a fixed-option question about text with probabilities, like a classifier whose labels you write.</li>
+    <li>It does not write, count, or compare dates. Its confidence cannot see a missing rule.</li>
+    <li>Code owns the workflow. Write the exact condition, test on your own data, and use plain code where code is enough.</li>
+  </ul>
+  <h2 class="pink">Now change the question.</h2>
+  <p class="src center">Track A: the maze · Track B: attendee questions</p>
+  <p class="speaker">William MJ Hill · <span class="pink">@emjay_hill</span></p>
+  <aside class="notes">
+    <p>Leave this slide up through questions and the whole build time. Do not replace it with "Questions?" or "Thank you".</p>
+    <p>Say: "At the start, I promised that you would know when to use Jev, when to use something else, and how to write a question that it answers well. Now test it. Start with the words."</p>
+  </aside>
+</section>
+
+</div>
+</div>
+
+<div class="notesPanel" id="notesPanel" hidden><h4>Speaker notes</h4><div id="notesBody"></div></div>
+<div class="controls">
+  <button type="button" id="prevBtn" aria-label="Previous slide">‹</button>
+  <span class="count" id="count">1 / 1</span>
+  <button type="button" id="nextBtn" aria-label="Next slide">›</button>
+  <button type="button" id="notesBtn" aria-pressed="false">Notes (N)</button>
+</div>
+
+<script>
+(function () {
+  var PARTS = ["Promise", "The problem", "What Jev is", "Limits", "How to use it", "Use cases", "Case and build"];
+  var stage = document.getElementById("stage");
+  var slides = Array.prototype.slice.call(stage.querySelectorAll(".slide"));
+  var count = document.getElementById("count");
+  var notesPanel = document.getElementById("notesPanel");
+  var notesBody = document.getElementById("notesBody");
+  var notesBtn = document.getElementById("notesBtn");
+  var controls = document.querySelector(".controls");
+  var i = 0, idleTimer = null;
+
+  slides.forEach(function (s) {
+    var rail = document.createElement("div");
+    rail.className = "rail";
+    PARTS.forEach(function (name, p) {
+      var span = document.createElement("span");
+      span.textContent = name;
+      if (String(p) === s.dataset.part) span.className = "on";
+      rail.appendChild(span);
+    });
+    s.appendChild(rail);
+  });
+
+  function fit() {
+    var w = window.innerWidth, h = window.innerHeight;
+    var scale = Math.min(w / 1600, h / 900);
+    stage.style.transform = "scale(" + scale + ")";
+    stage.style.left = Math.max(0, (w - 1600 * scale) / 2) + "px";
+    stage.style.top = Math.max(0, (h - 900 * scale) / 2) + "px";
+  }
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function (s, k) { s.classList.toggle("on", k === i); });
+    count.textContent = (i + 1) + " / " + slides.length;
+    var notes = slides[i].querySelector(".notes");
+    notesBody.innerHTML = notes ? notes.innerHTML : "";
+    try { history.replaceState(null, "", "#s" + (i + 1)); } catch (e) {}
+  }
+  function toggleNotes() {
+    notesPanel.hidden = !notesPanel.hidden;
+    notesBtn.setAttribute("aria-pressed", String(!notesPanel.hidden));
+  }
+  function wake() {
+    controls.classList.remove("idle");
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(function () { controls.classList.add("idle"); }, 2500);
+  }
+
+  document.getElementById("prevBtn").onclick = function () { show(i - 1); };
+  document.getElementById("nextBtn").onclick = function () { show(i + 1); };
+  notesBtn.onclick = toggleNotes;
+  window.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") { e.preventDefault(); show(i + 1); }
+    else if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); show(i - 1); }
+    else if (e.key === "Home") show(0);
+    else if (e.key === "End") show(slides.length - 1);
+    else if (e.key === "n" || e.key === "N") toggleNotes();
+    else if (e.key === "f" || e.key === "F") {
+      try {
+        if (document.fullscreenElement) document.exitFullscreen();
+        else document.documentElement.requestFullscreen().catch(function () {});
+      } catch (err) {}
+    }
+  });
+  window.addEventListener("mousemove", wake);
+  window.addEventListener("touchstart", wake, { passive: true });
+  window.addEventListener("resize", fit);
+
+  var m = /^#s(\d+)$/.exec(location.hash || "");
+  fit();
+  wake();
+  show(m ? Number(m[1]) - 1 : 0);
+})();
+</script>
