@@ -4,39 +4,56 @@
 <meta charset="utf-8">
 <title>Record the maze voiceover</title>
 <style>
+  * { box-sizing: border-box; }
   body { margin: 0; background: #211c22; color: #fcf9ee; font: 16px system-ui, sans-serif; }
-  main { display: grid; grid-template-columns: 1fr 340px; gap: 20px; padding: 20px; }
-  video#teaser { width: 100%; border: 3px solid #ff88df; background: #000; }
-  video#cam { width: 300px; height: 300px; object-fit: cover; border-radius: 50%; border: 6px solid #ff88df; transform: scaleX(-1); background: #000; }
-  .prompt { margin-top: 16px; min-height: 120px; font: 600 30px/1.35 system-ui, sans-serif; }
-  .next { color: rgba(252,249,238,.55); font-size: 20px; margin-top: 8px; min-height: 60px; }
-  button { font: 700 18px system-ui; padding: 12px 18px; margin: 6px 6px 0 0; border: 2px solid #fcf9ee; background: #ff88df; color: #211c22; cursor: pointer; }
-  button:disabled { opacity: .45; cursor: default; }
-  .status { margin-top: 12px; font: 14px ui-monospace, monospace; color: #ffd88a; white-space: pre-wrap; }
-  ol { padding-left: 20px; color: rgba(252,249,238,.8); }
+  /* The teleprompter sits at the top edge, right under the laptop camera. */
+  .prompter { position: sticky; top: 0; z-index: 2; background: #000; border-bottom: 4px solid #ff88df; padding: 14px 40px 16px; text-align: center; }
+  .prompt { font: 700 38px/1.3 system-ui, sans-serif; min-height: 100px; max-width: 1100px; margin: 0 auto; }
+  .next { font-size: 20px; color: rgba(252,249,238,.5); margin-top: 6px; min-height: 28px; }
+  .state { position: absolute; left: 16px; top: 12px; font: 700 14px ui-monospace, monospace; letter-spacing: .08em; }
+  .state.rec { color: #ff4d4d; }
+  .count { font: 800 96px/1 system-ui; color: #ff88df; }
+  main { display: grid; grid-template-columns: 1fr 360px; gap: 20px; padding: 18px 20px; }
+  video#teaser { width: 100%; border: 3px solid #ff88df; background: #000; display: block; }
+  .bubble { width: 200px; height: 200px; border-radius: 50%; overflow: hidden; border: 6px solid #ff88df; background: #000; }
+  .bubble video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+  button { font: 700 16px system-ui; padding: 10px 14px; margin: 6px 6px 0 0; border: 2px solid #fcf9ee; background: #ff88df; color: #211c22; cursor: pointer; }
+  button.ghost { background: transparent; color: #fcf9ee; }
+  button:disabled { opacity: .4; cursor: default; }
+  .status { margin-top: 10px; font: 13px ui-monospace, monospace; color: #ffd88a; white-space: pre-wrap; }
+  .takes { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
+  .take { border: 2px solid rgba(252,249,238,.3); padding: 8px 10px; }
+  .take b { color: #ff88df; }
+  .keys { font: 13px ui-monospace, monospace; color: rgba(252,249,238,.6); margin-top: 12px; line-height: 1.6; }
 </style>
 </head>
 <body>
+<div class="prompter">
+  <div class="state" id="state">READY</div>
+  <div class="prompt" id="prompt">Turn on the camera, then press Space to record.</div>
+  <div class="next" id="next"></div>
+</div>
 <main>
   <section>
     <video id="teaser" src="../media/maze-teaser.mp4" playsinline muted preload="auto"></video>
-    <div class="prompt" id="prompt">Press "Rehearse" to read along, then "Record".</div>
-    <div class="next" id="next"></div>
   </section>
   <aside>
-    <video id="cam" playsinline muted autoplay></video>
+    <div class="bubble"><video id="cam" playsinline muted autoplay></video></div>
     <div>
-      <button id="camBtn">1. Turn on camera</button>
-      <button id="rehearseBtn">Rehearse</button>
-      <button id="recordBtn" disabled>2. Record</button>
+      <button id="camBtn">Turn on camera</button>
+      <button id="recordBtn" disabled>Record (Space)</button>
+      <button id="stopBtn" class="ghost" disabled>Stop and discard (Esc)</button>
+      <button id="rehearseBtn" class="ghost">Rehearse (P)</button>
     </div>
     <div class="status" id="status"></div>
-    <ol>
-      <li>Use headphones off, and a quiet room. The teaser has no sound.</li>
-      <li>Look at the camera, not the script, when you can.</li>
-      <li>The recording starts with the video and stops when it ends (49 s).</li>
-      <li>The file downloads as <code>maze-voiceover-cam.webm</code>. Send me its path.</li>
-    </ol>
+    <div class="takes" id="takes"></div>
+    <div class="keys">
+      Space: record, with a 3-second countdown<br>
+      Esc: stop and discard a bad take<br>
+      P: rehearse without the camera<br>
+      Each take: play it back with the game, keep it (download), or delete it.<br>
+      Fillers ("um", "uh") are removed later. Keep going if you stumble.
+    </div>
   </aside>
 </main>
 <script>
@@ -53,64 +70,132 @@ const CUES = [
   [38.5, "This run: every wing, zero lives lost."],
   [42.0, "Build with Jev at the RenderATL workshop, October fifteenth. Change the question, then measure it."],
 ];
+const COUNTDOWN = 3;
 const $ = (id) => document.getElementById(id);
 const teaser = $("teaser"), cam = $("cam");
-let stream = null, recorder = null, chunks = [], timer = null;
+let stream = null, recorder = null, chunks = [], timer = null, discard = false, takeNo = 0, busy = false;
 
 function cueAt(t) { let i = 0; while (i + 1 < CUES.length && CUES[i + 1][0] <= t) i++; return i; }
 function showCue() {
   const i = cueAt(teaser.currentTime);
   $("prompt").textContent = CUES[i][1];
-  $("next").textContent = CUES[i + 1] ? `Next (${CUES[i + 1][0].toFixed(1)} s): ${CUES[i + 1][1]}` : "";
+  $("next").textContent = CUES[i + 1] ? `next: ${CUES[i + 1][1]}` : "";
 }
-function startPrompter() { clearInterval(timer); timer = setInterval(showCue, 100); showCue(); }
+function startPrompter() { clearInterval(timer); timer = setInterval(showCue, 80); showCue(); }
 function stopPrompter() { clearInterval(timer); }
+function setState(text, rec) { $("state").textContent = text; $("state").className = "state" + (rec ? " rec" : ""); }
+function setButtons() {
+  $("recordBtn").disabled = !stream || busy;
+  $("stopBtn").disabled = !busy;
+  $("rehearseBtn").disabled = busy;
+}
 
-$("camBtn").onclick = async () => {
+async function turnOnCamera() {
   try {
     stream = await navigator.mediaDevices.getUserMedia({
       video: { width: { ideal: 1280 }, height: { ideal: 720 }, frameRate: { ideal: 25 } },
-      audio: { echoCancellation: true, noiseSuppression: true },
+      audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true },
     });
     cam.srcObject = stream;
-    $("recordBtn").disabled = false;
     $("status").textContent = "Camera and microphone are on.";
+    setButtons();
   } catch (err) {
     $("status").textContent = "No camera or microphone: " + err.message + "\nAllow access in the browser, then try again.";
   }
-};
+}
 
-$("rehearseBtn").onclick = () => {
-  teaser.currentTime = 0;
-  teaser.play();
-  startPrompter();
-  teaser.onended = stopPrompter;
-};
+function countdown() {
+  return new Promise((resolve) => {
+    let n = COUNTDOWN;
+    const tick = () => {
+      if (discard) { resolve(false); return; }
+      if (n === 0) { resolve(true); return; }
+      $("prompt").innerHTML = `<span class="count">${n}</span>`;
+      $("next").textContent = `first line: ${CUES[0][1]}`;
+      n -= 1;
+      setTimeout(tick, 1000);
+    };
+    tick();
+  });
+}
 
-$("recordBtn").onclick = () => {
-  if (!stream) return;
+async function record() {
+  if (!stream || busy) return;
+  busy = true; discard = false; setButtons();
+  teaser.pause(); teaser.currentTime = 0;
+  setState("GET READY", false);
+  if (!(await countdown())) { finishAbort(); return; }
   chunks = [];
   const type = MediaRecorder.isTypeSupported("video/webm;codecs=vp9,opus") ? "video/webm;codecs=vp9,opus" : "video/webm";
   recorder = new MediaRecorder(stream, { mimeType: type, videoBitsPerSecond: 4_000_000 });
   recorder.ondataavailable = (e) => e.data.size && chunks.push(e.data);
   recorder.onstop = () => {
-    const blob = new Blob(chunks, { type: "video/webm" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "maze-voiceover-cam.webm";
-    a.click();
-    $("status").textContent = `Saved maze-voiceover-cam.webm (${(blob.size / 1e6).toFixed(1)} MB). Record again to replace it.`;
-    $("recordBtn").disabled = false;
+    stopPrompter(); teaser.pause();
+    if (discard) { finishAbort(); return; }
+    addTake(new Blob(chunks, { type: "video/webm" }));
+    busy = false; setButtons(); setState("READY", false);
+    $("prompt").textContent = "Take saved below. Press Space for another take.";
+    $("next").textContent = "";
   };
-  teaser.pause();
-  teaser.currentTime = 0;
   // Start the recorder first, then the video, so the recording never misses the first words.
-  recorder.onstart = () => { teaser.play(); startPrompter(); };
-  teaser.onended = () => { stopPrompter(); if (recorder.state === "recording") recorder.stop(); };
+  recorder.onstart = () => { teaser.play(); startPrompter(); setState("● RECORDING", true); };
+  teaser.onended = () => { if (recorder && recorder.state === "recording") recorder.stop(); };
   recorder.start(250);
-  $("recordBtn").disabled = true;
-  $("status").textContent = "Recording...";
-};
+}
+
+function stopAndDiscard() {
+  if (!busy) return;
+  discard = true;
+  if (recorder && recorder.state === "recording") recorder.stop(); else finishAbort();
+}
+function finishAbort() {
+  busy = false; stopPrompter(); teaser.pause(); teaser.currentTime = 0;
+  setState("READY", false); setButtons();
+  $("prompt").textContent = "Take discarded. Press Space to try again.";
+  $("next").textContent = "";
+}
+
+function addTake(blob) {
+  takeNo += 1;
+  const url = URL.createObjectURL(blob);
+  const name = `maze-voiceover-take-${takeNo}.webm`;
+  const row = document.createElement("div");
+  row.className = "take";
+  const label = document.createElement("div");
+  label.innerHTML = `<b>Take ${takeNo}</b> · ${(blob.size / 1e6).toFixed(1)} MB`;
+  const play = document.createElement("button"); play.className = "ghost"; play.textContent = "Play back";
+  const keep = document.createElement("button"); keep.textContent = "Keep (download)";
+  const del = document.createElement("button"); del.className = "ghost"; del.textContent = "Delete";
+  const audio = document.createElement("video"); audio.src = url; audio.style.display = "none";
+  play.onclick = () => {
+    // Play the take in the bubble and the teaser together, in sync, to judge the take.
+    cam.srcObject = null; cam.src = url; cam.muted = false;
+    teaser.currentTime = 0; cam.currentTime = 0;
+    cam.play(); teaser.play(); startPrompter();
+    teaser.onended = () => { stopPrompter(); cam.pause(); cam.removeAttribute("src"); cam.muted = true; cam.srcObject = stream; };
+  };
+  keep.onclick = () => { const a = document.createElement("a"); a.href = url; a.download = name; a.click(); keep.textContent = "Downloaded"; };
+  del.onclick = () => { URL.revokeObjectURL(url); row.remove(); };
+  row.append(label, play, keep, del);
+  $("takes").prepend(row);
+}
+
+function rehearse() {
+  if (busy) return;
+  teaser.currentTime = 0; teaser.play(); startPrompter();
+  teaser.onended = stopPrompter;
+}
+
+$("camBtn").onclick = turnOnCamera;
+$("recordBtn").onclick = record;
+$("stopBtn").onclick = stopAndDiscard;
+$("rehearseBtn").onclick = rehearse;
+window.addEventListener("keydown", (e) => {
+  if (e.target.tagName === "INPUT") return;
+  if (e.code === "Space") { e.preventDefault(); busy ? null : record(); }
+  else if (e.key === "Escape") stopAndDiscard();
+  else if (e.key === "p" || e.key === "P") rehearse();
+});
 </script>
 </body>
 </html>
