@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Record the maze voiceover</title>
+<style>
+  body { margin: 0; background: #211c22; color: #fcf9ee; font: 16px system-ui, sans-serif; }
+  main { display: grid; grid-template-columns: 1fr 340px; gap: 20px; padding: 20px; }
+  video#teaser { width: 100%; border: 3px solid #ff88df; background: #000; }
+  video#cam { width: 300px; height: 300px; object-fit: cover; border-radius: 50%; border: 6px solid #ff88df; transform: scaleX(-1); background: #000; }
+  .prompt { margin-top: 16px; min-height: 120px; font: 600 30px/1.35 system-ui, sans-serif; }
+  .next { color: rgba(252,249,238,.55); font-size: 20px; margin-top: 8px; min-height: 60px; }
+  button { font: 700 18px system-ui; padding: 12px 18px; margin: 6px 6px 0 0; border: 2px solid #fcf9ee; background: #ff88df; color: #211c22; cursor: pointer; }
+  button:disabled { opacity: .45; cursor: default; }
+  .status { margin-top: 12px; font: 14px ui-monospace, monospace; color: #ffd88a; white-space: pre-wrap; }
+  ol { padding-left: 20px; color: rgba(252,249,238,.8); }
+</style>
+</head>
+<body>
+<main>
+  <section>
+    <video id="teaser" src="../media/maze-teaser.mp4" playsinline muted preload="auto"></video>
+    <div class="prompt" id="prompt">Press "Rehearse" to read along, then "Record".</div>
+    <div class="next" id="next"></div>
+  </section>
+  <aside>
+    <video id="cam" playsinline muted autoplay></video>
+    <div>
+      <button id="camBtn">1. Turn on camera</button>
+      <button id="rehearseBtn">Rehearse</button>
+      <button id="recordBtn" disabled>2. Record</button>
+    </div>
+    <div class="status" id="status"></div>
+    <ol>
+      <li>Use headphones off, and a quiet room. The teaser has no sound.</li>
+      <li>Look at the camera, not the script, when you can.</li>
+      <li>The recording starts with the video and stops when it ends (49 s).</li>
+      <li>The file downloads as <code>maze-voiceover-cam.webm</code>. Send me its path.</li>
+    </ol>
+  </aside>
+</main>
+<script>
+// The cue times match the teaser: the intro card ends near 5 s, the captions change every 5.5 s
+// (the game plays at 2x), the result shows near 38.5 s, and the closing card near 42 s.
+const CUES = [
+  [0.0, "Can a model that only makes decisions play Pac-Man? Meet Jev."],
+  [5.0, "Jev never sees the screen. At every turn, code sends it the facts: how far to the next wing, the nearest blocker, the power pellet."],
+  [10.5, "Jev picks a direction, with a probability for each one. Those are the bars on the right."],
+  [16.0, "When Jev is unsure, or every way looks dangerous, code hands the move to a slower planner. That is System 2."],
+  [21.5, "The fast calls stay with Jev. About one move in five goes to the planner."],
+  [27.0, "On thirty new games, Jev alone won six."],
+  [32.5, "Jev plus the planner won twenty-eight."],
+  [38.5, "This run: every wing, zero lives lost."],
+  [42.0, "Build with Jev at the RenderATL workshop, October fifteenth. Change the question, then measure it."],
+];
+const $ = (id) => document.getElementById(id);
+const teaser = $("teaser"), cam = $("cam");
+let stream = null, recorder = null, chunks = [], timer = null;
+
+function cueAt(t) { let i = 0; while (i + 1 < CUES.length && CUES[i + 1][0] <= t) i++; return i; }
+function showCue() {
+  const i = cueAt(teaser.currentTime);
+  $("prompt").textContent = CUES[i][1];
+  $("next").textContent = CUES[i + 1] ? `Next (${CUES[i + 1][0].toFixed(1)} s): ${CUES[i + 1][1]}` : "";
+}
+function startPrompter() { clearInterval(timer); timer = setInterval(showCue, 100); showCue(); }
+function stopPrompter() { clearInterval(timer); }
+
+$("camBtn").onclick = async () => {
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({
+      video: { width: { ideal: 1280 }, height: { ideal: 720 }, frameRate: { ideal: 25 } },
+      audio: { echoCancellation: true, noiseSuppression: true },
+    });
+    cam.srcObject = stream;
+    $("recordBtn").disabled = false;
+    $("status").textContent = "Camera and microphone are on.";
+  } catch (err) {
+    $("status").textContent = "No camera or microphone: " + err.message + "\nAllow access in the browser, then try again.";
+  }
+};
+
+$("rehearseBtn").onclick = () => {
+  teaser.currentTime = 0;
+  teaser.play();
+  startPrompter();
+  teaser.onended = stopPrompter;
+};
+
+$("recordBtn").onclick = () => {
+  if (!stream) return;
+  chunks = [];
+  const type = MediaRecorder.isTypeSupported("video/webm;codecs=vp9,opus") ? "video/webm;codecs=vp9,opus" : "video/webm";
+  recorder = new MediaRecorder(stream, { mimeType: type, videoBitsPerSecond: 4_000_000 });
+  recorder.ondataavailable = (e) => e.data.size && chunks.push(e.data);
+  recorder.onstop = () => {
+    const blob = new Blob(chunks, { type: "video/webm" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "maze-voiceover-cam.webm";
+    a.click();
+    $("status").textContent = `Saved maze-voiceover-cam.webm (${(blob.size / 1e6).toFixed(1)} MB). Record again to replace it.`;
+    $("recordBtn").disabled = false;
+  };
+  teaser.pause();
+  teaser.currentTime = 0;
+  // Start the recorder first, then the video, so the recording never misses the first words.
+  recorder.onstart = () => { teaser.play(); startPrompter(); };
+  teaser.onended = () => { stopPrompter(); if (recorder.state === "recording") recorder.stop(); };
+  recorder.start(250);
+  $("recordBtn").disabled = true;
+  $("status").textContent = "Recording...";
+};
+</script>
+</body>
+</html>
