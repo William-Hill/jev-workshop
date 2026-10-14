@@ -1,15 +1,21 @@
-"""Lay out the voiceover video as a 9:16 Instagram Reel (1080x1920).
+"""Lay out the voiceover video for Instagram: a 9:16 Reel (1080x1920) or a 4:5 feed post (1080x1350).
 
-    python3 scripts/voiceover-vertical.py <base.mp4> <clean take> [output.mp4] [captions.mov]
+    python3 scripts/voiceover-vertical.py <base.mp4> <clean take> [output.mp4] [captions.mov] [reel|feed]
+
+Use "feed" for a carousel: Instagram crops every carousel item to at most 4:5, so a 9:16 video
+loses its top and bottom there. The RenderATL carousel images are 1080x1350 too.
 
 voiceover-make.py calls this with its intermediate files (recordings/voiceover-work/).
 The layout keeps the Reels interface clear: no content in the top 200 px (the header), the
 bottom 340 px (the caption and the username), or the right 140 px below the middle (the buttons).
 
+Reel (1080x1920):
   y  220-470    title and event line (an image drawn with Pillow; this ffmpeg has no drawtext)
   y  500-1108   the gameplay with its zooms, 1080x608
   y 1120-1230   the captions (optional), between the gameplay and the bubble
   y 1250-1610   the webcam bubble, 360 px, with a pink ring
+Feed (1080x1350): the same order, tighter: title from y 44, gameplay at y 232, captions near
+y 908, bubble 300 px at y 990.
 """
 
 import subprocess
@@ -19,11 +25,11 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
-W, H = 1080, 1920
-VIDEO_Y = 500
-BUBBLE = 360
+W = 1080
 RING = 10
-BUBBLE_Y = 1250
+# (height, title top, title size, gap after the title, gameplay top, bubble size, bubble top)
+LAYOUTS = {"reel": (1920, 220, 96, 18, 500, 360, 1250), "feed": (1350, 44, 66, 6, 232, 300, 990)}
+H, TITLE_Y, TITLE_SIZE, TITLE_GAP, VIDEO_Y, BUBBLE, BUBBLE_Y = LAYOUTS["reel"]
 NIGHT = (33, 28, 34)
 PAPER = (252, 249, 238)
 PINK = (255, 136, 223)
@@ -42,13 +48,13 @@ def background(path: Path) -> None:
         d.line([(x, 0), (x, H)], fill=(43, 37, 44))
     for y in range(0, H, 48):
         d.line([(0, y), (W, y)], fill=(43, 37, 44))
-    title = ImageFont.truetype(TITLE_FONT, 96)
-    y = 220
+    title = ImageFont.truetype(TITLE_FONT, TITLE_SIZE)
+    y = TITLE_Y
     for i, line in enumerate(TITLE):
         l, t, r, b = d.textbbox((0, 0), line, font=title)
         d.text(((W - (r - l)) // 2 - l, y - t), line, font=title, fill=PINK if i == 1 else PAPER)
-        y += (b - t) + 18
-    body = ImageFont.truetype(BODY_FONT, 30)
+        y += (b - t) + TITLE_GAP
+    body = ImageFont.truetype(BODY_FONT, 30 if TITLE_SIZE > 80 else 26)
     l, t, r, b = d.textbbox((0, 0), EVENT, font=body)
     d.text(((W - (r - l)) // 2 - l, y + 14 - t), EVENT, font=body, fill=(252, 249, 238))
     d.rectangle([0, VIDEO_Y - 6, W, VIDEO_Y + 608 + 5], fill=PINK)  # A pink rule above and below the video.
@@ -61,7 +67,9 @@ def main() -> None:
         raise SystemExit(__doc__)
     base, cam = Path(sys.argv[1]), Path(sys.argv[2])
     out = Path(sys.argv[3]) if len(sys.argv) > 3 else OUT
-    captions = Path(sys.argv[4]) if len(sys.argv) > 4 else None
+    captions = Path(sys.argv[4]) if len(sys.argv) > 4 and sys.argv[4] != "-" else None
+    global H, TITLE_Y, TITLE_SIZE, TITLE_GAP, VIDEO_Y, BUBBLE, BUBBLE_Y
+    H, TITLE_Y, TITLE_SIZE, TITLE_GAP, VIDEO_Y, BUBBLE, BUBBLE_Y = LAYOUTS[sys.argv[5] if len(sys.argv) > 5 else "reel"]
     length = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(base)],
                             capture_output=True, text=True, check=True).stdout.strip()
     with tempfile.TemporaryDirectory() as tmp:
@@ -91,7 +99,7 @@ def main() -> None:
              "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(out)],
             check=True,
         )
-    print(f"Wrote {out} (1080x1920, {float(length):.1f} s)")
+    print(f"Wrote {out} ({W}x{H}, {float(length):.1f} s)")
 
 
 if __name__ == "__main__":

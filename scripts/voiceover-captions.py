@@ -1,6 +1,6 @@
 """Burn-in captions for the voiceover videos: short phrases, with the spoken word in pink.
 
-    python3 scripts/voiceover-captions.py <captions.json> wide|tall <length s> <out.mov>
+    python3 scripts/voiceover-captions.py <captions.json> wide|tall|feed <length s> <out.mov>
 
 voiceover-make.py writes captions.json (recordings/voiceover-work/), one entry per phrase:
   {"start": 1.2, "end": 2.9, "words": [{"text": "Jev", "start": 1.2, "end": 1.5}, ...]}
@@ -26,6 +26,7 @@ BOX = (33, 28, 34, 225)
 LAYOUTS = {
     "wide": (1920, 1080, 54, 835, 985, 1350),  # Bottom centre, left of the webcam bubble.
     "tall": (1080, 1920, 58, 540, 1175, 980),  # Between the gameplay and the webcam bubble.
+    "feed": (1080, 1350, 50, 540, 908, 980),  # The 4:5 carousel post: between the gameplay and the bubble.
 }
 
 

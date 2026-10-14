@@ -11,7 +11,7 @@ Steps, all on this Mac:
 3. Code mutes "um", "uh", "er", and "hmm", and keeps the timing.
 4. scripts/voiceover-base.py builds the video with the zooms at those moments.
 5. scripts/voiceover-bubble.sh adds the round webcam bubble and the voice (16:9).
-6. scripts/voiceover-vertical.py makes the 9:16 Instagram Reel from the same parts.
+6. scripts/voiceover-vertical.py makes the 9:16 Instagram Reel and the 4:5 carousel post.
 7. Both videos get burned-in captions from the word times (scripts/voiceover-captions.py).
    The captions are saved in recordings/voiceover-work/captions.json. Fix a word there, then
    run --captions-only to render both videos again without a new transcription.
@@ -28,6 +28,7 @@ from pathlib import Path
 MODEL = Path.home() / ".whisper-models" / "ggml-small.en.bin"
 OUT = Path("docs/presentation/media/maze-voiceover-final.mp4")
 VERTICAL = Path("docs/presentation/media/maze-voiceover-instagram.mp4")
+FEED = Path("docs/presentation/media/maze-voiceover-feed.mp4")  # 4:5, for a carousel post.
 WORK = Path("recordings/voiceover-work")  # Keeps the base video and the clean take (not in git).
 FILLERS = re.compile(r"^(u+m+|u+h+|e+r+m*|a+h+|h+m+|m+m+)$")
 FILLER_PAD = 0.06
@@ -164,6 +165,9 @@ def render_outputs(out: Path) -> None:
     sh(["python3", "scripts/voiceover-captions.py", str(captions), "tall", length, str(tall)], stdout=subprocess.DEVNULL)
     sh(["scripts/voiceover-bubble.sh", str(clean), str(out)], env={**os.environ, "BASE": str(base), "CAPTIONS": str(wide)})
     sh(["python3", "scripts/voiceover-vertical.py", str(base), str(clean), str(VERTICAL), str(tall)])
+    feed = WORK / "captions-feed.mov"
+    sh(["python3", "scripts/voiceover-captions.py", str(captions), "feed", length, str(feed)], stdout=subprocess.DEVNULL)
+    sh(["python3", "scripts/voiceover-vertical.py", str(base), str(clean), str(FEED), str(feed), "feed"])
 
 if __name__ == "__main__":
     main()
