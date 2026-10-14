@@ -47,6 +47,7 @@
       <button id="camBtn">Turn on camera</button>
       <button id="recordBtn" disabled>Record (Space)</button>
       <button id="rehearseBtn" class="ghost">Rehearse (P)</button>
+      <button id="keepBtn" disabled>Stop and keep (Space)</button>
       <button id="stopBtn" class="ghost" disabled>Stop and discard (Esc)</button>
     </div>
     <div class="status" id="status"></div>
@@ -54,7 +55,8 @@
     <div class="keys">
       The highlight follows your voice (browser speech recognition; Chrome sends the audio to Google for this).<br>
       Without it, the highlight moves at a steady reading pace.<br>
-      Space: record, after a 3-second countdown. Space again: stop and keep.<br>
+      Space: record, after a 3-second countdown.<br>
+      Space or Enter while recording: stop and keep the take.<br>
       P: rehearse. With the camera on, a rehearsal is also a take.<br>
       Esc: stop and discard.<br>
       The take ends by itself 1.2 s after the last word.<br>
@@ -170,6 +172,7 @@ function setButtons() {
   $("recordBtn").disabled = !stream || busy;
   $("rehearseBtn").disabled = busy;
   $("stopBtn").disabled = !busy;
+  $("keepBtn").disabled = !busy;
 }
 
 async function turnOnCamera() {
@@ -229,6 +232,7 @@ async function begin(isRehearsal) {
 
 function finishTake() {
   if (!busy) return;
+  if (!recorder && !recognition && !fallbackTimer) { abort(); return; } // Still in the countdown.
   if (recorder && recorder.state === "recording") recorder.stop();
   else done("Rehearsal finished. Turn on the camera to keep takes.");
 }
@@ -271,8 +275,10 @@ $("camBtn").onclick = turnOnCamera;
 $("recordBtn").onclick = () => begin(false);
 $("rehearseBtn").onclick = () => begin(true);
 $("stopBtn").onclick = abort;
+$("keepBtn").onclick = finishTake;
 window.addEventListener("keydown", (e) => {
   if (e.code === "Space") { e.preventDefault(); if (busy) finishTake(); else if (stream) begin(false); }
+  else if (e.key === "Enter" && busy) { e.preventDefault(); finishTake(); }
   else if (e.key === "Escape") abort();
   else if (e.key === "p" || e.key === "P") { if (!busy) begin(true); }
 });
