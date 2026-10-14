@@ -26,7 +26,7 @@ ffmpeg -y -loglevel error -i "$BASE" -i "$CAM" -filter_complex "
        geq=lum='lum(X,Y)':cb='cb(X,Y)':cr='cr(X,Y)':a='if(lte(hypot(X-${RO},Y-${RO}),${RO}),255,0)'[ring];
   [ring][face]overlay=${RING}:${RING}:shortest=1[bubble];
   [0:v][bubble]overlay=${X}:${Y}:shortest=0:eof_action=pass[v];
-  [1:a]asetpts=PTS-STARTPTS,highpass=f=80,loudnorm=I=-16:TP=-1.5:LRA=11,apad[a]
+  [1:a]asetpts=PTS-STARTPTS,highpass=f=80,loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000,aformat=sample_rates=48000:channel_layouts=stereo,apad[a]
 " -map "[v]" -map "[a]" -t "$LENGTH" -c:v libx264 -pix_fmt yuv420p -crf 20 -c:a aac -b:a 160k -movflags +faststart "$OUT"
 
 echo "Wrote $OUT ($(ffprobe -v error -show_entries format=duration -of csv=p=0 "$OUT") s)"

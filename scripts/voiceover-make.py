@@ -9,7 +9,8 @@ Steps, all on this Mac:
    If a phrase is not found, code uses a fixed share of the take length.
 3. Code mutes "um", "uh", "er", and "hmm", and keeps the timing.
 4. scripts/voiceover-base.py builds the video with the zooms at those moments.
-5. scripts/voiceover-bubble.sh adds the round webcam bubble and the voice.
+5. scripts/voiceover-bubble.sh adds the round webcam bubble and the voice (16:9).
+6. scripts/voiceover-vertical.py makes the 9:16 Instagram Reel from the same parts.
 """
 
 import json
@@ -21,6 +22,8 @@ from pathlib import Path
 
 MODEL = Path.home() / ".whisper-models" / "ggml-small.en.bin"
 OUT = Path("docs/presentation/media/maze-voiceover-final.mp4")
+VERTICAL = Path("docs/presentation/media/maze-voiceover-instagram.mp4")
+WORK = Path("recordings/voiceover-work")  # Keeps the base video and the clean take (not in git).
 FILLERS = re.compile(r"^(u+m+|u+h+|e+r+m*|a+h+|h+m+|m+m+)$")
 FILLER_PAD = 0.06
 TAIL = 1.2  # Seconds kept after the last word.
@@ -108,6 +111,12 @@ def main() -> None:
         sh(["python3", "scripts/voiceover-base.py", "--decision", f"{times['decision']:.2f}", "--state", f"{times['state']:.2f}",
             "--finale", f"{times['finale']:.2f}", "--length", f"{length:.2f}", "--out", str(base)], stdout=subprocess.DEVNULL)
         sh(["scripts/voiceover-bubble.sh", str(clean), str(out)], env={**__import__("os").environ, "BASE": str(base)})
+        # The 9:16 Instagram version uses the same base video and clean take.
+        WORK.mkdir(parents=True, exist_ok=True)
+        kept_base, kept_clean = WORK / "base.mp4", WORK / "clean.mkv"
+        kept_base.write_bytes(base.read_bytes())
+        kept_clean.write_bytes(clean.read_bytes())
+        sh(["python3", "scripts/voiceover-vertical.py", str(kept_base), str(kept_clean), str(VERTICAL)])
 
 
 if __name__ == "__main__":
