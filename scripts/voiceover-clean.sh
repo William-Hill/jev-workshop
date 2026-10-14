@@ -14,9 +14,8 @@ trap 'rm -rf "$WORK"' EXIT
 
 ffmpeg -y -loglevel error -i "$TAKE" -vn -ac 1 -ar 16000 -c:a pcm_s16le "$WORK/voice.wav"
 
-# A prompt with fillers makes Whisper write them out; by default it leaves them out.
-whisper-cli -m "$MODEL" -f "$WORK/voice.wav" -ml 1 -sow -ojf -of "$WORK/words" -np \
-  --prompt "Umm, uh, so, hmm. Okay, um, here is what I, uh, mean." >/dev/null 2>&1
+# No --prompt: a prompt makes whisper.cpp collapse the word times on browser takes.
+whisper-cli -m "$MODEL" -f "$WORK/voice.wav" -ml 1 -sow -ojf -of "$WORK/words" -np >/dev/null 2>&1
 
 FILTER=$(python3 - "$WORK/words.json" <<'PY'
 import json, re, sys

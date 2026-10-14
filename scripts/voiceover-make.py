@@ -25,8 +25,13 @@ FILLERS = re.compile(r"^(u+m+|u+h+|e+r+m*|a+h+|h+m+|m+m+)$")
 FILLER_PAD = 0.06
 TAIL = 1.2  # Seconds kept after the last word.
 LEAD = 0.25  # Each zoom starts this many seconds before its phrase.
-# (key, words in order, the share of the take to use when the phrase is not found)
-ANCHORS = [("decision", ["here", "see"], 0.30), ("state", ["gets", "state"], 0.55), ("finale", ["then", "decision"], 0.82)]
+# (key, phrases to try in order, the share of the take to use when no phrase is found).
+# Each phrase is a first word and words that must follow it closely. Ad-libbed wording is common.
+ANCHORS = [
+    ("decision", [["here", "see"], ["see", "decision"], ["each", "decision"], ["one", "four"]], 0.30),
+    ("state", [["gets", "state"], ["pass", "state"], ["state", "board"], ["adversaries"]], 0.55),
+    ("finale", [["then", "decision"], ["make", "decision"], ["accordingly"]], 0.82),
+]
 
 
 def sh(args: list[str], **kw) -> subprocess.CompletedProcess:
@@ -38,8 +43,8 @@ def words_of(take: Path, work: Path) -> list[dict]:
     """Transcribe the take; return words with start and end times in seconds."""
     wav = work / "voice.wav"
     sh(["ffmpeg", "-y", "-loglevel", "error", "-i", str(take), "-vn", "-ac", "1", "-ar", "16000", "-c:a", "pcm_s16le", str(wav)])
-    sh(["whisper-cli", "-m", str(MODEL), "-f", str(wav), "-ml", "1", "-sow", "-ojf", "-of", str(work / "words"), "-np",
-        "--prompt", "Umm, uh, so, hmm. Okay, um, here is what I, uh, mean."],
+    # No --prompt: a prompt makes whisper.cpp collapse the word times on these takes.
+    sh(["whisper-cli", "-m", str(MODEL), "-f", str(wav), "-ml", "1", "-sow", "-ojf", "-of", str(work / "words"), "-np"],
        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     data = json.loads((work / "words.json").read_text())
     out = []
@@ -76,12 +81,16 @@ def main() -> None:
     out = Path(sys.argv[2]) if len(sys.argv) > 2 else OUT
     with tempfile.TemporaryDirectory() as tmp:
         work = Path(tmp)
+        # Browser recordings have no duration in the header. A copy into a new file writes one.
+        fixed = work / "take.mkv"
+        sh(["ffmpeg", "-y", "-loglevel", "error", "-fflags", "+genpts", "-i", str(take), "-c", "copy", str(fixed)])
+        take = fixed
         words = words_of(take, work)
         speech = [w for w in words if not FILLERS.match(w["norm"])]
         length = min(duration(take), (speech[-1]["end"] if speech else duration(take)) + TAIL)
         times, after = {}, 0.0
-        for key, phrase, share in ANCHORS:
-            found = find_phrase(words, phrase, after)
+        for key, phrases, share in ANCHORS:
+            found = next((t for t in (find_phrase(words, ph, after + 0.5) for ph in phrases) if t is not None), None)
             times[key] = max(after + 0.5, (found - LEAD) if found is not None else share * length)
             after = times[key]
             print(f"{key}: {times[key]:.2f} s ({'found' if found is not None else 'not found, used a share of the take'})")
@@ -90,7 +99,7 @@ def main() -> None:
 
         spans = [(max(0.0, w["start"] - FILLER_PAD), w["end"] + FILLER_PAD) for w in words if FILLERS.match(w["norm"])]
         mute = ",".join(f"volume=enable='between(t,{a:.3f},{b:.3f})':volume=0" for a, b in spans) or "anull"
-        clean = work / "clean.webm"
+        clean = work / "clean.mkv"
         sh(["ffmpeg", "-y", "-loglevel", "error", "-i", str(take), "-t", f"{length:.3f}", "-c:v", "copy", "-af", mute,
             "-c:a", "libopus", "-b:a", "128k", str(clean)])
         print(f"Muted {len(spans)} filler(s).")
