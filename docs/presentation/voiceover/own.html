@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Record your voiceover</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #211c22; color: #fcf9ee; font: 16px system-ui, sans-serif; }
+  /* The script sits at the top edge, right under the laptop camera. */
+  .prompter { position: sticky; top: 0; z-index: 2; background: #000; border-bottom: 4px solid #ff88df; padding: 34px 48px 18px; }
+  .script { height: 150px; overflow: hidden; font: 700 36px/1.4 system-ui, sans-serif; max-width: 1150px; margin: 0 auto; }
+  .script .w { color: rgba(252,249,238,.38); transition: color .12s; }
+  .script .w.done { color: #fcf9ee; }
+  .script .w.now { color: #211c22; background: #ff88df; border-radius: 6px; padding: 0 4px; }
+  .bar { position: absolute; left: 14px; right: 14px; top: 8px; display: flex; justify-content: space-between; font: 700 13px ui-monospace, monospace; letter-spacing: .06em; }
+  .rec { color: #ff4d4d; }
+  .count { font: 800 96px/1 system-ui; color: #ff88df; display: block; text-align: center; }
+  .progress { height: 4px; background: rgba(252,249,238,.15); margin: 12px auto 0; max-width: 1150px; }
+  .progress i { display: block; height: 100%; width: 0; background: #ff88df; }
+  main { display: grid; grid-template-columns: 1fr 360px; gap: 20px; padding: 18px 20px; }
+  video#preview { width: 100%; border: 3px solid #ff88df; background: #000; display: block; }
+  .bubble { width: 200px; height: 200px; border-radius: 50%; overflow: hidden; border: 6px solid #ff88df; background: #000; }
+  .bubble video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+  button { font: 700 16px system-ui; padding: 10px 14px; margin: 6px 6px 0 0; border: 2px solid #fcf9ee; background: #ff88df; color: #211c22; cursor: pointer; }
+  button.ghost { background: transparent; color: #fcf9ee; }
+  button:disabled { opacity: .4; cursor: default; }
+  .status { margin-top: 10px; font: 13px ui-monospace, monospace; color: #ffd88a; white-space: pre-wrap; }
+  .takes { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
+  .take { border: 2px solid rgba(252,249,238,.3); padding: 8px 10px; }
+  .take b { color: #ff88df; }
+  .keys { font: 13px ui-monospace, monospace; color: rgba(252,249,238,.6); margin-top: 12px; line-height: 1.6; }
+</style>
+</head>
+<body>
+<div class="prompter">
+  <div class="bar"><span id="state">READY</span><span id="mode">FOLLOWS YOUR VOICE</span></div>
+  <div class="script" id="script"></div>
+  <div class="progress"><i id="progress"></i></div>
+</div>
+<main>
+  <section>
+    <video id="preview" src="../media/maze-clean-preview.mp4" playsinline muted loop preload="auto"></video>
+  </section>
+  <aside>
+    <div class="bubble"><video id="cam" playsinline muted autoplay></video></div>
+    <div>
+      <button id="camBtn">Turn on camera</button>
+      <button id="recordBtn" disabled>Record (Space)</button>
+      <button id="rehearseBtn" class="ghost">Rehearse (P)</button>
+      <button id="stopBtn" class="ghost" disabled>Stop and discard (Esc)</button>
+    </div>
+    <div class="status" id="status"></div>
+    <div class="takes" id="takes"></div>
+    <div class="keys">
+      The highlight follows your voice (browser speech recognition; Chrome sends the audio to Google for this).<br>
+      Without it, the highlight moves at a steady reading pace.<br>
+      Space: record, after a 3-second countdown. Space again: stop and keep.<br>
+      P: rehearse. With the camera on, a rehearsal is also a take.<br>
+      Esc: stop and discard.<br>
+      The take ends by itself 1.2 s after the last word.<br>
+      Read at your own pace: the video is timed to your take later.
+    </div>
+  </aside>
+</main>
+<script>
+// The script. scripts/voiceover-make.py times the zooms to "Here you can see", "It gets the state",
+// and "Then it makes a decision", so keep those phrases if you edit the text.
+const SCRIPT = "Jev is a decision-making model. It's a System 1 model, built for fast decisions. We're testing it on the RenderATL Pac-Man game. Here you can see each decision: it picks one of four moves, up, down, left, or right. It gets the state of the game board: where it is, where the adversaries are, how much power time is left, and where the power pellets are. Then it makes a decision.";
+const FALLBACK_WORDS_PER_SECOND = 3.3; // About 22 s for the script.
+const WINDOW = 5; // How far ahead a heard word may match.
+const END_HOLD_MS = 1200;
+const NO_VOICE_MS = 3000; // With no words heard by then, the steady pace takes over.
+const COUNTDOWN = 3;
+const NUMBERS = { "1": "one", "2": "two", "3": "three", "4": "four", "5": "five" };
+// Words that speech recognition often hears in place of a script word.
+const ALIASES = { jev: ["jeff", "jeb", "jet", "chev", "jess", "jab"], renderatl: ["render", "rendered", "renderer"], pacman: ["pacman"] };
+
+const $ = (id) => document.getElementById(id);
+const cam = $("cam"), preview = $("preview");
+const norm = (w) => { const n = w.toLowerCase().replace(/[^a-z0-9]/g, ""); return NUMBERS[n] || n; };
+// "decision-making" and "Pac-Man" read as two words each.
+const tokens = SCRIPT.split(/\s+/).flatMap((w) => (/[a-z]-[a-z]/i.test(w) ? w.split("-").map((p, i, a) => (i < a.length - 1 ? p + "-" : p)) : [w]));
+const keys = tokens.map(norm);
+$("script").innerHTML = tokens.map((t, i) => `<span class="w" data-i="${i}">${t.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</span>` + (t.endsWith("-") ? "" : " ")).join("");
+const spans = [...document.querySelectorAll(".script .w")];
+
+let stream = null, recorder = null, chunks = [], recognition = null, fallbackTimer = null, endTimer = null;
+let busy = false, discard = false, rehearsal = false, takeNo = 0, pointer = 0, startedAt = 0, useVoice = true, heardAny = false, noVoiceTimer = null;
+
+function editDistanceOk(a, b) {
+  if (a === b) return true;
+  if ((ALIASES[a] || []).includes(b)) return true;
+  if (a.length >= 4 && (a.startsWith(b) || b.startsWith(a)) && Math.min(a.length, b.length) >= 3) return true;
+  if (Math.abs(a.length - b.length) > 1 || a.length < 5) return false;
+  let i = 0, j = 0, edits = 0;
+  while (i < a.length && j < b.length) {
+    if (a[i] === b[j]) { i++; j++; continue; }
+    if (++edits > 1) return false;
+    if (a.length > b.length) i++; else if (b.length > a.length) j++; else { i++; j++; }
+  }
+  return edits + (a.length - i) + (b.length - j) <= 1;
+}
+
+// Recompute the position from all the heard words each time. This is simple and never drifts.
+function positionFrom(heard) {
+  let p = 0;
+  for (const raw of heard) {
+    const w = norm(raw);
+    if (!w) continue;
+    for (let j = p; j < Math.min(keys.length, p + WINDOW); j++) {
+      if (editDistanceOk(keys[j], w)) { p = j + 1; break; }
+    }
+  }
+  return p;
+}
+
+function render(p) {
+  pointer = Math.max(pointer, p);
+  spans.forEach((s, i) => { s.className = "w" + (i < pointer ? " done" : i === pointer ? " now" : ""); });
+  const now = spans[Math.min(pointer, spans.length - 1)];
+  const box = $("script");
+  const target = now.offsetTop - box.offsetTop - 50;
+  box.scrollTop = Math.max(0, target);
+  $("progress").style.width = `${(100 * pointer) / keys.length}%`;
+  if (pointer >= keys.length && busy && !endTimer) endTimer = setTimeout(finishTake, END_HOLD_MS);
+}
+
+function startFollowing() {
+  pointer = 0; render(0); startedAt = performance.now();
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  useVoice = Boolean(SR);
+  $("mode").textContent = useVoice ? "FOLLOWS YOUR VOICE" : "STEADY PACE (NO SPEECH RECOGNITION)";
+  if (useVoice) {
+    recognition = new SR();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = "en-US";
+    recognition.onresult = (e) => {
+      heardAny = true;
+      const heard = [];
+      for (const r of e.results) heard.push(...r[0].transcript.split(/\s+/));
+      render(positionFrom(heard));
+    };
+    recognition.onerror = (e) => {
+      if (e.error === "not-allowed" || e.error === "service-not-allowed" || e.error === "network") {
+        useVoice = false; $("mode").textContent = "STEADY PACE (SPEECH RECOGNITION: " + e.error + ")"; startFallback();
+      }
+    };
+    // Chrome ends recognition after a pause; restart it while the take runs. The heard list resets,
+    // so the position keeps its highest value.
+    recognition.onend = () => { if (busy && useVoice) { try { recognition.start(); } catch (err) {} } };
+    recognition.start();
+    heardAny = false;
+    noVoiceTimer = setTimeout(() => {
+      if (!heardAny && busy) { useVoice = false; $("mode").textContent = "STEADY PACE (NO WORDS HEARD)"; startedAt = performance.now() - (pointer / FALLBACK_WORDS_PER_SECOND) * 1000; startFallback(); }
+    }, NO_VOICE_MS);
+  } else startFallback();
+}
+function startFallback() {
+  clearInterval(fallbackTimer);
+  fallbackTimer = setInterval(() => render(Math.floor(((performance.now() - startedAt) / 1000) * FALLBACK_WORDS_PER_SECOND)), 100);
+}
+function stopFollowing() {
+  clearInterval(fallbackTimer); fallbackTimer = null; clearTimeout(noVoiceTimer);
+  if (recognition) { recognition.onend = null; try { recognition.stop(); } catch (err) {} recognition = null; }
+}
+
+function setState(text, rec) { $("state").textContent = text; $("state").className = rec ? "rec" : ""; }
+function setButtons() {
+  $("recordBtn").disabled = !stream || busy;
+  $("rehearseBtn").disabled = busy;
+  $("stopBtn").disabled = !busy;
+}
+
+async function turnOnCamera() {
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({
+      video: { width: { ideal: 1280 }, height: { ideal: 720 }, frameRate: { ideal: 25 } },
+      audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true },
+    });
+    cam.srcObject = stream;
+    $("status").textContent = "Camera and microphone are on.";
+  } catch (err) {
+    $("status").textContent = "No camera or microphone: " + err.message;
+  }
+  setButtons();
+}
+
+function countdown() {
+  return new Promise((resolve) => {
+    let n = COUNTDOWN;
+    const box = $("script");
+    const saved = box.innerHTML;
+    const tick = () => {
+      if (discard) { box.innerHTML = saved; resolve(false); return; }
+      if (n === 0) { box.innerHTML = saved; resolve(true); return; }
+      box.innerHTML = `<span class="count">${n}</span>`;
+      n -= 1;
+      setTimeout(tick, 1000);
+    };
+    tick();
+  });
+}
+
+async function begin(isRehearsal) {
+  if (busy) return;
+  busy = true; discard = false; rehearsal = isRehearsal; endTimer = null; setButtons();
+  setState(isRehearsal ? "REHEARSAL" : "GET READY", false);
+  if (!(await countdown())) { abort(); return; }
+  // The span list was rebuilt by the countdown; collect it again.
+  spans.splice(0, spans.length, ...document.querySelectorAll(".script .w"));
+  preview.currentTime = 0; preview.play();
+  if (stream) {
+    chunks = [];
+    const type = MediaRecorder.isTypeSupported("video/webm;codecs=vp9,opus") ? "video/webm;codecs=vp9,opus" : "video/webm";
+    recorder = new MediaRecorder(stream, { mimeType: type, videoBitsPerSecond: 4_000_000 });
+    recorder.ondataavailable = (e) => e.data.size && chunks.push(e.data);
+    recorder.onstop = () => {
+      if (!discard) addTake(new Blob(chunks, { type: "video/webm" }), rehearsal);
+      done(discard ? "Take discarded. Press Space to try again." : "Take saved below. Press Space for another take.");
+    };
+    recorder.onstart = () => { setState(isRehearsal ? "● REHEARSAL (RECORDING)" : "● RECORDING", true); startFollowing(); };
+    recorder.start(250);
+  } else {
+    setState("REHEARSAL (NO CAMERA)", false);
+    startFollowing();
+  }
+}
+
+function finishTake() {
+  if (!busy) return;
+  if (recorder && recorder.state === "recording") recorder.stop();
+  else done("Rehearsal finished. Turn on the camera to keep takes.");
+}
+function abort() {
+  discard = true;
+  if (recorder && recorder.state === "recording") recorder.stop(); else done("Take discarded. Press Space to try again.");
+}
+function done(message) {
+  stopFollowing(); clearTimeout(endTimer); endTimer = null;
+  preview.pause(); busy = false; recorder = null; setButtons(); setState("READY", false);
+  $("status").textContent = message;
+}
+
+function addTake(blob, isRehearsal) {
+  takeNo += 1;
+  const url = URL.createObjectURL(blob);
+  const label = isRehearsal ? "rehearsal" : "take";
+  const name = `maze-voiceover-own-${label}-${takeNo}.webm`;
+  const row = document.createElement("div");
+  row.className = "take";
+  const title = document.createElement("div");
+  title.innerHTML = `<b>${isRehearsal ? "Rehearsal" : "Take"} ${takeNo}</b> · ${(blob.size / 1e6).toFixed(1)} MB`;
+  const play = document.createElement("button"); play.className = "ghost"; play.textContent = "Play back";
+  const keep = document.createElement("button"); keep.textContent = "Keep (download)";
+  const del = document.createElement("button"); del.className = "ghost"; del.textContent = "Delete";
+  play.onclick = () => {
+    // Play the take in the bubble, with the gameplay behind it.
+    cam.srcObject = null; cam.src = url; cam.muted = false;
+    cam.currentTime = 0; preview.currentTime = 0;
+    cam.play(); preview.play();
+    cam.onended = () => { preview.pause(); cam.removeAttribute("src"); cam.muted = true; cam.srcObject = stream; cam.onended = null; };
+  };
+  keep.onclick = () => { const a = document.createElement("a"); a.href = url; a.download = name; a.click(); keep.textContent = "Downloaded"; };
+  del.onclick = () => { URL.revokeObjectURL(url); row.remove(); };
+  row.append(title, play, keep, del);
+  $("takes").prepend(row);
+}
+
+$("camBtn").onclick = turnOnCamera;
+$("recordBtn").onclick = () => begin(false);
+$("rehearseBtn").onclick = () => begin(true);
+$("stopBtn").onclick = abort;
+window.addEventListener("keydown", (e) => {
+  if (e.code === "Space") { e.preventDefault(); if (busy) finishTake(); else if (stream) begin(false); }
+  else if (e.key === "Escape") abort();
+  else if (e.key === "p" || e.key === "P") { if (!busy) begin(true); }
+});
+render(0);
+</script>
+</body>
+</html>

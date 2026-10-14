@@ -90,6 +90,7 @@ const CUTS = {
     ],
   },
 };
+if (new URLSearchParams(location.search).get("cut") === "own") location.replace("own.html");
 const CUT = CUTS[new URLSearchParams(location.search).get("cut")] || CUTS.teaser;
 const CUES = CUT.cues;
 const COUNTDOWN = 3;
