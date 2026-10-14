@@ -35,7 +35,7 @@
 </div>
 <main>
   <section>
-    <video id="teaser" src="../media/maze-teaser.mp4" playsinline muted preload="auto"></video>
+    <video id="teaser" playsinline muted preload="auto"></video>
   </section>
   <aside>
     <div class="bubble"><video id="cam" playsinline muted autoplay></video></div>
@@ -57,22 +57,45 @@
   </aside>
 </main>
 <script>
-// The cue times match the teaser: the intro card ends near 5 s, the captions change every 5.5 s
-// (the game plays at 2x), the result shows near 38.5 s, and the closing card near 42 s.
-const CUES = [
-  [0.0, "Can a model that only makes decisions play Pac-Man? Meet Jev."],
-  [5.0, "Jev never sees the screen. At every turn, code sends it the facts: how far to the next wing, the nearest blocker, the power pellet."],
-  [10.5, "Jev picks a direction, with a probability for each one. Those are the bars on the right."],
-  [16.0, "When Jev is unsure, or every way looks dangerous, code hands the move to a slower planner. That is System 2."],
-  [21.5, "The fast calls stay with Jev. About one move in five goes to the planner."],
-  [27.0, "On thirty new games, Jev alone won six."],
-  [32.5, "Jev plus the planner won twenty-eight."],
-  [38.5, "This run: every wing, zero lives lost."],
-  [42.0, "Build with Jev at the RenderATL workshop, October fifteenth. Change the question, then measure it."],
-];
+// Teaser cue times: the intro card ends near 5 s, the captions change every 5.5 s (the game
+// plays at 2x), the result shows near 38.5 s, and the closing card near 42 s.
+// Two cuts. "teaser" (default): the captioned teaser. "own" (?cut=own): the text-free video with
+// William's own script; its camera zooms to the decision bars at 13 s and the board state at 22 s.
+const CUTS = {
+  teaser: {
+    video: "../media/maze-teaser.mp4",
+    file: "maze-voiceover-take",
+    cues: [
+      [0.0, "Can a model that only makes decisions play Pac-Man? Meet Jev."],
+      [5.0, "Jev never sees the screen. At every turn, code sends it the facts: how far to the next wing, the nearest blocker, the power pellet."],
+      [10.5, "Jev picks a direction, with a probability for each one. Those are the bars on the right."],
+      [16.0, "When Jev is unsure, or every way looks dangerous, code hands the move to a slower planner. That is System 2."],
+      [21.5, "The fast calls stay with Jev. About one move in five goes to the planner."],
+      [27.0, "On thirty new games, Jev alone won six."],
+      [32.5, "Jev plus the planner won twenty-eight."],
+      [38.5, "This run: every wing, zero lives lost."],
+      [42.0, "Build with Jev at the RenderATL workshop, October fifteenth. Change the question, then measure it."],
+    ],
+  },
+  own: {
+    video: "../media/maze-voiceover-base.mp4",
+    file: "maze-voiceover-own-take",
+    cues: [
+      [0.0, "Jev is a decision-making model. It's a System 1 model, meaning it's designed for making fast decisions."],
+      [6.5, "So we're testing it with the RenderATL Pac-Man game, to see if it can make quick decisions."],
+      [13.0, "Here we can see each decision. It chooses one of four things: up, down, left, or right."],
+      [22.0, "It gets the state of the game board: where it is on the board, how much power time is left, where the adversaries are, and where the power pellets are."],
+      [32.5, "And it tries to make a decision accordingly."],
+      [37.0, "(The board is cleared. Hold, or close in your own words.)"],
+    ],
+  },
+};
+const CUT = CUTS[new URLSearchParams(location.search).get("cut")] || CUTS.teaser;
+const CUES = CUT.cues;
 const COUNTDOWN = 3;
 const $ = (id) => document.getElementById(id);
 const teaser = $("teaser"), cam = $("cam");
+teaser.src = CUT.video;
 let stream = null, recorder = null, chunks = [], timer = null, discard = false, takeNo = 0, busy = false;
 
 function cueAt(t) { let i = 0; while (i + 1 < CUES.length && CUES[i + 1][0] <= t) i++; return i; }
@@ -158,7 +181,7 @@ function finishAbort() {
 function addTake(blob) {
   takeNo += 1;
   const url = URL.createObjectURL(blob);
-  const name = `maze-voiceover-take-${takeNo}.webm`;
+  const name = `${CUT.file}-${takeNo}.webm`;
   const row = document.createElement("div");
   row.className = "take";
   const label = document.createElement("div");

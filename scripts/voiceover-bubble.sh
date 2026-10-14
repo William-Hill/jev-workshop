@@ -6,8 +6,9 @@
 set -euo pipefail
 
 CAM="${1:?usage: scripts/voiceover-bubble.sh <webcam recording> [output.mp4]}"
-OUT="${2:-docs/presentation/media/maze-teaser-voiceover.mp4}"
-BASE="docs/presentation/media/maze-teaser.mp4"
+# Set BASE=docs/presentation/media/maze-voiceover-base.mp4 for the own-script cut.
+BASE="${BASE:-docs/presentation/media/maze-teaser.mp4}"
+OUT="${2:-${BASE%.mp4}-voiceover.mp4}"
 SIZE=230          # Bubble diameter in pixels; fits the empty strip right of the Jev panel.
 RING=8            # Pink ring width.
 X=$((1920 - SIZE - 2 * RING - 12))

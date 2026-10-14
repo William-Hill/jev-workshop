@@ -11,6 +11,8 @@ const PORT = 5190;
 const SIZE = { width: 1920, height: 1080 };
 const SEEDS = [5003, 5008, 5009, 5005, 5007, 5011];
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// CLEAN=1 records the game only: no title cards and no captions, for a voiceover cut.
+const CLEAN = process.env.CLEAN === "1";
 
 const CAPTIONS = [
   "Jev plays RenderMaze. It never sees the screen. Code sends it facts: steps to the nearest wing, the nearest blocker, the power pellet.",
@@ -54,9 +56,11 @@ async function attempt(seed) {
   const t0 = Date.now(); // The video starts with the page.
   await page.goto(`http://127.0.0.1:${PORT}/?jev=1&wait=1&timeout=5000&variant=level2d-s2search&speed=1`);
   await page.waitForFunction(() => window.__jev || window.__jevError, null, { timeout: 30000 });
-  await overlay(page, "card", "Can Jev play Pac-Man?\nA model that only makes decisions\nJev Workshop · RenderATL × AI Ship & Social · October 15");
-  await sleep(4000);
-  await overlay(page, "card", "");
+  if (!CLEAN) {
+    await overlay(page, "card", "Can Jev play Pac-Man?\nA model that only makes decisions\nJev Workshop · RenderATL × AI Ship & Social · October 15");
+    await sleep(4000);
+    await overlay(page, "card", "");
+  } else await sleep(1500);
   const introEnd = (Date.now() - t0) / 1000;
   await page.evaluate((seed) => {
     const s = window.__scene;
@@ -70,16 +74,18 @@ async function attempt(seed) {
     const phase = await page.evaluate(() => window.__scene.phase);
     if (phase === "won" || phase === "lost") break;
     const elapsed = Date.now() - started;
-    if (elapsed > i * 11000 && i < CAPTIONS.length) await overlay(page, "caption", CAPTIONS[i++]);
+    if (!CLEAN && elapsed > i * 11000 && i < CAPTIONS.length) await overlay(page, "caption", CAPTIONS[i++]);
     await sleep(250);
   }
   const gameEnd = (Date.now() - t0) / 1000;
   const end = await page.evaluate(() => ({ phase: window.__scene.phase, lives: window.__scene.lives, left: window.__scene.left, score: window.__jev.score.summary() }));
   const lost = 3 - end.lives;
-  await overlay(page, "caption", end.phase === "won" ? `Cleared: every wing collected, ${lost} ${lost === 1 ? "life" : "lives"} lost.` : `Game over with ${end.left} wings left.`);
+  if (!CLEAN) await overlay(page, "caption", end.phase === "won" ? `Cleared: every wing collected, ${lost} ${lost === 1 ? "life" : "lives"} lost.` : `Game over with ${end.left} wings left.`);
   await sleep(3500);
-  await overlay(page, "card", "Change the question.\nJev Workshop · October 15\nRenderATL HQ & Tech Lounge, Atlanta · RenderATL × AI Ship & Social · Jev access by Obvious");
-  await sleep(4500);
+  if (!CLEAN) {
+    await overlay(page, "card", "Change the question.\nJev Workshop · October 15\nRenderATL HQ & Tech Lounge, Atlanta · RenderATL × AI Ship & Social · Jev access by Obvious");
+    await sleep(4500);
+  }
   const video = page.video();
   await context.close();
   return { seed, ...end, lost, introEnd, gameEnd, path: await video.path() };
@@ -99,6 +105,12 @@ try {
   server.kill();
 }
 if (!best) { console.log("No win in the seeds tried. No video kept."); process.exit(1); }
+if (CLEAN) {
+  // The game from its first move to 3.5 s after the end (the win screen), at real speed.
+  execFileSync("ffmpeg", ["-y", "-loglevel", "error", "-ss", best.introEnd.toFixed(2), "-i", best.path, "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "18", "recordings/maze-clean.mp4"]);
+  console.log(`Kept seed ${best.seed} (${best.lost} lives lost). Video: recordings/maze-clean.mp4 (game ends at ${(best.gameEnd - best.introEnd).toFixed(1)} s)`);
+  process.exit(0);
+}
 execFileSync("ffmpeg", ["-y", "-loglevel", "error", "-i", best.path, "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "22", "recordings/maze-full.mp4"]);
 // The teaser: the intro card and the ending at normal speed, the game at 2x.
 const a = best.introEnd.toFixed(2), b = best.gameEnd.toFixed(2);
