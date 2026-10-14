@@ -28,6 +28,10 @@
   .takes { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
   .take { border: 2px solid rgba(252,249,238,.3); padding: 8px 10px; }
   .take b { color: #ff88df; }
+  .editor { margin-top: 14px; display: none; }
+  .editor.open { display: block; }
+  .editor textarea { width: 100%; height: 190px; font: 15px/1.45 system-ui, sans-serif; background: #fcf9ee; color: #211c22; border: 2px solid #ff88df; padding: 8px; }
+  .warn { font: 13px ui-monospace, monospace; color: #ffd88a; margin-top: 6px; white-space: pre-wrap; }
   .keys { font: 13px ui-monospace, monospace; color: rgba(252,249,238,.6); margin-top: 12px; line-height: 1.6; }
 </style>
 </head>
@@ -50,6 +54,15 @@
       <button id="keepBtn" disabled>Stop and keep (Space)</button>
       <button id="stopBtn" class="ghost" disabled>Stop and discard (Esc)</button>
     </div>
+    <div>
+      <button id="editBtn" class="ghost">Edit script (E)</button>
+    </div>
+    <div class="editor" id="editor">
+      <textarea id="scriptText" spellcheck="true"></textarea>
+      <button id="saveBtn">Save script</button>
+      <button id="resetBtn" class="ghost">Reset to default</button>
+      <div class="warn" id="warn"></div>
+    </div>
     <div class="status" id="status"></div>
     <div class="takes" id="takes"></div>
     <div class="keys">
@@ -59,6 +72,7 @@
       Space or Enter while recording: stop and keep the take.<br>
       P: rehearse. With the camera on, a rehearsal is also a take.<br>
       Esc: stop and discard.<br>
+      E: edit the script. It is saved in this browser.<br>
       The take ends by itself 1.2 s after the last word.<br>
       Read at your own pace: the video is timed to your take later.
     </div>
@@ -67,7 +81,7 @@
 <script>
 // The script. scripts/voiceover-make.py times the zooms to "Here you can see", "It gets the state",
 // and "Then it makes a decision", so keep those phrases if you edit the text.
-const SCRIPT = "Jev is a decision-making model. It's a System 1 model, built for fast decisions. We're testing it on the RenderATL Pac-Man game. Here you can see each decision: it picks one of four moves, up, down, left, or right. It gets the state of the game board: where it is, where the adversaries are, how much power time is left, and where the power pellets are. Then it makes a decision.";
+const DEFAULT_SCRIPT = "Jev is what's called a System 1 model, meaning it's designed for making decisions based on a state that it is given. We're testing it on the RenderATL Pac-Man game. Here you can see each decision: it picks one of four moves, up, down, left, or right. It gets the state of the game board: where it is, where the adversaries are, how much power time is left, and where the power pellets are. Then it makes a decision.";
 const FALLBACK_WORDS_PER_SECOND = 3.3; // About 22 s for the script.
 const WINDOW = 5; // How far ahead a heard word may match.
 const END_HOLD_MS = 1200;
@@ -81,10 +95,25 @@ const $ = (id) => document.getElementById(id);
 const cam = $("cam"), preview = $("preview");
 const norm = (w) => { const n = w.toLowerCase().replace(/[^a-z0-9]/g, ""); return NUMBERS[n] || n; };
 // "decision-making" and "Pac-Man" read as two words each.
-const tokens = SCRIPT.split(/\s+/).flatMap((w) => (/[a-z]-[a-z]/i.test(w) ? w.split("-").map((p, i, a) => (i < a.length - 1 ? p + "-" : p)) : [w]));
-const keys = tokens.map(norm);
-$("script").innerHTML = tokens.map((t, i) => `<span class="w" data-i="${i}">${t.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</span>` + (t.endsWith("-") ? "" : " ")).join("");
-const spans = [...document.querySelectorAll(".script .w")];
+const STORAGE_KEY = "maze-voiceover-own-script";
+// The video builder looks for these phrases to place the zooms and the cut to the win.
+const ANCHOR_PHRASES = ["Here you can see", "It gets the state", "Then it makes a decision"];
+let SCRIPT = localStorage.getItem(STORAGE_KEY) || DEFAULT_SCRIPT;
+let tokens = [], keys = [];
+const spans = [];
+
+function setScript(text) {
+  SCRIPT = text.replace(/\s+/g, " ").trim();
+  tokens = SCRIPT.split(/\s+/).flatMap((w) => (/[a-z]-[a-z]/i.test(w) ? w.split("-").map((p, i, a) => (i < a.length - 1 ? p + "-" : p)) : [w]));
+  keys = tokens.map(norm);
+  $("script").innerHTML = tokens.map((t, i) => `<span class="w" data-i="${i}">${t.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</span>` + (t.endsWith("-") ? "" : " ")).join("");
+  spans.splice(0, spans.length, ...document.querySelectorAll(".script .w"));
+  pointer = 0;
+  const missing = ANCHOR_PHRASES.filter((ph) => !SCRIPT.toLowerCase().includes(ph.toLowerCase()));
+  $("warn").textContent = missing.length
+    ? "Missing phrases (the video builder uses them for the zooms; without them it uses fixed points):\n- " + missing.join("\n- ")
+    : `${keys.length} words, about ${Math.round(keys.length / 3.3)} s at your pace.`;
+}
 
 let stream = null, recorder = null, chunks = [], recognition = null, fallbackTimer = null, endTimer = null;
 let busy = false, discard = false, rehearsal = false, takeNo = 0, pointer = 0, startedAt = 0, useVoice = true, heardAny = false, noVoiceTimer = null;
@@ -173,6 +202,7 @@ function setButtons() {
   $("rehearseBtn").disabled = busy;
   $("stopBtn").disabled = !busy;
   $("keepBtn").disabled = !busy;
+  $("editBtn").disabled = busy;
 }
 
 async function turnOnCamera() {
@@ -277,11 +307,29 @@ $("rehearseBtn").onclick = () => begin(true);
 $("stopBtn").onclick = abort;
 $("keepBtn").onclick = finishTake;
 window.addEventListener("keydown", (e) => {
+  if (e.target.tagName === "TEXTAREA") return;
+  if ((e.key === "e" || e.key === "E") && !busy) { e.preventDefault(); toggleEditor(); return; }
   if (e.code === "Space") { e.preventDefault(); if (busy) finishTake(); else if (stream) begin(false); }
   else if (e.key === "Enter" && busy) { e.preventDefault(); finishTake(); }
   else if (e.key === "Escape") abort();
   else if (e.key === "p" || e.key === "P") { if (!busy) begin(true); }
 });
+function toggleEditor() {
+  const open = $("editor").classList.toggle("open");
+  if (open) { $("scriptText").value = SCRIPT; $("scriptText").focus(); }
+}
+$("editBtn").onclick = toggleEditor;
+$("saveBtn").onclick = () => {
+  const text = $("scriptText").value.trim();
+  if (!text) return;
+  localStorage.setItem(STORAGE_KEY, text);
+  setScript(text); render(0);
+  $("editor").classList.remove("open");
+  $("status").textContent = "Script saved in this browser.";
+};
+$("resetBtn").onclick = () => { $("scriptText").value = DEFAULT_SCRIPT; };
+
+setScript(SCRIPT);
 render(0);
 </script>
 </body>
