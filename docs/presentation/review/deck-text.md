@@ -31,7 +31,7 @@ Then you will build with it yourself, with free Jev access from Obvious.
 
 ### Speaker notes
 
-Say: "Jev is new. It went into early access on September 15, one month ago. In thirty minutes you will know what it does, what it does not do, and how it compares with tools that you already use. I will show where the evidence is strong, where it is weak, and where we have none."
+Say: "Jev is new. It went into early access on September 15, one month ago, and yesterday, October 14, TypeSafe added images. In thirty minutes you will know what it does, what it does not do, and how it compares with tools that you already use. I will show where the evidence is strong, where it is weak, and where we have none."
 Bridge: "Every tool exists for a problem. Let us start with the problem."
 
 
@@ -83,7 +83,7 @@ Trained classifier: logistic regression or a fine-tuned BERT model. You need hun
 Zero-shot classifier: for example the Hugging Face zero-shot pipeline, which uses an entailment model. You give the labels as text at run time.
 LLM prompt: "Here is a ticket, reply with billing, technical, or sales." JSON mode fixes the format. For a probability, you can limit the output to the option tokens and read their log probabilities, then calibrate them with temperature scaling. That works, but it is extra work, and not every API exposes log probabilities.
 A documented example of text output that drifts: Anthropic's own guide for Claude Opus 5 says that its "default user-facing responses run longer than prior Opus models'", that a lower effort setting does not reliably shorten them, and that it "can also expand the scope of a task, adding steps that weren't requested." Users on Hacker News and Reddit made the same complaint. If your code parses an LLM's answer to make a decision, that drift becomes your problem.
-Be honest if asked: we did not measure Jev against an LLM on the same task. The one public comparison that we found is on slide 21.
+Be honest if asked: we did not measure Jev against an LLM on the same task. The one public comparison that we found is on slide 22.
 Bridge: "Before we look at Jev, one idea from the people who built it: assistance is not the same job as automation."
 
 
@@ -121,7 +121,7 @@ Say: "The CEO of TypeSafe, the company that makes Jev, co-authored the RLHF work
 His own words, worth quoting: assistance tasks are ones where "the goal of it is to please the human in the loop." Automation should run "in the background in a server that you never even look at." And: "Today's AI, everything inherited from RLHF, is incredible at the human in the loop stuff, but not for automation tasks." Why does every LLM need a human in the loop? "We literally put them in the loop."
 The last row: he names three training targets. "RLHF is optimizing for human preference. RLVR is optimizing for pure correctness, but we are doing a third thing that is optimized for calibrated decision-making." The launch post calls that third thing RLCD, reinforcement learning for calibrated decisions. He puts Claude Code on the assistance side too: a great tool, but one with a person who reads each step.
 Say: "Most of the AI tools that you use today are assistance tools: a chat window, a coding agent, a person who reads every answer. Jev is built for the other column: thousands of small decisions that nobody reads."
-RLHF, if asked now: reinforcement learning from human feedback. People rank model answers, a reward model learns their preferences, and the model is trained toward answers that people prefer. Slide 13 has all three definitions.
+RLHF, if asked now: reinforcement learning from human feedback. People rank model answers, a reward model learns their preferences, and the model is trained toward answers that people prefer. Slide 14 has all three definitions.
 His point about errors: a reward model that learns from people tends to reward answers that sound confident. So a chat model can sound right when it is wrong. In assistance, the user catches that. In automation, nobody does.
 Be clear about the source: this is the vendor's own story, from a talk before the Jev launch. It is a useful way to sort tasks. It is not evidence that Jev is more accurate. I have no relationship with TypeSafe.
 Source: "Jev CEO: I made ChatGPT, now I'm building what's next", AI Engineer channel, youtu.be/cJ0EOzey--o. Notes in docs/research/jev-research.md, section 7d.
@@ -134,9 +134,12 @@ Bridge: "Jev aims at the automation side, and at the gap between the last two ro
 
 What Jev is
 Jev answers a fixed-option question about text, and returns a probability for each option.
-Who A hosted model from TypeSafe AI, in early access since 15 Sept 2026
-Speed About 170 to 250 ms for each request in our tests
-Name After economist William Stanley Jevons
+Who
+A hosted model from TypeSafe AI, in early access since 15 Sept 2026
+Speed
+About 170 to 250 ms for each request in our tests
+Name
+After economist William Stanley Jevons
 It reads natural language, like an LLM. It returns a typed answer, one of your options, and it writes no text.
 
 ### Speaker notes
@@ -144,7 +147,7 @@ It reads natural language, like an LLM. It returns a typed answer, one of your o
 Say: "That is the whole definition. Input: text and a question with options that you write. Output: one option, and a probability for each option."
 "Typed answer" means the answer is always one of the options that you defined, so code never parses free text.
 The name: the next slide explains it.
-Speed: the median request time in our maze benchmark was 166 to 204 ms, from a laptop in Atlanta, through a local proxy. Current version: jev-1.13.0.
+Speed: the median request time in our maze benchmark was 166 to 204 ms, from a laptop in Atlanta, through a local proxy. Current stable version: jev-1.13.0. Since 14 October, jev-1.14.0 is out as jev-preview, and jev-latest moves to it in about one week. Since 14 October, Jev also reads images, behind an experimental header: slide 12. Text is still the main input, and the only one that TypeSafe supports for production.
 Bridge: "Why the name Jev? It comes from a book about coal."
 
 
@@ -154,9 +157,11 @@ Bridge: "Why the name Jev? It comes from a book about coal."
 
 What Jev is · the name "Jev"
 Named after Jevons: when a resource gets cheaper, we use more of it.
-1865: coal Steam engines used less coal for each job.
+1865: coal
+Steam engines used less coal for each job.
 Britain burned more coal in total.
-2026: decisions A judgment call costs less than a cent.
+2026: decisions
+A judgment call costs less than a cent.
 TypeSafe bets that software will make many more of them.
 "It is wholly a confusion of ideas to suppose that the economical use of fuel is equivalent to a diminished consumption. The very contrary is the truth." Jevons, The Coal Question (1865). TypeSafe, 2026: "We named Jev after William Stanley Jevons."
 
@@ -176,10 +181,12 @@ Bridge: "The other name, System One, comes from psychology. Here is the idea."
 
 What Jev is · the name "System One"
 The idea comes from psychology: two ways to think.
-System 1: fast and automatic 2 × 2 = ?
+System 1: fast and automatic
+2 × 2 = ?
 You know "4" at once.
 Jev is built for this kind of judgment
-System 2: slow and deliberate 17 × 24 = ?
+System 2: slow and deliberate
+17 × 24 = ?
 You work it out step by step: 408.
 Reasoning models come closest to this
 Daniel Kahneman, Thinking, Fast and Slow (2011). Psychologists Keith Stanovich and Richard West named System 1 and System 2 in 2000. Examples from IBM Technology, "What Is Jev?".
@@ -200,9 +207,11 @@ Bridge: "If you want one technique to compare System 1 Jev with, compare it with
 
 What Jev is
 Think of it as a classifier whose labels you write in English, at request time.
-Trained classifier Labels are fixed at training time.
+Trained classifier
+Labels are fixed at training time.
 Needs labeled training data.
-Jev Labels and rules are in each request.
+Jev
+Labels and rules are in each request.
 Needs no training data, but you still need a labeled test set.
 A preprint by Rafe and Das (arXiv 2610.00346, 29 Sept 2026) tested 8 decision models, Jev among them, against classifiers and LLMs. With labeled data, small trained classifiers were the most accurate on intent tasks. Without labels, decision models beat a zero-shot classifier. We read the abstract only.
 
@@ -222,24 +231,34 @@ Bridge: "Here is what one request looks like."
 What Jev is · how to call it
 One request, one answer.
 POST /v1/systemone
-state "Help! My payouts have
+state
+"Help! My payouts have
 been failing for 3 days."
-question department (choice)
+question
+department (choice)
 "Which team should handle this?"
-billing Payments, invoicing, refunds
-technical Bugs, outages, integrations
-sales Pricing, upgrades, new accounts
-choice billing
-billing 0.88
-technical 0.12
-sales 0.00
-confidence 0.81
+billing
+Payments, invoicing, refunds
+technical
+Bugs, outages, integrations
+sales
+Pricing, upgrades, new accounts
+choice
+billing
+billing
+0.88
+technical
+0.12
+sales
+0.00
+confidence
+0.81
 The example from the TypeSafe API reference, shortened. One request can carry many questions.
 
 ### Speaker notes
 
 Say: "Three parts. The state is the content: here, one support message. The question has instructions and a list of options, and each option has a short description. The answer names one option and gives a probability for each."
-Details for questions: The question name, "department", is not sent to the model, so all the meaning must be in the instructions and the descriptions. A request can carry many questions, answered in parallel. Limits: up to 255 options for each Choice, and 64,000 tokens for each request.
+Details for questions: The question name, "department", is not sent to the model, so all the meaning must be in the instructions and the descriptions. A request can carry many questions, answered in parallel. Limits: up to 255 options for each Choice, and 64,000 tokens for each request (32,000 for the state plus one question). Since 14 October, the header TypeSafe-Danger-Zone-Long-Context: true raises both limits to 262,000 tokens. TypeSafe says long context is slower and less accurate, at the same price for each token.
 Bridge: "This was a Choice. There are three question types."
 
 
@@ -249,13 +268,16 @@ Bridge: "This was a Choice. There are three question types."
 
 What Jev is · question types
 Three question types, and the classic technique that each one matches.
-Choice "Which team handles this ticket?"
+Choice
+"Which team handles this ticket?"
 One option, with a probability for each
 Like a multi-class classifier
-Score "How frustrated is this customer?"
+Score
+"How frustrated is this customer?"
 A number on levels that you define, for example 1.4
 Like an ordinal rating
-Noul "Does this message ask for a refund?"
+Noul
+"Does this message ask for a refund?"
 The probability of yes, for example 0.95
 Like a binary classifier
 
@@ -263,18 +285,54 @@ Like a binary classifier
 
 Choice picks one of your options. Score rates on ordered levels that you describe, for example 0 calm, 1 frustrated, 2 very frustrated; the answer is the probability-weighted level, so 1.4 lies between "frustrated" and "very frustrated". Noul, TypeSafe's name for a yes or no question, gives the probability of yes.
 Tie: "Each one is a classic machine learning output. You already know how to use these in code: an argmax, a threshold, a sort."
-Bridge: "Choice and Score answers also carry a confidence number. People misread it, so here is exactly what it is."
+Bridge: "Those are the three types that I tested for this talk. Yesterday TypeSafe added a fourth type, and a new kind of input."
 
 
 ## Slide 12 (section 2)
 
 ### On the slide
 
+What Jev is · new on 14 October
+Since yesterday, Jev also reads images. TypeSafe calls it experimental.
+[IMAGE: A RenderMaze board. A green box that Jev returned surrounds the runner character.]
+An image can go in the state, in the instructions, or in the criteria.
+A new question type, Box, returns where a thing is in an image. It needs jev-1.14.0.
+Off by default. Turn it on with the header TypeSafe-Danger-Zone-Images: true.
+Our test this morning: on one maze frame, Box found the runner 4 times in 4 runs. About 1,400 tokens, $0.00006.
+TypeSafe blog, 14 Oct: "too much jaggedness" for production. Ours: 1 frame, 4 runs.
+
+### Speaker notes
+
+Say: "One update, because this is new. Yesterday, October 14, TypeSafe released jev-1.14.0 and turned on images. An image can go anywhere that text can go: in the state, inside a question, or as the example for an option. And there is a new question type, Box, which returns where something is in an image."
+Say: "Our maze player does not see the screen. Code sends it facts. So this morning I sent Jev one frame of the maze, as an image, with three questions. The green box is Jev's Box answer for the runner: the same place in 4 of 4 runs, with a confidence of 0.55 to 0.67. The request took about 1,400 input tokens, which is less than one hundredth of a cent, and 190 to 330 ms."
+Say the limits plainly: "TypeSafe puts this in what it calls the danger zone. Its words: there is still 'way too much jaggedness for us to vouch for these for production'. It also says that every model, Jev included, does worse on images than on text. One frame and four runs is a demo, not a measurement. Everything in the next part of this talk applies to images too."
+The other two questions in our test. "About how many wings are left?" (true answer: 135). jev-1.14.0 answered "more than 100" at 0.78 to 0.81 in 4 of 4 runs. jev-1.13.0 answered "50 to 100" at 0.64, wrong, in 1 run. "Is a blocker within 3 tiles of the runner?" Both versions said no (0.18 to 0.22, and 0.38), which is correct. Counting is a known failure mode, so do not read the wing result as a rule. Script: the request is in the session scratchpad; the image is media/jev-box-maze.jpg.
+Facts, if asked:
+1. The header: TypeSafe-Danger-Zone-Images: true, on each request with an image or a Box question. Without it, the API returns 400: "Images are experimental." We saw that error.
+2. Versions: jev-1.13.0 and jev-1.14.0 both accept images. TypeSafe says jev-1.13.0 "was multimodal all along". Box needs jev-1.14.0 or jev-preview.
+3. How to send an image: list it once in a top-level "assets" map, with a reference string as its key, for example a new UUID. Write the reference anywhere in the state, the instructions, or the criteria, and the model gets the image in its place. The Python and JavaScript SDKs make the references for you. Over HTTP, multipart is better than base64, because base64 makes each image about one third larger.
+4. Limits: PNG or JPEG only. 256 to 1,568 pixels on each side, 16 MiB for each file, 32 MiB for each request. An image outside the limits is rejected, not resized.
+5. Cost: images are input tokens at the same price, $0.042 for each 1 million. Each use of a reference adds the image again. Wes Bos measured one question on an 850 × 850 image at $0.000097, about 10,000 images for each dollar. So put a shared image in the state once, not in each question.
+6. Box always returns a box. It has no "not found" answer. Ask a Noul "Is there a mug in the photo?" in the same request, and ignore the box when the Noul is low. One Box question finds one thing.
+7. Long context: a second header, TypeSafe-Danger-Zone-Long-Context: true, raises the limit from 64,000 to 262,000 tokens. Slower and less accurate.
+8. A docs conflict: on 15 October the Models page still says "Input: Text" for both versions, and that Jev "does not accept audio or video". The Images page says both versions accept images. Video is still not an input.
+9. VideoJev is not TypeSafe. Posts on X on 14 October (Aran Komatsuzaki, AK) shared "VideoJev: System One Model for Video Understanding and Interaction", arXiv 2610.18615. It is an academic paper by other authors (Zhu, Zeng, and others), with open 4B and 35B models. It uses the System One idea. If someone asks: it is not a TypeSafe product, and Jev does not accept video.
+10. For the build time: our maze proxy does not send the images header, and it rejects a body over 64 KiB, so an image request through /api/jev fails. To try images, use the TypeSafe console or the curl example on the TypeSafe Images page.
+I have no relationship with TypeSafe. This test used my own key.
+Bridge: "Back to the numbers that every answer carries. Choice, Score, and now Box answers carry a confidence. People misread it, so here is exactly what it is."
+
+
+## Slide 13 (section 2)
+
+### On the slide
+
 What Jev is · probability and confidence
 Probabilities and confidence are two different numbers.
-Probability Billing 0.88
+Probability
+Billing 0.88
 TypeSafe says these are calibrated: of many answers at 0.8, about 80% are correct.
-Confidence ≈ (n × top − 1) / (n − 1)
+Confidence
+≈ (n × top − 1) / (n − 1)
 How concentrated the probabilities are. It is not the chance of being correct.
 TypeSafe docs: Confidence; System One. Calibration "does not guarantee that an individual answer is correct."
 
@@ -283,24 +341,27 @@ TypeSafe docs: Confidence; System One. Calibration "does not guarantee that an i
 Say: "The probabilities are the model's estimate for each option. TypeSafe claims they are calibrated. That is a claim about groups: of a thousand answers at 0.8, about 800 are correct."
 Draw it in the air, from the IBM video: put the stated probability on the bottom axis and how often the answer is correct on the side axis. A calibrated model lies on the diagonal: answers at 0.8 are correct about 80 percent of the time.
 "Confidence is arithmetic on those probabilities. n is the number of options, top is the highest probability. All the probability on one option gives 1. An even spread gives 0. With 3 options and a top of 0.88, confidence is 0.81. So 'confidence 0.81' does not mean '81 percent correct'."
-For a Score, TypeSafe uses a different spread formula over the levels. A Noul has no confidence field: a value near 0.5 means "not sure".
+For a Score, TypeSafe uses a different spread formula over the levels. A Noul has no confidence field: a value near 0.5 means "not sure". A Box answer, new since 14 October, has a confidence too.
 Tie: "With a classifier that you train, you calibrate it yourself, with Platt scaling or temperature scaling on a held-out set. TypeSafe says it does that work in training. You still must check it on your own data, as the next part shows."
 Bridge: "Where would calibration come from? TypeSafe says: from the way it trains the model."
 
 
-## Slide 13 (section 2)
+## Slide 14 (section 2)
 
 ### On the slide
 
 What Jev is · training
 TypeSafe says it trains Jev to give probabilities that match outcomes.
-RLHF Reinforcement learning from human feedback
+RLHF
+Reinforcement learning from human feedback
 Rewards answers that people prefer
 Chat models
-RLVR Reinforcement learning with verifiable rewards
+RLVR
+Reinforcement learning with verifiable rewards
 Rewards answers that a program can check
 Reasoning models
-RLCD Reinforcement learning for calibrated decisions
+RLCD
+Reinforcement learning for calibrated decisions
 Rewards probabilities that match outcomes
 Jev
 No paper or reward function is published. Customers cannot fine-tune Jev.
@@ -317,7 +378,7 @@ If asked "why reinforcement learning, when a normal classifier loss such as log 
 Bridge: "A model trained for one narrow job has limits. TypeSafe publishes nine of them."
 
 
-## Slide 14 (section 3)
+## Slide 15 (section 3)
 
 ### On the slide
 
@@ -332,25 +393,28 @@ Adversarial content
 Instructions that contradict criteria
 Choice option order
 Text generation (out of scope)
-TypeSafe docs, "Jev 1.13 jaggedness", reviewed 2 October 2026. Read it before you design a question.
+TypeSafe docs, "Jev 1.13 jaggedness", checked again 15 October 2026. No list exists yet for jev-1.14 or for images. Read it before you design a question.
 
 ### Speaker notes
 
 Say: "Every tool on the earlier table had a weak column. This is Jev's, from TypeSafe itself. A published list is useful, because it tells you what to test."
 For each mode, the test to run:
 1. Literal reading: "jev-1.13 answers the question you wrote, not the one you meant." Test: write the exact condition, and check boundary cases. 2 and 3. Math, counting, dates: test any question that compares numbers or dates, and move it to code. 4. Indirection, for example a property of a property: point at the exact field. 5. Large state: send only the fields that the question needs. 6. Adversarial content: text in the state can steer the answer. 7. Contradiction: keep the instructions and the option text in agreement. 8. Option order: reorder the options and check that the answer stays the same. 9. Generation: Jev does not write text; use an LLM for that.
+New since 14 October: TypeSafe publishes no failure list for jev-1.14 or for images yet. The release post says that "all models (Jev included) perform worse on multimodality over pure text", and that it is "way too much jaggedness for us to vouch for these for production". Assume that every mode on this list also applies to images, and that counting objects in an image is worse than counting in text.
 Bridge: "Two of these modes produce wrong answers with high confidence. Here are the measurements."
 
 
-## Slide 15 (section 3)
+## Slide 16 (section 3)
 
 ### On the slide
 
 What it does not solve
 Confidence cannot tell you that the question is wrong.
-An incomplete question 24 support messages, 4 teams. The question left out a company rule.
+An incomplete question
+24 support messages, 4 teams. The question left out a company rule.
 19 wrong. 15 of them had confidence above 0.90.
-Option order and scope A swap of the yes and no labels changed 50.5 of 100 answers.
+Option order and scope
+A swap of the yes and no labels changed 50.5 of 100 answers.
 A 5% risk threshold still let in 31% of out-of-scope requests.
 Left: phuryn/experiments on GitHub, rerun 3 times by us. Right: Rafe and Das preprint, not rerun by us.
 
@@ -363,7 +427,7 @@ What to do: test each Noul and Choice with the options in a different order, and
 Bridge: "Next, the facts about the service itself."
 
 
-## Slide 16 (section 3)
+## Slide 17 (section 3)
 
 ### On the slide
 
@@ -372,25 +436,25 @@ Production facts about the service.
 Price
 $0.042 for each 1 million input tokens. Output is free.
 Rate limits
-80 requests and 100K tokens each second, "can change without notice"
+Set for each organization. Read yours in the console.
 Errors
 429 rate limit, 529 overloaded: retry with backoff. 401 key, 422 bad request.
 Versions
-jev-latest moves with each release. Pin jev-1.13.0 .
+jev-latest moves to jev-1.14.0 in about one week. Pin a version.
 Repeatability
 Close, not exact: in our 3 reruns of 72 requests, 70 got the same answer each time
 
 ### Speaker notes
 
 Price: our maze games used about 100,000 to 250,000 input tokens each, which is about one cent or less.
-Rate limits: TypeSafe says the limits are adjusting while demand grows, and higher limits are on custom plans. The docs do not say if the limit is for each key or for each account.
+Rate limits: on 2 October the docs said 80 requests and 100,000 tokens each second, "can change without notice". On 15 October the docs say only that limits are set for each organization, in requests and tokens each second, and that the console shows them. Higher limits are on custom and enterprise plans. Images have no separate rate limit.
 Errors: the TypeSafe SDKs retry 429 and 529 with backoff by default. A timeout or a 5xx error needs a fallback in your code: in our maze, code makes the move and labels it FALLBACK. The docs state no SLA.
-Versions: the response reports the exact version that answered, so log it. TypeSafe does not state a deprecation notice period.
+Versions: the response reports the exact version that answered, so log it. On 14 October TypeSafe released jev-1.14.0 as jev-preview, with "small, subtle improvements", the largest in languages other than English. jev-latest moves to jev-1.14.0 about one week later. TypeSafe says it will give 60 days of notice before it removes jev-1.13.0, and 30 days for jev-1.14.0, and that a deprecation policy comes first. If you tuned a threshold on jev-1.13.0, pin jev-1.13.0, and test again on jev-1.14.0 before you move. The Box question type needs jev-1.14.0.
 Repeatability: in our 3 reruns of the house-rules experiment (72 requests each), 70 requests got the same answer each time. The probabilities moved slightly between runs, for example 0.92 against 0.87.
 Bridge: "And the facts about your data."
 
 
-## Slide 17 (section 3)
+## Slide 18 (section 3)
 
 ### On the slide
 
@@ -398,26 +462,27 @@ What it does not solve
 Data and security.
 Your text goes to TypeSafe, hosted in the U.S.
 Policy: no training on your inputs. Retention "as long as reasonably necessary".
-No SOC 2 report or DPA is listed on the public site.
+A DPA is now listed. No SOC 2 report is listed.
 Text in the state can steer the answer. Code must check high-stakes actions.
-TypeSafe privacy policy; TypeSafe docs, jaggedness, "Adversarial content". Checked 2 October 2026.
+TypeSafe privacy policy; TypeSafe docs, Legal and jaggedness, "Adversarial content". Checked again 15 October 2026.
 
 ### Speaker notes
 
-Say: "Four facts before you send customer data. The service runs in the U.S. The privacy policy says TypeSafe will not train or fine-tune models on your inputs, but it gives no fixed retention period. The public site lists no SOC 2 report and no data processing agreement; ask TypeSafe if you need them."
+Say: "Four facts before you send customer data. The service runs in the U.S. The privacy policy says TypeSafe will not train or fine-tune models on your inputs, but it gives no fixed retention period. On 2 October, the public site listed no data processing agreement. On 15 October, the docs Legal page lists a Data Processing Agreement, and zero data retention for enterprise customers. I did not read the DPA. No SOC 2 report is listed; ask TypeSafe if you need one."
+New since 14 October: an opt-in setting lets TypeSafe look at your queries to find model errors. TypeSafe says it still does not train on them. Leave it off for customer data unless your data rules allow it. Images go to TypeSafe the same way as text. The API removes the image metadata (EXIF), but the pixels can still show faces, names, or addresses.
 Prompt injection: "TypeSafe's docs say that Jev does not treat the state as hostile by default, and that content written to steer the model can move the answer. The request separates the state from the questions, but the docs do not promise that text in the state cannot influence the answer. So treat the answer as untrusted input: code checks any action with real consequences."
 Bridge: "With the limits known, here is how to use it well."
 
 
-## Slide 18 (section 4)
+## Slide 19 (section 4)
 
 ### On the slide
 
 How to use it
 Code owns the workflow. Jev makes one narrow judgment inside it.
-Code Builds the state. Checks the refund window and the amount.
-Jev Answers the language questions: refund asked? Duplicate charge described?
-Code Combines the answers with the exact checks, then acts or sends it to a person.
+CodeBuilds the state. Checks the refund window and the amount.
+JevAnswers the language questions: refund asked? Duplicate charge described?
+CodeCombines the answers with the exact checks, then acts or sends it to a person.
 Adapted from the refund example in the TypeSafe docs, System One.
 
 ### Speaker notes
@@ -427,7 +492,7 @@ Tie: "You have seen this shape before. It is a rules engine or a workflow, where
 Bridge: "Five rules make this work. The first one is about the words."
 
 
-## Slide 19 (section 4)
+## Slide 20 (section 4)
 
 ### On the slide
 
@@ -437,7 +502,7 @@ Company rule left out
 5 / 24
 Company rule written in
 24 / 24
-Same experiment as slide 15 (phuryn/experiments, 24 support messages). The rule was written for these messages and scored on them, so this shows the effect of the words, not accuracy on new messages.
+Same experiment as slide 16 (phuryn/experiments, 24 support messages). The rule was written for these messages and scored on them, so this shows the effect of the words, not accuracy on new messages.
 
 ### Speaker notes
 
@@ -447,15 +512,17 @@ TypeSafe's advice: "When you look at a wrong answer and find yourself explaining
 Bridge: "Rule two is about what not to ask at all."
 
 
-## Slide 20 (section 4)
+## Slide 21 (section 4)
 
 ### On the slide
 
 How to use it · rule 2
 Keep counting, math, and dates in code.
-Asked of Jev "Is the bird below the opening?"
+Asked of Jev
+"Is the bird below the opening?"
 Correct in 35% of 434 answers, worse than a coin flip
-Done in code bird_row > opening_bottom
+Done in code
+bird_row > opening_bottom
 Correct every time, for free
 GapFlap, a public Flappy Bird game on GitHub (gdchaochao/lunar-terminal) that asks Jev about row numbers. Our rerun: "below" 0.353, "above" 0.433, "inside" 0.894.
 
@@ -467,7 +534,7 @@ The design rule: code calculates the numbers, and Jev weighs their meaning. In o
 Bridge: "Rule three is the one that TypeSafe calls the most important. The evidence for it is weaker than TypeSafe suggests."
 
 
-## Slide 21 (section 4)
+## Slide 22 (section 4)
 
 ### On the slide
 
@@ -493,15 +560,15 @@ This is also the only Jev-against-LLM comparison that we found. We did not measu
 Bridge: "Rule four decides what code does with each answer."
 
 
-## Slide 22 (section 4)
+## Slide 23 (section 4)
 
 ### On the slide
 
 How to use it · rule 4
 Let your test results and the stakes decide what code does.
-Low probability Send it to a person, or use a fallback
-Low stakes Act at a lower threshold. A mistake is easy to undo.
-High stakes Act only at a high threshold. Below it, ask to confirm.
+Low probabilitySend it to a person, or use a fallback
+Low stakesAct at a lower threshold. A mistake is easy to undo.
+High stakesAct only at a high threshold. Below it, ask to confirm.
 Choose each threshold from a labeled test set: plot the share of cases that code automates against the error rate.
 
 ### Speaker notes
@@ -514,7 +581,7 @@ In our maze, code uses the fallback policy below a confidence of 0.2. We set it 
 Bridge: "All of this depends on a test on your own data. That is rule five."
 
 
-## Slide 23 (section 4)
+## Slide 24 (section 4)
 
 ### On the slide
 
@@ -523,7 +590,7 @@ Test on your own data, then pin the version.
 Keep a labeled test set, and some cases that nobody tuned on.
 Log each decision: the state, the question, the answer, the version.
 Compare two versions of a question on the same cases.
-Pin jev-1.13.0 before you tune a threshold.
+Pin a version, for example jev-1.13.0, before you tune a threshold.
 TypeSafe skill guide: "Treat cookbook thresholds and demo results as examples to evaluate."
 
 ### Speaker notes
@@ -532,7 +599,7 @@ Say: "The preprint's summary was that the best model class depends on the condit
 Bridge: "So where does this fit in real systems?"
 
 
-## Slide 24 (section 5)
+## Slide 25 (section 5)
 
 ### On the slide
 
@@ -570,22 +637,22 @@ Our PTSO A/B: better outfits, one run
 ### Speaker notes
 
 Say: "Four places where the shape fits: fixed options, text input, many decisions. The right column says how much to believe each one."
-Ticket routing: the experiment from slides 15 and 19.
+Ticket routing: the experiment from slides 16 and 20.
 Hard-case tier: the preprint's most practical result. A classifier trained on intents handles most requests, and only the uncertain ones go to Jev. That matched Jev's accuracy at 0.43 of its cost, in their setup.
 Moderation: from TypeSafe's own list of use cases. We did not test it. Remember failure mode 6: hostile users write hostile text, so moderation needs your own tests. We removed "jailbreak detection" from this table for the same reason.
 Game characters: a public village simulation, where Jev picks what each villager does. Vague option text sent a villager with zero hunger to eat at 3 a.m., 5 times out of 5. Explicit thresholds sent them to bed. Our rerun matched both results, but the author changed the state text in the same commit, so the words were not the only cause. And our maze, which is next.
 Bridge: "Just as important is where Jev does not fit."
 
 
-## Slide 25 (section 5)
+## Slide 26 (section 5)
 
 ### On the slide
 
 Use cases · System 1 and System 2 together
 Jev makes the fast calls. An LLM does the slow work.
-Jev, System 1 The email arrives. Refund request? Which team? How urgent?
-LLM, System 2 Code routes the email. An LLM writes the reply.
-Jev, System 1 The customer answers. Jev classifies the answer, and the loop continues.
+Jev, System 1The email arrives. Refund request? Which team? How urgent?
+LLM, System 2Code routes the email. An LLM writes the reply.
+Jev, System 1The customer answers. Jev classifies the answer, and the loop continues.
 The support-email workflow from IBM Technology, "What Is Jev?". Kahneman's view: most of what we do runs on System 1, and System 2 starts only when a task needs real thought.
 
 ### Speaker notes
@@ -599,15 +666,15 @@ The IBM video also suggests Jev as a guardrail for jailbreak attempts. TypeSafe 
 Bridge: "Here is the same pattern on a tool that RenderATL runs every weekday."
 
 
-## Slide 26 (section 5)
+## Slide 27 (section 5)
 
 ### On the slide
 
 Use cases · at RenderATL
 Our sponsor pipeline makes small decisions all day.
-Code Is the deal due? On the Do Not Contact list? Did the email bounce?
-Jev, System 1 What does the prospect want? Send the deck? Follow up, stop, or escalate?
-Claude, System 2 Writes the draft in the rep's voice. The rep approves and sends.
+CodeIs the deal due? On the Do Not Contact list? Did the email bounce?
+Jev, System 1What does the prospect want? Send the deck? Follow up, stop, or escalate?
+Claude, System 2Writes the draft in the rep's voice. The rep approves and sends.
 The steps come from RenderATL's pipeline follow-up tool. Today one LLM prompt makes every one of these decisions. The next slides show what we built and measured.
 
 ### Speaker notes
@@ -623,7 +690,7 @@ Other RenderATL decisions with the same shape: the call for speakers (which trac
 Bridge: "So we built it."
 
 
-## Slide 27 (section 5)
+## Slide 28 (section 5)
 
 ### On the slide
 
@@ -645,18 +712,24 @@ The 36 emails are synthetic. On them, after one tuning pass: lane 32 of 32, acti
 Bridge: "What does that split save?"
 
 
-## Slide 28 (section 5)
+## Slide 29 (section 5)
 
 ### On the slide
 
 Use cases · Cost
 Same 36 emails: Jev first cost 69% less.
 Cost, 36 emails
-$0.226 → $0.070
+$0.226
+→
+$0.070
 Claude calls
-36 → 25
+36
+→
+25
 Time to a decision
-6.5 s → 0.19 s
+6.5 s
+→
+0.19 s
 [VIDEO: media/decision-desk-cost.mp4]
 Synthetic emails, one run. Same accuracy (action 27 vs 28 of 32). Claude tokens estimated at Sonnet list price.
 
@@ -668,7 +741,7 @@ Honest limits: synthetic emails, one run, Claude tokens estimated. The real-emai
 Bridge: "Synthetic data is easy. So we ran it on real sales email."
 
 
-## Slide 29 (section 5)
+## Slide 30 (section 5)
 
 ### On the slide
 
@@ -713,20 +786,23 @@ Earlier version, all 268 messages, latest message only: Jev 108, Sonnet 107, Hai
 Bridge: "The same idea works one step earlier: before the expensive model runs."
 
 
-## Slide 30 (section 5)
+## Slide 31 (section 5)
 
 ### On the slide
 
 Use cases · PTSO
 PTSO: Jev narrows the closet before the model proposes.
-Code Weather, season, a cap of 5 per category.
-Jev Rules out and orders garments for the request.
-Model, then ontology Gemini proposes. The ontology checks.
+CodeWeather, season, a cap of 5 per category.
+JevRules out and orders garments for the request.
+Model, then ontologyGemini proposes. The ontology checks.
 Blind judge, Jev first vs today
-16 to 2
+16 to
+2
 17 ties, p = 0.0013
 Gemini cost, 39 requests
-$1.34 → $1.29
+$1.34
+→
+$1.29
 Same cost, better inputs.
 One closet, 39 requests, one run. The judge is Claude, not a person (35 judged pairs). A human check is pending. The "skip the model" gate failed once and stays off.
 
@@ -739,7 +815,7 @@ Limits: one closet, one run, a Claude judge, not a person. Jev also tried to ski
 Bridge: "And here is where Jev does not fit at all."
 
 
-## Slide 31 (section 5)
+## Slide 32 (section 5)
 
 ### On the slide
 
@@ -764,7 +840,7 @@ Say: "Read top to bottom, and stop at the first row that matches. If code can de
 Bridge: "We tested the second row on this season of Formula 1."
 
 
-## Slide 32 (section 5)
+## Slide 33 (section 5)
 
 ### On the slide
 
@@ -798,7 +874,7 @@ Cost: Jev for all 9,122 laps was about $0.28. The Claude calls used about 42 mil
 Bridge: "Now one complete case where Jev does fit: the questions that people ask about this conference."
 
 
-## Slide 33 (section 6)
+## Slide 34 (section 6)
 
 ### On the slide
 
@@ -820,7 +896,7 @@ This is a real run (2026-10-06): real Jev, and Claude Sonnet through headless Cl
 Bridge: "One question proves nothing. Here is a measurement."
 
 
-## Slide 34 (section 6)
+## Slide 35 (section 6)
 
 ### On the slide
 
@@ -859,7 +935,7 @@ Limits: synthetic questions, one guide snapshot, one LLM, one run. One question 
 Bridge: "Now it is your turn. You get two practice fields."
 
 
-## Slide 35 (section 6)
+## Slide 36 (section 6)
 
 ### On the slide
 
@@ -875,7 +951,7 @@ Say plainly that this is a chosen game: "We picked a clean win to show. On 30 ne
 Bridge: "Now your turn."
 
 
-## Slide 36 (section 6)
+## Slide 37 (section 6)
 
 ### On the slide
 
@@ -897,12 +973,12 @@ Say the mistake openly, because it is a lesson: "Our first measurements used one
 And the warning: "We changed one more sentence, about the end of power mode. That version won 2 of 30. The new text changed Jev's first move at the start tile from down to right, and that route ends in a trap. One sentence can break a question that works. Measure every change."
 Say the second mistake openly too: "We tuned those questions on the same 30 games that we scored them on. Then we played 30 new games. Level 2d fell from 20 wins to 6, the same as the first question. Keep a held-out set, and score on it once."
 Say the System 1 to System 2 result: "Then we added a System 2. When Jev was unsure, below 0.5 confidence, or every direction had a blocker near, code handed the move to a slower step. That was about 1 move in 5. A code planner that looks 8 steps ahead took level 2d from 6 wins to 28 of 30 on the new games. An LLM in the same place won 13, and took about 5 seconds for each move. In that time the runner crosses about 33 tiles, so it works only when the game waits."
-Code only, the plain rule "avoid a blocker 3 steps or fewer away, else go to the nearest item", won 26 of 29 new games. Jev with the code planner is level with it (28 of 30, p = 1.000). The maze is mostly numbers, so this fits slide 31.
+Code only, the plain rule "avoid a blocker 3 steps or fewer away, else go to the nearest item", won 26 of 29 new games. Jev with the code planner is level with it (28 of 30, p = 1.000). The maze is mostly numbers, so this fits slide 32.
 The statistics, if asked. Seeds 1000 to 1029 (tuning): first question 6 of 30; level 2c 15; level 2d 20; code only 23. Seeds 5000 to 5029 (held out): first question 7 of 30; level 2c 12; level 2d 6; level 2d with the code planner 28; level 2d with the LLM 13; code only 26 of 29. Planner against level 2d: 22 seeds to 0, exact p < 0.001. Planner against LLM: 16 to 1, p < 0.001. Details: docs/research/question-design-finding.md.
 Bridge: "Here is what to change, in each track."
 
 
-## Slide 37 (section 6)
+## Slide 38 (section 6)
 
 ### On the slide
 
@@ -934,13 +1010,13 @@ Track B, attendee questions: the Jev request is in src/ask/core/system1.js, and 
 Bridge: go to the last slide and leave it up for the whole hack.
 
 
-## Slide 38 (section 6)
+## Slide 39 (section 6)
 
 ### On the slide
 
 What you know now
 Jev answers a fixed-option question about text with probabilities, like a classifier whose labels you write.
-It does not write, count, or compare dates. Its confidence cannot see a missing rule.
+It does not write, count, or compare dates. Its confidence cannot see a missing rule. Images are new and experimental: test them the same way.
 Code owns the workflow. Write the exact condition, test on your own data, and use plain code where code is enough.
 Now change the question.
 Track A: the maze · Track B: attendee questions

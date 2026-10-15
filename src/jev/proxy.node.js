@@ -11,17 +11,22 @@ const TYPESAFE_URL = "https://api.typesafe.ai/v1/systemone";
 const ROUTE = "/api/jev";
 const LLM_ROUTE = "/api/llm";
 const MAX_BODY = 64 * 1024;
+// A Jev request with images can be large. 32 MiB is the TypeSafe limit for one request body.
+const JEV_MAX_BODY = 32 * 1024 * 1024;
+// The experimental TypeSafe features (images, Box, long context) are off unless the request
+// sends these headers. The proxy forwards them, and only with the value "true".
+const DANGER_ZONE_HEADERS = ["typesafe-danger-zone-images", "typesafe-danger-zone-long-context"];
 // A local model can need more than 5 seconds to load. An abort during the load
 // cancels the load, so the timeout must be longer than the load time.
 const UPSTREAM_TIMEOUT_MS = 20000;
 
-function readBody(req) {
+function readBody(req, maxBody = MAX_BODY) {
   return new Promise((resolve, reject) => {
     let size = 0;
     const chunks = [];
     req.on("data", (chunk) => {
       size += chunk.length;
-      if (size > MAX_BODY) { reject(new Error("the request body is too large")); req.destroy(); return; }
+      if (size > maxBody) { reject(new Error("the request body is too large")); req.destroy(); return; }
       chunks.push(chunk);
     });
     req.on("end", () => resolve(Buffer.concat(chunks)));
@@ -89,10 +94,13 @@ export function jevProxy() {
     // Only the TypeSafe server needs the key.
     if (!key && url === TYPESAFE_URL) return send(res, 503, { error: "TYPESAFE_API_KEY is not set in .env." });
     try {
-      let body = await readBody(req);
+      let body = await readBody(req, JEV_MAX_BODY);
       if (model) body = JSON.stringify({ ...JSON.parse(body.toString("utf8")), model });
       const headers = { "Content-Type": "application/json" };
       if (key) headers.Authorization = `Bearer ${key}`;
+      for (const name of DANGER_ZONE_HEADERS) {
+        if (String(req.headers[name] || "").toLowerCase() === "true") headers[name] = "true";
+      }
       const started = Date.now();
       const upstream = await fetch(url, {
         method: "POST",

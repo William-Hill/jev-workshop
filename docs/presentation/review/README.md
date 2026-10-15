@@ -105,3 +105,13 @@ If the rehearsal runs long, the next cuts are short 2, 4, and 12 (the coach's li
 4. **Video cue points.** Mark the timestamps in `decision-desk-demo.mp4` for the pricing request, the repeat deck request, and the injection email. Play only those.
 5. **PTSO human check.** The 23-pair blind review is open. The PTSO slide is in the full deck only.
 6. **The term for the maze fallback.** The maze uses "confidence below 0.2" for the fallback, while slide 22 advises a threshold on the chosen option's probability. The TypeSafe reviewer asked for one rule or a short explanation.
+
+## Update for Jev 1.14 and images (2026-10-15)
+
+TypeSafe released `jev-1.14.0` and experimental images on 14 October 2026. The full deck now has 39 slides, and the short deck has 23.
+
+- New full-deck slide 12 (short-deck slide 8): images, the Box question type, the header, and our maze test. The image is `media/jev-box-maze.jpg`.
+- Full-deck slides 12 to 38 are now 13 to 39. The tables above use the old numbers. `scripts/build-short-deck.py` uses the new numbers.
+- Changed facts: rate limits (now "set for each organization", see the console), versions (`jev-latest` moves to `jev-1.14.0` about 21 October; 60 and 30 days of notice), a DPA is now listed, long context to 262,000 tokens with a header, the opt-in for data use.
+- Our test (one maze frame, `jev-preview` = `jev-1.14.0`): Box found the runner in 4 of 4 runs, confidence 0.55 to 0.67, about 1,411 input tokens, 192 to 332 ms. Without the header, the API returned 400.
+- The short deck is now about 75 seconds longer. The next cuts stay the same: short slides 2, 4, and 13.

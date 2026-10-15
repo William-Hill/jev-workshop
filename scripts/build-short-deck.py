@@ -18,21 +18,21 @@ from pathlib import Path
 FULL = Path("docs/presentation/jev-workshop.html")
 SHORT = Path("docs/presentation/jev-workshop-25min.html")
 
-KEEP = [1, 2, 3, 4, 5, 6, 10, 12, 15, 18, 19, 20, 22, 26, 27, 28, 29, 31, 34, 35, 37, 38]
+KEEP = [1, 2, 3, 4, 5, 6, 10, 12, 13, 16, 19, 20, 21, 23, 27, 28, 29, 30, 32, 35, 36, 38, 39]
 
 # kept slide -> (cut slides whose notes move here, one visible line or None)
 MERGE = {
     6: ([7, 8, 9], None),
-    10: ([11], "Three question types: Choice (one option), Score (a level), Noul (the probability of yes)."),
-    12: ([13], None),
-    15: ([14], None),
-    18: ([16, 17], None),
-    22: ([21, 23], "Pin jev-1.13.0, keep a held-out test set, and log every decision."),
-    26: ([24, 25], None),
-    28: ([], None),
-    31: ([32], "F1 2026 pit stops: a trained model beat Jev on all laps (0.147 against 0.076)."),
-    34: ([33], None),
-    35: ([36], None),
+    10: ([11], "Three tested question types: Choice (one option), Score (a level), Noul (the probability of yes). New: Box, next slide."),
+    13: ([14], None),
+    16: ([15], None),
+    19: ([17, 18], None),
+    23: ([22, 24], "Pin a version, keep a held-out test set, and log every decision."),
+    27: ([25, 26], None),
+    29: ([], None),
+    32: ([33], "F1 2026 pit stops: a trained model beat Jev on all laps (0.147 against 0.076)."),
+    35: ([34], None),
+    36: ([37], None),
 }
 # kept slide -> text replacements, where a new line would not fit
 REPLACE = {
@@ -40,30 +40,31 @@ REPLACE = {
         '<p class="small">It reads natural language, like an LLM. It returns a typed answer, one of your options, and it writes no text.</p>',
         '<p class="small">It reads language like an LLM and returns one of your options. Think of a classifier whose labels you write in English.</p>',
     )],
-    22: [
+    23: [
         ('<div class="kicker">How to use it · rule 4</div>', '<div class="kicker">How to use it · rule 3</div>'),
     ],
-    18: [
+    19: [
         ("Five rules make this work. The first one is about the words.", "Three rules make this work. The first one is about the words."),
     ],
-    15: [(
+    16: [(
         '<p class="src">Left: phuryn/experiments on GitHub, rerun 3 times by us. Right: Rafe and Das preprint, not rerun by us.</p>',
         '<p class="src">Left: phuryn/experiments, rerun 3 times by us. Right: Rafe and Das preprint, not rerun. TypeSafe lists 9 failure modes, for example math, dates, and option order.</p>',
     )],
 }
-# kept slide -> a new bridge line, where the full-deck bridge points to a cut slide
+# short-deck position -> a new bridge line, where the full-deck bridge points to a cut slide
 BRIDGES = {
     6: 'Bridge: "Here is what one request looks like."',
-    8: 'Bridge: "Calibrated or not, confidence has a blind spot."',
-    9: 'Bridge: "So how do you build with it? Code owns the workflow."',
-    12: 'Bridge: "Rule three: let your test results and the stakes decide what code does."',
-    13: 'Bridge: "Here is one real workflow at RenderATL."',
-    17: 'Bridge: "So where does Jev not fit?"',
-    18: 'Bridge: "Where it does fit, here is a second measured case: attendee questions."',
-    19: 'Bridge: "Before you build, watch Jev play."',
+    7: 'Bridge: "Since yesterday, a request can also carry an image."',
+    9: 'Bridge: "Calibrated or not, confidence has a blind spot."',
+    10: 'Bridge: "So how do you build with it? Code owns the workflow."',
+    13: 'Bridge: "Rule three: let your test results and the stakes decide what code does."',
+    14: 'Bridge: "Here is one real workflow at RenderATL."',
+    18: 'Bridge: "So where does Jev not fit?"',
+    19: 'Bridge: "Where it does fit, here is a second measured case: attendee questions."',
+    20: 'Bridge: "Before you build, watch Jev play."',
 }
 EXTRA_NOTES = {
-    28: "<p>Jevons, if there is time: TypeSafe named Jev after William Stanley Jevons. When a resource gets cheaper, we use more of it. Cheaper decisions mean more decisions. That is TypeSafe's bet, and also the risk: many cheap decisions add up to more total mistakes.</p>",
+    29: "<p>Jevons, if there is time: TypeSafe named Jev after William Stanley Jevons. When a resource gets cheaper, we use more of it. Cheaper decisions mean more decisions. That is TypeSafe's bet, and also the risk: many cheap decisions add up to more total mistakes.</p>",
 }
 MAZE_BULLETS = (
     '<ul class="ev" style="gap:22px">'
@@ -115,7 +116,7 @@ def main() -> None:
                 section = add_notes(section, f'<p><b>From full-deck slide {other}:</b></p>\n    {moved}')
         if number in EXTRA_NOTES:
             section = add_notes(section, EXTRA_NOTES[number])
-        if number == 35:
+        if number == 36:
             section = re.sub(
                 r'<video class="vid center" style="height:400px" (src="media/maze-teaser.mp4"[^>]*)></video>',
                 r'<div class="row center" style="align-items:center"><video class="vid" style="flex:1.4 1 0;height:400px" \1></video>'
